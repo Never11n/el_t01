@@ -1,0 +1,63 @@
+{% load static %}
+{% load i18n %}
+
+{#<div class="cab-pass cab-form main-text-right-rtf">#}
+        <form id="id_form_check_id" action="{% url 'game_check_id' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" id="id_balance" value="{{ me.profile.balance }}"/>
+            <div class="card-body">
+                <div class="cab-pass__text">
+                    <span>{% trans 'לקוח/ה יקר/ה,' %}</span>
+                </div>
+                <div class="cab-pass__text">
+                    <span>{% trans 'על מנת להשלים את תהליך הרכישה, עליך לבצע תהליך אימות זיהוי' %}</span>
+                </div>
+                <div class="cab-pass__text">
+                    <span>{% trans 'אנא הזינו צילום מסך של תעודה מזהה ממשלתית ותמונת פרופיל עדכנית' %}</span>
+                </div>
+                <div class="cab-pass__text">
+                    <span>{% trans 'לדוגמא' %}:</span>
+                </div>
+                <div class="mb-4">
+                    <img class="w-25 mr-3" src="{% static 'img/id_conf/id_card.png' %}">
+                    <img class="w-25" src="{% static 'img/id_conf/face_with_card.png' %}">
+                </div>
+
+                <div class="cab-pass__text">
+                    <label>{% trans 'Photo ID' %}</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="FileId_01" name="f_file_01">
+                            <label class="custom-file-label" for="FileId_01">{% trans 'Choose file' %}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cab-pass__text">
+                    <label>{% trans 'Photo of you with a card in hand' %}</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="FileId_02" name="f_file_02">
+                            <label class="custom-file-label" for="FileId_02">{% trans 'Choose file' %}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-flex justify-content-center cab-withdraw-btn">
+                <button type="submit"
+                        id="id_btn_ng"
+                        {# href="##" #}
+                        class="mybtn1 main-box-btn-center"
+                        {# onclick="btn_payout_save()" #}
+                >{% trans 'send' %}
+                </button>
+            </div>
+        </form>
+{#</div>#}
+
+<script>
+    $('.custom-file-input').on('change', function (event) {
+        $(this).next('.custom-file-label').html(event.target.files[0].name);
+    })
+</script>
+

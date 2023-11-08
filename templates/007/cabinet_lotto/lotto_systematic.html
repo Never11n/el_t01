@@ -1,0 +1,130 @@
+
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+{% load i18n %}
+{% load el_t01_tags %}
+<section data-game-theme-color="#1DCCF7" data-game-theme-color-rgb="29, 204, 247" class="js-game-theme-color game-item main-bg full-height-without-footer">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="ui-game">
+                    {% include tmpl_hidden_inputs %}
+                    {% include tmpl_card_header %}
+                    {% include tmpl_timer %}
+                    <div class="ui-game-box" style="position: relative; z-index: 1;">
+                        <div class="ui-game-price">
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{{ form_type_text_header }}</span>
+                            </div>
+                            <div class="ui-game-flex ui-game-flex_between ui-game-flex_align-center ui-game-box-m-b">
+                                <label class="ui-game-btn-input-label">
+                                    <input type="radio" name="regular-double" checked class="ui-game-btn-input" value="regular"/>
+                                    <span class="ui-game-btn-input-label-display ui-game-btn-input-label-display__theme-color">{% trans 'Regular' %}</span>
+                                </label>
+                                <label class="ui-game-btn-input-label">
+                                    <input type="radio" name="regular-double" id='double_btn' class="ui-game-btn-input" value="double"/>
+                                    <span class="ui-game-btn-input-label-display ui-game-btn-input-label-display__theme-color">{% trans 'Regular double' %}</span>
+                                </label>
+                            </div>
+
+                            <div class="ui-game-flex ui-game-flex_align-center ui-game-flex_between">
+                                <div class="ui-game-btn ui-game-btn_s ui-game-btn_yellow ui-game-btn-icon-wrap-pos js-extra-button">
+                                        {% trans 'Extra' %}
+                                        <input type="checkbox" id="is_extra_btn">
+                                    <span class="ui-game-btn-icon-pos ui-game-btn-icon-pos_right ui-game-tooltip-wrap">
+                                        <img class="ui-game-flex" src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/icon-question.svg" alt="question">
+                                        <div class="ui-game-tooltip ui-game-tooltip__right">
+                                            <h6 class="ui-game-tooltip__title">
+                                                60000
+                                            </h6>
+                                            <p class="ui-game-tooltip__text">
+                                                {% trans 'The EXTRA lottery allows an additional win of up to NIS 60,000.' %}
+                                            </p>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                             <div class="ui-game-price__count ui-game-price__count_m-b mt-3">
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" checked name="ui-game-count-line" class="ui-game-circle-input js-input-form-type" value="8" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_s">8</span>
+                                </label>
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" name="ui-game-count-line" class="ui-game-circle-input js-input-form-type" value="5" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_s">5=6</span>
+                                </label>
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" name="ui-game-count-line" class="ui-game-circle-input js-input-form-type" value="9" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_s">9</span>
+                                </label>
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" name="ui-game-count-line" class="ui-game-circle-input js-input-form-type" value="10" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_s">10</span>
+                                </label>
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" name="ui-game-count-line" class="ui-game-circle-input js-input-form-type" value="11" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_s">11</span>
+                                </label>
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" name="ui-game-count-line" class="ui-game-circle-input js-input-form-type" value="12" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_s">12</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-game-box">
+                        <div class="ui-game-single">
+<!--                            <div class="ui-game-info-header">-->
+<!--                                <span class="ui-game-info-header__text">some text</span>-->
+<!--                            </div>-->
+                            <div class="ui-game-single__actions">
+                                <div class="ui-game-btn-reset-wrap">
+                                    <button type="button"  data-reset="all" class="ui-game-btn-reset js-game-reset">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <span class="ui-game-btn-reset-text"></span>
+                                </div>
+                                <button type="button" class="ui-game-btn-sm js-game-auto">
+                                    {% trans 'Select automatically' %}
+                                </button>
+                            </div>
+
+                            <div>
+                                <div class="ui-game-balls-wrap">
+                                    <div class="ui-game-balls-wrap-row ui-game-balls-wrap-row_ball-to-left">
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open"></div>
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open"></div>
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open"></div>
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open"></div>
+                                        <div class="ui-game-ball ui-game-ball_l js-strong-ball js-ui-game-lotto-modal-2-open ui-game-ball_light"></div>
+                                    </div>
+                                </div>
+                                <div class="ui-game-balls-wrap">
+                                    <div class="ui-game-balls-wrap-row ui-game-balls-wrap-row_ball-to-left">
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open"></div>
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open"></div>
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open"></div>
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open"></div>
+                                    </div>
+                                </div>
+                                <div class="ui-game-balls-wrap">
+                                    <div class="ui-game-balls-wrap-row ui-game-balls-wrap-row_ball-to-left">
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open ui-game-ball-lotto-not-active"></div>
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open ui-game-ball-lotto-not-active"></div>
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open ui-game-ball-lotto-not-active"></div>
+                                        <div class="ui-game-ball ui-game-ball_l js-ui-game-lotto-modal-open ui-game-ball-lotto-not-active"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% include tmpl_subscription %}
+                    {% include tmpl_total_sum %}
+                    {% include tmpl_box_payment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include tmpl_game_modal %}

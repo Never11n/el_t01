@@ -1,0 +1,290 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+<input id="id_pay_ticket_type" type="hidden" value="{{ item_ticket_type.verbal }}">
+<input id="id_pay_ticket_col" type="hidden" value="{{ quantity_ticket }}">
+<input id="id_pay_method" type="hidden" value="0">
+<input id="id_pay_game_id" type="hidden" value="{{ item_game_user.id }}">
+
+{% for ItemPayment in dict_payment_type %}
+    {% if ItemPayment.popup %}
+    <input id="id_ItemPayment_{{ ItemPayment.verbal }}" type="hidden" value="{% trans ItemPayment.txt_warning|safe %}">
+    {% endif %}
+{% endfor %}
+<div class="header-padding">
+    <div class="hero-area hero-area-cab">
+        <div class="container">
+            <div class="hero-area__inner">
+                <h1 class="hero-area__title">{% trans 'Scratch HISHGAD On Mobile' %}</h1>
+{#                <img class="hero-area__img" src="{% static 'main/007/images/hero-area__img.png' %}" alt="">#}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-box inner-mob-shadow">
+    <div class="container">
+        <div class="main-box__inner">
+            <h2 class="cab-game-title cab-game-title_mob-left">
+                {% trans 'Shopping Cart' %}
+            </h2>
+
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-list__item">
+                    {% trans 'Home' %}
+                </li>
+                <li class="breadcrumb-list__item">
+                        <span class="breadcrumb-list__icon-wrap">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+                </li>
+                <li class="breadcrumb-list__item">
+                    {% trans 'Ticket' %}
+                </li>
+                <li class="breadcrumb-list__item">
+                        <span class="breadcrumb-list__icon-wrap">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+                </li>
+                <li class="breadcrumb-list__item">
+                    {% trans 'Shopping Cart' %}
+                </li>
+            </ul>
+
+            <div class="hide-on-desktop text-center">
+<!--                <a id="id_btn_pur" href="##"-->
+<!--                   onclick="btn_game_pay()"-->
+<!--                   class="mybtn1 disabled cab-pay-btn">{% trans 'BUY' %}</a>-->
+
+                <p class="cab-pay-win">
+                    {% trans 'WIN MAX' %}
+                    <span class="color-green text-bold">
+                        {{ itemOrder.max_win }} {% trans main_currency %}
+                    </span>
+                </p>
+            </div>
+            {% for itemOrder in game_order_list %}
+            <div class="row">
+                <div class="col-lg-3 mob-text-center">
+                    <div class="game-pay__img-wrap">
+                        <img src="{{ itemOrder.type.foto_1.url }}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="game-pay__item-name">
+                                {% trans 'Ticket Name' %}
+                            </p>
+                        </div>
+                        <div class="col-9">
+                            <p class="game-pay__item-description">
+                                {% trans itemOrder.name %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="game-pay__item-name">
+                                {% trans 'Ticket Price' %}
+                            </p>
+                        </div>
+                        <div class="col-9">
+                            <p class="game-pay__item-description">
+                                {{ itemOrder.cost_2 }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="game-pay__item-name">
+                                {% trans 'Units' %}
+                            </p>
+                        </div>
+                        <div class="col-9">
+                            <p class="game-pay__item-description">
+                               {{ all_quantity }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="game-pay__item-name">
+                                {% trans 'Total' %}
+                            </p>
+                        </div>
+                        <div class="col-9">
+                            <p class="game-pay__item-description">
+                                {{ all_sum }} {% trans main_currency %}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="game-pay__item-name">
+                                {% trans 'My Balance' %}
+                            </p>
+                        </div>
+                        <div class="col-9">
+                            <p class="game-pay__item-description">
+                                {{ balance_last }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="game-pay__item-name">
+                                {% trans 'Game ID' %}
+                            </p>
+                        </div>
+                        <div class="col-9">
+                            <p class="game-pay__item-description">
+                                {{ item_game_user.id }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row payment-method">
+                        <div class="col-12">
+                            <p class="game-pay__item-name">
+                                {% trans 'Choose Payment Method' %}
+                            </p>
+                        </div>
+                        {% for ItemPayment in PaymentList %}
+                            {#                                <div class="row">#}
+                            {% for RowPaymentItem in ItemPayment %}
+                                {#                                        <div class="col-lg-{{ m_payment_column_css }} col-md-{{ m_payment_column_css }} col-12 d-flex justify-content-center item-payment">#}
+                                <div class="d-flex justify-content-center item-payment">
+                                    <a href="##"
+                                       class="single-method
+                                                       {% if RowPaymentItem.is_active %}{% else %}not-active{% endif %}"
+                                            {% if RowPaymentItem.is_active %}
+                                       onclick="btn_payment_method()"
+                                            {% endif %}
+                                       data-paymethod="{% trans RowPaymentItem.verbal %}"
+                                       data-popup="{% if RowPaymentItem.popup %}11{% else %}00{% endif %}"
+                                       data-href="{% trans RowPaymentItem.link_redirect %}"
+                                    >
+                                        <div class="icon">
+                                            {% if ItemPayment.foto_1 %}
+                                                <img src="{{ RowPaymentItem.foto_1.url }}" alt="">
+                                            {% else %}
+                                                <img src="{{ RowPaymentItem.foto_1.url }}" alt="">
+                                            {% endif %}
+                                        </div>
+                                        <div class="item-payment-name">{% trans RowPaymentItem.caption|safe %}</div>
+                                        {% if RowPaymentItem.is_active %}
+                                        {% else %}
+                                            <div class="item-payment-sum">{% trans "not available" %}</div>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                            {#                                </div>#}
+                        {% endfor %}
+                        <div class="d-flex justify-content-center item-payment">
+                            <a href="##"
+                               class="single-method"
+                               onclick="btn_payment_method()"
+                               data-paymethod="balance"
+                            >
+                                <div class="icon">
+                                    <img src="{% static 'main/007/images/payment/from_balance.jpg' %}"
+                                         alt="">
+                                </div>
+                                <div class="item-payment-name">{% trans "My Balance" %}</div>
+{#                                    <div class="item-payment-sum">{{ balance_last }}</div>#}
+                            </a>
+                        </div>
+
+                        {% if false %}
+                            <div class="col-12">
+                                <ul class="pay-method-list">
+                                    <li class="pay-method-list__item">
+                                        <a href="##"
+                                           class="pay-method-list__link active"
+                                           onclick="btn_payment_method()"
+                                           data-paymethod="balance"
+                                        >
+                                            <div class="pay-method-list__img-wrap">
+                                                <img class="pay-method-list__img"
+                                                     src="{% static 'main/002/images/payment/cash.png' %}"
+                                                     alt="">
+                                            </div>
+                                            <p class="pay-method-list__item-name">
+                                                {% trans 'Pay From Balance' %}
+                                            </p>
+                                        </a>
+                                    </li>
+                                    {% for RowPaymentItem in PaymentList.0 %}
+                                        <li class="pay-method-list__item">
+                                            <a href="##"
+                                               class="pay-method-list__link
+                                                       {% if RowPaymentItem.is_active %}{% else %}not-active{% endif %}"
+                                                    {% if RowPaymentItem.is_active %}
+                                               onclick="btn_payment_method()"
+                                                    {% endif %}
+                                               data-paymethod="{% trans RowPaymentItem.verbal %}"
+                                               data-popup="{% if RowPaymentItem.popup %}11{% else %}00{% endif %}"
+                                               data-href="{% trans RowPaymentItem.link_redirect %}"
+                                            >
+                                                <div class="pay-method-list__img-wrap">
+                                                    <img class="pay-method-list__img"
+                                                         src="{{ RowPaymentItem.foto_1.url }}"
+                                                         alt="">
+                                                </div>
+                                                <p class="pay-method-list__item-name">
+                                                    {% trans RowPaymentItem.caption|safe %}
+                                                </p>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 mob-text-center">
+                            <div class="payment-agreement main-text-right-rtf">
+                                <label class="payment-agreement__label">
+                                    <input id="pay_checkbox_1"
+                                           type="checkbox"
+                                           name="payment-agreement__checkbox_1"
+                                           class="payment-agreement__checkbox payment-agreement__checkbox">
+                                    <a href="{% url 'rules' %}"
+                                       class="main-link main-text-black" target="_blank">
+                                       {% trans 'I Agree with Terms, Conditions & Privacy Policy' %}
+                                    </a>
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mob-text-center cab-pay-btn-outer">
+                            <a id="id_btn_pur" href="##"
+                               onclick="btn_game_pay()"
+                               class="mybtn1 disabled cab-pay-btn">{% trans 'BUY' %}</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="cab-pay-win mob-text-center">
+                                {% trans 'WIN MAX' %}
+                                <span class="color-green text-bold">
+                                    {{ itemOrder.max_win }} {% trans main_currency %}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- game-play Area End -->

@@ -1,0 +1,53 @@
+{% load static %}
+{% load i18n %}
+
+<div class="tab_text_3 tab_text_color_3">
+    <p>{% trans 'Some details for identification:' %}</p>
+</div>
+<div class="tab_text_4 tab_text_color_3">
+    <span>{% trans 'Type the number' %}</span>
+    <span>/ {% trans 'club member' %} / {% trans 'phone number' %}</span>
+</div>
+
+<div class="form_login">
+    {% csrf_token %}
+    <input type="hidden" id="url_path" name="url_path" value="{{ utm_code }}">
+    <input type="hidden" id="get_param" name="get_param" value="{{ get_param }}">
+    <div class="form_login_input">
+        <input type="text" class=""
+               autocomplete="off"
+               id="input-phone"
+               name="f_phone"
+               placeholder="{% trans 'Phone Number' %}*">
+    </div>
+
+    <div class="form_login_input">
+        <input type="text" class=""
+               autocomplete="off"
+               id="input-id"
+               name="f_id"
+               placeholder="{% trans 'ID' %}*">
+    </div>
+
+    <div class="form_login_input">
+        <input type="text" class=""
+               autocomplete="off"
+               id="input-code"
+               name="f_clubcode"
+               placeholder="{% trans 'Club Member' %}*">
+    </div>
+</div>
+
+<div class="tab_text_4">
+    <button class="btn_2 mybtn1-register-btn"
+       onclick="btn_modal_shop_login()">
+        {% trans 'CONFIRM' %}
+    </button>
+</div>
+<div class="tab_text_4 tab_text_color_3">
+    <p class="text-to-reg">{% trans 'Do not have an account?' %}</p>
+</div>
+<div class="tab_text_1 button-wrap">
+    <button class="btn_1"
+            onclick="nextPage('btn_to_registr')">{% trans 'Registration' %}</button>
+</div>

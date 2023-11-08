@@ -1,0 +1,71 @@
+{% load static %}
+{% load i18n %}
+<section class="cab-withdraw main-bg">
+    <div class="container cab-withdraw-box">
+        <div class="section-heading cab-history-title">
+            <h5 class="subtitle">{% trans 'User Profile' %}</h5>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-secondary cab-table-border">
+                    <div class="card-header">
+                        <h3 class="card-title">{% trans 'Profile' %}</h3>
+                    </div>
+                    <form id="id_form_payout" action="{% url 'cab_profile_save' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" id="id_balance" value="{{ me.profile.balance }}"/>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="id_acc_name">{% trans 'Name' %}</label>
+                                <input type="text"
+                                       id="id_u_name"
+                                       class="form-control"
+                                       name="f_u_name"
+                                       value="{{ me.profile.name }}"
+                                >
+                            </div>
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="id_name_bank">{% trans 'E-mail' %}</label>#}
+                            {#                                <input type="text"#}
+                            {#                                       id="id_u_email"#}
+                            {#                                       class="form-control"#}
+                            {#                                       name="f_u_email"#}
+                            {#                                       value="{{ me.email }}"#}
+                            {#                                >#}
+                            {#                            </div>#}
+                            <div class="form-group">
+                                <label for="id_branch">{% trans 'Phone' %}</label>
+                                <input type="text"
+                                       id="id_u_phone"
+                                       class="form-control"
+                                       name="f_u_phone"
+                                       value="{{ me.profile.mobile }}"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="id_acc_num">{% trans 'Id' %}</label>
+                                <input type="text"
+                                       id="id_u_id"
+                                       class="form-control"
+                                       name="f_u_id"
+                                       value="{{ me.profile.i_doc }}"
+                                >
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /.card-body -->
+                    <div class="col-12 d-flex justify-content-center cab-withdraw-btn">
+                        <a id="id_btn_ng"
+                           href="##"
+                           class="mybtn1"
+                           onclick="btn_payout_save()"
+                        >{% trans 'save' %}</a>
+                    </div>
+
+                </div>
+                <!-- /.card -->
+            </div>
+
+        </div>
+    </div>
+</section>

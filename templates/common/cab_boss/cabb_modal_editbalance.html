@@ -1,0 +1,75 @@
+{% load i18n %}
+<div tabindex="-1" role="dialog" class="modal fade ui__modal_feedback_replay js__modal_editbalance">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div data-dismiss="modal" aria-label="Close" class="ui__modal-close"></div>
+            </div>
+            <div class="modal__caption uppercase">
+                {% trans 'Feedback' %}
+            </div>
+            <div class="ui__modal_feedback_replay-item clearfix">
+                <div class="ui__modal_feedback_replay-content">
+{#                    <div id='id_feedback_caption' class="ui__mfeedback_replay-caption">#}
+                        {#                        Заголовок#}
+{#                    </div>#}
+                    <div class="ui__mfeedback_replay-items">
+                        <div class="ui__mfeedback_replay-item">
+                            <div class="ui__mfeedback_replay-item-caption">
+                                {% trans 'User:' %}
+                            </div>
+                            <div id='id_balance_s01' class="ui__mfeedback_replay-item-text"></div>
+                        </div>
+                        <div class="ui__mfeedback_replay-item">
+                            <div class="ui__mfeedback_replay-item-caption">
+                                {% trans 'Name:' %}
+                            </div>
+                            <div id='id_balance_s02' class="ui__mfeedback_replay-item-text"></div>
+                        </div>
+                        <div class="ui__mfeedback_replay-item">
+                            <div class="ui__mfeedback_replay-item-caption">
+                                {% trans 'Phone:' %}
+                            </div>
+                            <div id='id_balance_s03' class="ui__mfeedback_replay-item-text"></div>
+                        </div>
+                        <div class="ui__mfeedback_replay-item">
+                            <div class="ui__mfeedback_replay-item-caption">
+                                {% trans 'Balance now:' %}
+                            </div>
+                            <div id='id_balance_s04' class="ui__mfeedback_replay-item-text"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input id="id_balance_item" type="hidden" name="id_balance_item" value=""/>
+            <div class="ui__modal_feedback_replay-item clearfix">
+                <div class="ui__modal_feedback_replay-content" style="min-height: 75px;">
+                    <div class="ui__mfeedback_replay-caption">
+                        {% trans 'Set Balance:' %}
+                    </div>
+                    <div class="ui__mfeedback_replay-items">
+                        <input id="id_balance_new"
+                               type="number"
+                               name="balance_new"
+                               style="width: 100%;"
+                               value=""/>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-6">
+                    <button type="button" class="btn__big"
+                            onclick="balance_set()">
+                        {% trans 'Set Balance' %}
+                    </button>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn__big"
+                            data-dismiss="modal">
+                        {% trans 'Close' %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

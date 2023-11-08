@@ -1,0 +1,127 @@
+{% load static %}
+{% load i18n %}
+{% get_static_prefix as STATIC_PREFIX %}
+<div class="ui-game-box">
+    <div>
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">{{ form_type_text_box_payment }}</span>
+            <span class="ui-game-info-header__number">5</span>
+        </div>
+        <div class="row payment-method" style="background: none !important;">
+            <div class="container">
+                <div class="row js-balance-payment-method-hide">
+                    <div class="col-lg-3 col-md-12">
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12 d-flex justify-content-center item-payment item-payment_balance">
+                                <a href="##"
+                                   class="single-method active"
+                                   onclick="btn_payment_method()"
+                                   data-paymethod="balance"
+                                >
+                                    <div class="icon">
+                                        <img src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/payment/cash.png"
+                                             alt="">
+                                    </div>
+                                    <div class="icon">
+                                        <div class="item-payment-name">{% trans "My Balance" %}</div>
+                                        <div class="item-payment-sum">{{ balance_last }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                    </div>
+                </div>
+
+                {% for ItemPayment in PaymentList %}
+                    <div class="row js-other-payment-methods">
+                        {% for RowPaymentItem in ItemPayment %}
+                            <div class="col-lg-{{ m_payment_column_css }} col-md-{{ m_payment_column_css }} col-12 d-flex justify-content-center item-payment">
+                                <a href="##"
+                                   class="single-method
+                                           {% if RowPaymentItem.is_active %}{% else %}not-active{% endif %}"
+                                        {% if RowPaymentItem.is_active %}
+                                   onclick="btn_payment_method()"
+                                        {% endif %}
+                                   data-paymethod="{% trans RowPaymentItem.verbal %}"
+                                   data-popup="{% if RowPaymentItem.popup %}11{% else %}00{% endif %}"
+                                   data-href="{% trans RowPaymentItem.link_redirect %}"
+                                >
+                                    <div class="icon">
+                                        {% if ItemPayment.foto_1 %}
+                                            <img src="{{ RowPaymentItem.foto_1.url }}" alt="">
+                                        {% else %}
+                                            <img src="{{ RowPaymentItem.foto_1.url }}" alt="">
+                                        {% endif %}
+                                    </div>
+                                    <div class="item-payment-name">{% trans RowPaymentItem.caption|safe %}</div>
+                                    {% if RowPaymentItem.is_active %}
+                                    {% else %}
+                                        <div class="item-payment-sum">{% trans "not available" %}</div>
+                                    {% endif %}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="row flex-md-row flex-column-reverse">
+                    <div class="col-md-12 ">
+                        <div class="payment-agreement">
+                            <label class="payment-agreement__label">
+                                <input id="pay_checkbox_1"
+                                       type="checkbox"
+                                       name="payment-agreement__checkbox_1" value="1"
+                                       class="payment-agreement__checkbox">
+                                {% trans 'I agree with the' %}
+                                <a href="{% url 'rules' %}"
+                                   class="payment-agreement__link" target="_blank">
+                                    {% trans 'terms and conditions' %}
+                                </a>
+{#                                {{ GL_Name_Company }}#}
+                            </label>
+                        </div>
+                        {% if False %}
+                            <div class="payment-agreement">
+                                <label class="payment-agreement__label">
+                                    <input id="pay_checkbox_2"
+                                           type="checkbox"
+                                           name="payment-agreement__checkbox_2"
+                                           value="1"
+                                           class="payment-agreement__checkbox">
+                                    {% trans 'I agree with send me advertising material of any kind' %}
+                                </label>
+                            </div>
+                        {% endif %}
+                        {% if not me.profile.reklama %}
+                            <div class="payment-agreement">
+                                <label class="payment-agreement__label">
+                                    <input id="pay_checkbox_ads"
+                                           type="checkbox"
+                                           name="payment__checkbox_ads"
+                                           value="1"
+                                           class="payment-agreement__checkbox">
+                                    {% trans 'I agree with send me advertising material of any kind' %}
+                                </label>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row flex-md-row ">
+                    <div class="col-md-4 d-flex justify-content-center">
+                        <button onclick="gameSave()" id="id_btn_pur"
+                                class="ui-game-btn ui-game-btn_light disabled">{% trans 'PurChase' %}</button>
+                    </div>
+                    <div class="col-md-4 d-flex justify-content-center">
+                    </div>
+                    <div class="col-md-4 d-flex justify-content-center">
+                        <a href="{% url 'cabinet' %}"
+                           class="ui-game-btn ui-game-btn_light">{% trans 'List Game' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

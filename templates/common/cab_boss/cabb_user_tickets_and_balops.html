@@ -1,0 +1,208 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'List Games of USER' %}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr class="js_tic_row">
+                                        <th>{% trans 'Type' %}</th>
+                                        <th>{% trans 'Id (ticket/bal.op)' %}</th>
+                                        <th>{% trans 'Id game' %}</th>
+                                        <th>{% trans 'Ticket Status' %}</th>
+                                        <th>{% trans 'User name' %}</th>
+                                        <th>{% trans 'Send Request' %}</th>
+                                        <th>{% trans 'Reply date' %}</th>
+                                        <th>{% trans 'Name Game' %}</th>
+                                        <th>{% trans 'Win/Loss' %}</th>
+                                        <th>{% trans 'N ticket' %}</th>
+                                        <th>{% trans 'Payment Method' %}</th>
+                                        <th>{% trans 'Balance before' %}</th>
+                                        <th>{% trans 'Cost 2' %}</th>
+                                        <th>{% trans 'Sum WIN' %}</th>
+                                        <th>{% trans 'Balance after' %}</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in list_operations %}
+                                        <tr {% if item.error %} class="table-danger"{% endif %}>
+                                            <td>{{ item.type }}</td>
+                                            <td>{{ item.obj.id }}</td>
+                                            {% if item.type == 'Ticket' %}
+                                            <td>{{ item.obj.games_id_id }} ({{ item.obj.games_id.ticket_num }})</td>
+                                            {% if item.obj.status == "00" %}
+                                            <td class="table-warning">{% trans 'start' %}</td>
+                                            {% elif item.obj.status == "01" %}
+                                            <td class="table-warning">{% trans 'ready' %}</td>
+                                            {% elif item.obj.status == "30" %}
+                                            <td class="table-warning">{% trans 'error' %}</td>
+                                            {% elif item.obj.status == "33" %}
+                                            <td>{% trans 'finish' %}</td>
+                                            {% elif item.obj.status == "02" %}
+                                            <td class="table-warning">{% trans 'wait confirm' %}</td>
+                                            {% elif item.obj.status == "03" %}
+                                            <td class="table-warning">{% trans 'error SOD' %}</td>
+                                            {% else %}<td class="table-warning"></td>
+                                            {% endif %}
+                                            <td>
+                                                {{ item.obj.games_id.user_id.profile.name }}
+                                                <br>{{ item.obj.games_id.user_id.profile.mobile }}
+                                                <br>{{ item.obj.games_id.user_id.email }}
+                                                {% if item.obj.games_id.game_type.verbal == "game_gift" %}
+                                                    <br><b>{% trans 'Gift to' %}</b>
+                                                    <br>{{ item.obj.games_id.user_recipient.profile.name }}
+                                                    <br>{{ item.obj.games_id.user_recipient.profile.mobile }}
+                                                    <br>{{ item.obj.games_id.user_recipient.email }}
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ item.obj.req_dt|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ item.obj.answ_dt|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ item.obj.game_type }}</td>
+                                             <td class="center">
+                                                {% if item.obj.answ_win %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-nowrap">{{ item.obj.answ_nom }}</td>
+                                            <td>
+                                                {{ item.obj.games_id.t_payment }}
+                                                {% if item.card %}
+                                                <br>
+                                                    {% trans 'last 4' %}: {{ item.card.0 }}<br>
+                                                    {% trans 'mask card' %}: {{ item.card.1 }}
+                                                {% endif %}
+                                            </td>
+                                            <td {% if item.obj.balance_01 < 0 %} class="table-warning" {% endif %}>
+                                                {% if item.obj.games_id.game_type.verbal == "game_gift" %}
+                                                    {{ item.obj.games_id.user_id.email }}
+                                                    <br>{{ item.obj.balance_01 }}
+                                                    <br>{{ item.obj.games_id.user_recipient.email }}
+                                                    <br>{{ item.obj.recipient_balance_01 }}
+                                                {% else %}
+                                                    {{ item.obj.balance_01 }}
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ item.obj.cost_2 }}</td>
+                                            <td {% if item.obj.answ_win_sum and not item.obj.answ_win_sum == "0" %} class="table-success" {% endif %}>
+                                                {{ item.obj.answ_win_sum }}
+                                            </td>
+                                            <td {% if item.obj.balance_02 < 0 %} class="table-warning" {% endif %}>
+                                                {% if item.obj.games_id.game_type.verbal == "game_gift" %}
+                                                    {{ item.obj.games_id.user_id.email }}
+                                                    <br>{{ item.obj.balance_02 }}
+                                                    <br>{{ item.obj.games_id.user_recipient.email }}
+                                                    <br>{{ item.obj.recipient_balance_02 }}
+                                                {% else %}
+                                                    {{ item.obj.balance_02 }}
+                                                {% endif %}
+                                            </td>
+                                            <td>{% if item.type == 'Ticket' %}
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1 btn-sm"
+                                                        onclick="btn_ticket_action('recalculate', {{ item.obj.id }}, {{ filter_user_id }})">
+                                                        {% trans 'Recalculate' %}
+                                                </button>
+                                                {% endif %}
+                                            </td>
+                                            {% else %}
+                                            <td></td>
+                                            <td {% if item.obj.status.verbal != '04' %} class="table-warning" {%endif%}>
+                                                {{ item.obj.status }}
+                                            </td>
+                                            <td>
+                                                {{ item.obj.user_id.profile.name }}
+                                                <br>{{ item.obj.user_id.profile.mobile }}
+                                                <br>{{ item.obj.user_id.email }}
+                                            </td>
+                                            <td>{{ item.obj.created|date:"d.m.Y H:i:s" }}</td>
+                                            <td colspan="10" class="text-center">{{ item.obj.amount }}
+                                                {% if item.obj.description %}<br>{{ item.obj.description }}{% endif %}
+                                                <br>{{ item.t_create_user_name }} {{ item.t_create_user_email }}
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% if l_pagination %}
+                            {% include l_pagination %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    function btn_ticket_action(l_type_action, l_ticket_id, l_user_id) {
+        console.log('btn_ticket_action');
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        type_action: l_type_action,
+                        ticket_id: l_ticket_id,
+                        user_id: l_user_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb-user-tickets-action/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+</script>

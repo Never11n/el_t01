@@ -1,0 +1,36 @@
+{% extends "002/mail/mail_layout.html" %}
+{% load static %}
+{% load i18n %}
+{% block caption %}
+    {% trans 'CONFIRMATION OF REGISTRATION' %}
+{% endblock %}
+
+{% block description %}
+
+    <div class="contentHeading marginBottom25"
+         style="color: #66047d;font-size: 16px;margin-bottom: 25px;">
+        {% trans 'Hello' %}, {{ profile.name }}!
+    </div>
+    <div class="marginBottom25" style="margin-bottom: 25px;">
+        {% trans 'We are glad to welcome you to' %} <b>{{ EMAIL_SERVICE_NAME }}</b>!
+        <br>
+        {% trans 'Thank you for registering!' %}
+    </div>
+    <div class="marginBottom25" style="margin-bottom: 25px;">
+        {% trans 'You just have to activate your account:' %}
+    </div>
+    <a href="{{ url }}" target="_blank" class="activationBtn"
+       style="display: inline-block;padding-top: 10px;padding-bottom: 10px;padding-left: 20px;padding-right: 20px;margin-top: 10px;margin-bottom: 30px;border: 1px solid #66047d;text-transform: uppercase;font-size: 18px;line-height: 18px;white-space: nowrap;text-decoration: none;background-color: #fff;transition: color .2s ease-in-out, background-color .2s ease-in-out;color: #686868 !important;font-weight: normal;">
+        {% trans 'Activate' %}
+    </a>
+    <div class="marginBottom25" style="margin-bottom: 25px;">
+        {% trans "If the button doesn't work, copy the following link into the address bar of your browser:" %}
+    </div>
+    <a href="{{ url }}" target="_blank"
+       class="activationLink marginBottom25"
+       style="margin-bottom: 25px;display: block;text-align: center;overflow: hidden;word-break: break-all;-ms-word-break: break-all;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;color: #66047d;font-weight: normal;text-decoration: none;">
+        <span style="border-bottom: 1px solid #cde5dc;">
+            {{ url }}
+        </span>
+    </a>
+{% endblock %}

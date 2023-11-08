@@ -1,0 +1,35 @@
+{% load static %}
+{% load i18n %}
+<!-- SignIn Area Start -->
+<div class="modal fade login-modal" id="suport" tabindex="-1" role="dialog"  aria-labelledby="suport"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="{% trans 'Close' %}"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-body">
+                <div class="logo-area">
+                    <img class="logo" src="{% static 'main/004/images/logo.png' %}" alt="">
+                </div>
+                <div class="header-area">
+{#                    <h4 class="title">{% trans 'Great to have you back!' %}</h4>#}
+                    <p class="sub-title">{% trans 'You can call ' %}</p>
+                    <p class="sub-title">{% trans '999 999 9999' %}</p>
+                    <p class="sub-title">{% trans 'to solve your problems.' %}</p>
+                </div>
+                <div class="form-area">
+                    <form action="#" method="POST">
+                        <div class="form-group text-center">
+                            <a href="#" class="mybtn1"
+                               data-dismiss="modal" aria-label="Close"
+                            >
+                               {% trans 'OK' %}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SignIn Area End -->

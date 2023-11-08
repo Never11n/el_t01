@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html {% if lang == "he" %}dir="rtl"{% endif %}>
+
+<head>
+    <title>{{ PAGE_TITLE }}</title>
+    {% for item_head in l_head_list %}
+        {% include item_head %}
+    {% endfor %}
+</head>
+
+<body>
+{% for item_header in l_header_list %}
+{#    {{ item_header }}#}
+{% endfor %}
+
+{% block layoutbody %}
+{% endblock %}
+
+{% for item_script in l_script_list %}
+    {% include item_script %}
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,533 @@
+{% load static %}
+{% load i18n %}
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="cabs_newtask main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{% trans 'User' %}{{ permissions }}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 ui__mfeedback_replay-items">
+                                            <div class="ui__mfeedback_replay-item">
+                                                <div class="ui__mfeedback_replay-item-caption">
+                                                    {% trans 'User:' %}
+                                                </div>
+                                                <div class="ui__mfeedback_replay-item-text">
+                                                    {{ t_user_profile.id }}
+                                                </div>
+                                            </div>
+                                            <div class="ui__mfeedback_replay-item">
+                                                <div class="ui__mfeedback_replay-item-caption">
+                                                    {% trans 'Name:' %}
+                                                </div>
+                                                <div class="ui__mfeedback_replay-item-text">
+                                                    {{ t_user_profile.name }}
+                                                </div>
+                                            </div>
+                                            <div class="ui__mfeedback_replay-item">
+                                                <div class="ui__mfeedback_replay-item-caption">
+                                                    {% trans 'Phone:' %}
+                                                </div>
+                                                <div class="ui__mfeedback_replay-item-text">
+                                                    {{ t_user_profile.mobile }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ui__mfeedback_replay-items">
+                                            <div class="ui__mfeedback_replay-item">
+                                                <div class="ui__mfeedback_replay-item-caption">
+                                                    {% trans 'Email:' %}
+                                                </div>
+                                                <div class="ui__mfeedback_replay-item-text">
+                                                    {{ t_user_profile.user }}
+                                                </div>
+                                            </div>
+                                            <div class="ui__mfeedback_replay-item">
+                                                <div class="ui__mfeedback_replay-item-caption">
+                                                    {% trans 'ID doc:' %}
+                                                </div>
+                                                <div class="ui__mfeedback_replay-item-text">
+                                                    {{ t_user_profile.i_doc }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card card-secondary card-tabs">
+                                <div class="card-header p-0 pt-1">
+                                    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                                        {% if me.profile.settings.permit_cabb.user_edit_profile %}
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="custom-tabs-one-home-tab"
+                                               data-toggle="pill" href="#custom-tabs-one-home"
+                                               role="tab" aria-controls="custom-tabs-one-home"
+                                               aria-selected="true">{% trans 'Profile' %}</a>
+                                        </li>
+                                        {% endif %}
+                                        {% if me.profile.settings.permit_cabb.user_edit_limits %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-one-profile-tab"
+                                               data-toggle="pill" href="#custom-tabs-one-profile"
+                                               role="tab" aria-controls="custom-tabs-one-profile"
+                                               aria-selected="false">{% trans 'Limits' %}</a>
+                                        </li>
+                                        {% endif %}
+                                        {% if me.profile.settings.permit_cabb.user_edit_photo %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-one-messages-tab"
+                                               data-toggle="pill" href="#custom-tabs-one-messages"
+                                               role="tab" aria-controls="custom-tabs-one-messages"
+                                               aria-selected="false">{% trans 'ID photo' %}</a>
+                                        </li>
+                                        {% endif %}
+                                        {% if me.profile.settings.permit_cabb.user_edit_set_blogger %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-one-blogger-tab"
+                                               data-toggle="pill" href="#custom-tabs-one-blogger"
+                                               role="tab" aria-controls="custom-tabs-one-blogger"
+                                               aria-selected="false">{% trans 'Set blogger' %}</a>
+                                        </li>
+                                        {% endif %}
+                                        {% if me.profile.settings.permit_cabb.user_add_permissions %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-one-permission-tab"
+                                               data-toggle="pill" href="#custom-tabs-one-permission"
+                                               role="tab" aria-controls="custom-tabs-one-permission"
+                                               aria-selected="false">{% trans 'Set permissions' %}</a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-one-tabContent">
+                                        {% if me.profile.settings.permit_cabb.user_edit_profile %}
+                                        <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_user_name">{% trans 'Name' %}</label>
+                                                        <input type="text"
+                                                               id="id_user_name"
+                                                               class="form-control"
+                                                               name="f_user_name"
+                                                               value="{{ t_user_profile.name }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_user_email">{% trans 'Email' %}</label>
+                                                        <input type="text"
+                                                               id="id_user_email"
+                                                               class="form-control"
+                                                               name="f_user_email"
+                                                               value="{{ t_user_profile.user.email }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_user_phone">{% trans 'Phone' %}</label>
+                                                        <input type="text"
+                                                               id="id_user_phone"
+                                                               class="form-control"
+                                                               name="f_user_phone"
+                                                               value="{{ t_user_profile.mobile }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_user_id_doc">{% trans 'ID document' %}</label>
+                                                        <input type="text"
+                                                               id="id_user_id_doc"
+                                                               class="form-control"
+                                                               name="f_user_id_doc"
+                                                               value="{{ t_user_profile.i_doc }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>{% trans 'Date of birth' %}</label>
+                                                        <div class="input-group date" id="id_date_1"
+                                                             data-target-input="nearest">
+                                                            <input type="text"
+                                                                   class="form-control datetimepicker-input js__calc_date_1"
+                                                                   id="id_date_birthday"
+                                                                   data-target="#id_date_1"
+                                                                   name="f_date_start"
+                                                                   value="{{t_user_profile.date_birthday|date:'d.m.Y'}}"
+                                                            >
+                                                            <div class="input-group-append" data-target="#id_date_1"
+                                                                 data-toggle="datetimepicker">
+                                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_user_password">{% trans 'Password' %}</label>
+                                                        <input type="text"
+                                                               id="id_user_password"
+                                                               class="form-control"
+                                                               name="f_user_password"
+                                                               value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% if me.profile.settings.permit_cabb.user_edit_limits %}
+                                        <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_max_ticket_d">{% trans 'Max Tickets Day' %}</label>
+                                                        <input type="number"
+                                                               id="id_max_ticket_d"
+                                                               class="form-control"
+                                                               name="f_max_ticket_d"
+                                                               value="{{ t_user_profile.settings.limit.max_ticket_d }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_max_sum_d">{% trans 'Max Amount Day' %}</label>
+                                                        <input type="number"
+                                                               id="id_max_sum_d"
+                                                               class="form-control"
+                                                               name="f_max_sum_d"
+                                                               value="{{ t_user_profile.settings.limit.max_sum_d }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_max_ticket_w">{% trans 'Max Tickets Week' %}</label>
+                                                        <input type="number"
+                                                               id="id_max_ticket_w"
+                                                               class="form-control"
+                                                               name="f_max_ticket_w"
+                                                               value="{{ t_user_profile.settings.limit.max_ticket_w }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_max_sum_w">{% trans 'Max Amount Week' %}</label>
+                                                        <input type="number"
+                                                               id="id_max_sum_w"
+                                                               class="form-control"
+                                                               name="f_max_sum_w"
+                                                               value="{{ t_user_profile.settings.limit.max_sum_w }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_max_ticket_m">{% trans 'Max Tickets Month' %}</label>
+                                                        <input type="number"
+                                                               id="id_max_ticket_m"
+                                                               class="form-control"
+                                                               name="f_max_ticket_m"
+                                                               value="{{ t_user_profile.settings.limit.max_ticket_m }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_max_sum_m">{% trans 'Max Amount Month' %}</label>
+                                                        <input type="number"
+                                                               id="id_max_sum_m"
+                                                               class="form-control"
+                                                               name="f_max_sum_m"
+                                                               value="{{ t_user_profile.settings.limit.max_sum_m }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% if me.profile.settings.permit_cabb.user_edit_photo %}
+                                        <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        {% if  t_user_profile.i_foto %}
+                                                        <a href="{% get_media_prefix %}{{ t_user_profile.i_foto }}" target="_blank">
+                                                            <img class="w-50" src="{% get_media_prefix %}{{ t_user_profile.i_foto }}">
+                                                        </a>
+                                                        {% else %}
+                                                        {% trans 'No photo uploaded' %}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        {% if  t_user_profile.i_photo_face %}
+                                                        <a href="{% get_media_prefix %}{{ t_user_profile.i_photo_face }}" target="_blank">
+                                                            <img class="w-50" src="{% get_media_prefix %}{{ t_user_profile.i_photo_face }}">
+                                                        </a>
+                                                        {% else %}
+                                                        {% trans 'No photo uploaded' %}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="FileId_01" name="f_file_01">
+                                                        <label class="custom-file-label" for="FileId_01">{% trans 'Choose file' %}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="FileId_02" name="f_file_02">
+                                                        <label class="custom-file-label" for="FileId_02">{% trans 'Choose file' %}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% if me.profile.settings.permit_cabb.user_edit_set_blogger %}
+                                        <div class="tab-pane fade" id="custom-tabs-one-blogger" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="id_user_blogger_ref">{% trans 'Ref hash' %}</label>
+                                                        <input type="text"
+                                                               id="id_user_blogger_ref"
+                                                               class="form-control"
+                                                               name="f_user_blogger_ref"
+                                                               value="{{ t_user_profile.settings.i_am_blogger }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% if me.profile.settings.permit_cabb.user_add_permissions %}
+                                        <input id="add_permissions" type="hidden">
+                                        <div class="tab-pane fade" id="custom-tabs-one-permission" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    {% for perm in all_permissions %}
+                                                        <div class="custom-control custom-switch">
+                                                            <input id="id_perm_{{ perm }}"
+                                                                   type="checkbox"
+                                                                   name="{{ perm }}"
+                                                                   {% if perm in user_permissions %} checked {% endif %}
+                                                                   class="custom-control-input">
+                                                            <label class="custom-control-label" for="id_perm_{{ perm }}">{{ perm }}</label>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row flex-md-row ">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <div class="modal-footer justify-content-between">
+                                            {% if me.profile.settings.permit_cabb.user_edit_photo or me.profile.settings.permit_cabb.user_edit_profile or me.profile.settings.permit_cabb.user_edit_limits or me.profile.settings.permit_cabb.user_edit_set_blogger%}
+                                            <button type="button"
+                                                    class="btn btn-dark"
+                                                    onclick="btn_cabb_form_save()"
+                                            >{% trans 'Set' %}</button>
+                                            {% endif %}
+                                            <button type="button"
+                                                    class="btn btn-dark"
+                                                    data-dismiss="modal"
+                                            >{% trans 'Close' %}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#id_date_1').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
+    $('.custom-file-input').on('change', function (event) {
+            $(this).next('.custom-file-label').html(event.target.files[0].name);
+        })
+    function btn_cabb_form_save() {
+        let formData = new FormData();
+        let csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+        formData.append('csrfmiddlewaretoken', csrftoken);
+        formData.append('f_user_id', '{{ t_user_profile.id }}');
+        formData.append('f_form_name', 'user_edit');
+        formData.append('f_form_type', 'save');
+        checked_perms = $("input[id^='id_perm_']:checked")
+        f_perms = []
+        $.each(checked_perms, function (index, value) {
+            f_perms.push(value.name)
+        });
+        if ($("#add_permissions").length) {
+            if (f_perms.length) {
+                formData.append('f_perms', f_perms)
+            } else {
+                formData.append('f_perms', 'del_all')
+            }
+
+            }
+
+        if ($("#id_max_ticket_d").length) {
+                formData.append('f_max_ticket_d', $("#id_max_ticket_d").val())
+            }
+        if ($("#id_max_ticket_w").length) {
+                formData.append('f_max_ticket_w', $("#id_max_ticket_w").val())
+            }
+        if ($("#id_max_ticket_m").length) {
+                formData.append('f_max_ticket_m', $("#id_max_ticket_m").val())
+            }
+        if ($("#id_max_sum_d").length) {
+                formData.append('f_max_sum_d', $("#id_max_sum_d").val())
+            }
+        if ($("#id_max_sum_w").length) {
+                formData.append('f_max_sum_w', $("#id_max_sum_w").val())
+            }
+        if ($("#id_max_sum_m").length) {
+                formData.append('f_max_sum_m', $("#id_max_sum_m").val())
+            }
+        if ($("#id_user_name").length) {
+                formData.append('f_user_name', $("#id_user_name").val())
+            }
+        if ($("#id_user_email").length) {
+                formData.append('f_user_email', $("#id_user_email").val())
+            }
+        if ($("#id_user_phone").length) {
+                formData.append('f_user_phone', $("#id_user_phone").val())
+            }
+        if ($("#id_user_id_doc").length) {
+                formData.append('f_user_id_doc', $("#id_user_id_doc").val())
+            }
+        if ($("#id_date_birthday").length) {
+                formData.append('f_user_date_birthday', $("#id_date_birthday").val())
+            }
+        if ($("#id_user_password").length) {
+                formData.append('f_user_password', $("#id_user_password").val())
+            }
+        if ($("#FileId_01").length){
+                formData.append('photo1',  $("#FileId_01")[0].files[0]);
+            }
+        if ($("#FileId_02").length) {
+                formData.append('photo2', $("#FileId_02")[0].files[0]);
+            }
+        if ($("#id_user_blogger_ref").length) {
+                formData.append('f_user_blogger_ref', $("#id_user_blogger_ref").val())
+            }
+        $.ajax({
+                type: "POST",
+                async: false,
+                processData: false,
+                contentType: false,
+                data: formData,
+                url: "/cabb-user-form/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+    // function btn_cabb_form_save() {
+    //     let m_max_ticket_d = $("#id_max_ticket_d").val();
+    //     let m_max_ticket_w = $("#id_max_ticket_w").val();
+    //     let m_max_ticket_m = $("#id_max_ticket_m").val();
+    //     let m_max_sum_d = $("#id_max_sum_d").val();
+    //     let m_max_sum_w = $("#id_max_sum_w").val();
+    //     let m_max_sum_m = $("#id_max_sum_m").val();
+    //     $.ajax({
+    //         type: "POST",
+    //         async: false,
+    //         data: {
+    //             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+    //             f_user_id: {{ t_user_profile.id }},
+    //             f_form_name: "user_edit",
+    //             f_form_type: "save",
+    //             f_max_ticket_d: m_max_ticket_d,
+    //             f_max_ticket_w: m_max_ticket_w,
+    //             f_max_ticket_m: m_max_ticket_m,
+    //             f_max_sum_d: m_max_sum_d,
+    //             f_max_sum_w: m_max_sum_w,
+    //             f_max_sum_m: m_max_sum_m,
+    //         },
+    //         url: "/cabb-user-form/",
+    //         success: function (res) {
+    //             if (res.AnswerCod == '01') {
+    //                 $('.js-modal__cabb_form').modal('hide');
+    //                 Swal.fire({
+    //                     icon: 'success',
+    //                     title: gettext('success'),
+    //                     background: '#cacaca',
+    //                     {#html: res.AnswerText,#}
+    //                     confirmButtonText: gettext('Back to form'),
+    //                     confirmButtonColor: '#dd3333',
+    //                 });
+    //             } else {
+    //                 Swal.fire({
+    //                     icon: 'error',
+    //                     title: gettext('ERROR'),
+    //                     background: '#cacaca',
+    //                     html: res.AnswerText,
+    //                     confirmButtonText: gettext('Back to form'),
+    //                     confirmButtonColor: '#dd3333',
+    //                 });
+    //                 return false;
+    //             }
+    //         },
+    //         error: function (res) {
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: gettext('ERROR'),
+    //                 background: '#cacaca',
+    //                 html: gettext("An error occured, please try again later."),
+    //                 confirmButtonText: gettext('Back to form'),
+    //                 confirmButtonColor: '#dd3333',
+    //             });
+    //             return false;
+    //         }
+    //     });
+    // }
+
+</script>

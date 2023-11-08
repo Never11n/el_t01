@@ -1,0 +1,10 @@
+{% extends l_layout_file %}
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+{% block layoutbody %}
+{% for item_body in l_body_list %}
+    {% include item_body %}
+{% endfor %}
+
+{% endblock %}

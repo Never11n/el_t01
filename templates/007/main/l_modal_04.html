@@ -1,0 +1,45 @@
+{% load static %}
+{% load i18n %}
+<!-- SignIn Area Start -->
+<div class="modal fade main-modal" id="recovery" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="suport"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered main-modal__inner" role="document">
+
+        <div class="modal-content main-modal-content">
+
+            <div class="modal-body main-modal-body main-modal-body_sm">
+
+                <button type="button" class="close modal-dialog-close" data-dismiss="modal" aria-label="Close">
+                    <img class="modal-dialog-close__img" src="{% static 'main/007/images/close-icon.png' %}" alt="">
+                </button>
+
+                <h4 class="main-modal-title main-modal-title_recovery">{% trans 'Password Recovery' %}</h4>
+                <p class="main-modal-sub-title main-modal-sub-title_recovery">{% trans 'A new password will be sent to you to the specified adress' %}</p>
+
+                <fieldset class="form-area">
+
+                    <form id="id_form_recovery" action="{% url 'recovery' %}" method="post">
+                        {% csrf_token %}
+                        <fieldset class="main-modal-fieldset-recovery">
+                            <input type="email"
+                                   class="main-modal-form-control"
+                                   id="id_fl_email_recovery"
+                                   name="fl_email_recovery"
+                                   placeholder="{% trans 'E-Мail / Login' %}">
+                        </fieldset>
+                        <div class="text-center">
+                               <a href="#"
+                               class="mybtn1 main-modal-btn"
+                               onclick="btn_modal_recovery()"
+                               >
+                               {% trans 'Send' %}
+                            </a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SignIn Area End -->

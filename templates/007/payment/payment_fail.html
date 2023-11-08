@@ -1,0 +1,25 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+<!-- Recent Winners Area Start -->
+<section class="payment_fail_page main-bg full-height-without-footer">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="section-heading">
+                    <h2 class="title">
+                        {% trans 'Your pay is fail' %}
+                    </h2>
+                    <p class="text">
+                        {% trans 'You can try other options' %}
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-12 d-flex justify-content-center">
+                <a href="{% url 'cab_game_order' item_game_user.id %}"
+                   class="mybtn1 mybtn6">{% trans 'Return to Game Order' %}</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Recent Winners Area End -->

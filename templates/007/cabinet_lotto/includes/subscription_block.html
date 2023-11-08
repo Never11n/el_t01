@@ -1,0 +1,82 @@
+{% load static %}
+{% load i18n %}
+{% get_static_prefix as STATIC_PREFIX %}
+{% if subs_enable or me.email == "dekelb7@gmail.com" or me.email == "v.plasys@gmail.com" or  me.email == "dianavasilevsky3@gmail.com" %}
+<div class="ui-game-box">
+    <div>
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">{% trans 'Subscription' %}</span>
+            <span class="ui-game-info-header__number">4</span>
+        </div>
+<!--        <div class="row flex-md-row ">-->
+<!--                    <div class="col-md-12 d-flex justify-content-center">-->
+<!--                        <button id="id_btn_subscribe"-->
+<!--                                class="ui-game-btn ui-game-btn_light">{% trans 'Subscribe' %}</button>-->
+<!--                    </div>-->
+<!--        </div>-->
+        <div class="row flex-md-row">
+            <div class="col-md-4 d-flex justify-content-center mb-2">
+                <label class="ui-game-btn-input-label">
+                    <input type="radio" name="subscribe-not" checked class="ui-game-btn-input btn_subscribe" value="0"/>
+                    <span class="ui-game-btn-input-label-display ui-game-btn-input-label-display__theme-color">{% trans 'Not subscribe' %}</span>
+                </label>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+                <label class="ui-game-btn-input-label">
+                    <input type="radio" name="subscribe-not" class="ui-game-btn-input btn_subscribe"
+                           value="1"/>
+                    <span class="ui-game-btn-input-label-display ui-game-btn-input-label-display__theme-color">{% trans 'Subscribe' %}</span>
+                </label>
+            </div>
+        </div>
+        <div class="js-subs-days-hidden-block mt-5">
+            <div class="ui-game-info-header">
+                    <span class="ui-game-info-header__text">{% trans 'Select number of games' %}</span>
+            </div>
+            <div class="ui-game-balls-wrap js-subs-day-block">
+                {% for item_days_list in subscription_days %}
+                    <div class="{% if item_days_list|length < 6 %} d-flex justify-content-around {% else %} ui-game-balls-wrap-row {% endif %}">
+                        {% for item_day in item_days_list %}
+                            {% if item_day == 'infinity' %}
+                                <div data-day="{{ item_day }}"
+                                     class="ui-game-ball js-subs-day"
+                                     style="max-width: 170px;width: fit-content;padding-left: 10px;padding-right: 10px;border-radius: 0%;"
+                                >{% trans 'each next game' %}</div>
+                            {% else %}
+                                <div data-day="{{ item_day }}"
+                                     class="ui-game-ball js-subs-day"
+                                     style=""
+                                >{{ item_day }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="js-subs-days-hidden-block mt-5">
+            <div class="ui-game-info-header">
+                    <span class="ui-game-info-header__text">{% trans 'Choice for future games' %}</span>
+            </div>
+            <div class="row flex-md-row">
+                <div class="col-md-4 d-flex justify-content-center mb-2">
+                    <label class="ui-game-btn-input-label">
+                        <input type="radio" name="automatic-same" checked class="ui-game-btn-input" value="0"/>
+                        <span class="ui-game-btn-input-label-display ui-game-btn-input-label-display__theme-color">{% trans 'Same choice' %}</span>
+                    </label>
+                </div>
+                <div class="col-md-4 d-flex justify-content-center">
+                </div>
+                <div class="col-md-4 d-flex justify-content-center">
+                    <label class="ui-game-btn-input-label">
+                        <input type="radio" name="automatic-same" id='aoutomatic_same_btn' class="ui-game-btn-input"
+                               value="1"/>
+                        <span class="ui-game-btn-input-label-display ui-game-btn-input-label-display__theme-color">{% trans 'Automatic choice' %}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

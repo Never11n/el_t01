@@ -1,0 +1,340 @@
+{% load static %}
+{% load i18n %}
+<!-- modal -->
+<div data-modal-id="js-ui-game-777-modal" class="game-modal js-game-modal">
+    <div class="game-modal__overlay"></div>
+    <div class="game-modal__box">
+        <div class="game-modal__header">
+            <div class="ui-game-btn-reset-wrap">
+                <button data-line="123" type="button" class="ui-game-btn-reset js-game-modal-close js-game-reset js-modal-reset-button-line">
+                    <i class="fa fa-times"></i>
+                </button>
+                <span class="ui-game-btn-reset-text">{% trans 'Clear and close' %}</span>
+            </div>
+            <div class="ui-game-btn-ok-wrap">
+                <span class="ui-game-btn-ok-text">{% trans 'Save and close' %}</span>
+                <button type="button" class="ui-game-btn-ok js-game-modal-close">
+                    <i class="fa fa-check"></i>
+                </button>
+            </div>
+        </div>
+        <div data-selected-line="123" class="js-selected-line game-modal__body">
+<!--            <form>-->
+                <div class="ui-game-balls-options-wrap">
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="01" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="01" />
+                            <span class="ui-game-ball-input-label-display">1</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="02" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="02" />
+                            <span class="ui-game-ball-input-label-display">2</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="03" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="03" />
+                            <span class="ui-game-ball-input-label-display">3</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="04" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="04" />
+                            <span class="ui-game-ball-input-label-display">4</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="05" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="05" />
+                            <span class="ui-game-ball-input-label-display">5</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="06" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="06" />
+                            <span class="ui-game-ball-input-label-display">6</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="07" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="07" />
+                            <span class="ui-game-ball-input-label-display">7</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="08" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="08" />
+                            <span class="ui-game-ball-input-label-display">8</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="09" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="09" />
+                            <span class="ui-game-ball-input-label-display">9</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="10" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="10" />
+                            <span class="ui-game-ball-input-label-display">10</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="11" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="11" />
+                            <span class="ui-game-ball-input-label-display">11</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="12" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="12" />
+                            <span class="ui-game-ball-input-label-display">12</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="13" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="13" />
+                            <span class="ui-game-ball-input-label-display">13</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="14" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="14" />
+                            <span class="ui-game-ball-input-label-display">14</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="15" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="15" />
+                            <span class="ui-game-ball-input-label-display">15</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="16" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="16" />
+                            <span class="ui-game-ball-input-label-display">16</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="17" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="17" />
+                            <span class="ui-game-ball-input-label-display">17</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="18" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="18" />
+                            <span class="ui-game-ball-input-label-display">18</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="19" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="19" />
+                            <span class="ui-game-ball-input-label-display">19</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="20" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="20" />
+                            <span class="ui-game-ball-input-label-display">20</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="21" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="21" />
+                            <span class="ui-game-ball-input-label-display">21</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="22" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="22" />
+                            <span class="ui-game-ball-input-label-display">22</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="23" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="23" />
+                            <span class="ui-game-ball-input-label-display">23</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="24" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="24" />
+                            <span class="ui-game-ball-input-label-display">24</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="25" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="25" />
+                            <span class="ui-game-ball-input-label-display">25</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="26" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="26" />
+                            <span class="ui-game-ball-input-label-display">26</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="27" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="27" />
+                            <span class="ui-game-ball-input-label-display">27</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="28" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="28" />
+                            <span class="ui-game-ball-input-label-display">28</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="29" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="29" />
+                            <span class="ui-game-ball-input-label-display">29</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="30" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="30" />
+                            <span class="ui-game-ball-input-label-display">30</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="31" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="31" />
+                            <span class="ui-game-ball-input-label-display">31</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="32" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="32" />
+                            <span class="ui-game-ball-input-label-display">32</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="33" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="33" />
+                            <span class="ui-game-ball-input-label-display">33</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="34" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="34" />
+                            <span class="ui-game-ball-input-label-display">34</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="35" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="35" />
+                            <span class="ui-game-ball-input-label-display">35</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="36" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="36" />
+                            <span class="ui-game-ball-input-label-display">36</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="37" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="37" />
+                            <span class="ui-game-ball-input-label-display">37</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="38" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="38" />
+                            <span class="ui-game-ball-input-label-display">38</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="39" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="39" />
+                            <span class="ui-game-ball-input-label-display">39</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="40" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="40" />
+                            <span class="ui-game-ball-input-label-display">40</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="41" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="41" />
+                            <span class="ui-game-ball-input-label-display">41</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="42" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="42" />
+                            <span class="ui-game-ball-input-label-display">42</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="43" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="43" />
+                            <span class="ui-game-ball-input-label-display">43</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="44" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="44" />
+                            <span class="ui-game-ball-input-label-display">44</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="45" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="45" />
+                            <span class="ui-game-ball-input-label-display">45</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="46" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="46" />
+                            <span class="ui-game-ball-input-label-display">46</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="47" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="47" />
+                            <span class="ui-game-ball-input-label-display">47</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="48" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="48" />
+                            <span class="ui-game-ball-input-label-display">48</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="49" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="49" />
+                            <span class="ui-game-ball-input-label-display">49</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="50" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="50" />
+                            <span class="ui-game-ball-input-label-display">50</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="51" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="51" />
+                            <span class="ui-game-ball-input-label-display">51</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="52" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="52" />
+                            <span class="ui-game-ball-input-label-display">52</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="53" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="53" />
+                            <span class="ui-game-ball-input-label-display">53</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="54" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="54" />
+                            <span class="ui-game-ball-input-label-display">54</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="55" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="55" />
+                            <span class="ui-game-ball-input-label-display">55</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="56" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="56" />
+                            <span class="ui-game-ball-input-label-display">56</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="57" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="57" />
+                            <span class="ui-game-ball-input-label-display">57</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="58" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="58" />
+                            <span class="ui-game-ball-input-label-display">58</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="59" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="59" />
+                            <span class="ui-game-ball-input-label-display">59</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="60" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="60" />
+                            <span class="ui-game-ball-input-label-display">60</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="61" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="61" />
+                            <span class="ui-game-ball-input-label-display">61</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="62" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="62" />
+                            <span class="ui-game-ball-input-label-display">62</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="63" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="63" />
+                            <span class="ui-game-ball-input-label-display">63</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="64" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="64" />
+                            <span class="ui-game-ball-input-label-display">64</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="65" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="65" />
+                            <span class="ui-game-ball-input-label-display">65</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="66" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="66" />
+                            <span class="ui-game-ball-input-label-display">66</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="67" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="67" />
+                            <span class="ui-game-ball-input-label-display">67</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="68" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="68" />
+                            <span class="ui-game-ball-input-label-display">68</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="69" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="69" />
+                            <span class="ui-game-ball-input-label-display">69</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="70" type="radio" name="ui-game-ball-option" class="ui-game-ball-input" value="70" />
+                            <span class="ui-game-ball-input-label-display">70</span>
+                        </label>
+                        <label class="ui-game-ball-input-label visually-hide">
+                            <span class="ui-game-ball-input-label-display">70</span>
+                        </label>
+                        <label class="ui-game-ball-input-label visually-hide">
+                            <span class="ui-game-ball-input-label-display">70</span>
+                        </label>
+                    </div>
+                </div>
+<!--            </form>-->
+        </div>
+    </div>
+</div>

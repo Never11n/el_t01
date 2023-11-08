@@ -1,0 +1,58 @@
+{% load static %}
+{% load i18n %}
+<table class="table table-bordered">
+    <tbody>
+    <tr class="{% if item_ticket.answ_tabl.c01_win == 'win' %} table-success {% endif %}">
+        <td>{{ item_ticket.answ_tabl.c01_win }}</td>
+        {% if item_ticket.answ_tabl.c01_OP %}
+            <td>OPTION</td>
+        {% else %}
+            <td>{{ item_ticket.answ_tabl.c0101 }}</td>
+        {% endif %}
+        <td>{{ item_ticket.answ_tabl.c0101_сlear }}</td>
+        <td>{{ item_ticket.answ_tabl.c0102 }}</td>
+        <td>{{ item_ticket.answ_tabl.c0102_сlear }}</td>
+        <td>{{ item_ticket.answ_tabl.c0103 }}</td>
+        <td>{{ item_ticket.answ_tabl.c0103_сlear }}</td>
+    </tr>
+    <tr class="{% if item_ticket.answ_tabl.c02_win == 'win' %} table-success {% endif %}">
+        <td>{{ item_ticket.answ_tabl.c02_win }}</td>
+        {% if item_ticket.answ_tabl.c02_OP %}
+            <td>OPTION</td>
+        {% else %}
+            <td>{{ item_ticket.answ_tabl.c0201 }}</td>
+        {% endif %}
+        <td>{{ item_ticket.answ_tabl.c0201_сlear }}</td>
+        <td>{{ item_ticket.answ_tabl.c0202 }}</td>
+        <td>{{ item_ticket.answ_tabl.c0202_сlear }}</td>
+        <td>{{ item_ticket.answ_tabl.c0203 }}</td>
+        <td>{{ item_ticket.answ_tabl.c0203_сlear }}</td>
+    </tr>
+    <tr class="{% if item_ticket.answ_tabl.c03_win == 'win' %} table-success {% endif %}">
+        <td>{{ item_ticket.answ_tabl.c03_win }}</td>
+        {% if item_ticket.answ_tabl.c03_OP %}
+            <td>OPTION</td>
+        {% else %}
+            <td>{{ item_ticket.answ_tabl.c0301 }}</td>
+        {% endif %}
+        <td>{{ item_ticket.answ_tabl.c0301_сlear }}</td>
+        <td>{{ item_ticket.answ_tabl.c0302 }}</td>
+        <td>{{ item_ticket.answ_tabl.c0302_сlear }}</td>
+        <td>{{ item_ticket.answ_tabl.c0303 }}</td>
+        <td>{{ item_ticket.answ_tabl.c0303_сlear }}</td>
+    </tr>
+    <tr class="{% if item_ticket.answ_tabl.c04_win == 'win' %} table-success {% endif %}">
+        <td>{{ item_ticket.answ_tabl.c04_win }}</td>
+        {% if item_ticket.answ_tabl.c04_OP %}
+            <td>OPTION</td>
+        {% else %}
+            <td>{{ item_ticket.answ_tabl.c0401 }}</td>
+        {% endif %}
+        <td>{{ item_ticket.answ_tabl.c0401_сlear }}</td>
+        <td>{{ item_ticket.answ_tabl.c0402 }}</td>
+        <td>{{ item_ticket.answ_tabl.c0402_сlear }}</td>
+        <td>{{ item_ticket.answ_tabl.c0403 }}</td>
+        <td>{{ item_ticket.answ_tabl.c0403_сlear }}</td>
+    </tr>
+    </tbody>
+</table>

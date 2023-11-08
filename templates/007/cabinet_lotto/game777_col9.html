@@ -1,0 +1,53 @@
+{% load static %}
+{% load i18n %}
+<section data-game-theme-color="#FC459A" data-game-theme-color-rgb="252, 69, 154" class="js-game-theme-color game-item main-bg full-height-without-footer">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="ui-game">
+                    {% include tmpl_hidden_inputs %}
+                    {% include tmpl_card_header %}
+                    {% include tmpl_timer %}
+                    <div class="ui-game-box">
+                        <div class="ui-game-single">
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{% trans 'Choose your numbers' %}</span>
+                                <span class="ui-game-info-header__number">1</span>
+                            </div>
+                            <div class="ui-game-single__actions">
+                                <div class="ui-game-btn-reset-wrap">
+                                    <button data-line=1 type="button" class="ui-game-btn-reset js-game-reset">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <span class="ui-game-btn-reset-text"></span>
+                                </div>
+                                <button data-line=1 type="button" class="ui-game-btn-sm js-game-auto">
+                                    {% trans 'Select automatically' %}
+                                </button>
+                            </div>
+                            <div class="ui-game-balls-wrap">
+                                <div data-line-num=1 class="ui-game-balls-wrap-row js-ui-game-balls-wrap-row">
+                                    <div data-line=1 class="ui-game-ball"></div>
+                                    <div data-line=1 class="ui-game-ball js-ui-game-777-modal-open"></div>
+                                    <div data-line=1 class="ui-game-ball js-ui-game-777-modal-open"></div>
+                                    <div data-line=1 class="ui-game-ball js-ui-game-777-modal-open"></div>
+                                    <div data-line=1 class="ui-game-ball js-ui-game-777-modal-open"></div>
+                                    <div data-line=1 class="ui-game-ball js-ui-game-777-modal-open"></div>
+                                    <div data-line=1 class="ui-game-ball js-ui-game-777-modal-open"></div>
+                                    <div data-line=1 class="ui-game-ball js-ui-game-777-modal-open"></div>
+                                </div>
+                                <div data-line-num=1 class="ui-game-balls-wrap-row ui-game-balls-wrap-row_flex-end">
+                                    <div data-line=1 class="ui-game-ball js-ui-game-777-modal-open"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% include tmpl_subscription %}
+                    {% include tmpl_total_sum %}
+                    {% include tmpl_box_payment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include tmpl_game_modal %}

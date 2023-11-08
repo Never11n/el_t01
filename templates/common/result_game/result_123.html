@@ -1,0 +1,45 @@
+{% load static %}
+{% load i18n %}
+<label>WINNING NUMBERS</label>
+<table class="table table-bordered">
+    <tbody>
+    <tr class="">
+        <td>{{ result.result }}</td>
+    </tr>
+    </tbody>
+</table>
+<label>USER NUMBERS</label>
+<table class="table table-bordered">
+    <tbody>
+    {% for line in item_ticket.answ_tabl.lotto_ticket_info.tables %}
+    <tr class="">
+        <td>{% trans 'Block' %} {{ forloop.counter }}</td>
+        <td>{{ line.numbers }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+<!--<div class="ui-game-box">-->
+<!--    <div class="ui-game-single">-->
+<!--        <div class="ui-game-info-header">-->
+<!--            <span class="ui-game-info-header__text">{% trans 'Line' %} {{ forloop.counter }}</span>-->
+<!--&lt;!&ndash;            <span class="ui-game-info-header__number"></span>&ndash;&gt;-->
+<!--        </div>-->
+
+<!--        <div class="ui-game-balls-wrap">-->
+<!--            <div class="ui-game-balls-wrap-row js-ui-game-balls-wrap-row">-->
+<!--                {% for number in line.numbers %}-->
+<!--                <div class="ui-game-ball"-->
+<!--                     {% if number in winning_numbers %}-->
+<!--                        style="background-color:#FC459A;color: #fff;"-->
+<!--                     {% endif %}-->
+<!--                >{{ number }}</div>-->
+<!--                {% endfor %}-->
+<!--            </div>-->
+
+<!--        </div>-->
+
+<!--    </div>-->
+<!--</div>-->

@@ -1,0 +1,162 @@
+{% load i18n %}
+{% load static %}
+<div class="container">
+    <div class="header-middle">
+        <div class="row">
+            <div class="col-xs-12">
+                {# <a href="/" class="header-middle__logo">{{ name_region }}</a> #}
+                <a href="/" class="header-middle__logo"></a>
+                <div class="header-statistic-text {% if block_statistic_show %}{% else %}hide{% endif %}">
+                    <div class="header-statistic-text-block">
+                        <div class="header-statistic-text-block-tender js_header-statistic-text-block-tender">
+                            {#{% if me.profile.city.region.caption %}#}
+                            {% if city_id %}
+                            <div class="header-statistic-text-row1">{% trans 'Сейчас на сайте проводится тендеров - ' %}
+                                {{ current_tenders_n_text }},
+                            </div>
+                            {% for item in current_tenders_n_region_list %}
+                            <div class="header-statistic-text-row2
+                                        js_header-region-{{item.id}}
+                                        {% if item.id != city_id %} collapse {% endif %}">
+                                {% if me.profile.city.region.id == item.id %}
+                                {% trans 'в т.ч. в Вашем регионе (' %}{% trans item.caption %}) - {{item.value_text}}
+                            </div>
+                            {% else %}
+                            {% trans 'в т.ч. в выбранном регионе (' %}{% trans item.caption %}) - {{item.value_text}}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% else %}
+                        <div class="header-statistic-text-row_one">{% trans 'Сейчас на сайте проводится тендеров - ' %}
+                            {{ current_tenders_n_text }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="header-statistic-text-block-tender js_header-statistic-text-block-ads collapse">
+                        {% if city_id %}
+                        <div class="header-statistic-text-row1">{% trans 'Опубликовано объявлений - ' %} {{ current_ads_n_text }},
+                        </div>
+                        {% for item in current_ads_n_region_list %}
+                        <div class="header-statistic-text-row2
+                                        js_header-region-{{item.id}}
+                                        {% if item.id != city_id %} collapse {% endif %}">
+                            {% if me.profile.city.region.id == item.id %}
+                            {% trans 'в т.ч. в Вашем регионе (' %}{% trans item.caption %}) - {{ item.value_text }}
+                        </div>
+                        {% else %}
+                        {% trans 'в т.ч. в выбранном регионе (' %}{% trans item.caption %}) - {{ item.value_text }}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    <div class="header-statistic-text-row_one">{% trans 'Опубликовано объявлений - ' %} {{ current_ads_n_text }}
+                    </div>
+				{% endif %}
+                </div>
+            </div>
+{% if block_statistic_show %}
+            <button type="button" class="header-middle__search-btn pull-right js-header-top__city-select_2">
+                <div class="header-middle__search-btn-icon"></div>
+            </button>
+{% endif %}
+
+{% if block_statistic_show %}
+            <div class="header-middle__search-filter pull-right">
+                <a href="" class="header-middle__search-filter-link js-header-middle__search-filter-link
+                            header-middle__search-filter-link--active" onclick="view_statistic_tenders()">
+                    {% trans 'по тендерам' %}
+                </a>
+                <input type="hidden" name="search_by" value="tenders"/>
+                <a href="" class="header-middle__search-filter-link js-header-middle__search-filter-link"
+                   onclick="view_statistic_ads()"> {# search_by_ads() #}
+                    {% trans 'по объявлениям' %}
+                </a>
+            </div>
+{% endif %}
+            <div class="header-middle__search-results hide">
+            </div>
+        </div>
+
+        {% if login_page_guest %}
+        <div class="header-middle__auth js-header-middle__auth">
+            <div class="header-middle__auth-guest">
+                <div class="header-middle__auth-guest-greeting">
+                    {% trans 'Добро пожаловать!' %}
+                </div>
+            </div>
+            <div class="header-middle__auth-guest-links header-middle__auth-guest-links-login">
+                {% trans 'Вы находитесь на странице входа в систему' %}
+            </div>
+        </div>
+        {% else %}
+        {% if register_page_guest %}
+        <div class="header-middle__auth js-header-middle__auth">
+            <div class="header-middle__auth-guest">
+                <div class="header-middle__auth-guest-greeting">
+                    {% trans 'Добро пожаловать!' %}
+                </div>
+            </div>
+            <div class="header-middle__auth-guest-greeting header-middle__auth-guest-links-login">
+                {% trans 'Вы находитесь на <br> странице регистрации' %}
+            </div>
+        </div>
+        {% else %}
+        {% if me.id %}
+        {% include 'layout/header2_user_dropdown.html' %}
+        {% else %}
+        <div class="header-middle__auth js-header-middle__auth">
+            <div class="header-middle__auth-guest">
+                <div class="header-middle__auth-guest-greeting">
+                    {% trans 'Добро пожаловать!' %}
+                </div>
+            </div>
+            <div class="header-middle__auth-guest-links">
+                <a href="" class="js-header-middle__login">{% trans 'Войти' %}</a>
+                <span> {% trans 'или' %} </span>
+                <a href="{% url 'join' %}" class="js-header-middle__register">
+                    {% trans 'Зарегистрироваться' %}
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        <div class="user"></div>
+    </div>
+</div>
+</div>
+</div>
+<div class="container">
+    <nav class="row header-nav">
+        <div class="col-xs-12">
+            <div class="header-nav__links">
+                <a href="/"
+                   class="header-nav__link {% if current_tab == 'main' %} header-nav__link--active {% endif %}">
+                    {% trans 'Главная' %}
+                </a>
+                <a href="{% url 'main_isk' %}"
+                   class="header-nav__link {% if current_tab == 'main_isk' %} header-nav__link--active {% endif %}">
+                    {% trans 'Иски' %}
+                </a>
+                <a href="{% url 'main_advice' %}"
+                   class="header-nav__link {% if current_tab == 'main_advice' %} header-nav__link--active {% endif %}">
+                    {% trans 'Услуги' %}
+                </a>
+                <a href="{% url 'actions' %}"
+                   class="header-nav__link {% if current_tab == 'actions' %} header-nav__link--active {% endif %}">
+                    {% trans 'Тарифы' %}
+                </a>
+                <a href="{% url 'building_law' %}" {# js-header-nav__link-encyclopedia  #}
+                   class="header-nav__link {% if current_tab == 'enc' %} header-nav__link--active {% endif %}">
+                    {% trans 'Законодательство' %} {#% trans 'Законодательство Энциклопедия' %#}
+                </a>
+                <a href="{% url 'about' %}"
+                   class="header-nav__link {% if current_tab == 'about' %} header-nav__link--active {% endif %}">
+                    <div class="header-nav__link-info-icon">
+                    </div>
+                    {% trans 'о проекте' %}
+                </a>
+            </div>
+        </div>
+    </nav>
+</div>

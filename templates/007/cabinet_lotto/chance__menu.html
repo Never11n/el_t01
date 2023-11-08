@@ -1,0 +1,25 @@
+{% load static %}
+{% load i18n %}
+<section data-game-theme-color="#60DBA5" data-game-theme-color-rgb="96, 219, 165" class="js-game-theme-color game-item main-bg full-height-without-footer">
+<!--    <div class="container">-->
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="col-lg-12">-->
+                <div class="ui-game ui-game__mob-no-p">
+                    {% include tmpl_card_header %}
+                    {% include tmpl_timer %}
+                    <div class="ui-game-links">
+                        <div class="ui-game-links-inner">
+                            <a class="ui-game-links__game ui-game-links__game-1" href="{% url 'cab_game_lotto' 'chance_multi' %}">{% trans 'Multi Chance' %}</a>
+                            <a class="ui-game-links__game ui-game-links__game-2" href="{% url 'cab_game_lotto' 'chance_regular' %}">{% trans 'Chance' %}</a>
+                            <a class="ui-game-links__game ui-game-links__game-3" href="{% url 'cab_game_lotto' 'chance_systematic' %}">{% trans 'Systematic Chance' %}</a>
+                            <div class="ui-game-links__manin">
+                                <span class="ui-game-links__manin-inner-border"></span>
+                                {% trans 'Chance' %}
+                            </div>
+                        </div>
+                    </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</section>

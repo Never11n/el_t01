@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    {% block extra_head %} {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex,nofollow"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300"
+          rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/icdu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/sweetalert2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lightbox.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/bootstrap4/bootstrap.min.css' %}">
+
+    {% include 'common/_JS_CONSTANTS.html' %}
+    <script src="{% static 'js/vendor/lightbox-plus-jquery.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery.min.js' %}"></script>
+    <!--
+    <script src="{% static 'js/vendor/bootstrap4/bootstrap.min.js' %}"></script>
+    -->
+
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/vendor/jquery.caret-1.5.2.min.js' %}"></script>
+    <script src="{% static 'js/vendor/slick.min.js' %}"></script>
+    <script src="{% static 'js/vendor/sweetalert2.js' %}"></script>
+
+    <script src="{% static 'js/vendor/alik.js' %}"></script>
+
+    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+
+    <script src="{% static 'js/js.js' %}?{{ millis }}"></script>
+    <script src="{% static 'icdu/main.js' %}?{{ millis }}"></script>
+    <script src="{% static 'icdu/paid_functions.js' %}?{{ millis }}"></script>
+
+    <link rel="icon" href="{% static 'img/favicon.ico?v=2' %}"/>
+    <link rel="apple-touch-icon" sizes="256x256" href="{% static "img/apple-touch-icon.png" %}">
+</head>
+
+<body>
+{% csrf_token %}
+<input type="hidden" name="available_drafts" value="{{ me.profile.available_drafts }}" />
+<!-- preloader type 1-->
+<!--.loader-->
+<!-- preloader type 2-->
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div id="object_one" class="object"></div>
+                <div id="object_two" class="object"></div>
+                <div id="object_three" class="object"></div>
+                <div id="object_four" class="object"></div>
+            </div>
+        </div>
+    </div>
+<div class="header">
+{% include 'boss/boss_header.html' %}
+</div>
+{% block layoutbody %}
+{% endblock %}
+{% include 'boss/boss_footer.html' %}
+</body>
+</html>

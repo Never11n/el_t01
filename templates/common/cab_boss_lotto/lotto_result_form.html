@@ -1,0 +1,185 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{ m_form_title }}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_lotto_type">{% trans 'Lotto Type' %}</label>
+                                                <select class="custom-select"
+                                                        id="id_lotto_type"
+                                                        name="f_lotto_type">
+                                                    {% for Item in lotto_types %}
+                                                        {% if Item.verbal == t_lotto_result.lotto_type.verbal %}
+                                                        <option selected="selected"
+                                                                value="{{ Item.verbal }}">{% trans Item.caption %}</option>
+                                                        {% else %}
+                                                        <option value="{{ Item.verbal }}">{% trans Item.caption %}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_t_type">{% trans 'Type ticket' %}</label>
+                                                <select class="custom-select"
+                                                        id="id_t_type"
+                                                        name="f_t_type">
+                                                    <option selected="selected"
+                                                                value="all_in_lotto_type">----{% trans 'All tickets in lotto type' %}----</option>
+                                                    {% for Item in ticket_types %}
+                                                        {% if Item.verbal == t_lotto_profit.ticket_type.verbal %}
+                                                        <option selected="selected"
+                                                                value="{{ Item.verbal }}">{% trans Item.caption %}</option>
+                                                        {% else %}
+                                                        <option value="{{ Item.verbal }}">{% trans Item.caption %}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_lottery_number">{% trans 'Lottery number' %}</label>
+                                                <input type="text"
+                                                       id="id_lottery_number"
+                                                       class="form-control"
+                                                       name="f_lottery_number"
+                                                       value="{{ t_lotto_result.lottery_number }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_win_money">{% trans 'Win money' %}</label>
+                                                <input type="number"
+                                                       step="0.1"
+                                                       id="id_win_money"
+                                                       class="form-control"
+                                                       name="f_win_money"
+                                                       value="{{ t_lotto_result.win_money }}">
+                                            </div>
+                                        </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class='col-sm-6'>
+                                            <div class="form-group">
+                                                <label>Date and time of draw:</label>
+                                                <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input"
+                                                           data-target="#reservationdatetime"
+                                                           id="id_draw_date"
+                                                           value="{{  t_lotto_result.draw_date|date:'d.m.Y H:i' }}">
+                                                    <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="id_result_json">{% trans "Result json" %}</label>
+                                                <textarea class="form-control" rows="3"
+                                                          id="id_result_json"
+                                                          name="f_result_json"
+                                                          placeholder='{}'>{{ t_lotto_result.result }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row flex-md-row ">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                onclick="btn_lotto_result_save()"
+                                        >{% trans 'Save' %}
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                data-dismiss="modal"
+                                        >{% trans 'Close' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#reservationdatetime').datetimepicker(
+        { icons: { time: 'far fa-clock' },format: 'DD.MM.YYYY HH:mm'});
+    $('#reservationdatetime2').datetimepicker({ icons: { time: 'fa-solid fa-clock' } ,format: 'DD.MM.YYYY HH:mm'});
+    function btn_lotto_result_save() {
+        let lotto_type = $("#id_lotto_type").val(),
+            t_type = $("#id_t_type").val(),
+            lottery_number = $("#id_lottery_number").val(),
+            draw_date =  $("#id_draw_date").val(),
+            result_json =  $("#id_result_json").val(),
+            win_money =  $("#id_win_money").val();
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                f_form_type: '{{ m_form_type }}',
+                f_id: '{{ m_id }}',
+                f_lotto_type: lotto_type,
+                f_t_type: t_type,
+                f_lottery_number: lottery_number,
+                f_draw_date: draw_date,
+                f_result_json: result_json,
+                f_win_money: win_money
+            },
+            url: "/lotto_result_form_save/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    $('.js-modal__cabb_form').modal('hide');
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+
+    }
+</script>

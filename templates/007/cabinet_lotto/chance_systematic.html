@@ -1,0 +1,146 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!--
+    hearts    черви;
+    spades    пики;
+    diamonds  бубны;
+    clubs     трефы;
+-->
+
+<section data-game-theme-color="#60DBA5" data-game-theme-color-rgb="96, 219, 165" class="js-game-theme-color game-item main-bg full-height-without-footer">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="ui-game">
+                    {% include tmpl_hidden_inputs %}
+                    {% include tmpl_card_header %}
+                    {% include tmpl_timer %}
+                    {% include tmpl_form_type %}
+
+                    <div class="ui-game-box">
+                        <div class="ui-game-single">
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{% trans 'Choose your cards' %}</span>
+                                <span class="ui-game-info-header__number">2</span>
+                            </div>
+                            <div class="ui-game-single__actions">
+                                <button type="button" class="ui-game-btn-reset js-game-reset">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <button type="button" class="ui-game-btn-sm js-game-auto">
+                                    {% trans 'Select automatically' %}
+                                </button>
+                            </div>
+
+                            <div>
+                                <div data-card-num=1 class="ui-game-single-cards-multi">
+                                    <div data-card-suit="spades" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg" alt="spades">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="spades" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg" alt="spades">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="spades" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg" alt="spades">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="spades" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg" alt="spades">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div class="ui-game-single-card-line-number">1</div>
+                                </div>
+
+                                <div data-card-num=2 class="ui-game-single-cards-multi">
+                                    <div data-card-suit="hearts" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg" alt="hearts">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="hearts" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg" alt="hearts">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="hearts" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg" alt="hearts">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="hearts" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg" alt="hearts">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div class="ui-game-single-card-line-number">2</div>
+                                </div>
+
+                                <div data-card-num=3 class="ui-game-single-cards-multi">
+                                    <div data-card-suit="diamonds" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="diamonds">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="diamonds" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="diamonds">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="diamonds" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="diamonds">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="diamonds" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="diamonds">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div class="ui-game-single-card-line-number">3</div>
+                                </div>
+
+                                <div data-card-num=4 class="ui-game-single-cards-multi ui-game-single-cards-multi_no-m-b">
+                                    <div data-card-suit="clubs" class="ui-game-single-card  js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="clubs">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="clubs" class="ui-game-single-card  js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="clubs">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="clubs" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="clubs">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div data-card-suit="clubs" class="ui-game-single-card js-ui-game-single-card">
+                                        <img class="js-game-single-card_img"
+                                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="clubs">
+                                        <span hidden class="js-game-single-card_text">2</span>
+                                    </div>
+                                    <div class="ui-game-single-card-line-number">4</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% include tmpl_count_price %}
+                    {% include tmpl_subscription %}
+                    {% include tmpl_total_sum %}
+                    {% include tmpl_box_payment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include tmpl_game_modal %}

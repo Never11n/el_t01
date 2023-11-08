@@ -1,0 +1,206 @@
+{% load static %}
+{% load i18n %}
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{ m_form_title }}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="id_all_users">{% trans 'For all users' %}</label>
+                                                <input type="checkbox"
+                                                       id="id_all_users"
+                                                       class="form-control"
+                                                       {% if m_form_type == 'new' %}
+                                                        checked
+                                                        {% else %}
+                                                        {% if disc_hist.all_users %}
+                                                        checked
+                                                        {% endif %}
+                                                        {% endif %}
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <label for="id_user">{% trans 'For specific user (enter email)' %}</label>
+                                                <input type="text"
+                                                       id="id_user"
+                                                       class="form-control"
+                                                       {% if disc_hist.user %}
+                                                       value="{{ disc_hist.user }}"
+                                                       {% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                         <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_discount">{% trans 'Discount' %}</label>
+                                                <select class="form-control" id="id_discount">
+                                                    {% for discount in discounts %}
+                                                    <option {% if discount == disc_hist.discount %} selected="selected" {% endif %}
+                                                         value="{{ discount.id }}">{{ discount.caption }}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="id_enabled">{% trans 'Enabled' %}</label>
+                                                <input type="checkbox"
+                                                       id="id_enabled"
+                                                       class="form-control"
+                                                       {% if m_form_type == 'new' %}
+                                                        checked
+                                                        {% else %}
+                                                        {% if disc_hist.enabled %}
+                                                        checked
+                                                        {% endif %}
+                                                        {% endif %}
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class='col-sm-6'>
+                                            <div class="form-group">
+                                                <label>Date and time start:</label>
+                                                <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input"
+                                                       data-target="#reservationdatetime"
+                                                       id="id_start_date"
+                                                       value="{{ disc_hist.start_date|date:'d.m.Y H:i' }}">
+                                                <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                      </div>
+                                        <div class='col-sm-6'>
+                                            <div class="form-group">
+                                                <label>Date and time stop:</label>
+                                                <div class="input-group date" id="reservationdatetime2" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input"
+                                                       data-target="#reservationdatetime2"
+                                                       id="id_stop_date"
+                                                       value="{{ disc_hist.stop_date|date:'d.m.Y H:i' }}">
+                                                <div class="input-group-append" data-target="#reservationdatetime2" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                      </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="id_description">{% trans "Description" %}</label>
+                                                <textarea class="form-control" rows="3"
+                                                          id="id_description"
+                                                          name="f_description"
+                                                          placeholder='{% trans "Description" %}'>{{ disc_hist.description }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row flex-md-row ">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                onclick="btn_discount_history_save()"
+                                        >{% trans 'Save' %}
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                data-dismiss="modal"
+                                        >{% trans 'Close' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#reservationdatetime').datetimepicker(
+        { icons: { time: 'far fa-clock' },format: 'DD.MM.YYYY HH:mm'});
+    $('#reservationdatetime2').datetimepicker({ icons: { time: 'far fa-clock' } ,format: 'DD.MM.YYYY HH:mm'});
+    function btn_discount_history_save() {
+        let all_users = 0;
+        if ($('#id_all_users').is(':checked')) {
+            all_users = 1
+        }
+        let enabled = 0;
+        if ($('#id_enabled').is(':checked')) {
+            enabled = 1
+        }
+        let discount = $("#id_discount").val(),
+            user_email = $("#id_user").val(),
+            start_date = $("#id_start_date").val(),
+            stop_date = $("#id_stop_date").val(),
+            description = $("#id_description").val();
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                f_form_type: '{{ m_form_type }}',
+                f_id: '{{ m_id }}',
+                f_all_users: all_users,
+                f_discount: discount,
+                f_user_email: user_email,
+                f_start_date: start_date,
+                f_stop_date: stop_date,
+                f_description: description,
+                f_enabled: enabled
+
+            },
+            url: "/discount_history_form_save/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    $('.js-modal__cabb_form').modal('hide');
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+
+    }
+</script>

@@ -1,0 +1,471 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    {% load i18n %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+{#    <title>Lucky Lotto</title>#}
+    <title>WinWin</title>
+    <style type="text/css">
+        #outlook a {
+            padding: 0;
+        }
+
+        .text-green {
+            color: #15b284;
+        }
+
+        .text-green-lighter {
+            color: #05d699;
+        }
+
+        .text-red {
+            color: #b21515 !important;
+        }
+
+        .text-black {
+            color: #54595c !important;
+        }
+
+        .text-grey {
+            color: #b6b8b9 !important;
+        }
+
+        .text-white {
+            color: #fff;
+        }
+
+        a:link, a:visited {
+            color: #15b284;
+            font-weight: normal;
+            text-decoration: none;
+        }
+
+        a span {
+            border-bottom: 1px solid #cde5dc;
+        }
+
+        a:focus, a:hover {
+            text-decoration: none;
+            color: #05d699;
+        }
+
+        body {
+            width: 100% !important;
+        }
+
+        body {
+            -webkit-text-size-adjust: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            text-transform: capitalize;
+        }
+
+        #backgroundTable {
+            height: 100% !important;
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+        }
+
+        body, #backgroundTable {
+            background-color: #f5f5f5;
+        }
+
+        #letterContainer {
+            border: 1px solid #eaeaea;
+        }
+
+        h1, .h1 {
+            color: #202020;
+            display: block;
+            font-family: Tahoma, Verdana, Segoe, sans-serif;
+            font-size: 34px;
+            font-weight: bold;
+            line-height: 100%;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        h2, .h2 {
+            color: #202020;
+            display: block;
+            font-family: Tahoma, Verdana, Segoe, sans-serif;
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 100%;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        h3, .h3 {
+            color: #202020;
+            display: block;
+            font-family: Tahoma, Verdana, Segoe, sans-serif;
+            font-size: 26px;
+            font-weight: bold;
+            line-height: 100%;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        h4, .h4 {
+            color: #202020;
+            display: block;
+            font-family: Tahoma, Verdana, Segoe, sans-serif;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 100%;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        #letterPreheader {
+            background-color: transparent;
+        }
+
+        .letterIndent {
+            background-color: transparent;
+        }
+
+        .preheaderContent {
+            padding: 0;
+        }
+
+        .preheaderContentInner {
+            padding: 15px 0;
+        }
+
+        .letterIndentInner {
+            margin-top: 20px;
+        }
+
+        .preheaderContent div {
+            color: #505050;
+            font-family: Tahoma, Verdana, Segoe, sans-serif;
+            font-size: 13px;
+            line-height: 100%;
+            text-align: right;
+        }
+
+        .padding0 {
+            padding: 0;
+        }
+
+        .preheaderContent div img {
+            height: auto;
+            max-width: 600px;
+        }
+
+        #letterHeader {
+            background-color: #ffffff;
+            border-bottom: 0;
+        }
+
+        .headerContent {
+            color: #202020;
+            font-family: Tahoma, Verdana, Segoe, sans-serif;
+            font-size: 34px;
+            font-weight: bold;
+            line-height: 100%;
+            padding: 25px 0 5px 0;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .headerContent a:link, .headerContent a:visited {
+            color: #336699;
+            font-weight: normal;
+            text-decoration: underline;
+        }
+
+        #headerLogo {
+            height: auto;
+            max-width: 600px !important;
+        }
+
+        .contentDivider {
+            width: 100%;
+            min-height: 0;
+            max-height: 0;
+            height: 0;
+            border-top: 1px solid #eaeaea;
+        }
+
+        .headerTitle {
+            text-transform: uppercase;
+            color: #54595c;
+            font-size: 18px !important;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        .paddingBottom0 {
+            padding-bottom: 0;
+        }
+
+        .contentHeading {
+            color: #15b284;
+            font-size: 16px;
+        }
+
+        .marginBottom25 {
+            margin-bottom: 25px;
+        }
+
+        .activationBtn {
+            display: inline-block;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            border: 1px solid #15b284;
+            text-transform: uppercase;
+            font-size: 18px;
+            line-height: 18px;
+            white-space: nowrap;
+            color: #686868 !important;
+            text-decoration: none;
+            background-color: #fff;
+            transition: color .2s ease-in-out, background-color .2s ease-in-out;
+        }
+
+        .activationBtn:hover, .activationBtn:focus {
+            color: #fff !important;
+            text-decoration: none;
+            background-color: #15b284;
+        }
+
+        #letterContainer, .bodyContent {
+            background-color: #ffffff;
+        }
+
+        .bodyContent {
+            color: #54595c;
+            font-family: Tahoma, Verdana, Segoe, sans-serif;
+            font-size: 16px;
+            line-height: 26px;
+            text-align: center;
+        }
+
+        .activationLink {
+            display: block;
+            text-align: center;
+            overflow: hidden;
+            word-break: break-all;
+            -ms-word-break: break-all;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            hyphens: auto;
+        }
+
+        .navigationLinks {
+            margin-top: 10px;
+            margin-bottom: 12px;
+            margin-left: 5px;
+        }
+
+        .navigationLink {
+            display: inline-block;
+            margin-left: 15px;
+            font-size: 13px;
+        }
+
+        .socialLinks {
+            padding-right: 15px;
+            padding-top: 15px;
+        }
+
+        .socialLink {
+            margin-right: 5px;
+        }
+
+        #letterFooter {
+            font-size: 13px !important;
+            line-height: 20px;
+            color: #54595c;
+            background-color: transparent;
+            margin-top: 10px;
+        }
+
+        .footerApps {
+            margin-top: 22px;
+            margin-bottom: 40px;
+        }
+
+        .footerApp {
+            display: inline-block;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .footerContent div {
+            color: #707070;
+            font-family: Tahoma, Verdana, Segoe, sans-serif;
+            font-size: 12px;
+            line-height: 125%;
+            text-align: left;
+        }
+    </style>
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"
+      style="-webkit-text-size-adjust: none;margin: 0;padding: 0;background-color: #f5f5f5;width: 100% !important;">
+<center>
+    <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="backgroundTable"
+           style="margin: 0;padding: 0;background-color: #f5f5f5;height: 100% !important;width: 100% !important;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- // Begin letter Header \\ -->
+                <table border="0" cellpadding="0" cellspacing="0" width="600" id="letterContainer"
+                       style="border: 1px solid #eaeaea;background-color: #ffffff;">
+                    <tr>
+                        <td align="center" valign="top">
+                            <table border="0" cellpadding="0" cellspacing="0" width="600" id="letterHeader"
+                                   style="background-color: #ffffff;border-bottom: 0;">
+                                <tr>
+                                    <td class="headerContent"
+                                        style="color: #202020;font-family: Tahoma, Verdana, Segoe, sans-serif;font-size: 34px;font-weight: bold;line-height: 100%;padding: 25px 0 5px 0;text-align: center;vertical-align: middle;">
+                                        <a href="{{ DOMAIN_OUTER }}" target="_blank"
+                                           style="color: #336699;font-weight: normal;text-decoration: underline;">
+                                            {# src="https://stroibook.com/static/img/sprite_retina/logo_r.png" #}
+                                            <img src="{{ GL_EMAIL_LOGO_FOR_MAIL }}"
+                                                 id="headerLogo" width="289" height="60"
+                                                 style="border: none;font-size: 14px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;max-width: 600px !important;">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="top">
+                            <table border="0" cellpadding="10" cellspacing="0" width="600" id="letterBody">
+                                <tr>
+                                    <td valign="top" class="bodyContent paddingBottom0"
+                                        style="padding-bottom: 0;background-color: #ffffff;color: #54595c;font-family: Tahoma, Verdana, Segoe, sans-serif;font-size: 16px;line-height: 26px;text-align: center;">
+                                        <table border="0" cellpadding="10" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td align="center" valign="top" class="paddingBottom0"
+                                                    style="padding-bottom: 0;">
+                                                    <div class="contentDivider"
+                                                         style="width: 100%;min-height: 0;max-height: 0;height: 0;border-top: 1px solid #eaeaea;"></div>
+                                                    <div class="headerTitle"
+                                                         style="text-transform: uppercase;color: #54595c;padding-top: 8px;padding-bottom: 8px;display: inline-block;font-size: 18px !important;">
+                                                        {% block caption %}{% endblock %}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <!-- // End letter Header \\ -->
+                <!-- // Begin Indent between content blocks \\ -->
+                <table border="0" cellpadding="10" cellspacing="0" width="600" id="letterIndent">
+                    <tr>
+                        <td valign="top" class="padding0" style="padding: 0;">
+                            <table border="0" cellpadding="10" cellspacing="0" width="100%">
+                                <tr>
+                                    <td valign="top" width="180" class="letterIndentInner padding0"
+                                        style="margin-top: 20px;padding: 0;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <!-- // End Indent between content blocks \\ -->
+                <!-- // Begin letter Body \\ -->
+                <table border="0" cellpadding="0" cellspacing="0" width="600" id="letterContainer">
+                    <tr>
+                        <td align="center" valign="top">
+                            <table border="0" cellpadding="10" cellspacing="0" width="600" id="letterBody">
+                                <tr>
+                                    <td valign="top" class="bodyContent"
+                                        style="background-color: #ffffff;color: #54595c;font-family: Tahoma, Verdana, Segoe, sans-serif;font-size: 16px;line-height: 26px;text-align: center;">
+                                        <table border="0" cellpadding="10" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td valign="top">
+                                                    <div>
+                                                        {% block description %} {% endblock %}
+                                                    </div>
+                                                    <div class="marginBottom25" style="margin-bottom: 25px;">
+                                                        {% trans 'Best regards, Team' %} <b>{{ EMAIL_SERVICE_NAME }}</b>.
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <!-- // End letter Body \\ -->
+                <!-- // Begin Indent between content blocks \\ -->
+                <table border="0" cellpadding="10" cellspacing="0" width="600" id="letterIndent">
+                    <tr>
+                        <td valign="top" class="padding0" style="padding: 0;">
+                            <table border="0" cellpadding="10" cellspacing="0" width="100%">
+                                <tr>
+                                    <td valign="top" width="180" class="letterIndentInner padding0"
+                                        style="margin-top: 20px;padding: 0;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <!-- // End Indent between content blocks \\ -->
+                <!-- // Begin Footer \\ -->
+                <table border="0" cellpadding="0" cellspacing="0" width="600" id="letterFooter"
+                       style="line-height: 20px;color: #54595c;background-color: transparent;margin-top: 10px;font-size: 10px !important;">
+                    <tr>
+                        <td align="center" valign="top">
+                            <table border="0" cellpadding="10" cellspacing="0" width="600">
+                                <tr>
+                                    <td valign="top">
+                                        <table border="0" cellpadding="10" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td valign="top" align="center">
+{#                                                    <div class="marginBottom25" style="margin-bottom: 25px;"> #}
+{#                                                        {% trans 'Вы получили это письмо, потому что согласились получать уведомления и рассылку с новостями <span class="text-green-lighter">Строй</span>Бук<sup>&#174;</sup>. Отказаться от рассылки Вы можете в Личном кабинете, изменив соответствующие настройки.' %} #}
+{#                                                    </div> #}
+{#                                                    <div class="marginBottom25" style="margin-bottom: 25px;"> #}
+{#                                                        {% trans 'C уважением, Команда <span class="text-green-lighter">Строй</span>Бук<sup>&#174;</sup>.' %} #}
+{#                                                    </div> #}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <!-- // End Footer \\ -->
+            </td>
+        </tr>
+    </table>
+</center>
+</body>
+</html>

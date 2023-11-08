@@ -1,0 +1,198 @@
+{% load static %}
+{% load i18n %}
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header bg-info">
+                                    <h3 class="card-title">{{ m_form_title }}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="id_name">{% trans 'Blogger name' %}</label>
+                                                <input type="text"
+                                                       id="id_name"
+                                                       class="form-control"
+                                                       name="f_name"
+                                                       value="{{ m_name }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="id_phone">{% trans 'Blogger phone' %}</label>
+                                                <input type="text"
+                                                       id="id_phone"
+                                                       class="form-control"
+                                                       name="f_phone"
+                                                       value="{{ m_phone }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="id_btype">{% trans 'Blogger type' %}</label>
+                                                <select class="form-control"
+                                                         id="id_btype""
+                                                         name="f_payment_type">
+                                                     {% for b_type in blogger_types_list %}
+                                                     <option {% if b_type == m_blogger_type %} selected="selected" {% endif %}
+                                                             value="{{ b_type.verbal }}">{{ b_type.caption }}</option>
+                                                     {% endfor %}
+                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>{% trans 'Blogger social media accounts' %}</label>
+                                                <div class="col-md-12">
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label mr-3" for="id_whatsapp">Whatsapp</label>
+                                                        <input type="text"
+                                                               id="id_whatsapp"
+                                                               class="form-control"
+                                                               name="m_whatsaap"
+                                                               value="{{ m_accounts.whatsapp }}">
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label mr-3" for="id_telegram">Telegram</label>
+                                                        <input type="text"
+                                                               id="id_telegram"
+                                                               class="form-control"
+                                                               name="m_telegram"
+                                                               value="{{ m_accounts.telegram }}">
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label mr-3" for="id_instagram">Instagram</label>
+                                                        <input type="text"
+                                                               id="id_instagram"
+                                                               class="form-control"
+                                                               name="m_instagram"
+                                                               value="{{ m_accounts.instagram }}">
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label mr-3" for="id_facebook">Facebook</label>
+                                                        <input type="text"
+                                                               id="id_facebook"
+                                                               class="form-control"
+                                                               name="m_facebook"
+                                                               value="{{ m_accounts.facebook }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="id_notes">{% trans 'Notes' %}</label>
+                                            <input type="text"
+                                                       id="id_notes"
+                                                       class="form-control"
+                                                       name="f_notes"
+                                                       value="{{ m_notes }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row flex-md-row ">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button"
+                                                class="btn btn-info"
+                                                onclick="btn_blogger_save()"
+                                        >{% trans 'Save' %}</button>
+                                        <button type="button"
+                                                class="btn btn-danger"
+                                                data-dismiss="modal"
+                                        >{% trans 'Close' %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+function btn_blogger_save() {
+        let f_name = $("#id_name").val().trim();;
+        if(!f_name) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please, enter a blogger name"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                return false;
+            }
+        let f_phone = $("#id_phone").val().trim();
+        let f_notes = $("#id_notes").val();
+        let f_instagram = $("#id_instagram").val().trim();
+        let f_facebook = $("#id_facebook").val().trim();
+        let f_whatsapp = $("#id_whatsapp").val().trim();
+        let f_telegram = $("#id_telegram").val().trim();
+        if(!f_phone && !f_instagram && !f_whatsapp && !f_facebook && !f_telegram) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please, enter at least one blogger contact"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                return false;
+            }
+        let blogger_type = $("#id_btype").val();
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                m_form_type: '{{ m_form_type }}',
+                f_id: '{{ m_id }}',
+                f_name: f_name,
+                f_phone: f_phone,
+                f_notes: f_notes,
+                f_instagram: f_instagram,
+                f_facebook: f_facebook,
+                f_whatsapp: f_whatsapp,
+                f_telegram: f_telegram,
+                f_blogger_type: blogger_type
+            },
+            url: "/blogger_form_save/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    $('.js-modal__cabb_form').modal('hide');
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>

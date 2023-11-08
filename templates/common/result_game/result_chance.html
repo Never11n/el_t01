@@ -1,0 +1,34 @@
+{% load static %}
+{% load i18n %}
+<label>SELECTED CARDS</label>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Suit</th>
+            <th>User</th>
+            <th>Pais</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr class="">
+        <td>{% trans 'Spades' %}</td>
+        <td>{{ item_ticket.answ_tabl.lotto_ticket_info.card_spades }}</td>
+        <td>{{ result.result.card_spades }}</td>
+    </tr>
+    <tr class="">
+        <td>{% trans 'Hearts' %}</td>
+        <td>{{ item_ticket.answ_tabl.lotto_ticket_info.card_hearts }}</td>
+        <td>{{ result.result.card_hearts }}</td>
+    </tr>
+    <tr class="">
+        <td>{% trans 'Diamonds' %}</td>
+        <td>{{ item_ticket.answ_tabl.lotto_ticket_info.card_diamonds }}</td>
+        <td>{{ result.result.card_diamonds }}</td>
+    </tr>
+    <tr class="">
+        <td>{% trans 'Clubs' %}</td>
+        <td>{{ item_ticket.answ_tabl.lotto_ticket_info.card_clubs }}</td>
+        <td>{{ result.result.card_clubs }}</td>
+    </tr>
+    </tbody>
+</table>

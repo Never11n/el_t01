@@ -1,0 +1,54 @@
+html,
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.modal-fade-main-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.main-modal-fieldset-register {
+    border: 0px;
+}
+
+.main-modal-form-group {
+    margin: 20%;
+}
+
+input {
+    padding: 17%;
+    border: none;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.1);
+    transform: scale(2, 1.5);
+    border-radius: 15px;
+}
+
+.text-center {
+    background-color: yellow;
+    margin: 15%;
+    padding: 5%;
+    transform: scale(1.8);
+    border: none;
+    box-shadow: 0 0 15px 4px rgba(255, 255, 0, 0.5);
+    border-radius: 15px;
+    font-size: 20px;
+    margin-left: 25%;
+    width: 100%;
+}
+
+.mybtn1-register-btn {
+    margin-left: 23%;
+    text-decoration: none;
+    color: rgba(26, 25, 25, 0.6);
+}

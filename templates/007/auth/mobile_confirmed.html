@@ -1,0 +1,57 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+<section class="footer-pages">
+    <div class="container ui-box_message">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+
+
+                <div class="card card-outline card-primary">
+                    <div class="card-header text-center">
+                        <a href="##" class="h1 text-dark"><b>{% trans 'Phone Verification' %}</b></a>
+                    </div>
+                    <div class="card-body">
+                        <p class="login-box-msg">
+                            {% trans 'Your phone failed verification. Please check your phone, this will allow us to use it in the future to communicate with you.' %}
+                        </p>
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="user" value="{{ hash }}"/>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control"
+                                       id="id_set_password1"
+                                       name="fl_set_password1" placeholder="{% trans 'Code' %}">
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button
+                                        onclick="btn_mob_code()"
+                                        class="btn btn-primary btn-block">{% trans 'Send me code' %}
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button
+                                        onclick="btn_mob_confirm()"
+                                        class="btn btn-primary btn-block">{% trans 'Confirm' %}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <a href="/"
+                                   class="btn btn-primary btn-block btn-mobile_later">{% trans 'Later' %}</a>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </div>
+                    <!-- /.login-card-body -->
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+

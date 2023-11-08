@@ -1,0 +1,937 @@
+{% load static %}
+{% load i18n %}
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{ m_form_title }} ({{ t_subscription.id }})</h3>
+                                </div>
+<!--                                <input id="id_user_id" name="f_t_user" type="hidden" value="{{ m_user.id }}">-->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="id_email">{% trans 'User e-mail' %}</label>
+                                                <input type="text"
+                                                       id="id_email"
+                                                       class="form-control"
+                                                       name="f_email"
+                                                       value="{{ m_email }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>{% trans 'Date start:' %}</label>
+                                               <div class="input-group date" id="id_date_1"
+                                                     data-target-input="nearest">
+                                                    <input type="text"
+                                                           class="form-control datetimepicker-input js__calc_date_1"
+                                                           id="id_date_start"
+                                                           data-target="#id_date_1"
+                                                           name="f_date_start"
+                                                           value="{{ m_dt_start|date:'d.m.Y'}}"
+                                                    >
+                                                    <div class="input-group-append" data-target="#id_date_1"
+                                                         data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="id_range_days">{% trans 'Days' %}</label>
+                                                <input type="number"
+                                                       id="id_range_days"
+                                                       class="form-control js__calc_range_days"
+                                                       name="f_range_days"
+                                                       min="1"
+                                                       max="365"
+                                                       value="{{ m_range_days }}"
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>{% trans 'Date stop:' %}</label>
+                                                <div class="input-group date" id="id_date_2"
+                                                     data-target-input="nearest">
+                                                    <input type="text"
+                                                           class="form-control datetimepicker-input js__calc_date_2"
+                                                           id="id_date_stop"
+                                                           data-target="#id_date_2"
+                                                           name="f_date_stop"
+                                                           value="{{ m_dt_stop|date:'d.m.Y' }}"
+                                                    >
+                                                    <div class="input-group-append" data-target="#id_date_2"
+                                                         data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_t_type">{% trans 'Type ticket' %}</label>
+                                                <select class="custom-select js__calc_select"
+                                                        id="id_t_type"
+                                                        name="f_t_type">
+                                                    {% for Item in dict_tickets_type %}
+                                                        <option
+                                                                {% if Item.verbal == m_t_type %} selected="selected"
+                                                                {% endif %}
+                                                                data-cost="{{ Item.cost_2 }}"
+                                                                value="{% trans Item.verbal %}">{% trans Item.caption %} ({{ Item.cost_2 }}) </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_t_count">{% trans 'Tickets in day' %}</label>
+                                                <input type="number"
+                                                       id="id_t_count"
+                                                       class="form-control js__calc_1"
+                                                       name="f_t_count"
+                                                       min="1"
+                                                       max="20"
+                                                       value="{{ m_t_count }}"
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>{% trans 'Week day' %}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>{% trans 'Hours' %}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>{% trans 'Minutes' %}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {% for ItemDay in list_days %}
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <!-- checkbox -->
+                                                <div class="form-group clearfix">
+                                                    <div class="icheck-success d-inline">
+                                                        <input type="checkbox"
+                                                               class="js__calc_check"
+                                                        {% if m_form_type == 'new' %}
+                                                        checked
+                                                        {% else %}
+                                                        {% if ItemDay.m_day %}
+                                                        checked
+                                                        {% endif %}
+                                                        {% endif %}
+                                                        id="id_check_day_{{ ItemDay.d_num }}"
+                                                        name="f_check_day_{{ ItemDay.d_num }}"
+                                                        value="m_check_day_{{ ItemDay.d_num }}">
+                                                        <label for="id_check_day_{{ ItemDay.d_num }}">
+                                                            {{ ItemDay.d_caption }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <select class="form-control"
+                                                            id="id_t_hours_{{ ItemDay.d_num }}"
+                                                            name="f_t_hours_{{ ItemDay.d_num }}">
+                                                        {% for ItemHour in m_range_hours %}
+                                                            <option
+                                                                {% if ItemHour == ItemDay.m_hour %} selected="selected"{% endif %}
+                                                                value="{{ ItemHour }}">{{ ItemHour }}
+                                                            </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <select class="form-control"
+                                                            id="id_t_minut_{{ ItemDay.d_num }}"
+                                                            name="f_t_minut_{{ ItemDay.d_num }}">
+                                                        {% for ItemMinut in m_range_minut %}
+                                                            <option
+                                                                    {% if ItemMinut == ItemDay.m_minute %} selected="selected"{% endif %}
+                                                                    value="{{ ItemMinut }}">{{ ItemMinut }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="id_subs_cost">{% trans 'Subs cost:' %}</label>
+                                                <input type="number"
+                                                       id="id_subs_cost"
+                                                       class="form-control js__calc_1"
+                                                       name="f_subs_cost"
+                                                       min="0"
+                                                       max="1000"
+                                                       {% if m_subs_cost %}
+                                                       value="{{ m_subs_cost }}"
+                                                       {% else %}
+                                                       value="0"
+                                                       {% endif %}
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="id_subs_amount">{% trans 'Day:' %}</label>
+                                                <input type="number"
+                                                       id="id_all_day"
+                                                       class="form-control"
+                                                       name="f_per_day"
+                                                       value="{# { m_per_day }#}"
+                                                       readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="id_subs_amount">{% trans 'In day:' %}</label>
+                                                <input type="number"
+                                                       id="id_per_day"
+                                                       class="form-control"
+                                                       name="f_per_day"
+                                                       value="{# { m_per_day }#}"
+                                                       readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="id_subs_amount">{% trans 'All tickets:' %}</label>
+                                                <input type="number"
+                                                       id="id_subs_amount"
+                                                       class="form-control"
+                                                       name="f_subs_amount"
+                                                       value="{{ m_subs_amount }}"
+                                                       readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="id_subs_total">{% trans 'Total:' %}</label>
+                                                <input type="text"
+                                                       id="id_subs_total"
+                                                       class="form-control"
+                                                       name="id_subs_total"
+                                                       min="2"
+                                                       value="{{ m_subs_total }}"
+                                                       readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        {# PAID #}
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>{% trans 'Paid date:' %}</label>
+                                                <div class="input-group date" id="id_date_3"
+                                                     data-target-input="nearest">
+                                                    <input type="text"
+                                                           class="form-control datetimepicker-input"
+                                                           id="id_paid_date"
+                                                           data-target="#id_date_3"
+                                                           name="f_paid_date"
+                                                           value="{{ m_paid_date|date:'d.m.Y' }}"
+                                                    >
+                                                    <div class="input-group-append" data-target="#id_date_3"
+                                                         data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_paid_amount">{% trans 'Paid amount:' %}</label>
+                                                <input type="number"
+                                                       id="id_paid_amount"
+                                                       class="form-control"
+                                                       name="f_paid_amount"
+                                                       min="1"
+                                                       value="{{ m_paid_amount }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                             <div class="form-group">
+                                                <label for="id_manager">{% trans 'Manager' %}</label>
+                                                 <select class="form-control"
+                                                         id="id_manager"
+                                                         name="f_manager">
+                                                     <option value="no_manager">---no manager---</option>
+                                                     {% for manager in m_managers_list %}
+                                                     <option {% if manager == m_manager %} selected="selected" {% endif %}
+                                                             value="{{ manager.id }}">{{ manager.name }}
+                                                     </option>
+                                                        {% endfor %}
+                                                 </select>
+                                             </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                             <div class="form-group">
+                                                <label for="id_payment_type">{% trans 'Type payment' %}</label>
+                                                 <select class="form-control"
+                                                         id="id_payment_type"
+                                                         name="f_payment_type">
+                                                     {% for payment_type in m_payment_types_list %}
+                                                     <option {% if payment_type == m_type_payment %} selected="selected" {% endif %}
+                                                             value="{{ payment_type.verbal }}">{{ payment_type.caption }}</option>
+                                                        {% endfor %}
+                                                 </select>
+                                             </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                             <div class="form-group">
+                                                <label for="id_bonus">{% trans 'Bonus' %}</label>
+                                                <input type="text"
+                                                       id="id_bonus"
+                                                       class="form-control"
+                                                       name="f_bonus"
+                                                       value="{{ m_bonus }}"
+                                                       readonly
+                                                >
+                                             </div>
+                                        </div>
+                                    </div>
+                                <hr>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group clearfix">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="checkbox"
+                                                           class="js__calc_check"
+                                                            {% if m_auto_pay %}
+                                                            checked
+                                                            {% endif %}
+                                                            id="id_auto_pay"
+                                                            name="f_auto_pay"
+                                                            >
+                                                        <label for="id_auto_pay">{% trans 'Auto payment' %}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_tranzila_token">{% trans 'Tranzila token' %}</label>
+                                                <input type="text"
+                                                           class="form-control"
+                                                           id="id_tranzila_token"
+                                                           name="f_tranzila_token"
+                                                           value="{{ m_tranzila_token }}"
+                                                    >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="id_exp_month">{% trans 'Exp.month' %}</label>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       id="id_exp_month"
+                                                       name="f_exp_month"
+                                                       value="{{ m_exp_month }}"
+                                                       min="1"
+                                                       max="12"
+                                                    >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="id_exp_year">{% trans 'Exp.year' %}</label>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       id="id_exp_year"
+                                                       name="f_exp_year"
+                                                       value="{{ m_exp_year }}"
+                                                       min="23"
+                                                    >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="id_ccno">{% trans 'Ccno' %}</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="id_ccno"
+                                                       name="f_ccno"
+                                                       value="{{ m_ccno }}"
+                                                    >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="id_exp_month">{% trans 'Amount' %}</label>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       id="id_auto_pay_amount"
+                                                       name="f_auto_pay_amount"
+                                                       value="{{ t_subscription.auto_pay_amount }}"
+                                                       min="1"
+                                                       max="0"
+                                                    >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="id_exp_year">{% trans 'Period' %}</label>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       id="id_auto_pay_day"
+                                                       name="f_auto_pay_day"
+                                                       value="{{ t_subscription.auto_pay_day }}"
+                                                       min="0"
+                                                    >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="id_description">{% trans "Description" %}</label>
+                                                <textarea class="form-control" rows="3"
+                                                          id="id_description"
+                                                          name="f_description"
+                                                          placeholder='{% trans "Description" %}'>{{ m_description }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row flex-md-row ">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="modal-footer justify-content-between">
+                                        {% if m_form_type == 'new' %}
+                                         <button type="button"
+                                                class="btn btn-dark"
+                                                onclick="btn_subs_save(isCheckBonus=true)"
+                                        >{% trans 'Calc bonus' %}</button>
+                                        <button id='btn_save'
+                                                type="button"
+                                                class="btn btn-dark"
+                                                onclick="btn_subs_save()"
+                                                hidden
+                                        >{% trans 'Save' %}</button>
+                                        {% else %}
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                onclick="btn_subs_save()"
+                                        >{% trans 'Save' %}</button>
+                                        {% endif %}
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                data-dismiss="modal"
+                                        >{% trans 'Close' %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function f_calc() {
+        let m_list_day = [];
+        if ($('#id_check_day_1').is(':checked')) { m_list_day.push(0) }
+        if ($('#id_check_day_2').is(':checked')) { m_list_day.push(1) }
+        if ($('#id_check_day_3').is(':checked')) { m_list_day.push(2) }
+        if ($('#id_check_day_4').is(':checked')) { m_list_day.push(3) }
+        if ($('#id_check_day_5').is(':checked')) { m_list_day.push(4) }
+        if ($('#id_check_day_6').is(':checked')) { m_list_day.push(5) }
+        if ($('#id_check_day_7').is(':checked')) { m_list_day.push(6) }
+
+        let m_day_num = 0;
+        let m_data_01 = $.datepicker.parseDate('dd.mm.yy', $("#id_date_start").val());
+        let m_data_02 = $.datepicker.parseDate('dd.mm.yy', $("#id_date_stop").val());
+
+        if (m_data_01 && m_data_02) {
+            while (m_data_01 <= m_data_02) {
+                if (m_list_day.indexOf(m_data_01.getDay()) !== -1) {
+                    m_day_num += 1
+                }
+                m_data_01.setDate(1 + m_data_01.getDate());
+            }
+        }
+
+        let m_ticket_cost = $('#id_t_type option:selected').data("cost");
+        let m_ticket_num = $('#id_t_count').val();
+        let m_subs_cost = Number($('#id_subs_cost').val());
+        let m_per_day = m_ticket_cost * m_ticket_num;
+        let m_subs_amount = m_day_num * m_per_day;
+        let m_total_amoun = m_subs_amount + m_subs_cost;
+
+        $('#id_all_day').val(m_day_num);
+        $('#id_per_day').val(m_per_day);
+        $('#id_subs_amount').val(m_subs_amount);
+        $('#id_subs_total').val(m_total_amoun);
+
+    }
+    $(".js__calc_1").on('input', function () {
+        f_calc();
+    });
+    $(".js__calc_check").change( function () {
+        f_calc();
+    });
+    $(".js__calc_select").change( function () {
+        f_calc();
+    });
+
+    $(".js__calc_date_1").on('input', function () {
+        let stop_date = $.datepicker.parseDate('dd.mm.yy', $("#id_date_stop").val());
+        let start_date = $.datepicker.parseDate('dd.mm.yy', $("#id_date_start").val());
+        if (stop_date && start_date) {
+            let timeDiff = Math.abs(stop_date.getTime() - start_date.getTime());
+            let diffDays = Math.ceil((timeDiff / (1000 * 3600 * 24)) + 1);
+            $('#id_range_days').val(diffDays);
+        }
+        f_calc();
+    });
+    $(".js__calc_date_2").on('input', function () {
+        let stop_date = $.datepicker.parseDate('dd.mm.yy', $("#id_date_stop").val());
+        let start_date = $.datepicker.parseDate('dd.mm.yy', $("#id_date_start").val());
+        let timeDiff = Math.abs(stop_date.getTime() - start_date.getTime());
+        let diffDays = Math.ceil((timeDiff / (1000 * 3600 * 24))+1);
+        $('#id_range_days').val(diffDays);
+        f_calc();
+    });
+    $(".js__calc_range_days").on('input', function () {
+         let range_days = Number($("#id_range_days").val());
+         let new_stop_date = $.datepicker.parseDate('dd.mm.yy', $("#id_date_start").val());
+         new_stop_date.setDate(new_stop_date.getDate() + range_days - 1 );
+         let stop_date = $.datepicker.formatDate( "dd.mm.yy", new_stop_date);
+         $('#id_date_stop').val(stop_date);
+         f_calc();
+    });
+
+    $('#id_date_1').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
+    $('#id_date_2').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
+    $('#id_date_3').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
+    function btn_subs_save(isCheckBonus=false) {
+        let f_name_check = "";
+        let f_email = $("#id_email").val();
+        let mLine_wrong;
+        f_name_check = "f_email";
+        if (input_field_exist(f_name_check)) {
+            if (input_field_value_is_empty(f_name_check)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter an email"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('input[name=' + f_name_check + ']');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        let f_date_start = $("#id_date_start").val();
+        f_name_check = "f_date_start";
+        if (input_field_exist(f_name_check)) {
+            if (input_field_value_is_empty(f_name_check)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter the date start"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('input[name=' + f_name_check + ']');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        let f_range_days = $("#id_range_days").val();
+        f_name_check = "f_range_days";
+        if (input_field_exist(f_name_check)) {
+            if (input_field_value_is_empty(f_name_check)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter the date range"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('input[name=' + f_name_check + ']');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        let f_date_stop = $("#id_date_stop").val();
+        f_name_check = "f_date_stop";
+        if (input_field_exist(f_name_check)) {
+            if (input_field_value_is_empty(f_name_check)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter the date stop"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('input[name=' + f_name_check + ']');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        let f_t_type = $("#id_t_type").val();
+        f_name_check = "f_t_type";
+        if (input_field_exist(f_name_check)) {
+            if (input_field_value_is_empty(f_name_check)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please choose a ticket"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('input[name=' + f_name_check + ']');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        let f_t_count = $("#id_t_count").val();
+        f_name_check = "f_t_count";
+        if (input_field_exist(f_name_check)) {
+            if (input_field_value_is_empty(f_name_check)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter ticket number"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('input[name=' + f_name_check + ']');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        let f_day_1 = 0;
+        if ($('#id_check_day_1').is(':checked')) { f_day_1 = 1}
+        let f_day_2 = 0;
+        if ($('#id_check_day_2').is(':checked')) { f_day_2 = 1}
+        let f_day_3 = 0;
+        if ($('#id_check_day_3').is(':checked')) { f_day_3 = 1}
+        let f_day_4 = 0;
+        if ($('#id_check_day_4').is(':checked')) { f_day_4 = 1}
+        let f_day_5 = 0;
+        if ($('#id_check_day_5').is(':checked')) { f_day_5 = 1}
+        let f_day_6 = 0;
+        if ($('#id_check_day_6').is(':checked')) {f_day_6 = 1}
+        let f_day_7 = 0;
+        if ($('#id_check_day_7').is(':checked')) {f_day_7 = 1}
+
+        if (f_day_1+f_day_2+f_day_3+f_day_4+f_day_5+f_day_6+f_day_7===0){
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter at least one week day"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                // mLine_wrong = $('input[name=' + f_name_check + ']');
+                // if (mLine_wrong.length) {
+                //     $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                // }
+                return false;
+            }
+        let f_hour_1 = $("#id_t_hours_1").val();
+        let f_hour_2 = $("#id_t_hours_2").val();
+        let f_hour_3 = $("#id_t_hours_3").val();
+        let f_hour_4 = $("#id_t_hours_4").val();
+        let f_hour_5 = $("#id_t_hours_5").val();
+        let f_hour_6 = $("#id_t_hours_6").val();
+        let f_hour_7 = $("#id_t_hours_7").val();
+
+        let f_minute_1 = $("#id_t_minut_1").val();
+        let f_minute_2 = $("#id_t_minut_2").val();
+        let f_minute_3 = $("#id_t_minut_3").val();
+        let f_minute_4 = $("#id_t_minut_4").val();
+        let f_minute_5 = $("#id_t_minut_5").val();
+        let f_minute_6 = $("#id_t_minut_6").val();
+        let f_minute_7 = $("#id_t_minut_7").val();
+
+        let f_subs_cost = $("#id_subs_cost").val();
+        f_name_check = "f_subs_cost";
+        if (input_field_exist(f_name_check)) {
+            if (input_field_value_is_empty(f_name_check)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter subs cost"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('input[name=' + f_name_check + ']');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        let f_subs_amount = $("#id_subs_amount").val();
+        f_name_check = "f_subs_amount";
+        if (input_field_exist(f_name_check)) {
+            if (input_field_value_is_empty(f_name_check)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter subs amount"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('input[name=' + f_name_check + ']');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        let f_subs_total = $("#id_subs_total").val();
+        f_name_check = "f_subs_total";
+        if (input_field_exist(f_name_check)) {
+            if (input_field_value_is_empty(f_name_check)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter subs total"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('input[name=' + f_name_check + ']');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        let f_paid_date = $("#id_paid_date").val();
+        let f_paid_amount = $("#id_paid_amount").val();
+        let f_description = $("#id_description").val();
+        let days_amount = $("#id_all_day").val();
+        let m_ticket_cost = $('#id_t_type option:selected').data("cost");
+        let tickets_amount = f_subs_amount / m_ticket_cost;
+        let manager = $("#id_manager").val();
+        let payment_type = $("#id_payment_type").val();
+        let tranzila_token = $("#id_tranzila_token").val();
+        let exp_month = $("#id_exp_month").val();
+        let exp_year = $("#id_exp_year").val();
+        let ccno = $("#id_ccno").val();
+        let auto_pay = 0;
+        let auto_pay_amount = $("#id_auto_pay_amount").val();
+        let auto_pay_day = $("#id_auto_pay_day").val();
+
+        if ($('#id_auto_pay').is(':checked')) { auto_pay = 1}
+        if (isCheckBonus) {
+            $.ajax({
+                type: "POST",
+                async: false,
+                data: {
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    isCheckBonus: true,
+                    f_manager: manager,
+                    m_form_type: '{{ m_form_type }}',
+                    f_id: '{{ m_item_id }}',
+                    f_tickets_amount: tickets_amount,
+                    f_days_sub_works: days_amount,
+                    f_email: f_email,
+                    f_date_start: f_date_start,
+                    f_range_days: f_range_days,
+                    f_date_stop: f_date_stop,
+                    f_t_type: f_t_type,
+                    f_t_count: f_t_count,
+                    f_day_1: f_day_1,
+                    f_day_2: f_day_2,
+                    f_day_3: f_day_3,
+                    f_day_4: f_day_4,
+                    f_day_5: f_day_5,
+                    f_day_6: f_day_6,
+                    f_day_7: f_day_7,
+                    f_subs_cost: f_subs_cost,
+                    f_subs_amount: f_subs_amount,
+                    f_subs_total: f_subs_total,
+                    f_paid_date: f_paid_date,
+                    f_paid_amount: f_paid_amount,
+                    f_description: f_description,
+                    f_payment_type: payment_type,
+                    f_auto_pay_amount: auto_pay_amount,
+                    f_auto_pay_day: auto_pay_day,
+                },
+                url: "/subs_form_save/",
+                success: function (res) {
+                    Swal.fire({
+                            icon: 'success',
+                            title: gettext('Bonus check'),
+                            background: '#cacaca',
+                            html: res.AnswerText,
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#32a852',
+                        });
+                        $('#id_bonus').val(res.bonusSum);
+                        $('#btn_save').removeAttr('hidden');
+                },
+                error: function (res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            });
+        }else {
+            $.ajax({
+                type: "POST",
+                async: false,
+                data: {
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    m_form_type: '{{ m_form_type }}',
+                    f_id: '{{ m_item_id }}',
+                    f_tickets_amount: tickets_amount,
+                    f_days_sub_works: days_amount,
+                    f_email: f_email,
+                    f_date_start: f_date_start,
+                    f_range_days: f_range_days,
+                    f_date_stop: f_date_stop,
+                    f_t_type: f_t_type,
+                    f_t_count: f_t_count,
+                    f_day_1: f_day_1,
+                    f_day_2: f_day_2,
+                    f_day_3: f_day_3,
+                    f_day_4: f_day_4,
+                    f_day_5: f_day_5,
+                    f_day_6: f_day_6,
+                    f_day_7: f_day_7,
+                    f_hour_1: f_hour_1,
+                    f_hour_2: f_hour_2,
+                    f_hour_3: f_hour_3,
+                    f_hour_4: f_hour_4,
+                    f_hour_5: f_hour_5,
+                    f_hour_6: f_hour_6,
+                    f_hour_7: f_hour_7,
+                    f_minute_1: f_minute_1,
+                    f_minute_2: f_minute_2,
+                    f_minute_3: f_minute_3,
+                    f_minute_4: f_minute_4,
+                    f_minute_5: f_minute_5,
+                    f_minute_6: f_minute_6,
+                    f_minute_7: f_minute_7,
+                    f_subs_cost: f_subs_cost,
+                    f_subs_amount: f_subs_amount,
+                    f_subs_total: f_subs_total,
+                    f_paid_date: f_paid_date,
+                    f_paid_amount: f_paid_amount,
+                    f_description: f_description,
+                    f_manager: manager,
+                    f_payment_type: payment_type,
+                    f_tranzila_token: tranzila_token,
+                    f_exp_month: exp_month,
+                    f_exp_year: exp_year,
+                    f_ccno: ccno,
+                    f_auto_pay: auto_pay,
+                    f_auto_pay_amount: auto_pay_amount,
+                    f_auto_pay_day: auto_pay_day,
+                },
+                url: "/subs_form_save/",
+                success: function (res) {
+                    if (res.AnswerCod == '01') {
+                        $('.js-modal__cabb_form').modal('hide');
+                        location.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: res.AnswerText,
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                },
+                error: function (res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            });
+        }
+        }
+        f_calc();
+</script>

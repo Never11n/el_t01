@@ -1,0 +1,65 @@
+{% load static %}
+{% load i18n %}
+<div class="content">
+    <div class="logotype">
+        <img src="{{STATIC_PREFIX}}/main/{{company_code}}/img/logo.png" alt="logo" class="slogo">
+    </div>
+
+    <div class="text">
+        <b>
+
+            <p class="col-1">{%trans 'להשלמת התהליך'%}</p>
+            <p class="col-2">{% trans 'אנא מלא את פרטייך' %}</p>
+
+        </b>
+    </div>
+    <div class="modal-fade-main-modal" id="signin" tabindex="-1" role="dialog" data-backdrop="static"
+        data-keyboard="false" aria-labelledby="signin" aria-hidden="true">
+
+        <div class="modal-body-main-modal-body">
+
+            <div class="form-area">
+
+                <form action="#" method="POST" autocomplete="off">
+                    {% csrf_token %}
+                    <input type="hidden" id="url_path" name="url_path" value="{{ utm_code }}">
+
+                    <input type="hidden" id="get_param" name="get_param" value="{{ get_param }}">
+
+                    <fieldset class="main-modal-fieldset-register">
+
+                        <div class="register-form-box">
+
+                            <div class="main-modal-form-group">
+                                <input type="text" class="main-modal-form-control" id="input-name" autocomplete="off"
+                                    name="f_name" placeholder="{% trans 'שם מלא' %}">
+                            </div>
+
+                            <div class="main-modal-form-group">
+                                <input type="text" class="main-modal-form-control" id="input-phone" autocomplete="off"
+                                    name="f_phone" placeholder="{% trans 'טלפון' %}">
+                            </div>
+
+                            <div class="main-modal-form-group">
+                                <input type="text" class="main-modal-form-control" id="input-email" autocomplete="off"
+                                    name="f_email" placeholder="{% trans 'כתובת מייל' %}">
+                            </div>
+
+                            <div class="main-modal-form-group">
+                                <input type="text" class="main-modal-form-control" id="input-adress" autocomplete="off"
+                                    name="f_adress" placeholder="{% trans 'כתובת' %}">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="text-center">
+                        <a href="#" class="mybtn1-register-btn"
+                            onclick="btn_modal_shop_register();nextPage('btn_to_game')">
+                            {% trans 'הבא' %}
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

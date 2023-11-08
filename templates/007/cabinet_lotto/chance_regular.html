@@ -1,0 +1,160 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!--
+    hearts    черви;
+    spades    пики;
+    diamonds  бубны;
+    clubs     трефы;
+-->
+<section data-game-theme-color="#60DBA5" data-game-theme-color-rgb="96, 219, 165" class="js-game-theme-color game-item main-bg full-height-without-footer">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="ui-game">
+                    {% include tmpl_hidden_inputs %}
+                    {% include tmpl_card_header %}
+                    {% include tmpl_timer %}
+                    {% include tmpl_form_type %}
+                    <div class="ui-game-box">
+                        <div class="ui-game-single">
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{% trans 'Choose your cards' %}</span>
+                                <span class="ui-game-info-header__number">2</span>
+                            </div>
+                            <div class="ui-game-single__actions">
+                                <button type="button" class="ui-game-btn-reset js-game-reset">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <button type="button" class="ui-game-btn-sm js-game-auto">
+                                    {% trans 'Select automatically' %}
+                                </button>
+                            </div>
+                            <div class="ui-game-single-cards">
+                                <div data-card-num=1 data-card-suit="spades" class="ui-game-single-card js-ui-game-single-card ">  {# ui-game-card-suit ui-game-card-suit__spades #}
+                                    <img class="js-game-single-card_img"
+                                            src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg" alt="{% trans 'spades' %}">
+                                    <span hidden class="js-game-single-card_text">2</span>
+                                </div>
+                                <div data-card-num=2 data-card-suit="hearts" class="ui-game-single-card js-ui-game-single-card">
+                                    <img class="js-game-single-card_img"
+                                            src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg" alt="{% trans 'hearts' %}">
+                                    <span hidden class="js-game-single-card_text">2</span>
+                                </div>
+                                <div data-card-num=3 data-card-suit="diamonds" class="ui-game-single-card js-ui-game-single-card">
+                                    <img class="js-game-single-card_img"
+                                          src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="{% trans 'diamonds' %}">
+                                    <span hidden class="js-game-single-card_text">2</span>
+                                </div>
+                                <div data-card-num=4 data-card-suit="clubs" class="ui-game-single-card js-ui-game-single-card ">
+                                    <img class="js-game-single-card_img"
+                                         src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="{% trans 'clubs' %}">
+                                    <span hidden class="js-game-single-card_text">2</span>
+                                </div>
+                            </div>
+{#                            <button class="ui-game-btn ui-game-btn_full-w ui-game-btn_light" type="button"> add more +</button>#}
+                        </div>
+                    </div>
+                    {% include tmpl_count_price %}
+                    {% include tmpl_subscription %}
+                    {% include tmpl_total_sum %}
+                    {% include tmpl_box_payment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include tmpl_game_modal %}
+
+<script type="text/javascript">
+    function selectCardsSwal() {
+        Swal.fire({
+            icon: 'error',
+            title: gettext('ERROR'),
+            background: '#cacaca',
+            html: gettext("Please select a cards"),
+            confirmButtonText: gettext('Back to form'),
+            confirmButtonColor: '#d33',
+        });
+    }
+    function game_lotto_save() {
+        const game_version = $("#game_version").val(),
+              form_type = $("#form_type").val(),
+              card_hearts = $("#card_hearts").val(),
+              card_spades = $("#card_spades").val(),
+              card_diamonds = $("#card_diamonds").val(),
+              card_clubs = $("#card_clubs").val(),
+              price = $("#cost").val(),
+              games_count = $("#games_count").val(),
+              total_sum = $('#total_sum').val();
+
+        if (form_type === '1' && card_spades === '') {
+            selectCardsSwal();
+            return false;
+        }
+        if (form_type === '2' && card_spades === '' && card_hearts === '') {
+            selectCardsSwal();
+            return false;
+        }
+        if (form_type === '3' && card_spades === '' && card_hearts === '' && card_diamonds === '') {
+            selectCardsSwal();
+            return false;
+        }
+        if (form_type === '4' && card_spades === '' && card_hearts === '' && card_diamonds === '' && card_clubs === '') {
+            selectCardsSwal();
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                f_game_version: game_version,
+                f_form_type: form_type,
+                f_card_hearts: card_hearts,
+                f_card_spades: card_spades,
+                f_card_diamonds: card_diamonds,
+                f_card_clubs: card_clubs,
+                f_cost: price,
+                f_games_count: games_count,
+                f_total_sum: total_sum
+            },
+            url: "/cab-game-lotto-save/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: gettext('SUCCESS'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    // location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+                },
+                error: function (res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            });
+    }
+</script>

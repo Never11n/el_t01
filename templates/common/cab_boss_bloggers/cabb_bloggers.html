@@ -1,0 +1,104 @@
+{% load static %}
+{% load i18n %}
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'Bloggers List' %}</h5>
+                </div>
+                <div class="card-body">
+                    <button type="button"
+                            class="btn btn-info mybtn_cabb1"
+                            onclick="btn_blogger_form('new')">
+                        {% trans 'New' %}
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans '#' %}</th>
+                                        <th>{% trans 'Name' %}</th>
+                                        <th>{% trans 'Type' %}</th>
+                                        <th>{% trans 'Phone' %}</th>
+                                        <th>{% trans 'Accounts' %}</th>
+                                        <th>{% trans 'Notes' %}</th>
+                                        <th>{% trans 'Referral hash' %}</th>
+                                        <th>{% trans 'Referral link' %}</th>
+                                        <th>{% trans 'Count of users' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ItemLine in bloggers_list %}
+                                        <tr class="">
+                                            <td><button type="button"
+                                                        class="btn btn-info mybtn_cabb1"
+                                                        onclick="btn_blogger_form('edit', {{ ItemLine.id }})">
+                                                        {% trans 'Edit' %}
+                                                </button>
+                                            </td>
+                                            <td>{{ ItemLine.id }}</td>
+                                            <td>{{ ItemLine.name }}</td>
+                                            <td>{{ ItemLine.b_type__caption }}</td>
+                                            <td>{{ ItemLine.phone }}</td>
+                                            <td>
+                                                {% for name, link in ItemLine.accounts.items %}
+                                                {% if link != '' %}
+                                                {{ name }}: {{ link }}<br>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>{{ ItemLine.notes }}</td>
+                                            <td>{{ ItemLine.ref_hash }}</td>
+                                            <td>{{ GL_Subs_return_url_sh }}://{{ GL_Subs_return_url_dom }}{{ ItemLine.ref_link }}</td>
+                                            <td>{{ ItemLine.count_profiles }}</td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    function btn_blogger_form(l_form_type, l_id) {
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                f_id: l_id,
+                f_form_type: l_form_type,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_blogger_form/",
+            success: function (res) {
+                $("#id_ResAjax_cabb_form").html(res);
+                return $('.js-modal__cabb_form').modal('show');
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>

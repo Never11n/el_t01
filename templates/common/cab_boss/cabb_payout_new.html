@@ -1,0 +1,177 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            {#            <div class="col-lg-12">#}
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'New Payouts' %}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr class="js_tic_row">
+                                        <th></th>
+                                        <th>{% trans 'N' %}</th>
+                                        <th>{% trans 'Status' %}</th>
+                                        <th>{% trans 'User name' %}</th>
+                                        <th>{% trans 'Photo' %}</th>
+                                        <th>{% trans 'User email' %}</th>
+                                        <th>{% trans 'User phone' %}</th>
+                                        <th>{% trans 'Date req' %}</th>
+                                        <th>{% trans 'Account Name' %}</th>
+                                        <th>{% trans 'Name Bank' %}</th>
+                                        <th>{% trans 'Branch' %}</th>
+                                        <th>{% trans 'Account number' %}</th>
+                                        <th>{% trans 'Amount' %}</th>
+                                        <th>{% trans 'Percent' %}</th>
+                                        <th>{% trans 'Amount minus percent' %}</th>
+                                        <th>{% trans 'Notes' %}</th>
+                                        <th>{% trans 'Photo url' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ItemPayout in list_payout %}
+                                        <tr class="{% if ItemPayout.status == '04' %}table-warning{% endif %}">
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1"
+                                                        onclick="btn_payout_form({{ ItemPayout.id }}, 'check')">
+                                                        <i class="far fa-edit"></i>
+                                                </button>
+                                               <button type="button"
+                                                       class="btn btn-info mybtn_cabb1"
+                                                       onclick="btn_payout_form({{ ItemPayout.id }}, 'photo')">
+                                                   <i class="fas fa-image"></i>
+                                               </button>
+<!--                                                <button type="button"-->
+<!--                                                        class="btn btn-info mybtn_cabb1 btn-sm"-->
+<!--                                                        onclick="btn_payout_ok(-->
+<!--                                                                '{{ ItemPayout.id }}'-->
+<!--                                                                )"-->
+<!--                                                ><i class="fas fa-edit"></i>-->
+<!--                                                </button>-->
+                                                {% if ItemPayout.user_id.id %}
+                                                <a href="{% url 'cabb_user_tickets' ItemPayout.user_id.id %}" target="_blank"
+                                                   class="btn btn-info mybtn_cabb1">
+                                                    <i class="fas fa-dice"></i>
+                                                    {#{% trans 'Games' %}#}
+                                                </a>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ ItemPayout.id }}</td>
+                                            <td>{% if ItemPayout.status == '00' %} NEW
+                                                {% elif ItemPayout.status == '04' %} IN PROCESS
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ ItemPayout.user_id.profile.name }}</td>
+                                            <td>{% if ItemPayout.user_id.profile.i_foto %}
+                                                <a href="{{ MEDIA_URL }}{{ ItemPayout.user_id.profile.i_foto }}" target="_blank"
+                                                   class="text-green">
+                                                    ID photo</a>
+                                                <br> {% else %}
+                                                NOT ID photo <br> {% endif %}
+                                                {% if ItemPayout.user_id.profile.i_photo_face %}
+                                                    {{ ItemPayout.user_id.i_photo_face }}
+                                                    <a href="{{ MEDIA_URL }}{{ ItemPayout.user_id.profile.i_photo_face }}"
+                                                       target="_blank"
+                                                       class="text-green">
+                                                        FACE photo</a>
+                                                    <br> {% else %}
+                                                    NOT FACE photo <br>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ ItemPayout.user_id.email }}</td>
+                                            <td>{{ ItemPayout.user_id.profile.mobile }}</td>
+                                            <td>{{ ItemPayout.created|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ ItemPayout.acc_name }}</td>
+                                            <td>{{ ItemPayout.name_bank }}</td>
+                                            <td>{{ ItemPayout.branch }}</td>
+                                            <td>{{ ItemPayout.acc_num }}</td>
+                                            <td>{{ ItemPayout.amount }}</td>
+                                            <td>{{ ItemPayout.percent }}</td>
+                                            <td>{{ ItemPayout.amount_minus_percent }}</td>
+                                            <td>{{ ItemPayout.description }}</td>
+                                            <td>{% if ItemPayout.photo %}
+                                                     <a href="{{ MEDIA_URL }}{{ ItemPayout.photo }}" target="_blank" class="text-dark">
+                                                        Click here to see photo</a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans 'N' %}</th>
+                                        <th>{% trans 'User name' %}</th>
+                                        <th>{% trans 'User email' %}</th>
+                                        <th>{% trans 'User phone' %}</th>
+                                        <th>{% trans 'Date req' %}</th>
+                                        <th>{% trans 'Account Name' %}</th>
+                                        <th>{% trans 'Name Bank' %}</th>
+                                        <th>{% trans 'Branch' %}</th>
+                                        <th>{% trans 'Account number' %}</th>
+                                        <th>{% trans 'Amount' %}</th>
+                                        <th>{% trans 'Notes' %}</th>
+                                        <th>{% trans 'Photo url' %}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    function btn_payout_form(l_id, l_typeform) {
+        let m_url = "/cabb_payout_form/";
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "GET",
+            async: false,
+            data: {
+                f_id: l_id,
+                f_typeform: l_typeform
+            },
+            url: m_url,
+            success: function (res) {
+                console.log("res = ", res);
+                if (res.AnswerCod === '01') {
+                    $("#id_ResAjax_cabb_form").html(res.html);
+                    return $('.js-modal__cabb_form').modal('show');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>
+

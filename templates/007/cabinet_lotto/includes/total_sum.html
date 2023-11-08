@@ -1,0 +1,17 @@
+{% load static %}
+{% load i18n %}
+{% get_static_prefix as STATIC_PREFIX %}
+<div class="ui-game-box">
+    <div>
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">{{ form_type_text_total_sum }}</span>
+            <span class="ui-game-info-header__number">4</span>
+        </div>
+        <div class="ui-game-card-count">
+            <label class="ui-game-circle-input-label">
+{#                <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_md ui-game-circle-input-label-display__no-bg">{% trans 'Сумма к оплате' %}</span>#}
+                <span id="sum_block" class="ui-game-circle-input-label-display ui-game-circle-input-label-display_md ui-game-circle-input-label-display__no-bg"></span>
+            </label>
+        </div>
+    </div>
+</div>

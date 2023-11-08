@@ -1,0 +1,195 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'Lotto Results List' %}</h5>
+                </div>
+                {% if l_find %}
+                    {% include l_find %}
+                {% endif %}
+                <div class="card-body row">
+                    <div class="col-md-6">
+                         <button type="button"
+                            class="btn btn-info mybtn_cabb1"
+                            onclick="btn_lotto_result_form('new')">
+                        {% trans 'New' %}
+                        </button>
+                    </div>
+                     <div class="col-md-6">
+                         <button type="button"
+                            class="btn btn-info mybtn_cabb1"
+                            onclick="btn_lotto_result_form_calendar()">
+                        {% trans 'Create calendar' %}
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans 'Lotto type ' %}</th>
+                                        <th>{% trans 'Ticket type' %}</th>
+                                        <th>{% trans 'Lottery number' %}</th>
+                                        <th>{% trans 'Draw date' %}</th>
+                                        <th>{% trans 'Result' %}</th>
+                                        <th>{% trans 'Win money' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in list_lotto_profits %}
+                                        <tr class="js_tic_row">
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1"
+                                                        onclick="btn_lotto_result_calc_tickets({{ item.id }})"
+                                                >
+                                                    {% trans 'Calc tickets' %}
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1"
+                                                        onclick="btn_lotto_result_form('edit', {{ item.id }})"
+                                                >
+                                                        {% trans 'Edit' %}
+                                                </button>
+                                            </td>
+
+                                            <td>{{ item.lotto_type }}</td>
+                                            <td>
+                                                {% if item.ticket_type %}
+                                                    {{ item.ticket_type }}
+                                                {% else %}
+                                                    {% trans 'All' %} {{ item.lotto_type }}
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ item.lottery_number }}</td>
+                                            <td>{{ item.draw_date|date:"d.m.Y H:i:s"  }}</td>
+                                            <td>{{ item.result }}</td>
+                                            <td>{{ item.win_money }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    function btn_lotto_result_calc_tickets(l_lotto_result_id) {
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        lotto_result_id: l_lotto_result_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/lotto_result_calc_tickets/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Ok"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                Swal.fire(gettext('Done!'), '', 'info');
+                return false;
+            }
+        });
+    }
+    function btn_lotto_result_form(l_form_type, l_id) {
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                f_id: l_id,
+                f_form_type: l_form_type,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/lotto_result_form/",
+            success: function (res) {
+                $("#id_ResAjax_cabb_form").html(res);
+                return $('.js-modal__cabb_form').modal('show');
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+    function btn_lotto_result_form_calendar() {
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "GET",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/lotto_result_form_calendar/",
+            success: function (res) {
+                $("#id_ResAjax_cabb_form").html(res);
+                return $('.js-modal__cabb_form').modal('show');
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>

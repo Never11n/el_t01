@@ -1,0 +1,23 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" href="{% static 'main/el_t001/css/mainpage.css' %}" type="text/css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="image">
+            <img src="{% static 'main/el_t001/img/play.png' %}" alt="X_X">
+        </div>
+        <div class="text">
+            <b><a href="{% url 'choise' %}">СЫГРАТЬ</a></b>
+        </div>
+    </div>
+</body>
+
+</html>

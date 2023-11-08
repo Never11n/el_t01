@@ -1,0 +1,1044 @@
+{% load static %}
+{% load i18n %}
+<section data-game-theme-color="#FF7524" data-game-theme-color-rgb="255, 117, 36" class="js-game-theme-color game-item main-bg full-height-without-footer">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="ui-game">
+                    {% include tmpl_hidden_inputs %}
+                    {% include tmpl_card_header %}
+                    {% include tmpl_timer %}
+                    <div class="ui-game-box">
+                        <div>
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{{ form_type_text_header }}</span>
+                                <span class="ui-game-info-header__number">1</span>
+                            </div>
+                            <div class="ui-game-card-count">
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" disabled checked name="ui-game-card-count" class="ui-game-circle-input ui-game-circle-input-form-type" value="1" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display__no-bg" style="cursor: default;">1</span>
+                                </label>
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" disabled name="ui-game-card-count" class="ui-game-circle-input ui-game-circle-input-form-type" value="2" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display__no-bg" style="cursor: default;">2</span>
+                                </label>
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" disabled name="ui-game-card-count" class="ui-game-circle-input ui-game-circle-input-form-type" value="3" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display__no-bg" style="cursor: default;">3</span>
+                                </label>
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" disabled name="ui-game-card-count" class="ui-game-circle-input ui-game-circle-input-form-type" value="4" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display__no-bg" style="cursor: default;">4</span>
+                                </label>
+                                <label class="ui-game-circle-input-label">
+                                    <input type="radio" disabled name="ui-game-card-count" class="ui-game-circle-input ui-game-circle-input-form-type" value="5" />
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display__no-bg" style="cursor: default;">5</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-game-price-radio-wrap">
+                        <label class="ui-game-circle-input-label">
+                            <input type="radio" checked name="ui-game-card-count-price"
+                                   class="ui-game-circle-input ui-game-circle-input-price" value="1" />
+                            <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1{{ sum_currency }}</span>
+                        </label>
+                        <label class="ui-game-circle-input-label">
+                            <input type="radio" name="ui-game-card-count-price"
+                                   class="ui-game-circle-input ui-game-circle-input-price" value="2" />
+                            <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2{{ sum_currency }}</span>
+                        </label>
+                        <label class="ui-game-circle-input-label">
+                            <input type="radio" name="ui-game-card-count-price"
+                                   class="ui-game-circle-input ui-game-circle-input-price" value="3" />
+                            <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3{{ sum_currency }}</span>
+                        </label>
+                        <label class="ui-game-circle-input-label">
+                            <input type="radio" name="ui-game-card-count-price"
+                                   class="ui-game-circle-input ui-game-circle-input-price" value="5" />
+                            <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5{{ sum_currency }}</span>
+                        </label>
+                        <label class="ui-game-circle-input-label">
+                            <input type="radio" name="ui-game-card-count-price"
+                                   class="ui-game-circle-input ui-game-circle-input-price" value="10" />
+                            <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">10{{ sum_currency }}</span>
+                        </label>
+                        <label class="ui-game-circle-input-label">
+                            <input type="radio" name="ui-game-card-count-price"
+                                   class="ui-game-circle-input ui-game-circle-input-price" value="25" />
+                            <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">25{{ sum_currency }}</span>
+                        </label>
+<!--                        <label class="ui-game-circle-input-label">-->
+<!--                            <input type="radio" name="ui-game-card-count-price"-->
+<!--                                   class="ui-game-circle-input ui-game-circle-input-price" value="own" />-->
+<!--                            <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs-->
+<!--                                         ui-game-circle-input-label-display-own-price-buttton">-->
+<!--                                {% trans 'Choose sum' %}-->
+<!--                            </span>-->
+<!--                        </label>-->
+<!--                        <button type="button" class="ui-game-circle-input-button">{% trans 'Choose your sum' %}</button>-->
+                    </div>
+                     <div class="ui-game-box own-price-block" hidden>
+                        <div class="ui-game-single">
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{% trans 'Enter an amount from 1 to 500' %}</span>
+                                <span class="ui-game-info-header__number">2</span>
+                            </div>
+                             <div class="ui-game-card-count">
+                                <label class="ui-game-circle-input-label">
+                                    <span id="own_price_block"
+                                          class="ui-game-circle-input-label-display ui-game-circle-input-label-display_md
+                                                 ui-game-circle-input-label-display__no-bg">
+                                        <input type="number" class="own-price-block-input"
+                                               min="1"
+                                               max="500"
+                                               value="1">
+                                    </span>
+                            </label>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="ui-game-box">
+                        <div class="ui-game-single">
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{% trans 'Choose your numbers in block 1' %}</span>
+                                <span class="ui-game-info-header__number">3</span>
+                            </div>
+                            <div class="ui-game-single__actions">
+                                <div class="ui-game-btn-reset-wrap">
+                                    <button data-block=1 type="button" class="ui-game-btn-reset js-game-reset">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <span class="ui-game-btn-reset-text"></span>
+                                </div>
+                                <button data-block=1 type="button" class="ui-game-btn-sm js-game-auto">
+                                    {% trans 'Select automatically' %}
+                                </button>
+                            </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=1>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                     <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line1" data-block=1 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block1_line1 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                     </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line1" data-block=1 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block1_line1 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line1" data-block=1 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block1_line1 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line1" data-block=1 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block1_line1 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line1" data-block=1 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block1_line1 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line1" data-block=1 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block1_line1 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line1" data-block=1 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block1_line1 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line1" data-block=1 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block1_line1 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line1" data-block=1 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block1_line1 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line1" data-block=1 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block1_line1 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=1>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line2" data-block=1 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block1_line2 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line2" data-block=1 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block1_line2 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line2" data-block=1 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block1_line2 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line2" data-block=1 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block1_line2 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line2" data-block=1 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block1_line2 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line2" data-block=1 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block1_line2 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line2" data-block=1 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block1_line2 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line2" data-block=1 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block1_line2 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line2" data-block=1 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block1_line2 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line2" data-block=1 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block1_line2 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=1>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line3" data-block=1 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block1_line3 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line3" data-block=1 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block1_line3 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line3" data-block=1 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block1_line3 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line3" data-block=1 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block1_line3 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line3" data-block=1 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block1_line3 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line3" data-block=1 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block1_line3 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line3" data-block=1 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block1_line3 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line3" data-block=1 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block1_line3 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line3" data-block=1 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block1_line3 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block1-line3" data-block=1 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block1_line3 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="ui-game-box">
+                        <div class="ui-game-single">
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{% trans 'Choose your numbers in block 2' %}</span>
+                                <span class="ui-game-info-header__number">3</span>
+                            </div>
+                            <div class="ui-game-single__actions">
+                                <div class="ui-game-btn-reset-wrap">
+                                    <button data-block=2 type="button" class="ui-game-btn-reset js-game-reset">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <span class="ui-game-btn-reset-text"></span>
+                                </div>
+                                <button data-block=2 type="button" class="ui-game-btn-sm js-game-auto">
+                                    {% trans 'Select automatically' %}
+                                </button>
+                            </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=2>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line1" data-block=2 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block2_line1 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line1" data-block=2 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block2_line1 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line1" data-block=2 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block2_line1 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line1" data-block=2 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block2_line1 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line1" data-block=2 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block2_line1 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line1" data-block=2 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block2_line1 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line1" data-block=2 class="ui-game-circle-input number-block-linet" value="6"
+                                               {% if ticket_info.block2_line1 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line1" data-block=2 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block2_line1 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line1" data-block=2 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block2_line1 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line1" data-block=2 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block2_line1 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=2>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line2" data-block=2 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block2_line2 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line2" data-block=2 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block2_line2 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line2" data-block=2 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block2_line2 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line2" data-block=2 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block2_line2 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line2" data-block=2 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block2_line2 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line2" data-block=2 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block2_line2 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line2" data-block=2 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block2_line2 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line2" data-block=2 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block2_line2 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line2" data-block=2 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block2_line2 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line2" data-block=2 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block2_line2 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=2>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line3" data-block=2 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block2_line3 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line3" data-block=2 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block2_line3 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line3" data-block=2 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block2_line3 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line3" data-block=2 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block2_line3 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line3" data-block=2 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block2_line3 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line3" data-block=2 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block2_line3 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line3" data-block=2 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block2_line3 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line3" data-block=2 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block2_line3 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line3" data-block=2 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block2_line3 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block2-line3" data-block=2 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block2_line3 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="ui-game-box">
+                        <div class="ui-game-single">
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{% trans 'Choose your numbers in block 3' %}</span>
+                                <span class="ui-game-info-header__number">3</span>
+                            </div>
+                            <div class="ui-game-single__actions">
+                                <div class="ui-game-btn-reset-wrap">
+                                    <button data-block=3 type="button" class="ui-game-btn-reset js-game-reset">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <span class="ui-game-btn-reset-text"></span>
+                                </div>
+                                <button data-block=3 type="button" class="ui-game-btn-sm js-game-auto">
+                                    {% trans 'Select automatically' %}
+                                </button>
+                            </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=3>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line1" data-block=3 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block3_line1 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line1" data-block=3 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block3_line1 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line1" data-block=3 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block3_line1 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line1" data-block=3 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block3_line1 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line1" data-block=3 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block3_line1 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line1" data-block=3 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block3_line1 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line1" data-block=3 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block3_line1 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line1" data-block=3 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block3_line1 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line1" data-block=3 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block3_line1 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line1" data-block=3 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block3_line1 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=3>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line2" data-block=3 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block3_line2 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line2" data-block=3 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block3_line2 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line2" data-block=3 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block3_line2 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line2" data-block=3 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block3_line2 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line2" data-block=3 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block3_line2 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line2" data-block=3 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block3_line2 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line2" data-block=3 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block3_line2 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line2" data-block=3 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block3_line2 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line2" data-block=3 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block3_line2 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line2" data-block=3 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block3_line2 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=3>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line3" data-block=3 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block3_line3 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line3" data-block=3 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block3_line3 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line3" data-block=3 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block3_line3 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line3" data-block=3 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block3_line3 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line3" data-block=3 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block3_line3 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line3" data-block=3 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block3_line3 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line3" data-block=3 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block3_line3 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line3" data-block=3 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block3_line3 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line3" data-block=3 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block3_line3 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block3-line3" data-block=3 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block3_line3 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                     <div class="ui-game-box">
+                        <div class="ui-game-single">
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{% trans 'Choose your numbers in block 4' %}</span>
+                                <span class="ui-game-info-header__number">3</span>
+                            </div>
+                            <div class="ui-game-single__actions">
+                                <div class="ui-game-btn-reset-wrap">
+                                    <button data-block=4 type="button" class="ui-game-btn-reset js-game-reset">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <span class="ui-game-btn-reset-text"></span>
+                                </div>
+                                <button data-block=4 type="button" class="ui-game-btn-sm js-game-auto">
+                                    {% trans 'Select automatically' %}
+                                </button>
+                            </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=4>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line1" data-block=4 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block4_line1 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line1" data-block=4 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block4_line1 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line1" data-block=4 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block4_line1 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line1" data-block=4 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block4_line1 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line1" data-block=4 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block4_line1 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line1" data-block=4 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block4_line1 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line1" data-block=4 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block4_line1 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line1" data-block=4 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block4_line1 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line1" data-block=4 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block4_line1 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line1" data-block=4 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block4_line1 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=4>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line2" data-block=4 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block4_line2 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line2" data-block=4 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block4_line2 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line2" data-block=4 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block4_line2 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line2" data-block=4 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block4_line2 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line2" data-block=4 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block4_line2 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line2" data-block=4 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block4_line2 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line2" data-block=4 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block4_line2 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line2" data-block=4 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block4_line2 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line2" data-block=4 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block4_line2 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line2" data-block=4 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block4_line2 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=4>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line3" data-block=4 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block4_line3 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line3" data-block=4 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block4_line3 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line3" data-block=4 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block4_line3 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line3" data-block=4 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block4_line3 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line3" data-block=4 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block4_line3 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line3" data-block=4 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block4_line3 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line3" data-block=4 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block4_line3 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line3" data-block=4 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block4_line3 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line3" data-block=4 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block4_line3 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block4-line3" data-block=4 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block4_line3 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                     <div class="ui-game-box">
+                        <div class="ui-game-single">
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">{% trans 'Choose your numbers in block 5' %}</span>
+                                <span class="ui-game-info-header__number">3</span>
+                            </div>
+                            <div class="ui-game-single__actions">
+                                <div class="ui-game-btn-reset-wrap">
+                                    <button data-block=5 type="button" class="ui-game-btn-reset js-game-reset">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <span class="ui-game-btn-reset-text"></span>
+                                </div>
+                                <button data-block=5 type="button" class="ui-game-btn-sm js-game-auto">
+                                    {% trans 'Select automatically' %}
+                                </button>
+                            </div>
+                             <div class="ui-game-price-radio-wrap row" data-block=5>
+                                 <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                     <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line1" data-block=5 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block5_line1 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line1" data-block=5 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block5_line1 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line1" data-block=5 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block5_line1 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line1" data-block=5 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block5_line1 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line1" data-block=5 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block5_line1 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                 </div>
+                                 <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line1" data-block=5 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block5_line1 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line1" data-block=5 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block5_line1 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line1" data-block=5 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block5_line1 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line1" data-block=5 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block5_line1 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line1" data-block=5 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block5_line1 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                            <div class="ui-game-price-radio-wrap row"data-block=5>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line2" data-block=5 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block5_line2 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line2" data-block=5 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block5_line2 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line2" data-block=5 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block5_line2 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line2" data-block=5 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block5_line2 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line2" data-block=5 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block5_line2 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line2" data-block=5 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block5_line2 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line2" data-block=5 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block5_line2 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line2" data-block=5 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block5_line2 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line2" data-block=5 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block5_line2 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line2" data-block=5 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block5_line2 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                            <div class="ui-game-price-radio-wrap row" data-block=5>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pr-md-2 pr-sm-1 mb-md-0 mb-sm-0 mb-2">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line3" data-block=5 class="ui-game-circle-input number-block-line" value="0"
+                                               {% if ticket_info.block5_line3 == 0 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">0</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line3" data-block=5 class="ui-game-circle-input number-block-line" value="1"
+                                               {% if ticket_info.block5_line3 == 1 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">1</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line3" data-block=5 class="ui-game-circle-input number-block-line" value="2"
+                                               {% if ticket_info.block5_line3 == 2 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">2</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line3" data-block=5 class="ui-game-circle-input number-block-line" value="3"
+                                               {% if ticket_info.block5_line3 == 3 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">3</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line3" data-block=5 class="ui-game-circle-input number-block-line" value="4"
+                                               {% if ticket_info.block5_line3 == 4 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">4</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-between pl-md-1 pl-sm-0">
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line3" data-block=5 class="ui-game-circle-input number-block-line" value="5"
+                                               {% if ticket_info.block5_line3 == 5 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">5</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line3" data-block=5 class="ui-game-circle-input number-block-line" value="6"
+                                               {% if ticket_info.block5_line3 == 6 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">6</span>
+                                    </label>
+                                    <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line3" data-block=5 class="ui-game-circle-input number-block-line" value="7"
+                                               {% if ticket_info.block5_line3 == 7 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">7</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line3" data-block=5 class="ui-game-circle-input number-block-line" value="8"
+                                               {% if ticket_info.block5_line3 == 8 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">8</span>
+                                    </label>
+                                           <label class="ui-game-circle-input-label">
+                                        <input type="radio" name="number-block5-line3" data-block=5 class="ui-game-circle-input number-block-line" value="9"
+                                               {% if ticket_info.block5_line3 == 9 %} checked {% endif %}/>
+                                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs">9</span>
+                                    </label>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                    {% include tmpl_subscription %}
+                    {% include tmpl_total_sum %}
+                    {% include tmpl_box_payment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

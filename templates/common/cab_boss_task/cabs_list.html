@@ -1,0 +1,94 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">
+                        {% trans 'Task List' %} {% if m_addTitle %}({{ m_addTitle }}){% endif %}
+                    </h5>
+                </div>
+                {% if l_find %}
+                {% include l_find %}
+                {% endif %}
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans 'N' %}</th>
+                                        <th>{% trans 'Status' %}</th>
+                                        <th>{% trans 'Type' %}</th>
+                                        <th>{% trans 'Name Task' %}</th>
+                                        <th>{% trans 'Count user' %}</th>
+                                        <th>{% trans 'Text' %}</th>
+                                        <th>{% trans 'Subject (email)' %}</th>
+                                        <th>{% trans 'Date Plan' %}</th>
+                                        <th>{% trans 'Date add task' %}</th>
+                                        <th>{% trans 'Date start task' %}</th>
+                                        <th>{% trans 'Date stop task' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ItemTask in task_list %}
+                                        <tr class="js_tic_row
+                                            {% if ItemTask.answ_win %}
+                                                table-success
+                                            {% else %}
+                                                {% if Item_ticket.id == me.profile.t_last_show %} table-active {% else %} table-warning {% endif %}
+                                            {% endif %}"
+                                        >
+                                            <td>
+                                                <a href="{#% url 'cabb_user_payoparation' ItemTask.user.id %#}"
+                                                   target="_blank"
+                                                   class="btn btn-info mybtn_cabb1">
+                                                    <i class="far fa-clipboard"></i>
+                                                    {% trans 'View Task' %}
+                                                </a>
+                                            </td>
+                                            <td>{{ ItemTask.id }}</td>
+                                            <td>{{ ItemTask.t_status }}</td>
+                                            <td>{{ ItemTask.t_type }}</td>
+                                            <td>{{ ItemTask.task_name }}</td>
+                                            <td>{{ ItemTask.task_num }}</td>
+                                            <td>{{ ItemTask.task_text|truncatechars:200 }}</td>
+                                            <td>{{ ItemTask.subject }}</td>
+                                            <td>{{ ItemTask.dt_plan|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ ItemTask.dt_add|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ ItemTask.dt_start|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ ItemTask.dt_stop|date:"d.m.Y H:i:s" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans 'N' %}</th>
+                                        <th>{% trans 'Status' %}</th>
+                                        <th>{% trans 'Type' %}</th>
+                                        <th>{% trans 'Name Task' %}</th>
+                                        <th>{% trans 'Count user' %}</th>
+                                        <th>{% trans 'Text' %}</th>
+                                        <th>{% trans 'Date Plan' %}</th>
+                                        <th>{% trans 'Date add task' %}</th>
+                                        <th>{% trans 'Date start task' %}</th>
+                                        <th>{% trans 'Date stop task' %}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        {% if l_pagination %}
+                            {% include l_pagination %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

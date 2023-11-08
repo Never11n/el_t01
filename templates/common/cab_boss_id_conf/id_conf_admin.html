@@ -1,0 +1,179 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">
+                        {% trans 'Users ID confirmation' %}
+                    </h5>
+                    <div class="card-tools cabb-page-btnexp">
+                        <button type="button"
+                            onclick="btn_form_find(is_export=true)"
+                            class="btn btn-block btn-outline-primary"
+                        >{% trans 'Export EXCEL' %}
+                        </button>
+                    </div>
+                </div>
+                {% if l_find %}
+                    {% include l_find %}
+                {% endif %}
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>{% trans 'Request id' %}</th>
+                                            <th>{% trans 'Status' %}</th>
+                                            <th>{% trans 'Date add' %}</th>
+                                            <th>{% trans 'User id' %}</th>
+                                            <th>{% trans 'User ID number' %}</th>
+                                            <th>{% trans 'Photo' %}</th>
+                                            <th>{% trans 'Check' %}</th>
+                                            <th>{% trans 'Notes' %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ItemLine in conf_list %}
+                                        <tr class="{% if ItemLine.status.verbal == 'wait' %} table-info
+                                        {% elif ItemLine.status.verbal == 'ok'%} table-success
+                                        {% elif ItemLine.status.verbal == 'repeat'%} table-warning
+                                        {% else %} table-danger
+                                        {% endif %}">
+                                            <th>
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1"
+                                                        onclick="btn_id_checkform({{ ItemLine.id }}, 'check')">
+                                                        <i class="far fa-edit"></i>
+                                                </button>
+                                                 <button type="button"
+                                                         class="btn btn-info mybtn_cabb1"
+                                                         onclick="btn_id_checkform({{ ItemLine.id }}, 'photo')">
+                                                        <i class="fas fa-image"></i>
+                                                 </button>
+                                            </th>
+                                            <th>{{ ItemLine.id }}</th>
+                                            <th>
+                                                {{ ItemLine.status }}
+                                                {% if ItemLine.status.verbal == 'reject' or ItemLine.status.verbal == 'repeat' %}
+                                                {{ ItemLine.reject_reason }}
+                                                {% endif %}
+                                            </th>
+                                            <th>{{ ItemLine.dt_add|date:"d.m.Y H:i:s"  }}</th>
+                                            <th>
+                                                {% trans 'User id' %}: {{ ItemLine.user.id }}<br>
+                                                {% trans 'User email' %}: {{ ItemLine.user }}<br>
+                                                {% trans 'User name' %}: {{ ItemLine.user.profile.name }}<br>
+                                                {% trans 'Date joined' %}: {{ ItemLine.user.profile.date_joined|date:"d.m.Y" }}<br>
+                                                {% trans 'User phone' %}: {{ ItemLine.user.profile.mobile }}
+                                                <a href="https://wa.me/+972{{ ItemLine.user.profile.mobile }}"
+                                                   target="_blank"
+                                                   style="text-decoration:none;"
+                                                   role="link"
+                                                   aria-label="link to whatsapp">
+                                                    <img src="{% static 'img/whatsapp.png' %}"
+                                                         height="25"
+                                                         alt="link to whatsapp">
+                                                </a>
+
+                                                <br>
+                                                {% trans 'User birthday' %}: {{ ItemLine.user.profile.date_birthday|date:"d.m.Y" }}<br>
+                                            </th>
+                                            <th>{{ ItemLine.user.profile.i_doc }}</th>
+                                            <th>
+{#                                                {% if ItemLine.photo_id_preview or ItemLine.photo_id %}#}
+                                                <a href="{{ MEDIA_URL }}{{ ItemLine.photo_id }}" target="_blank">
+{#                                                {% else %}#}
+{#                                                <a>#}
+{#                                                {% endif %}#}
+{#                                                    {% if ItemLine.photo_id_preview %}#}
+{#                                                        <img style="min-width: 50px;"#}
+{#                                                             class="w-25" src="{{ MEDIA_URL }}{{ ItemLine.photo_id_preview }}">#}
+{#                                                    {% else %}#}
+                                                        <img style="min-width: 50px;"
+                                                             class="w-25" src="{{ MEDIA_URL }}{{ ItemLine.photo_id }}">
+{#                                                    {% endif %}#}
+                                                </a>
+{#                                                {% if ItemLine.photo_face_preview or ItemLine.photo_face %}#}
+                                                <a href="{{ MEDIA_URL }}{{ ItemLine.photo_face }}" target="_blank">
+{#                                                {% else %}#}
+{#                                                <a>#}
+{#                                                {% endif %}#}
+{#                                                    {% if ItemLine.photo_face_preview %}#}
+{#                                                        <img style="min-width: 50px;"#}
+{#                                                             class="w-25" src="{{ MEDIA_URL }}{{ ItemLine.photo_face_preview }}">#}
+{#                                                    {% else %}#}
+                                                        <img style="min-width: 50px;"
+                                                             class="w-25" src="{{ MEDIA_URL }}{{ ItemLine.photo_face }}">
+{#                                                    {% endif %}#}
+                                                </a>
+                                            </th>
+                                            <th>
+                                                {% if ItemLine.check_dt and ItemLine.check_user %}
+                                                {{ ItemLine.check_dt|date:"d.m.Y H:i:s" }} {{ ItemLine.check_user }} {{ ItemLine.check_user.profile.name }}
+                                                {% endif %}
+                                            </th>
+                                            <th>{{ ItemLine.description }}</th>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% if l_pagination %}
+                            {% include l_pagination %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    function btn_id_checkform(l_id, l_typeform) {
+        console.log("btn_id_check");
+        let m_url = "/cabb-idconf/";
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "GET",
+            async: false,
+            data: {
+                f_id: l_id,
+                f_typeform: l_typeform,
+            },
+            url: m_url,
+            success: function (res) {
+                console.log("res = ", res);
+                if (res.AnswerCod === '01') {
+                    $("#id_ResAjax_cabb_form").html(res.html);
+                    return $('.js-modal__cabb_form').modal('show');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>

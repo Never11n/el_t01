@@ -1,0 +1,159 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+{% load el_t01_tags %}
+<!-- Featured Game Area Start -->
+<div class="header-padding">
+    <div class="hero-area hero-area-cab">
+        <div class="container">
+            <div class="hero-area__inner">
+                <img class="hero-area__img_ticket_l" src="{% static 'main/007/images/top_ticket_l.png' %}" alt="">
+                <h1 class="hero-area__title">{% trans 'Scratch HISHGAD On Mobile' %}</h1>
+{#                <img class="hero-area__img" src="{% static 'main/007/images/hero-area__img.png' %}" alt="">#}
+                <img class="hero-area__img_ticket_r" src="{% static 'main/007/images/top_ticket_r.png' %}" alt="">
+                <img class="hero-area__img_ticket_mob" src="{% static 'main/007/images/top_ticket_l.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="featured-game main-bg featured-game_header-p">
+    <!-- Features Area End -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="section-heading">
+<!--                    <h5 class="subtitle subtitle__withe ">-->
+<!--                        {% trans 'Play yours' %}-->
+<!--                    </h5>-->
+                    <h2 class="title">
+                        {% trans 'Scratch Online Favourite HISHGAD Tickets' %}
+                    </h2>
+                    <p class="subtitle">
+                        {% trans 'Receive Winnings Directly To Your Bank Account' %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="game-slider">
+                    {% for ItemTicketType in dict_tickets_type %}
+                        <div class="item">
+                            <div class="single-game
+                                    {% if ItemTicketType.in_play %}{% else %}single-game_not-active{% endif %}">
+
+                                <div class="game-img"><img src="{{ ItemTicketType.foto_1.url }}" alt=""></div>
+                                <div class="game-name">{% trans ItemTicketType.caption|safe %}</div>
+                                <div class="game-maxwin">
+                                    {% trans 'max win' %}
+                                    <span class="color-violet">
+                                        {% set_int_separate ItemTicketType.max_win %} {% trans ItemTicketType.type_currency.code %}
+                                    </span>
+                                </div>
+                                <div class="game-cost">
+                                    {% trans 'cost' %}
+                                    <span class="color-violet">
+                                    {{ ItemTicketType.cost_2 }} {{ ItemTicketType.type_currency.code }}
+                                </span>
+                                </div>
+                                {% if ItemTicketType.in_play %}
+                                    {% if tickets_gift %}
+                                        <a href="{% url 'cab_game_addnew' ItemTicketType.verbal 'gift' %}"
+                                           class="mybtn3">{% trans 'Send the lottery as a gift' %}</a>
+                                    {% else %}
+                                        <a href="{% url 'cab_game_addnew' ItemTicketType.verbal None %}"
+                                           class="mybtn3">{% trans 'PLay NoW' %}</a>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="#" class="mybtn3">{% trans 'not available' %}</a>
+                                    {#<a href="#" class="mybtn4">{% trans 'not available' %}</a>#}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% if GL_Lotto_slider %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="game-slider">
+                        {% for ItemTypeTicketType in list_lotto_types %}
+                            <div class="item">
+                                <div class="single-game">
+                                    <div class="game-img"><img src="{{ ItemTypeTicketType.foto_1.url }}" alt=""></div>
+                                    <div class="game-name">{% trans ItemTypeTicketType.caption|safe %}</div>
+                                    {% if ItemTypeTicketType.in_play %}
+                                     <a href="{% url 'cab_game_lotto_menu' ItemTypeTicketType.verbal %}"
+                                        class="mybtn3">{% trans 'PLay NoW' %}</a>
+                                    {% else %}
+                                        <a href="#" class="mybtn4">{% trans 'not available' %}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="section-heading">
+                    <h2 class="title">
+                        חישגד בנייד אונליין!
+                    </h2>
+                    <p class="subtitle color-black">
+                         כרטיסי הגירוד מבית מפעל הפיס במקום אחד! בואו לבחור מתוך מגוון של כרטיסי גירוד: חישגד כדורסל, חישגד בורסה, קזינו, בלאק ג'ק 21, מלכת הלבבות, אס = פרס, מגה כסף ועוד.
+                    </p>
+                    <p class="subtitle">
+                         כל זה קורה בתהליך רישום מהיר ופשוט, באמצעות פלטפורמה חדשנית שכבר ביצעה מהפכה בחוויה ובהנגשה של כרטיסי הגירוד הפיזיים והחיבור לעולם הדיגיטלי.
+                    </p>
+                    <p class="subtitle">
+                        מי אנחנו ואיך קורה הקסם? "חישליין" החלה לפעול בשנת 2022 עם פיתוח חדשני המאפשר לגרד כרטיסי חישגד דרך הנייד, המחשב, הטאבלט והכל זמין עבורכם 24/7. אנו בעלי זיכיון לשימוש בפטנט טכנולוגי שבו כל מי שמעל גיל 18 יכול להירשם ולהנות מחוויה טכנולוגית פורצת דרך.
+                    </p>
+                    <p class="subtitle">
+                        גאים להיות מובילי התחום ! רוצים לדעת עלינו קצת יותר?
+                        <a style="color: #0024f1; font-size: 18px;" class="sub-footer-menu__link" href="{% url 'aboutus' %}">בקרו בעמוד אודות חישליין</a>
+                    </p>
+                    <p class="subtitle">
+                        בטוח ומאובטח: אנו שמים דגש על אבטחה ופרטיות. הפלטפורמה המתקדמת שלנו משתמשת בטכניקות הצפנה מתקדמות ובשרתים מאובטחים כדי להגן על נתוני המשתמש ולהבטיח סודיות מלאה לכל אורך ההליך.
+                    </p>
+                    <p class="subtitle">
+                        {% trans 'שקיפות מלאה: הטכנולוגיה המתקדמת שלנו מאפשרת לכם לצפות בכרטיס הגירוד ולאסוף את הכרטיס במקרה של זכיה ממשרדי החברה בכל עת. כאשר אתם מגרדים את הכרטיס בנייד, נשלחת פקודה לרובוט בו נמצאים כרטיסי חישגד של מפעל הפיס והרובוט מגרד וחושף את תוצאות הכרטיס. ' %}
+                    </p>
+                    <p class="subtitle">
+                        אתם נהנים מהביטחון של שקיפות מלאה גם בזכות מצלמה המותקנת על המכונה, מקבלים צילום של המספר הסידורי של מפעל הפיס וברגע שיש זכיה הכסף מועבר אליכם ישירות.
+                    </p>
+                    <p class="subtitle">
+                         המערכת המתקדמת שלנו יכולה לזהות כל כרטיס זוכה ואת סכום הזכיה. כמו כן, במידה ואתם המאושרים והמעושרים  אתם בוחרים אם להמשיך ולשחק או למשוך את סכום הזכייה. (נהנים ומשחקים באחריות).
+                    </p>
+                    <p class="subtitle">
+                         עבורכם 24/7: אנו מעמידים לרשותכם מוקד זמין 24/7 שבו ייענו כל דרישותיכם, תרגישו בנוח לפנות אלינו ונשמח לעמוד לרשותכם.
+                    </p>
+                    <p class="subtitle">
+                         חישגד אונליין עומדת בחזית המהפכה הדיגיטלית, ומספקת חווית משתמש המותאמת לצרכים ולציפיות שלכם. אתם יכולים להסתגל בקלות לפלטפורמה ולמקסם את הפרודוקטיביות שלכם. התמקדנו בעיקר בחווית המשתמש כמו גם בגמישות והנגישות. הפלטפורמה תואמת מכשירי סלולר שונים, מחשבים נייחים וניידים, טאבלטים וסמארטפונים.
+                    </p>
+                    <p class="subtitle">
+                         בנוסף, חישליין מעדכנת מעת לעת פונקציות נוספות, חידושים טכנולוגיים ומוסיפה עוד מוצרים מבית מפעל הפיס. כל זה תוך עמידה על אספקת החוויה, השירות והמחיר הטוב ביותר. בזכות פיתוח ואופטימיזציה ברמות הגבוהות ביותר תהנו מחוויה דיגיטלית מתקדמת ללא חסמים טכנולוגיים או גיאוגרפיים. את כל הקסם הזה אנחנו מספקים ישירות לנייד הפרטי שלכם ובשבילכם.
+                    </p>
+{#                    <p class="subtitle">#}
+{#                        {% trans 'Receive Winnings Directly To Your Bank Account' %}#}
+{#                    </p>#}
+{#                    <p class="subtitle">#}
+{#                        {% trans 'Receive Winnings Directly To Your Bank Account' %}#}
+{#                    </p>#}
+{#                    <p class="subtitle">#}
+{#                        {% trans 'Receive Winnings Directly To Your Bank Account' %}#}
+{#                    </p>#}
+{#                    <p class="subtitle">#}
+{#                        {% trans 'Receive Winnings Directly To Your Bank Account' %}#}
+{#                    </p>#}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Featured Game Area	End -->

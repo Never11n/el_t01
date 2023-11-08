@@ -1,0 +1,130 @@
+{% load static %}
+{% load i18n %}
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{% trans 'Create New BlackList' %}</h3>
+                                </div>
+                                <input id="id_user_id" name="f_t_user" type="hidden" value="{{ m_user.id }}">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_t_type">{% trans 'Type blacklist' %}</label>
+                                                <select class="custom-select"
+                                                        id="id_t_type"
+                                                        name="f_t_type">
+                                                    {% for Item in dict_blacklist_type %}
+                                                        <option value="{% trans Item.verbal %}">{% trans Item.caption %}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_t_text">{% trans 'Text' %}</label>
+                                                <input type="text"
+                                                       id="id_t_text"
+                                                       class="form-control"
+                                                       name="f_t_text"
+                                                       value=""
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="id_t_description">{% trans "Description" %}</label>
+                                                <textarea class="form-control" rows="3"
+                                                          id="id_t_description"
+                                                          name="f_t_description"
+                                                          placeholder={% trans "Description" %}></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="row flex-md-row ">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="button"
+                                                    class="btn btn-dark"
+                                                    {#                                                    data-dismiss="modal"#}
+                                                    onclick="btn_blocklist_save()"
+                                            >{% trans 'Save' %}</button>
+                                            <button type="button"
+                                                    class="btn btn-dark"
+                                                    data-dismiss="modal"
+                                            >{% trans 'Close' %}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+
+<script type="text/javascript">
+    function btn_blocklist_save() {
+
+        let m_t_type = $("#id_t_type").val();
+        let m_t_text = $("#id_t_text").val();
+        let m_t_description = $("#id_t_description").val();
+        console.log("m_t_type        = ", m_t_type);
+        console.log("m_t_text        = ", m_t_text);
+        console.log("m_t_description = ", m_t_description);
+
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                t_type: m_t_type,
+                t_text: m_t_text,
+                t_description: m_t_description,
+            },
+            url: "/cabb_blocklist_save/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    $('.js-modal__cabb_form').modal('hide');
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>

@@ -1,0 +1,229 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{ m_form_title }}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div class="form-group clearfix">
+                                                    <div class="icheck-success d-inline">
+                                                        <input type="checkbox"
+                                                               id="id_enabled"
+                                                               class="js__calc_check"
+                                                               name="f_enabled"
+                                                               value="m_enabled"
+                                                               {% if m_form_type == 'new' %}
+                                                                checked
+                                                                {% else %}
+                                                                {% if t_lotto_profit.enabled %}
+                                                                checked
+                                                                {% endif %}
+                                                                {% endif %}
+                                                        >
+                                                        <label for="id_enabled">
+                                                            {% trans 'Enabled' %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_t_type">{% trans 'Type ticket' %}</label>
+                                                <select class="custom-select"
+                                                        id="id_t_type"
+                                                        name="f_t_type">
+                                                    {% for Item in ticket_types %}
+                                                        {% if Item.verbal == t_lotto_profit.ticket_type.verbal %}
+                                                        <option selected="selected"
+                                                                value="{{ Item.verbal }}">{% trans Item.caption %}</option>
+                                                        {% else %}
+                                                        <option value="{{ Item.verbal }}">{% trans Item.caption %}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_profit_type">{% trans 'Profit type' %}</label>
+                                                <select class="custom-select"
+                                                        id="id_profit_type"
+                                                        name="f_profit_type">
+                                                    {% for key, value in dict_profit_type.items %}
+                                                        {% if key == t_lotto_profit.profit_type %}
+                                                        <option selected="selected"
+                                                                value="{{ key }}">{% trans value %}</option>
+                                                        {% else %}
+                                                        <option value="{{ key }}">{% trans value %}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_profit_rounding">{% trans 'Rounding' %}</label>
+                                                <select class="custom-select"
+                                                        id="id_profit_rounding"
+                                                        name="f_profit_rounding">
+                                                    {% for key, value in dict_profit_rounding.items %}
+                                                        {% if key == t_lotto_profit.profit_rounding %}
+                                                        <option selected="selected"
+                                                                value="{{ key }}">{% trans value %}</option>
+                                                        {% else %}
+                                                        <option value="{{ key }}">{% trans value %}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_sum_from">{% trans 'Sum from' %}</label>
+                                                <input type="number"
+                                                       step="0.1"
+                                                       id="id_sum_from"
+                                                       class="form-control"
+                                                       name="f_sum_from"
+                                                       value="{{ t_lotto_profit.sum_from }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_sum_to">{% trans 'Sum to' %}</label>
+                                                <input type="number"
+                                                       step="0.1"
+                                                       id="id_sum_to"
+                                                       class="form-control"
+                                                       name="f_sum_to"
+                                                       value="{{ t_lotto_profit.sum_to }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_amount_profit">{% trans 'Amount profit' %}</label>
+                                                <input type="number"
+                                                       step="0.1"
+                                                       id="id_amount_profit"
+                                                       class="form-control"
+                                                       name="f_amount_profit"
+                                                       value="{{ t_lotto_profit.amount_profit }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_percent_profit">{% trans 'Percent profit' %}</label>
+                                                <input type="number"
+                                                       step="0.1"
+                                                       id="id_percent_profit"
+                                                       class="form-control"
+                                                       name="f_percent_profit"
+                                                       value="{{ t_lotto_profit.percent_profit }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row flex-md-row ">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                onclick="btn_lotto_profit_save()"
+                                        >{% trans 'Save' %}
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                data-dismiss="modal"
+                                        >{% trans 'Close' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function btn_lotto_profit_save() {
+        let enabled = 0;
+        if ($('#id_enabled').is(':checked')) {
+            enabled = 1
+        }
+        let t_type = $("#id_t_type").val(),
+            profit_type = $("#id_profit_type").val(),
+            profit_rounding = $("#id_profit_rounding").val(),
+            ticket_type = $("#id_ticket_type").val(),
+            sum_from = $("#id_sum_from").val(),
+            sum_to = $("#id_sum_to").val(),
+            amount_profit = $("#id_amount_profit").val(),
+            percent_profit = $("#id_percent_profit").val();
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                f_form_type: '{{ m_form_type }}',
+                f_id: '{{ m_id }}',
+                f_enabled: enabled,
+                f_t_type: t_type,
+                f_profit_type: profit_type,
+                f_profit_rounding: profit_rounding,
+                f_ticket_type: ticket_type,
+                f_sum_from: sum_from,
+                f_sum_to: sum_to,
+                f_amount_profit: amount_profit,
+                f_percent_profit: percent_profit
+            },
+            url: "/lotto_profit_form_save/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    $('.js-modal__cabb_form').modal('hide');
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+
+    }
+</script>

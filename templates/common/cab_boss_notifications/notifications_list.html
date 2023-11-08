@@ -1,0 +1,163 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'System Notifications List' %}</h5>
+                </div>
+                {% if l_find %}
+                    {% include l_find %}
+                {% endif %}
+                <div class="card-body">
+                    <button type="button"
+                            class="btn btn-info mybtn_cabb1"
+                            onclick="btn_system_notification_form('new')">
+                        {% trans 'New' %}
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans 'Id' %}</th>
+                                        <th>{% trans 'Enabled' %}</th>
+                                        <th>{% trans 'Created date' %}</th>
+                                        <th>{% trans 'Date start' %}</th>
+                                        <th>{% trans 'Date stop' %}</th>
+                                        <th>{% trans 'Text' %}</th>
+                                        <th>{% trans 'Description' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in list_notifications %}
+                                        <tr class="js_tic_row">
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1"
+                                                        onclick="btn_system_notification_enable({{ item.id }})"
+                                                >
+                                                    {% if item.enabled %}
+                                                        {% trans 'Disable' %}
+                                                    {% else %}
+                                                        {% trans 'Enable' %}
+                                                    {% endif %}
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1"
+                                                        onclick="btn_system_notification_form('edit', {{ item.id }})"
+                                                >
+                                                        {% trans 'Edit' %}
+                                                </button>
+                                            </td>
+                                            <td>{{ item.id }}</td>
+                                            <td>
+                                                {% if item.enabled %}<i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}<i class="icon fas fa-ban text-red"></i>{% endif %}<br>
+                                            </td>
+                                            <td>{{ item.created|date:'d.m.Y H:i' }}</td>
+                                            <td>{{ item.dt_start|date:'d.m.Y H:i' }}</td>
+                                            <td>{{ item.dt_stop|date:'d.m.Y H:i' }}</td>
+                                            <td>{{ item.text }}</td>
+                                            <td>{% if item.description %}{{ item.description }}{% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    function btn_system_notification_enable(l_notification_id) {
+        console.log("btn_subs_enable");
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        discount_id: l_notification_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/system_notification_enable/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                Swal.fire(gettext('Done!'), '', 'info');
+                return false;
+            }
+        });
+    }
+    function btn_system_notification_form(l_form_type, l_id) {
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                f_id: l_id,
+                f_form_type: l_form_type,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/system_notification_form/",
+            success: function (res) {
+                $("#id_ResAjax_cabb_form").html(res);
+                return $('.js-modal__cabb_form').modal('show');
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>

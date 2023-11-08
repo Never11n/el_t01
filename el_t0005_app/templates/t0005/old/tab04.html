@@ -1,0 +1,16 @@
+{% load static %}
+{% load i18n %}
+<div class="tab_text_1 tab_text_color_1">
+    <p>{% trans 'Please show <br>the invoice to <br>the barcode<br>reader' %} <br> {% trans 'worth NIS 100' %}</p>
+</div>
+
+<div class="barcode-reader">
+    <div class="bar-img">
+        <img src="{% static 'main/t0005/img/barcode.png' %}" alt="logo" class="barcode-img" onclick="nextPage('btn_to_info')">
+    </div>
+</div>
+
+{#<div class="tab_text_1 button-wrap">#}
+{#    <button class="btn_1"#}
+{#            onclick="nextPage('btn_to_login')">{% trans 'To start click here' %}</button>#}
+{#</div>#}

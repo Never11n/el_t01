@@ -1,0 +1,31 @@
+{% extends "layout/layout.html" %}
+{% load static %}
+{% load i18n %}
+{% block layoutbody %}
+    <div class="error page">
+        <div class="container">
+        <a href="" class="btn-scroll-up js-btn-scroll-up"> </a>
+        <a href="" class="btn-scroll-down js-btn-scroll-down"></a>
+
+            <div class="error__info">
+                <div class="error__info-headings">
+                    <div class="error__info-heading">
+                        {% trans 'Ошибка' %}
+                        <span class="text-green-lighter">
+                        500
+                    </span>
+                    </div>
+                    <div class="error__info-descr">
+                        {% trans 'Сервер не отвечает. Наши специалисты уже работают над решением проблемы. Извините за временные неудобства.' %}
+                        <a href="{% url 'index' %}" class="error__info-descr-link">
+                            {% trans 'Перейти на главную страницу' %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        simple_get('/log500', {url: window.location.href})
+    </script>
+{% endblock %}

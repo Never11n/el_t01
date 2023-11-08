@@ -1,0 +1,150 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'List Games' %}</h5>
+                </div>
+                {% if not without_buttons %}
+                <div class="card-body">
+                    {#                    <label class="tender-create-agreement__label">#}
+                    <label>
+                        <input id="cabb_ticket_checkbox_1"
+                               type="checkbox"
+                               name="payment-agreement__checkbox_1" value="1"
+                               class="">
+                        {% trans 'Auto Refresh' %}
+                    </label>
+                    <label>
+                        <input id="cabb_ticket_checkbox_1"
+                               type="number"
+                               min="10" max="60"
+                               name="payment-agreement__checkbox_1" value="10"
+                               class="">
+                        {% trans 'Auto Refresh' %}
+                    </label>
+
+                </div>
+                {% if l_find %}
+                    {% include l_find %}
+                {% endif %}
+                {% endif %}
+                <div class="card-body js_tickets_body">
+                    {% include l_tickets_body %}
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    function PollingListTicketCabb() {
+        console.log("checked = ", $('#cabb_ticket_checkbox_1').is(":checked"));
+        <!--
+
+        {#if($('#cabb_ticket_checkbox_1').is(":checked")) {#}
+         -->
+        location.reload();
+        <!-- } -->
+        setTimeout(PollingListTicketCabb, 60000);
+    }
+
+    window.onload = function () {
+        setTimeout(PollingListTicketCabb, 60000);
+    };
+
+    function btn_ticketrestart(l_ticket_id) {
+        console.log("btn_user_limit");
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        ticket_id: l_ticket_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb_ticketrestart/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            return Swal.fire({
+                                icon: 'success',
+                                title: gettext("success"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                // 'OK my boss, I didn\'t think you were so greedy'
+                Swal.fire(gettext("OK my boss, I didn't think you were so greedy"), "", "info");
+                return false;
+            }
+        });
+    }
+
+
+    function btn_ticketcheck_conf(l_param) {
+        m_payadd_id = $("#id_payadd_id").val();
+        $.ajax({
+            type: "POST",
+            data: {
+                f_id: m_payadd_id,
+                f_param: l_param,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_ticketcheck_conf/",
+            success: function (res) {
+                location.reload();
+                return;
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occurred during user verification, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                return false;
+            }
+        });
+    }
+
+</script>

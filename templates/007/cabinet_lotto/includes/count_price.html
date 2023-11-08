@@ -1,0 +1,60 @@
+{% load static %}
+{% load i18n %}
+<div class="ui-game-box">
+    <div class="ui-game-price">
+        {% if count_price_part_1 %}
+            <div class="ui-game-price__header">
+                <span class="ui-game-price__info-text">{% trans 'Number of lotteries' %}</span>
+            </div>
+            <div class="ui-game-price__count">
+                {% for item_count in list_count_game %}
+                    <label class="ui-game-circle-input-label">
+                        {% if item_count.value == '1' %}
+                        <input type="radio" name="ui-game-count" class="ui-game-circle-input ui-game-circle-input-games-count"
+                               value="{{ item_count.value }}" checked/>
+                        {% else %}
+                        <input type="radio" name="ui-game-count" class="ui-game-circle-input ui-game-circle-input-games-count"
+                               value="{{ item_count.value }}"/>
+                        {% endif %}
+                        <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_s">{{ item_count.text }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if count_price_part_2 %}
+            <div class="ui-game-info-header">
+                <span class="ui-game-info-header__text">{% trans 'Cost of lotteries' %}</span>
+                <span class="ui-game-info-header__number">3</span>
+            </div>
+            <div class="ui-game-price-slider">
+                <div class="ui-game-price-slider__wrap js-ui-game-price-slider">
+                    {% for item_price in list_count_price %}
+                        <p data-price="{{ item_price.value }}"
+                           class="ui-game-price-slider__item">{{ item_price.text }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        {% if count_price_part_3 %}
+            <div class="ui-game-info-header">
+                <span class="ui-game-info-header__text">{% trans 'Cost of lotteries' %}</span>
+                <span class="ui-game-info-header__number">3</span>
+            </div>
+            <div class="ui-game-price-switcher">
+                <label class="ui-game-btn-input-label">
+                    <input type="radio" name="ui-game-btn-price"
+                           class="ui-game-btn-input js-not-carousel-games-count"
+                           value="5" checked/>
+                    <span class="ui-game-btn-input-label-display">{{ sum_currency }}5</span>
+                </label>
+                <label class="ui-game-btn-input-label">
+                    <input type="radio" name="ui-game-btn-price"
+                           class="ui-game-btn-input js-not-carousel-games-count"
+                           value="10"/>
+                    <span class="ui-game-btn-input-label-display">{{ sum_currency }}10</span>
+                </label>
+            </div>
+        {% endif %}
+
+    </div>
+</div>

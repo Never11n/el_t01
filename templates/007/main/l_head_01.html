@@ -1,0 +1,30 @@
+{% load static %}
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta property="og:url" content="{{ l_domain }}"/>
+<meta property="og:image" content="{% static 'img/logo-og.png' %}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="{{ PAGE_TITLE }}"/>
+<meta property="og:description" content="{{ PAGE_DESCRIPTION }}"/>
+
+<!-- favicon -->
+<link rel="icon" href="{% static 'main/007/images/favicon.ico' %}"  type="image/x-icon">
+<link rel="shortcut icon" href="{% static 'main/007/images/favicon.ico' %}" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="256x256" href="{% static "main/007/images/apple-touch-icon.png" %}">
+<!-- bootstrap -->
+<link rel="stylesheet" href="{% static 'main/007/css/bootstrap.min.css' %}">
+<!-- Plugin css -->
+<link rel="stylesheet" href="{% static 'main/007/css/plugin.css' %}">
+<!-- var -->
+<link rel="stylesheet" href="{% static 'main/007/css/var.css' %}">
+<!-- stylesheet -->
+<link rel="stylesheet" href="{% static 'main/007/css/style.css' %}">
+<!-- responsive -->
+<link rel="stylesheet" href="{% static 'main/007/css/responsive.css' %}">
+{#<!-- SweetAlert2 -->#}
+<link rel="stylesheet" href="{% static 'vendor/sweetalert2/dist/sweetalert2.min.css' %}">

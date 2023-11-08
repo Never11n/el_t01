@@ -1,0 +1,77 @@
+{% load static %}
+{% load i18n %}
+
+{% if status_dev == "BUSY" %}
+    <div class="card-header">
+        <h5 class="card-title m-0">{% trans 'Machine is BUSY' %}</h5>
+    </div>
+{% else %}
+{#    <div class="card-header">#}
+{#        <h5 class="card-title m-0">{% trans 'Time' %} {{ TimeTest }} {% trans 'sec' %}</h5>#}
+{#    </div>#}
+    <div class="card-header">
+        <h3 class="card-title">TICKET = {{ item_ticket.id }} </h3>
+    </div>
+
+    <div class="card-body">
+        <!-- radio -->
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5 class="card-title m-0">{% trans 'Photo BEFORE' %}</h5>
+                    </div>
+                    <div class="col-sm-6">
+                        <img class="img-fluid" src="/{{ item_ticket.img_03 }}" alt="Photo BEFORE">
+                    </div>
+                    <div class="col-sm-6">
+                        <img class="img-fluid" src="/{{ item_ticket.img_07 }}" alt="Photo BEFORE">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content" id="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5 class="card-title m-0">{% trans 'Photo AFTER' %}</h5>
+                    </div>
+                    <div class="col-sm-6">
+                        <img class="img-fluid" src="/{{ item_ticket.img_04 }}" alt="Photo AFTER">
+                    </div>
+                    <div class="col-sm-6">
+                        <img class="img-fluid" src="/{{ item_ticket.img_08 }}" alt="Photo AFTER">
+                    </div>
+                </div>
+            </div>
+        </div>
+{#        <div class="card-header">#}
+{#            <h5 class="card-title m-0">{% trans 'Time' %} {{ TimeTest }} {% trans 'sec' %}</h5>#}
+{#        </div>#}
+
+        <div class="row {% if item_ticket.his_job.ticket_num.v1 != item_ticket.his_job.ticket_num.v2 %} bg-danger {% endif %}">
+            <div class="card-header col-md-4">
+                <h3 class="card-title">N = {{ item_ticket.answ_nom }} </h3>
+            </div>
+            <div class="card-header col-md-4">
+                <h3 class="card-title">v1 = {{ item_ticket.his_job.ticket_num.v1 }} </h3>
+            </div>
+            <div class="card-header col-md-4">
+                <h3 class="card-title">v2 = {{ item_ticket.his_job.ticket_num.v2 }} </h3>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <!-- /.card-body -->
+        <div class="row {% if item_ticket.answ_win %} bg-success {% endif %}">
+            <div class="card-header col-md-4">
+                <h3 class="card-title">WIN SUM = {{ item_ticket.answ_win_sum }}</h3>
+            </div>
+            <div class="card-header col-md-4">
+                <h3 class="card-title">{% if item_ticket.answ_win %}TICKET WIN{% else %}TICKET LOSS{% endif %}</h3>
+            </div>
+            <div class="card-header col-md-4">
+                <h3 class="card-title">{{ item_ticket.answ_option }}</h3>
+            </div>
+        </div>
+    </div>
+{% endif %}

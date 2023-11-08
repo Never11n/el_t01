@@ -1,0 +1,63 @@
+{% load static %}
+{% load i18n %}
+<div class="tab_text_1 tab_text_color_3">
+    <p>{% trans 'Some details for identification:' %}</p>
+</div>
+
+    <div class="log-text">
+        <h1>Some details for identification:</h1>
+    </div>
+        <p class="input-info">Type the number / club member /<br>phone number</p>
+    
+    <div class="modal-fade-main-modal" id="signin" tabindex="-1" role="dialog" data-backdrop="static"
+         data-keyboard="false" aria-labelledby="signin" aria-hidden="true">
+
+        <div class="modal-body-main-modal-body">
+
+            <div class="form-area">
+
+                <form action="#" method="POST" autocomplete="off">
+                    {% csrf_token %}
+                    <input type="hidden" id="url_path" name="url_path" value="{{ utm_code }}">
+
+                    <input type="hidden" id="get_param" name="get_param" value="{{ get_param }}">
+
+                    <fieldset class="main-modal-fieldset-register">
+
+                        <div class="register-form-box">
+
+                            <div class="main-modal-form-group">
+                                <input type="text" class="main-modal-form-control" id="input-id" autocomplete="off"
+                                       name="f_id" placeholder="{% trans 'ID*' %}">
+                            </div>
+
+                            <div class="main-modal-form-group">
+                                <input type="text" class="main-modal-form-control" id="input-code" autocomplete="off"
+                                       name="f_clubcode" placeholder="{% trans 'Club Member*' %}">
+                            </div>
+
+                            <div class="main-modal-form-group">
+                                <input type="text" class="main-modal-form-control" id="input-phone" autocomplete="off"
+                                       name="f_phone" placeholder="{% trans 'Phone Number*' %}">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="text-center">
+                        <a href="#" class="mybtn1-register-btn" onclick="btn_modal_shop_login(), nextPage('btn_to_barcode')">
+                            {% trans 'CONFIRM' %}
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <h2 class="to-reg">Do not have an account?<br>
+    </h2>
+    <h2 class="to-reg">
+    <a class="reg-btn" onclick="nextPage('btn_to_registr')">Registration</a>
+    </h2>
+</div>
+
+
+

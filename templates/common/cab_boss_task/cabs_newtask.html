@@ -1,0 +1,378 @@
+{% load static %}
+{% load i18n %}
+<section class="cabs_newtask main-bg">
+    <div class="container cabs_newtask-box">
+        <div class="section-heading cab-history-title">
+            <h5 class="subtitle">{% trans 'New Task' %}</h5>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-secondary cab-table-border">
+                    <div class="card-header">
+                        <h3 class="card-title">{% trans 'New Task' %}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="id_t_name">{% trans 'Name Task' %}</label>
+                                    <input type="text"
+                                           id="id_t_name"
+                                           class="form-control"
+                                           name="f_t_name"
+                                           value=""
+                                    >
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="id_t_tasktype">{% trans 'Type Task' %}</label>
+                                    <select class="custom-select"
+                                            id="id_t_tasktype"
+                                            name="f_t_tasktype">
+                                        {% for Item in dict_tasktype %}
+                                        {% if Item.verbal == selected_task_type %}
+                                            <option value="{% trans Item.verbal %}">{% trans Item.caption %}</option>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        {% if selected_task_type == 'email' %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="id_t_subject">{% trans 'Subject' %}</label>
+                                        <input type="text"
+                                               id="id_t_subject"
+                                               class="form-control"
+                                               name="f_t_subject"
+                                               value=""
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if selected_task_type == 'whatsapp' %}
+                            <div class="form-group col-sm-6 pl-0">
+                                <label>{% trans 'Image' %}</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="FileId_01" name="f_file_01">
+                                        <label class="custom-file-label" for="FileId_01">{% trans 'Choose file' %}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="form-group {% if selected_task_type == 'email' %}c  {% endif %}">
+                            <label for="id_t_message">{% trans 'Message' %}</label>
+                            <textarea class="form-control {% if selected_task_type == 'email' %} textarea {% endif %}"
+                                      maxlength="500"
+                                      rows="3"
+                                      id="id_t_message"
+                                      name="f_t_message"
+                                      placeholder="{% trans 'Message' %}"></textarea>
+                        </div>
+                                                <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="id_t_data">{% trans 'Data' %}</label>
+                                    <input type="date"
+                                           id="id_t_data"
+                                           class="form-control"
+                                           name="f_t_data"
+                                           value="{% now 'Y-m-d' %}">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="id_t_hours">{% trans 'Hours' %}</label>
+                                    <select class="form-control"
+                                            id="id_t_hours"
+                                            name="f_t_hours">
+                                        <option value="00">00</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="id_t_minut">{% trans 'Minutes' %}</label>
+                                    <select class="form-control"
+                                            id="id_t_minut"
+                                            name="f_t_minut">
+                                        <option value="00">00</option>
+                                        <option value="15">15</option>
+                                        <option value="30">30</option>
+                                        <option value="45">45</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="users_lists">
+                            <label>{% trans 'Users list' %}</label>
+                             <button class="btn btn-default users_list_button" onclick="btn_task_user_list('all')">
+                                 {% trans 'All users' %}
+                             </button>
+                             <button class="btn btn-default users_list_button" onclick="btn_task_user_list('never_played')">
+                                 {% trans 'Never played' %}
+                             </button>
+                            <input style="width: 60px;" type="number" id="days_not_played">
+                            <button class="btn btn-default users_list_button" onclick="btn_task_user_list('days_not_played')">
+                                 {% trans 'Days not played' %}
+                            </button>
+                            <br>
+                            <input id="fileSelect" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                            <button class="btn btn-default users_list_button" onclick="btn_task_user_list('from_file')">
+                                 {% trans 'From file' %}
+                            </button>
+                        </div>
+                        <div class="row" id="id_ResAjax_users_list">
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="row flex-md-row ">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <a id="id_btn_ng"
+                               href="##"
+                               class="mybtn8"
+                               onclick="btn_task_save()"
+                            >{% trans 'Save TASK' %}</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    function btn_task_user_list(value) {
+        let days_not_played = $("#days_not_played").val();
+        let csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+        let dataRequest = {
+                f_task_type: '{{ selected_task_type}}',
+                f_users_filter: value,
+                f_days_not_played: days_not_played,
+                csrfmiddlewaretoken: csrftoken
+            };
+        let typeRequest = 'GET';
+        let processDataRequest = true;
+        let contentTypeRequest = true;
+        if (value === 'from_file') {
+            if ($("#fileSelect")[0].files[0]){
+                dataRequest = new FormData();
+                console.log(dataRequest);
+                dataRequest.append('csrfmiddlewaretoken', csrftoken);
+                dataRequest.append('f_task_type', '{{ selected_task_type}}');
+                dataRequest.append('f_users_filter', value);
+                dataRequest.append('f_file',  $("#fileSelect")[0].files[0]);
+                typeRequest = 'POST';
+                processDataRequest = false;
+                contentTypeRequest = false;
+            } else {
+                Swal.fire({
+                icon: 'error',
+                title: gettext('ERROR'),
+                background: '#cacaca',
+                html: gettext("Select a file!"),
+                confirmButtonText: gettext('Back to form'),
+                confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+            }
+        }
+        let selected_ticket = $(event.currentTarget);
+        // let days_not_played = $("#days_not_played").val();
+        if (value === 'days_not_played' && !days_not_played) {
+            Swal.fire({
+                icon: 'error',
+                title: gettext('ERROR'),
+                background: '#cacaca',
+                html: gettext("Enter a number of days"),
+                confirmButtonText: gettext('Back to form'),
+                confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+        }
+        selected_ticket
+            .closest("#users_lists")
+            .find(".users_list_button")
+            .removeClass("btn-info")
+            .addClass("btn-default");
+        selected_ticket.removeClass("btn-default");
+        selected_ticket.addClass("btn-info");
+        $.ajax({
+            beforeSend: function(){
+                $('#id_ResAjax_users_list').html(
+                    '<div class="spinner-border text-info m-auto" role="status">' +
+                    '  <span class="sr-only">Loading...</span>' +
+                    '</div>');
+            },
+            type: typeRequest,
+            data: dataRequest,
+            processData: processDataRequest,
+            contentType: contentTypeRequest,
+            // type: "GET",
+            // data: {
+            //     f_task_type: '{{ selected_task_type}}',
+            //     f_users_filter: value,
+            //     f_days_not_played: days_not_played,
+            //     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            // },
+            url: "/new_task_users_list/",
+            success: function (res) {
+                $("#id_ResAjax_users_list").html(res);
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occurred, please try again later"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                $("#id_ResAjax_users_list").html('<span class="m-auto">An error occurred, please try again later</span>');
+                return false;
+            }
+    });
+    }
+    function btn_task_save() {
+        let m_task_name = $("#id_t_name").val();
+        let m_task_type = $("#id_t_tasktype").val();
+        let m_task_text = $("#id_t_message").val();
+        let m_task_subject = $("#id_t_subject").val();
+        let m_task_users = "";
+        let m_task_dated = $("#id_t_data").val();
+        let m_task_dateh = $("#id_t_hours").val();
+        let m_task_datem = $("#id_t_minut").val();
+        let m_user_list = $(".js-task_user");
+        m_user_list.find('.js-task_user_checkbox').each(function () {
+            if ($(this).is(':checked')) {
+                m_task_users += $(this).data('user') + " "
+            }
+        });
+        if ($("#FileId_01").length && m_task_type === 'whatsapp') {
+            let formData = new FormData();
+            let csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+            formData.append('csrfmiddlewaretoken', csrftoken);
+            formData.append('photo1',  $("#FileId_01")[0].files[0]);
+            formData.append('f_task_name', m_task_name);
+            formData.append('f_task_type', m_task_type);
+            formData.append('f_task_text', m_task_text);
+            formData.append('f_task_users', m_task_users);
+            formData.append('f_task_dated', m_task_dated);
+            formData.append('f_task_dateh', m_task_dateh);
+            formData.append('f_task_datem', m_task_datem);
+            $.ajax({
+                type: "POST",
+                async: false,
+                processData: false,
+                contentType: false,
+                data: formData,
+                url: "/cabs_newtask_save/",
+                success: function (res) {
+                   if (res.AnswerCod === "01") {
+                    location.href = "/cabs_list/";
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: res.AnswerText,
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                },
+                error: function (res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                async: false,
+                data: {
+                    f_task_name: m_task_name,
+                    f_task_type: m_task_type,
+                    f_task_text: m_task_text,
+                    f_task_subject: m_task_subject,
+                    f_task_users: m_task_users,
+                    f_task_dated: m_task_dated,
+                    f_task_dateh: m_task_dateh,
+                    f_task_datem: m_task_datem,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                url: "/cabs_newtask_save/",
+                success: function (res) {
+                    if (res.AnswerCod === "01") {
+                        location.href = "/cabs_list/";
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: res.AnswerText,
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                },
+                error: function (res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occurred, please try again later"),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            });
+        }
+    }
+    window.onload = function(){
+         $('.custom-file-input').on('change', function (event) {
+            $(this).next('.custom-file-label').html(event.target.files[0].name);
+        })
+    }
+</script>

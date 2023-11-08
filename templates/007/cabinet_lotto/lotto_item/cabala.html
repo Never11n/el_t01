@@ -1,0 +1,13 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+{% get_static_prefix as STATIC_PREFIX %}
+<div>
+    <div class="ui-game-info-header">
+        <span class="ui-game-info-header__text">{% trans "Сashier's Сheck" %}</span>
+{#        <span class="ui-game-info-header__number">3</span>#}
+    </div>
+    <div class="ui-game-card-count">
+        <img class="js-pic_result ui-prevent-user" src="/{{ ticket.img_06 }}">
+    </div>
+</div>

@@ -1,0 +1,149 @@
+{% load i18n %}
+<div class="header-top">
+    <div class="container">
+        <div class="row">
+            <div class="header-top__inner">
+                {% if BOOL_BLOCK_SITES %}
+                <a href="" class="header-top__link header-top__sites js-header-top__sites-select">
+                    <div class="header-top__link-text">
+                        {% trans "Сайты" %}
+                    </div>
+                    <i class="fa fa-long-arrow-down header-top__link-text-arrow"></i>
+                </a>
+                {% endif %}
+                <a href="" class="header-top__link header-top__city js-header-top__country-select">
+                    <div class="header-top__link-text">
+                        {% trans name_region_2 %}
+                    </div>
+                    <i class="fa fa-long-arrow-down header-top__link-text-arrow"></i>
+                </a>
+                <a href="" class="header-top__link js-header-top__lang-select header-top__lang">
+                    <div class="header-top__link-text js-header-top__lang-text">
+                        {% if lang == 'ua' %}
+                        {% trans 'Українська' %}
+                        {% elif lang == 'be' %}
+                        {% trans 'Беларуская' %}
+                        {% elif lang == 'kk' %}
+                        {% trans 'Kazakh' %}
+                        {% elif lang == 'en' %}
+                        {% trans 'English' %}
+                        {% elif lang == 'de' %}
+                        {% trans 'Deutsch' %}
+                        {% else %}
+                        {% trans 'Русский' %}
+                        {% endif %}
+                    </div>
+                    <i class="fa fa-long-arrow-down header-top__link-text-arrow"></i>
+                </a>
+                <div class="header-top__date-text js-header-top__date-text">Пн, 1 Янв, 00:00</div>
+            </div>
+            <div class="header-top__inner_right">
+                {% if me.profile.specialization.verbal == 'istec'%}
+                    {# href="{% url 'isk_new' %}" class="js-header-middle__isk_new header-top__link-right" #}
+                    <a href="" class="js-header-middle__isk_new header-top__link-right">
+                        <span class="header-top__sprite-tender"></span>
+                        <div class="header-top__link-text">
+                            {% trans 'Подать иск' %}
+                        </div>
+                    </a>
+                {% endif %}
+                {% if me.profile.specialization.verbal == 'arbitr_sydja'%}
+                {% endif %}
+                {% if me.profile.specialization.verbal == 'urist'%}
+                {% endif %}
+
+                {% if me.profile.specialization.verbal == 'istec'%}
+                    {# href="{% url 'advice_new' %}" #}
+                    <a href="" class="js-header-middle__advice_new header-top__link-right">
+                        <span class="header-top__sprite-ad"></span>
+                        <div class="header-top__link-text">
+                            {% trans 'Юридические услуги' %}
+                        </div>
+                    </a>
+                {% endif %}
+                {% if me.profile.specialization.verbal == 'arbitr_sydja'%}
+                {% endif %}
+                {% if me.profile.specialization.verbal == 'urist'%}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="header-sites collapse">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="header-country__heading">
+                    {% trans 'Выберите сайт' %}
+                </div>
+            </div>
+        </div>
+        <div class="header-country__countrys row">
+            {% include 'layout/sites.html' %}
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="header-city__heading_half">
+                    {% if False %}
+                    {% trans 'Ждём Ваших' %} <a href="{% url 'feedback' %}" class="footer__link">{% trans 'предложений' %}</a> {% trans 'по работе сайта в неуказанных выше странах.' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="header-country collapse">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="header-country__heading">
+                    {% trans 'Выберите страну' %}
+                </div>
+            </div>
+        </div>
+        <div class="header-country__countrys row">
+            {% include 'layout/country.html' %}
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="header-city__heading_half">
+                    {% trans 'Ждём Ваших' %}
+                    <a href="{% url 'feedback' %}" class="footer__link">{% trans 'предложений' %}</a>
+                    {% trans 'по работе сайта в неуказанных выше странах.' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="{% url 'set_language' %}" id="lang_form" method="POST" class="hide">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="">
+    <input name="language" type="hidden" value="">
+    <input type="submit">
+</form>
+
+<div class="header-lang collapse">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="header-lang__heading">
+                    {% trans 'Выберите язык' %}
+                </div>
+            </div>
+        </div>
+        <div class="header-lang__cities row">
+            {% for Item_lang in site_lang %}
+            <div class="header-lang__lang-item col-lg-12">
+                <a href="/setlang/{{ Item_lang.lang_code }}"
+                   class="header-lang__lang-item-link js-header-lang__lang-item-link {% if lang == Item_lang.lang_code %}header-lang__lang-item-link--active{% endif %}"
+                   onclick="change_lang('{{ Item_lang.lang_code }}')">
+                    <i class="header-lang__lang-item-icon fa fa-long-arrow-right"></i>
+                    {#{ Item_lang.lang_name }} - {% trans Item_lang.lang_name %#}
+                    {{ Item_lang.lang_name }}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html {% if lang == "he" or lang == "ar" %}dir="rtl"{% endif %}>
+{#<html>#}
+<head>
+    <title>{{ PAGE_TITLE }}</title>
+    {% for item_head in l_head_list %}
+        {% include item_head %}
+    {% endfor %}
+</head>
+
+<body>
+{% csrf_token %}
+<!-- preloader area start -->
+<div class="preloader" id="preloader">
+    <div class="loader loader-1">
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
+    </div>
+</div>
+<!-- preloader area end -->
+
+{% for item_header in l_header_list %}
+    {% include item_header %}
+{% endfor %}
+
+{% block layoutbody %}
+{% endblock %}
+
+{% for item_footer in l_footer_list %}
+    {% include item_footer %}
+{% endfor %}
+
+<!-- Back to Top Start -->
+<div class="bottomtotop">
+    <i class="fas fa-chevron-right"></i>
+</div>
+<!-- Back to Top End -->
+
+{% for item_script in l_script_list %}
+    {% include item_script %}
+{% endfor %}
+
+{% for item_modal in l_modal_list %}
+    {% include item_modal %}
+{% endfor %}
+
+</body>
+</html>

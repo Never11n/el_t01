@@ -1,0 +1,48 @@
+{% load static %}
+{% load i18n %}
+<table class="table table-bordered">
+    <tbody>
+    <tr class="{% if item_ticket.answ_tabl.c_h.win == 'win' %} table-success {% endif %}">
+        <td>{{ item_ticket.answ_tabl.c_h.win }}</td>
+        <td>HOUSE</td>
+        <td>{{ item_ticket.answ_tabl.c_h.kard01.txt }}={{ item_ticket.answ_tabl.c_h.kard01.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c_h.kard02.txt }}={{ item_ticket.answ_tabl.c_h.kard02.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c_h.val }}</td>
+    </tr>
+    <tr class="{% if item_ticket.answ_tabl.c01.win == 'win' %} table-success {% endif %}">
+        <td>{{ item_ticket.answ_tabl.c01.win }}</td>
+        <td>K 1</td>
+        <td>{{ item_ticket.answ_tabl.c01.kard01.txt }}={{ item_ticket.answ_tabl.c01.kard01.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c01.kard02.txt }}={{ item_ticket.answ_tabl.c01.kard02.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c01.val }}</td>
+    </tr>
+    <tr class="{% if item_ticket.answ_tabl.c02.win == 'win' %} table-success {% endif %}">
+        <td>{{ item_ticket.answ_tabl.c02.win }}</td>
+        <td>K 2</td>
+        <td>{{ item_ticket.answ_tabl.c02.kard01.txt }}={{ item_ticket.answ_tabl.c02.kard01.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c02.kard02.txt }}={{ item_ticket.answ_tabl.c02.kard02.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c02.val }}</td>
+    </tr>
+    <tr class="{% if item_ticket.answ_tabl.c03.win == 'win' %} table-success {% endif %}">
+        <td>{{ item_ticket.answ_tabl.c03.win }}</td>
+        <td>K 3</td>
+        <td>{{ item_ticket.answ_tabl.c03.kard01.txt }}={{ item_ticket.answ_tabl.c03.kard01.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c03.kard02.txt }}={{ item_ticket.answ_tabl.c03.kard02.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c03.val }}</td>
+    </tr>
+    <tr class="{% if item_ticket.answ_tabl.c04.win == 'win' %} table-success {% endif %}">
+        <td>{{ item_ticket.answ_tabl.c04.win }}</td>
+        <td>K 4</td>
+        <td>{{ item_ticket.answ_tabl.c04.kard01.txt }}={{ item_ticket.answ_tabl.c04.kard01.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c04.kard02.txt }}={{ item_ticket.answ_tabl.c04.kard02.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c04.val }}</td>
+    </tr>
+    <tr class="{% if item_ticket.answ_tabl.c05.win == 'win' %} table-success {% endif %}">
+        <td>{{ item_ticket.answ_tabl.c05.win }}</td>
+        <td>K 4</td>
+        <td>{{ item_ticket.answ_tabl.c05.kard01.txt }}={{ item_ticket.answ_tabl.c05.kard01.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c05.kard02.txt }}={{ item_ticket.answ_tabl.c05.kard02.num }}</td>
+        <td>{{ item_ticket.answ_tabl.c05.val }}</td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choise</title>
+    <link rel="stylesheet" href="{% static 'main/el_t001/css/choise.css' %}" type="text/css">
+</head>
+
+<body>
+    <div class="items">
+        <div class="row1">
+            <a href="{% url 'auth' img_id=1 %}"><img src="{% static 'main/el_t001/img/7-7-2.png' %}" alt="button"></a>
+            <a href="{% url 'auth' img_id=2 %}"><img src="{% static 'main/el_t001/img/7-3-2.png' %}" alt="button"></a>
+        </div>
+
+        <div class="row2">
+            <a href="{% url 'auth' img_id=3 %}"><img src="{% static 'main/el_t001/img/7-1-2.png' %}" alt="button"></a>
+            <a href="{% url 'auth' img_id=4 %}"><img src="{% static 'main/el_t001/img/7-2-2.png' %}" alt="button"></a>
+        </div>
+
+        <div class="row3">
+            <a href="{% url 'auth' img_id=5 %}"><img src="{% static 'main/el_t001/img/7-4-2.png' %}" alt="button"></a>
+            <a href="{% url 'auth' img_id=6 %}"><img src="{% static 'main/el_t001/img/7-5-2.png' %}" alt="button"></a>
+        </div>
+
+        <div class="row4">
+            <a href="{% url 'auth' img_id=7 %}"><img src="{% static 'main/el_t001/img/7-6-2.png' %}" alt="button"></a>
+        </div>
+    </div>
+</body>
+
+</html>

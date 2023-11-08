@@ -1,0 +1,91 @@
+{% load static %}
+{% load i18n %}
+<!-- SignIn Area Start -->
+<div class="modal fade login-modal sign-in" id="signin" tabindex="-1" role="dialog" aria-labelledby="signin"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="{% trans 'Close' %}"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-body">
+                <div class="logo-area">
+                    <img class="logo" src="{% static 'main/002/images/logo.png' %}" alt="">
+                </div>
+                <div class="header-area">
+                    <h4 class="title">{% trans 'Great to have you back!' %}</h4>
+                    <p class="sub-title">{% trans 'Enter your details below.' %}</p>
+                </div>
+                <div class="form-area">
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="input-name">{% trans 'Name' %}*</label>
+                            <input type="text" class="input-field"
+                                   id="input-name"
+                                   name="f_name"
+                                   placeholder="{% trans 'Enter your Name' %}"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="input-email">{% trans 'Email' %}*</label>
+                            <input type="email" class="input-field"
+                                   id="input-email"
+                                   name="f_email"
+                                   placeholder="{% trans 'Enter your Email' %}"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="input-password">{% trans 'Password' %}*</label>
+                            <input type="password" class="input-field"
+                                   id="input-password"
+                                   name="f_password"
+                                   placeholder="{% trans 'Enter your password' %}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-con-password">{% trans 'confirm password' %}**</label>
+                            <input type="password" class="input-field"
+                                   id="input-con-password"
+                                   name="f_re_password"
+                                   placeholder="{% trans 'Enter your Confirm Password' %}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-phone">{% trans 'Phone' %}*</label>
+                            <input type="text" class="input-field"
+                                   id="input-phone"
+                                   name="f_phone"
+                                   placeholder="{% trans 'Enter your phone number' %}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-id">{% trans 'Id' %}*</label>
+                            <input type="text" class="input-field"
+                                   id="input-id"
+                                   name="f_id"
+                                   placeholder="{% trans 'Enter your Id' %}">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="check-group">
+                                <input type="checkbox" class="check-box-field"
+                                       id="input-terms"
+                                       name="f_terms"
+                                       checked>
+                                <label for="input-terms">
+                                    {% trans 'I agree with' %} <a href="{% url 'rules' %}" target="_blank">{% trans 'terms and Conditions' %}</a> {% trans 'and' %} <a href="#">{% trans 'privacy policy' %}</a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+{#                            <button type="submit" class="mybtn1">{% trans 'JOIN US' %}</button>#}
+                            <a href="#"
+                               class="mybtn1"
+                               onclick="btn_modal_register()"
+                               >
+                               {% trans 'JOIN US' %}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SignIn Area End -->

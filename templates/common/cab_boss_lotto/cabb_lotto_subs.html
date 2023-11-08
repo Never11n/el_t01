@@ -1,0 +1,246 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'Lotto Subscription List' %}</h5>
+                </div>
+                {% if l_find %}
+                    {% include l_find %}
+                {% endif %}
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr>
+                                        <th>{% trans '#' %}</th>
+                                        <th>{% trans 'Id' %}</th>
+                                        <th>{% trans 'Active' %}</th>
+                                        <th>{% trans 'Creation date' %}</th>
+                                        <th>{% trans 'Paid date' %}</th>
+                                        <th>{% trans 'User' %}</th>
+                                        <th>{% trans 'Ticket' %}</th>
+                                        <th>{% trans 'Count games' %}</th>
+                                        <th>{% trans 'Subscription cost' %}</th>
+                                        <th>{% trans 'Auto payment card info' %}</th>
+                                        <th>{% trans 'Ticket info' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for sub in list_subscription %}
+                                        <tr>
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1"
+                                                        onclick="btn_lotto_subs_enable({{ sub.id }})">
+                                                        {% if sub.enabled %}
+                                                            {% trans 'Disable' %}
+                                                        {% else %}
+                                                            {% trans 'Enable' %}
+                                                        {% endif %}
+                                                </button>
+                                            </td>
+                                            <td>{{ sub.id }}</td>
+                                            <td>
+                                                {% if sub.enabled %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ sub.date_created|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ sub.date_paid|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ sub.user_owner.profile.name }}<br>
+                                                {{ sub.user_owner }}<br>
+                                                {{ sub.user_owner.profile.mobile }}<br>
+                                            </td>
+                                            <td>
+                                                {{ sub.ticket_type.caption }}<br>
+                                                {% if sub.automatic %}
+                                                    {% trans 'Automatic' %}
+                                                {% else %}
+                                                    {% trans 'Same ticket' %}
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if sub.infinity %}
+                                                    {% trans 'Each next game' %}
+                                                {% else %}
+                                                    {{ sub.games_count }}
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ sub.subscription_cost }}</td>
+                                            <td>
+                                                {% if sub.u_paycard %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                    <br>{% trans 'token:' %} {{ sub.u_paycard.tranzila_tk }}
+                                                    <br>{% trans 'last 4:' %} {{ sub.u_paycard.ccno }}
+                                                    <br>{% trans 'Exp. month:' %} {{ sub.u_paycard.expmonth }}
+                                                    <br>{% trans 'Exp. year:' %} {{ sub.u_paycard.expyear }}
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ sub.ticket_info }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% if l_pagination %}
+                            {% include l_pagination %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    function btn_lotto_subs_enable(l_subs_id) {
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        subs_id: l_subs_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb_lotto_subs_enable/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                // 'OK my boss, I didn\'t think you were so greedy'
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+    function btn_subscription_form(l_form_type, l_id) {
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                f_id: l_id,
+                f_form_type: l_form_type,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_subs_form/",
+            success: function (res) {
+                $("#id_ResAjax_cabb_form").html(res);
+                return $('.js-modal__cabb_form').modal('show');
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+    function btn_subs_act(l_id, l_act) {
+        {#$("#id_ResAjax_cabb_form").html("");#}
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        f_id: l_id,
+                        f_act: l_act,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb_subs_act/",
+                    success: function (res) {
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                        {#$("#id_ResAjax_cabb_form").html(res);#}
+                        {#return $('.js-modal__cabb_form').modal('show');#}
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occured, please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+
+            } else {
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+</script>

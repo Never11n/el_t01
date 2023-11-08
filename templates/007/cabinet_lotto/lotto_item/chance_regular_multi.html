@@ -1,0 +1,107 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+{% get_static_prefix as STATIC_PREFIX %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">{% trans 'Your choosen cards' %}</span>
+            <span class="ui-game-info-header__number">1</span>
+        </div>
+        <div class="ui-game-single-cards">
+            {% if lotto_ticket_info.card_spades  %}
+            <div data-card-num=1 data-card-suit="spades"
+                 class="ui-game-single-card  ui-game-card-suit ui-game-card-suit__spades
+                    {% if lotto_ticket_info.card_spades.0 ==  winning_cards.card_spades %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span class="js-game-single-card_text">{{ lotto_ticket_info.card_spades.0 }}</span>
+            </div>
+            {% else %}
+            <div data-card-num=3 data-card-suit="spades"
+                 class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                <img class="js-game-single-card_img"
+                     src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg" alt="{% trans 'spades' %}">
+            </div>
+            {% endif %}
+            {% if lotto_ticket_info.card_hearts %}
+            <div data-card-num=2 data-card-suit="hearts"
+                 class="ui-game-single-card ui-game-card-suit ui-game-card-suit__hearts
+                    {% if lotto_ticket_info.card_hearts.0 ==  winning_cards.card_hearts %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span class="js-game-single-card_text">{{ lotto_ticket_info.card_hearts.0 }}</span>
+            </div>
+            {% else %}
+            <div data-card-num=3 data-card-suit="hearts" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                <img class="js-game-single-card_img"
+                        src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg" alt="{% trans 'hearts' %}">
+            </div>
+            {% endif %}
+            {% if lotto_ticket_info.card_diamonds %}
+            <div data-card-num=2 data-card-suit="diamonds"
+                 class="ui-game-single-card ui-game-card-suit ui-game-card-suit__diamonds
+                    {% if lotto_ticket_info.card_diamonds.0 ==  winning_cards.card_diamonds %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span class="js-game-single-card_text">{{ lotto_ticket_info.card_diamonds.0 }}</span>
+            </div>
+            {% else %}
+            <div data-card-num=3 data-card-suit="diamonds" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                <img class="js-game-single-card_img"
+                      src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="{% trans 'diamonds' %}">
+            </div>
+            {% endif %}
+            {% if lotto_ticket_info.card_clubs %}
+            <div data-card-num=2 data-card-suit="clubs"
+                 class="ui-game-single-card ui-game-card-suit ui-game-card-suit__clubs
+                    {% if lotto_ticket_info.card_clubs.0 ==  winning_cards.card_clubs %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span class="js-game-single-card_text">{{ lotto_ticket_info.card_clubs.0 }}</span>
+            </div>
+            {% else %}
+            <div data-card-num=4 data-card-suit="clubs" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                <img class="js-game-single-card_img"
+                     src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="{% trans 'clubs' %}">
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% if winning_cards %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">
+                {% trans 'Lottery number' %}: {{ ticket.answ_lottery_number }}<br>
+                {% trans 'Draw date' %}: {{ draw_date|date:"d.m.Y H:i:s" }}<br>
+                {% trans 'Winning cards' %}:
+            </span>
+            <span class="ui-game-info-header__number">2</span>
+        </div>
+        <div class="ui-game-single-cards">
+            <div data-card-num=1 data-card-suit="spades"
+                 class="ui-game-single-card js-ui-game-single-card ui-game-card-suit ui-game-card-suit__spades
+                    {% if lotto_ticket_info.card_spades.0 ==  winning_cards.card_spades %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span class="js-game-single-card_text">{{ winning_cards.card_spades }}</span>
+            </div>
+            <div data-card-num=2 data-card-suit="hearts"
+                 class="ui-game-single-card js-ui-game-single-card ui-game-card-suit ui-game-card-suit__hearts
+                    {% if lotto_ticket_info.card_hearts.0 ==  winning_cards.card_hearts %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span class="js-game-single-card_text">{{ winning_cards.card_hearts }}</span>
+            </div>
+            <div data-card-num=3 data-card-suit="diamonds"
+                 class="ui-game-single-card js-ui-game-single-card ui-game-card-suit ui-game-card-suit__diamonds
+                    {% if lotto_ticket_info.card_diamonds.0 ==  winning_cards.card_diamonds %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span class="js-game-single-card_text">{{ winning_cards.card_diamonds }}</span>
+            </div>
+            <div data-card-num=4 data-card-suit="clubs"
+                 class="ui-game-single-card js-ui-game-single-card ui-game-card-suit ui-game-card-suit__clubs
+                    {% if lotto_ticket_info.card_clubs.0 ==  winning_cards.card_clubs %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span  class="js-game-single-card_text">{{ winning_cards.card_clubs }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

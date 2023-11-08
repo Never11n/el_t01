@@ -1,0 +1,120 @@
+{% load static %}
+{% load i18n %}
+<div class="card-header ">
+    <h3 class="card-title text-secondary">HOUSE (WIN = {{ item_ticket.answ_tabl.c_h.win }})</h3>
+</div>
+<table class="table table-bordered">
+    <tbody>
+    <tr class="text-center">
+        <td class="{% if item_ticket.answ_tabl.c_h.win == item_ticket.answ_tabl.c_h.ch_01.num %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_h.ch_01.num }}{# <br>{{ item_ticket.answ_tabl.c_h.ch_01.txt }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_01.val }}#}{# <br>{{ item_ticket.answ_tabl.c_h.ch_01.win }} #}</td>
+        <td class="{% if item_ticket.answ_tabl.c_h.win == item_ticket.answ_tabl.c_h.ch_02.num %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_h.ch_02.num }}{# <br>{{ item_ticket.answ_tabl.c_h.ch_02.txt }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_02.val }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_02.win }} #}</td>
+        <td class="{% if item_ticket.answ_tabl.c_h.win == item_ticket.answ_tabl.c_h.ch_03.num %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_h.ch_03.num }}{# <br>{{ item_ticket.answ_tabl.c_h.ch_03.txt }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_03.val }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_03.win }} #}</td>
+        <td class="{% if item_ticket.answ_tabl.c_h.win == item_ticket.answ_tabl.c_h.ch_04.num %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_h.ch_04.num }}{# <br>{{ item_ticket.answ_tabl.c_h.ch_04.txt }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_04.val }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_04.win }} #}</td>
+        <td class="{% if item_ticket.answ_tabl.c_h.win == item_ticket.answ_tabl.c_h.ch_05.num %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_h.ch_05.num }}{# <br>{{ item_ticket.answ_tabl.c_h.ch_05.txt }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_05.val }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_05.win }} #}</td>
+        <td class="{% if item_ticket.answ_tabl.c_h.win == item_ticket.answ_tabl.c_h.ch_06.num %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_h.ch_06.num }}{# <br>{{ item_ticket.answ_tabl.c_h.ch_06.txt }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_06.val }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_06.win }} #}</td>
+        <td class="{% if item_ticket.answ_tabl.c_h.win == item_ticket.answ_tabl.c_h.ch_07.num %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_h.ch_07.num }}{# <br>{{ item_ticket.answ_tabl.c_h.ch_07.txt }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_07.val }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_07.win }} #}</td>
+        <td class="{% if item_ticket.answ_tabl.c_h.win == item_ticket.answ_tabl.c_h.ch_08.num %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_h.ch_08.num }}{# <br>{{ item_ticket.answ_tabl.c_h.ch_08.txt }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_08.val }} #}{# <br>{{ item_ticket.answ_tabl.c_h.ch_08.win }} #}</td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="table table-bordered text-center">
+    <tbody>
+    <tr>
+        <td class="{% if item_ticket.answ_tabl.c01.w_l == 'WIN' %} table-success {% endif %}">
+            {#            1#}
+            {{ item_ticket.answ_tabl.c01.num }}
+            {# <br>{{ item_ticket.answ_tabl.c01.txt }}#}
+            <br>{{ item_ticket.answ_tabl.c01.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c01.w_l }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c02.w_l == 'WIN' %} table-success {% endif %}">
+            {#            2#}
+            {{ item_ticket.answ_tabl.c02.num }}
+            {# <br>{{ item_ticket.answ_tabl.c02.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c02.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c02.w_l }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c03.w_l == 'WIN' %} table-success {% endif %}">
+            {#            3#}
+            {{ item_ticket.answ_tabl.c03.num }}
+            {# <br>{{ item_ticket.answ_tabl.c03.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c03.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c03.w_l }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c04.w_l == 'WIN' %} table-success {% endif %}">
+            {#            4#}
+            {{ item_ticket.answ_tabl.c04.num }}
+            {# <br>{{ item_ticket.answ_tabl.c04.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c04.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c04.w_l }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c05.w_l == 'WIN' %} table-success {% endif %}">
+            {#            5#}
+            {{ item_ticket.answ_tabl.c05.num }}
+            {# <br>{{ item_ticket.answ_tabl.c05.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c05.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c05.w_l }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c06.w_l == 'WIN' %} table-success {% endif %}">
+            {#            6#}
+            {{ item_ticket.answ_tabl.c06.num }}
+            {# <br>{{ item_ticket.answ_tabl.c06.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c06.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c06.w_l }}#}
+        </td>
+    </tr>
+    <tr>
+        <td class="{% if item_ticket.answ_tabl.c07.w_l == 'WIN' %} table-success {% endif %}">
+            {#            7#}
+            {{ item_ticket.answ_tabl.c07.num }}
+            {# <br>{{ item_ticket.answ_tabl.c07.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c07.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c07.w_l }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c08.w_l == 'WIN' %} table-success {% endif %}">
+            {#            8#}
+            {{ item_ticket.answ_tabl.c08.num }}
+            {# <br>{{ item_ticket.answ_tabl.c08.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c08.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c08.w_l }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c09.w_l == 'WIN' %} table-success {% endif %}">
+            {#            9#}
+            {{ item_ticket.answ_tabl.c09.num }}
+            {# <br>{{ item_ticket.answ_tabl.c09.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c09.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c09.w_l }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c10.w_l == 'WIN' %} table-success {% endif %}">
+            {#            10#}
+            {{ item_ticket.answ_tabl.c10.num }}
+            {# <br>{{ item_ticket.answ_tabl.c10.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c10.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c10.w_l }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c11.w_l == 'WIN' %} table-success {% endif %}">
+            {#            11#}
+            {{ item_ticket.answ_tabl.c11.num }}
+            {# <br>{{ item_ticket.answ_tabl.c11.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c11.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c11.w_l }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c12.w_l == 'WIN' %} table-success {% endif %}">
+            {#            12#}
+            {{ item_ticket.answ_tabl.c12.num }}
+            {# <br>{{ item_ticket.answ_tabl.c12.txt }} #}
+            <br>{{ item_ticket.answ_tabl.c12.win }}
+            {#            <br>{{ item_ticket.answ_tabl.c12.w_l }}#}
+        </td>
+    </tr>
+    </tbody>
+</table>

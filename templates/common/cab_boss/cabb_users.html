@@ -1,0 +1,473 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">
+                        {% trans 'List Users' %} {% if m_addTitle %}({{ m_addTitle }}){% endif %}
+                    </h5>
+                </div>
+                {% if l_find %}
+                {% include l_find %}
+                {% endif %}
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr>
+                                        {% if not without_buttons %}<th></th>{% endif %}
+                                        <th>{% trans 'SMS' %}</th>
+                                        <th>{% trans 'Limit' %}</th>
+                                        <th>{% trans 'Active' %}</th>
+                                        <th>{% trans 'N' %}</th>
+                                        <th>{% trans 'Mobile' %}</th>
+                                        <th>{% trans 'User' %}</th>
+                                        <th>{% trans 'Balance' %}</th>
+                                        <th>{% trans 'Joined' %}</th>
+                                        <th>{% trans 'Confirmed' %}</th>
+                                        <th>{% trans 'Mail confirmed' %}</th>
+                                        <th>{% trans 'Mobile confirmed ' %}</th>
+                                        <th>{% trans 'Doc' %}</th>
+                                        <th>{% trans 'Tickets' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% set_mem mem_line "0" as mem_line %}
+                                    {% for ItemUser in list_users %}
+                                    {% ifchanged ItemUser.date_joined|date:"Ymd" %}
+                                    {% if mem_line > 0 %}
+                                        <tr>
+                                            <td colspan="17">
+                                                {{ values_by_dates|get_values_from_date:mem_date_prev }}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                    {% endifchanged %}
+                                    {% set_mem mem_line 1 as mem_line %}
+                                    {% set_mem_date mem_date_prev ItemUser.date_joined|date:"d.m.Y H:i:s" as mem_date_prev %}
+                                    <tr class="js_tic_row
+                                            {% if ItemUser.answ_win %}
+                                                table-success
+                                            {% else %}
+                                                {% if Item_ticket.id == me.profile.t_last_show %} table-active {% else %} table-warning {% endif %}
+                                            {% endif %}"
+                                    >
+                                         {% if not without_buttons %}<td>
+                                            {% if me.profile.settings.permit_cabb.user_edit %}
+                                            <button type="button"
+                                                    class="btn btn-info mybtn_cabb1"
+                                                    onclick="btn_cabb_form(
+                                                                    '{{ ItemUser.id }}',
+                                                                    'user_edit'
+                                                                    )">
+                                                <i class="fas fa-donate"></i>
+                                                {% trans 'USER' %}
+                                            </button>
+                                            {% endif %}
+                                            <a href="{% url 'cabb_user_payoperation' ItemUser.user.id %}"
+                                               target="_blank"
+                                               class="btn btn-info mybtn_cabb1">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                            {% if me.profile.settings.permit_cabb.add_money %}
+                                            <button type="button"
+                                                    class="btn btn-info mybtn_cabb1"
+                                                    onclick="btn_user_balance_oparation(
+                                                                    '{{ ItemUser.id }}'
+                                                                    )">
+                                                <i class="fas fa-donate"></i>
+                                            </button>
+                                            {% endif %}
+                                             <a href="{% url 'cabb_user_tickets' ItemUser.user.id %}"
+                                                target="_blank"
+                                                class="btn btn-info mybtn_cabb1">
+                                                 <i class="fas fa-dice"></i>
+                                             </a>
+                                             <a href="{% url 'cabb_user_tickets_and_balops' ItemUser.user.id %}"
+                                                target="_blank"
+                                                class="btn btn-info mybtn_cabb1">
+                                                 <i class="fas fa-dice"> 2 </i>
+                                             </a>
+                                             {% if me.profile.settings.permit_cabb.user_limit %}
+                                            <button type="button"
+                                                    class="btn btn-info mybtn_cabb1"
+                                                    onclick="btn_user_limit(
+                                                                    '{{ ItemUser.id }}'
+                                                                    )">
+                                                {% if ItemUser.max_sum_m >= 0 %}
+                                                {% trans 'Limit' %}
+                                                {% else %}
+                                                {% trans 'UNLimit' %}
+                                                {% endif %}
+                                            </button>
+                                            {% endif %}
+                                        </td> {% endif %}
+                                        <td>
+                                            {% if ItemUser.reklama %}
+                                                <i class="icon far fa-check-circle text-green"></i>
+                                            {% else %}
+                                                <i class="icon fas fa-ban text-red"></i>
+                                            {% endif %}
+                                            {% if me.profile.settings.permit_cabb.user_reclama %}
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1"
+                                                        onclick="btn_user_sms(
+                                                                '{{ ItemUser.id }}'
+                                                                )">
+                                                    {% if ItemUser.reklama %}
+                                                        {% trans 'Off' %}
+                                                    {% else %}
+                                                        {% trans 'On' %}
+                                                    {% endif %}
+                                                </button>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if ItemUser.max_ticket_m > 0 %}
+                                            {{ ItemUser.max_ticket_m }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if ItemUser.user.is_active %}
+                                            <i class="icon far fa-check-circle text-green"></i>
+                                            {% else %}
+                                            <i class="icon fas fa-ban text-red"></i>
+                                            {% endif %}
+                                            {% if me.profile.settings.permit_cabb.user_block %}
+                                            <button type="button"
+                                                    class="btn btn-info mybtn_cabb1"
+                                                    onclick="btn_user_block(
+                                                                    '{{ ItemUser.id }}'
+                                                                    )">
+                                                {% if ItemUser.user.is_active %}
+                                                {% trans 'BLOCK' %}
+                                                {% else %}
+                                                {% trans 'UNBLOCK' %}
+                                                {% endif %}
+                                            </button>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ ItemUser.id }}</td>
+                                        <td>
+                                            <a href="https://wa.me/+972{{ ItemUser.mobile }}"
+                                               target="_blank"
+                                               style="text-decoration:none;"
+                                               role="link"
+                                               aria-label="link to whatsapp">
+                                                <img src="{% static 'img/whatsapp.png' %}"
+                                                     height="25"
+                                                     alt="link to whatsapp">
+                                            </a>
+                                            {{ ItemUser.mobile }}
+                                        </td>
+                                        <td>
+                                            {{ ItemUser.user }}<br>
+                                            {{ ItemUser.name }}<br>
+                                            {% trans 'City' %}:{{ ItemUser.city }}<br>
+                                            {% trans 'Birthday' %}: {{ ItemUser.date_birthday|date:"d.m.Y" }}<br>
+                                            {% if ItemUser.settings.ref_blogger_id %}
+                                                {% trans 'from blogger with id' %} {{ ItemUser.settings.ref_blogger_id }}
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ ItemUser.balance }}</td>
+                                        <td>{{ ItemUser.date_joined|date:"d.m.Y H:i:s" }}</td>
+                                        <td class="text-center">
+                                            {% if ItemUser.user_confirmed %}
+                                            <i class="icon far fa-check-circle text-green"></i>
+                                            {% else %}
+                                            <i class="icon fas fa-ban text-red"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            {% if ItemUser.mail_confirmed %}
+                                            <i class="icon far fa-check-circle text-green"></i>
+                                            {% else %}
+                                            <i class="icon fas fa-ban text-red"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            {% if ItemUser.mobile_confirmed %}
+                                            <i class="icon far fa-check-circle text-green"></i>
+                                            {% else %}
+                                            <i class="icon fas fa-ban text-red"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ ItemUser.i_doc }}</td>
+                                        <td>{{ ItemUser.num_tickets }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans 'SMS' %}</th>
+                                        <th>{% trans 'Limit' %}</th>
+                                        <th>{% trans 'Active' %}</th>
+                                        <th>{% trans 'N' %}</th>
+                                        <th>{% trans 'Mobile' %}</th>
+                                        <th>{% trans 'User' %}</th>
+                                        <th>{% trans 'Balance' %}</th>
+                                        <th>{% trans 'Joined' %}</th>
+                                        <th>{% trans 'Confirmed' %}</th>
+                                        <th>{% trans 'Mail confirmed' %}</th>
+                                        <th>{% trans 'Mobile confirmed ' %}</th>
+                                        <th>{% trans 'Doc' %}</th>
+                                        <th>{% trans 'Tickets' %}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        {% if l_pagination %}
+                            {% include l_pagination %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    function btn_cabb_form(l_user_id, l_form_name) {
+        let m_url = "/cabb-user-form/";
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                f_user_id: l_user_id,
+                f_form_name: l_form_name,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: m_url,
+            success: function (res) {
+                if (res.AnswerCod === '01') {
+                    $("#id_ResAjax_cabb_form").html(res.html);
+                    return $('.js-modal__cabb_form').modal('show');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+
+    function btn_user_balance_oparation(l_user_id) {
+        console.log("btn_user_balance_oparation");
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                f_user_id: l_user_id,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_user_balance_oparation/",
+            success: function (res) {
+                $("#id_ResAjax_cabb_form").html(res);
+                return $('.js-modal__cabb_form').modal('show');
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occurred while creating the user profile, please try again later"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+
+    function btn_user_limit(l_user_id) {
+        console.log("btn_user_limit");
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        user_id: l_user_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb_user_limit/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+
+    function btn_user_sms(l_user_id) {
+        console.log("btn_user_sms");
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        user_id: l_user_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb_user_sms/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+
+    function btn_user_block(l_user_id) {
+        console.log("btn_user_block");
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        user_id: l_user_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb_user_block/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                // 'OK my boss, I didn\'t think you were so greedy'
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+</script>

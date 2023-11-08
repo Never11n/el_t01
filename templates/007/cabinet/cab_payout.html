@@ -1,0 +1,126 @@
+{% load static %}
+{% load i18n %}
+<section class="main-text-right-rtf">
+    <h4 class="main-box__title">
+        {% trans 'Payout' %}
+    </h4>
+
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-list__item">
+            {% trans 'Home' %}
+        </li>
+        <li class="breadcrumb-list__item">
+            <span class="breadcrumb-list__icon-wrap">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+        </li>
+        <li class="breadcrumb-list__item">
+            {% trans 'Payout' %}
+        </li>
+    </ul>
+
+    <h5 class="cab-payout-title">
+        {% trans 'Withdraw Funds from your balance to the bank account.' %}
+    </h5>
+    <p class="cab-payout-sub-title hide-on-mob">
+        {% trans 'Payout Bank Credentials' %}
+    </p>
+    <form class="cab-form cab-form-no-border" id="id_form_payout" action="{% url 'cab_payout_save' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" id="id_balance" value="{{ me.profile.balance }}"/>
+
+        <div class="row m-b-30 align-items-center">
+            <div class="col-lg-4 col-md-5 col-5">
+                <p class="cap-payout-item-name">
+                    {% trans 'Account Name' %}
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-5 col-7">
+                <input type="text"
+                       id="id_acc_name"
+                       class="main-form-control"
+                       name="f_acc_name"
+                       placeholder="{% trans 'Full Name' %}"
+                >
+            </div>
+        </div>
+
+        <div class="row m-b-30 align-items-center">
+            <div class="col-lg-4 col-md-5 col-5">
+                <p class="cap-payout-item-name">
+                    {% trans 'Bank' %}
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-5 col-7">
+                <input type="text"
+                       id="id_name_bank"
+                       class="main-form-control"
+                       name="f_name_bank"
+                       placeholder="{% trans 'Bank Name' %}"
+                >
+            </div>
+        </div>
+
+        <div class="row m-b-30 align-items-center">
+            <div class="col-lg-4 col-md-5 col-5">
+                <p class="cap-payout-item-name">
+                    {% trans 'Branch ID' %}
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-5 col-7">
+
+                <input type="text"
+                       id="id_branch"
+                       class="main-form-control"
+                       name="f_branch"
+                       placeholder="{% trans 'Branch ID' %}"
+                >
+            </div>
+        </div>
+
+        <div class="row m-b-30 align-items-center">
+            <div class="col-lg-4 col-md-5 col-5">
+                <p class="cap-payout-item-name">
+                    {% trans 'Account Number' %}
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-5 col-7">
+                <input type="text"
+                       id="id_acc_num"
+                       class="main-form-control"
+                       name="f_acc_num"
+                       placeholder="{% trans 'Account Number' %}"
+                >
+            </div>
+        </div>
+
+        <div class="row m-b-30 align-items-center">
+            <div class="col-lg-4 col-md-5 col-5">
+                <p class="cap-payout-item-name">
+                    {% trans 'Transfer Amount' %}
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-5 col-7">
+                <input type="number"
+                       id="id_amount"
+                       class="main-form-control"
+                       name="f_amount"
+                       min="0"
+                       max="{{ me.profile.balance }}"
+                       placeholder="{% trans 'Insert Transfer Sum' %}"
+                >
+            </div>
+        </div>
+    </form>
+    <div class="mob-text-center">
+        <a id="id_btn_ng"
+           href="##"
+           class="mybtn2 cab-payout-btn"
+           onclick="btn_payout_save()"
+        >
+            {% trans 'Withdraw' %}
+        </a>
+    </div>
+
+</section>
+

@@ -1,0 +1,191 @@
+{% load static %}
+{% load i18n %}
+<div class="card card-default collapsed-card">
+    <div class="card-header">
+        <h3 class="card-title">{% trans 'Search' %}</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body" style="display: none;">
+            <input type="hidden" name="find_type_game_verabl" id='id_find_type_game_verabl' value="{{ menu_tickets_item }}"/>
+            <div class="row">
+{#                {% if l_find_type_game %}#}
+                {% if False %}
+                <input type="hidden" name="find_type_game_list" id='id_find_type_game_list' value=""/>
+                <!-- Dict List -->
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>{% trans 'Type GAME' %}</label>
+                        <select class="duallistbox" multiple="multiple">
+                            {% for item_dict in dict_tickets_type %}
+                                <option selected data-code="{{ item_dict.verbal }}">{% trans item_dict.caption %}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+                {% endif %}
+{#                {% if l_find_date_range %}#}
+                {% if True %}
+                <!-- Date range -->
+                <div class="col-md-12">
+                    <!-- Date range -->
+                    <div class="form-group">
+                        <label>Date range:</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="reservation"
+                                   name="find_date_range"
+                                   value=""
+                            >
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                    <!-- /.form group -->
+
+                    <!-- Date and time range -->
+                    <div class="form-group">
+                        <label>Date and time range:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="reservationtime"
+                                   name="find_date_range"
+                            >
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                    <!-- /.form group -->
+
+                    <!-- Date and time range -->
+                    <div class="form-group">
+                        <label>Date range button:</label>
+
+                        <div class="input-group">
+                            <button type="button" class="btn btn-default float-right" id="daterange-btn">
+                                <i class="far fa-calendar-alt"></i> Date range picker
+                                <i class="fas fa-caret-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.form group -->
+
+                </div>
+                {% endif %}
+                {% if True %}
+                    <!-- Date range -->
+                    <div class="col-md-12">
+                        <!-- Date range -->
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-edit"></i>
+                                  </span>
+                                </div>
+                                <input type="text"
+                                       class="form-control float-right"
+                                       id="id_find_uname"
+                                       name="find_uname"
+                                       value="{{ m_uName }}"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if True %}
+                    <!-- Date range -->
+                    <div class="col-md-12">
+                        <!-- Date range -->
+                        <div class="form-group">
+                            <label>E-mail:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                  </span>
+                                </div>
+                                <input type="text"
+                                       class="form-control float-right"
+                                       id="id_find_uemail"
+                                       name="find_uemail"
+                                       value="{{ m_uEmail }}"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if True %}
+                    <!-- Date range -->
+                    <div class="col-md-12">
+                        <!-- Date range -->
+                        <div class="form-group">
+                            <label>Phone:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-phone"></i>
+                                  </span>
+                                </div>
+                                <input type="text"
+                                       class="form-control float-right"
+                                       id="id_find_uphone"
+                                       name="find_uphone"
+                                       value="{{ m_uPhone }}"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if True %}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{% trans 'Ticket:' %}</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-keyboard"></i>
+                                  </span>
+                                </div>
+                                <input type="text"
+                                       class="form-control float-right"
+                                       id="id_find_uticket"
+                                       name="find_uticket"
+                                       value="{{ m_uTicket }}"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+            <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <div class="input-group-append">
+                        <button type="button"
+                                onclick="btn_form_find()"
+                                class="btn btn-default"
+                        ><i class="fas fa-search"></i>{% trans 'Show' %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

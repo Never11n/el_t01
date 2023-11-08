@@ -1,0 +1,53 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+<section class="main-text-right-rtf">
+    <h4 class="main-box__title">
+        {% trans 'Delete account' %}
+    </h4>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-list__item">
+            {% trans 'Home' %}
+        </li>
+        <li class="breadcrumb-list__item">
+            <span class="breadcrumb-list__icon-wrap">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+        </li>
+        <li class="breadcrumb-list__item">
+            {% trans 'Delete account' %}
+        </li>
+    </ul>
+
+    <div class="col-12 ui-payadd_info">
+        <p>{% trans 'We are sorry to see you leave.' %}</p>
+        <p>{% trans 'After verification the account will be deleted.' %}</p>
+        <div class="text-muted">
+            <div class="row">
+                <p class="text-sm col-md-4">{% trans 'Name' %}
+                    <b class="d-block">{{ me.profile.name }}</b>
+                </p>
+                <p class="text-sm col-md-4">{% trans 'Phone' %}
+                    <b class="d-block">{{ me.profile.mobile }}</b>
+                </p>
+                <p class="text-sm col-md-4">{% trans 'E-mail' %}
+                    <b class="d-block">{{ me.email }}</b>
+                </p>
+            </div>
+        </div>
+    </div>
+    <form id="id_form_contact" action="{% url 'feedback' %}" method="post">
+        {% csrf_token %}
+        <div class="main-form-group">
+                                <textarea hidden class="main-form-control"
+                                          name="f_text"
+                                          rows="4"
+                                          placeholder="{% trans 'Message' %} *">Order for Delete</textarea>
+        </div>
+        <div class="text-center">
+            <button onclick=""
+                    class="mybtn1 mybtn1_hover-animation mybtn-bottom">{% trans 'SUBMIT NOW' %}
+            </button>
+        </div>
+    </form>
+</section>

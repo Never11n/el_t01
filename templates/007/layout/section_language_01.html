@@ -1,0 +1,32 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+{#{% if section_language_dropdown %}#}
+    <!-- Language Dropdown Menu -->
+    <div class="d-none">
+        <form action="{% url 'set_language' %}" id="lang_form" method="POST">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="">
+            <input name="language" type="hidden" value="">
+            <input type="submit">
+        </form>
+    </div>
+    <li class="has-children">
+        <a class="nav-link">
+            {% for Item_lang in site_lang %}
+                {% if lang == Item_lang.lang_code %}
+                    <img class="flag-icon" src="{% static 'img/flags/4x3/' %}{{ Item_lang.lang_code }}.svg">
+                {% endif %}
+            {% endfor %}
+        </a>
+        <ul class="dropdown arrow-top">
+            {% for Item_lang in site_lang %}
+                <li><a class="{% if lang == Item_lang.lang_code %}active{% endif %}"
+                       onclick="change_lang('{{ Item_lang.lang_code }}')">
+                    <img class="flag-icon" src="{% static 'img/flags/4x3/' %}{{ Item_lang.lang_code }}.svg">
+                    {{ Item_lang.lang_name }} - {% trans Item_lang.lang_name %}
+                </a></li>
+            {% endfor %}
+        </ul>
+    </li>
+{#{% endif %}#}

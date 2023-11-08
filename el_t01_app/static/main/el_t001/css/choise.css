@@ -1,0 +1,30 @@
+html,
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.items {
+    height: 100%;
+}
+
+.row1,
+.row2,
+.row3 {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    height: 25vh;
+}
+
+.row4 {
+    display: flex;
+    justify-content: center;
+    height: 25vh;
+}
+
+img {
+    width: 150px;
+    height: 200px;
+}

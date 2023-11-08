@@ -1,0 +1,296 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{ m_form_title }}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div class="form-group clearfix">
+                                                    <div class="icheck-success d-inline">
+                                                        <input type="checkbox"
+                                                               id="id_enabled"
+                                                               class="js__calc_check"
+                                                               name="f_enabled"
+                                                               value="m_enabled"
+                                                               {% if m_form_type == 'new' %}
+                                                                checked
+                                                                {% else %}
+                                                                {% if discount.enabled %}
+                                                                checked
+                                                                {% endif %}
+                                                                {% endif %}
+                                                        >
+                                                        <label for="id_enabled">
+                                                            {% trans 'Enabled' %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_caption">{% trans 'Caption for admins' %}</label>
+                                                <input type="text"
+                                                       name="f_caption"
+                                                       id="id_caption"
+                                                       class="form-control"
+                                                       value="{{ discount.caption }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_caption_user">{% trans 'Caption for users' %}</label>
+                                                <input type="text"
+                                                       name="f_caption_user"
+                                                       id="id_caption_user"
+                                                       class="form-control"
+                                                       value="{{ discount.caption_user }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_verbal">{% trans 'Verbal (only english letters and digits)' %}</label>
+                                                <input type="text"
+                                                       name="f_caption"
+                                                       id="id_verbal"
+                                                       class="form-control"
+                                                       value="{{  discount.verbal }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>{% trans 'From date:' %}</label>
+                                                <div class="input-group date" id="id_date_1"
+                                                     data-target-input="nearest">
+                                                    <input type="text"
+                                                           class="form-control datetimepicker-input"
+                                                           id="id_start_date"
+                                                           data-target="#id_date_1"
+                                                           name="f_start_date"
+                                                           value="{{  discount.start_date|date:'d.m.Y' }}"
+                                                    >
+                                                    <div class="input-group-append" data-target="#id_date_1"
+                                                         data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>{% trans 'To date:' %}</label>
+                                                <div class="input-group date" id="id_date_2"
+                                                     data-target-input="nearest">
+                                                    <input type="text"
+                                                           class="form-control datetimepicker-input"
+                                                           id="id_stop_date"
+                                                           data-target="#id_date_2"
+                                                           name="f_start_date"
+                                                           value="{{ discount.stop_date|date:'d.m.Y' }}"
+                                                    >
+                                                    <div class="input-group-append" data-target="#id_date_2"
+                                                         data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    {% for ticket in dict_tickets_type %}
+                                    <div class="row ticket_set">
+                                        <input type="hidden" value="{{ ticket.verbal }}" class="ticket_verbal">
+                                        <div class="col-md-2 d-flex align-items-center text-bold">
+                                            {{ ticket.caption }}
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>{% trans 'Discount/ILS' %}</label>
+                                                        <input type="number"
+                                                               step="0.1"
+                                                               class="form-control ticket_amount"
+                                                               name="f_per_day"
+                                                               {% for key, val in tickets_sets.items %}
+                                                               {% if key == ticket.verbal %}
+                                                               value="{{ val.discount_amount|unlocalize }}"
+                                                               {% endif %}
+                                                               {% endfor %}
+                                                        >
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>{% trans 'Discount/%' %}</label>
+                                                        <input type="number"
+                                                               step="0.1"
+                                                               class="form-control ticket_percent"
+                                                               name="f_per_day"
+                                                               {% for key, val in tickets_sets.items %}
+                                                               {% if key == ticket.verbal %}
+                                                               value="{{ val.discount_percent|unlocalize }}"
+                                                               {% endif %}
+                                                               {% endfor %}
+                                                        >
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>{% trans 'Enabled' %}</label>
+                                                            <input type="checkbox"
+                                                                   class="form-control ticket_enabled"
+                                                                   {% for key, val in tickets_sets.items %}
+                                                                   {% if key == ticket.verbal %}
+                                                                   {% if val.enabled %}
+                                                                   checked
+                                                                   {% endif %}
+                                                                   {% endif %}
+                                                                   {% endfor %}
+                                                                   id=""
+                                                                   name="f_auto_pay"
+                                                                    >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="id_description">{% trans "Description" %}</label>
+                                                <textarea class="form-control" rows="3"
+                                                          id="id_description"
+                                                          name="f_description"
+                                                          placeholder='{% trans "Description" %}'>{{ m_description }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row flex-md-row ">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                onclick="btn_discount_save()"
+                                        >{% trans 'Save' %}
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                data-dismiss="modal"
+                                        >{% trans 'Close' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#id_date_1').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
+    $('#id_date_2').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
+
+    function btn_discount_save() {
+        let ticket_sets = []
+        $('.ticket_set').each(function(){
+           let ticket_verbal = $(this).find(".ticket_verbal").val(),
+               ticket_amount = $(this).find(".ticket_amount").val(),
+               ticket_percent = $(this).find(".ticket_percent").val(),
+               ticket_enabled = $(this).find(".ticket_enabled").is(':checked');
+           ticket_sets.push({verbal:ticket_verbal, amount:ticket_amount, percent:ticket_percent, enabled:ticket_enabled});
+        });
+        let enabled = 0;
+        if ($('#id_enabled').is(':checked')) {
+            enabled = 1
+        }
+        let caption = $("#id_caption").val(),
+            caption_user = $("#id_caption_user").val(),
+            verbal = $("#id_verbal").val(),
+            ticket_type = $("#id_ticket_type").val(),
+            date_start = $("#id_start_date").val(),
+            date_stop = $("#id_stop_date").val(),
+            discount_amount = $("#id_discount_amount").val(),
+            discount_percent = $("#id_discount_percent").val(),
+            description = $("#id_description").val();
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                f_form_type: '{{ m_form_type }}',
+                f_id: '{{ m_id }}',
+                f_enabled: enabled,
+                f_caption: caption,
+                f_caption_user: caption_user,
+                f_verbal: verbal,
+                f_ticket_type: ticket_type,
+                f_date_start: date_start,
+                f_date_stop: date_stop,
+                f_discount_amount: discount_amount,
+                f_discount_percent: discount_percent,
+                f_description: description,
+                f_ticket_sets: JSON.stringify(ticket_sets)
+
+            },
+            url: "/discount_form_save/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    $('.js-modal__cabb_form').modal('hide');
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+
+    }
+</script>

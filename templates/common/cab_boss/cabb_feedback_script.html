@@ -1,0 +1,131 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="row justify-content-center">
+            {#            <div class="col-lg-12">#}
+            <div class="card">
+            <div class="card-header">
+                <h5 class="card-title m-0">{% trans 'New Feedback' %}</h5>
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12 table-cabb">
+                            <table id="id_table_tic" class="table table-bordered table-striped ">
+                                <thead>
+                                <tr class="js_tic_row" >
+                                    <th></th>
+                                    <th>{% trans 'N req' %}</th>
+                                    <th>{% trans 'Date req' %}</th>
+                                    <th>{% trans 'User name' %}</th>
+                                    <th>{% trans 'User Reg' %}</th>
+                                    <th>{% trans 'User email' %}</th>
+                                    <th>{% trans 'Text' %}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for ItemFeedback in list_feedback %}
+                                   <tr class="js_tic_row {% if ItemTicket.answ_win %}
+                                     table-success
+                                   {% else %}
+{#                                     table-danger#}
+                                   {% endif %}"
+                                   >
+                                        <td>
+                                            <button type="button"
+                                                    class="btn btn-info mybtn_cabb1 btn-sm"
+                                                    onclick="btn_ticket_result({{ ItemTicket.id }})">
+                                                {% trans 'Answer' %}
+                                            </button>
+                                        </td>
+{#    created = models.DateTimeField(auto_now_add=True, null=True, verbose_name=u'Data create')#}
+{#    user_id = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE,#}
+{#    u_name = models.CharField(max_length=100, default='', blank=True, null=True, verbose_name=u'User')#}
+{#    u_email = models.EmailField(default='', blank=True, null=True, verbose_name=u'email')#}
+{#    text = models.TextField(max_length=500, default='', blank=True, null=True, verbose_name=u'Text req')#}
+{#    reply_text = models.TextField(max_length=2000, default='', blank=True, null=True, verbose_name=u'Text ansver')#}
+{#    reply_date = models.DateTimeField(blank=True, null=True, verbose_name=u'Date ansver')#}
+
+
+                                        <td>{{ ItemFeedback.id }}</td>
+                                        <td>{{ ItemFeedback.created|date:"d.m.Y H:i:s" }}</td>
+                                        <td>{{ ItemFeedback.user_id.profile.name }}</td>
+                                        <td>{{ ItemFeedback.u_name }}</td>
+                                        <td>{{ ItemFeedback.u_email }}</td>
+                                        <td>{{ ItemFeedback.text }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>{% trans 'N req' %}</th>
+                                    <th>{% trans 'Date req' %}</th>
+                                    <th>{% trans 'User name' %}</th>
+                                    <th>{% trans 'User Reg' %}</th>
+                                    <th>{% trans 'User email' %}</th>
+                                    <th>{% trans 'Text' %}</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1
+                                to 10 of 57
+                                entries
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                <ul class="pagination">
+                                    <li class="paginate_button page-item previous disabled" id="example1_previous"><a
+                                            href="#"
+                                            aria-controls="example1"
+                                            data-dt-idx="0"
+                                            tabindex="0"
+                                            class="page-link">Previous</a>
+                                    </li>
+                                    <li class="paginate_button page-item active"><a href="#" aria-controls="example1"
+                                                                                    data-dt-idx="1"
+                                                                                    tabindex="0" class="page-link">1</a>
+                                    </li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1"
+                                                                              data-dt-idx="2"
+                                                                              tabindex="0"
+                                                                              class="page-link">2</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1"
+                                                                              data-dt-idx="3"
+                                                                              tabindex="0"
+                                                                              class="page-link">3</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1"
+                                                                              data-dt-idx="4"
+                                                                              tabindex="0"
+                                                                              class="page-link">4</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1"
+                                                                              data-dt-idx="5"
+                                                                              tabindex="0"
+                                                                              class="page-link">5</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1"
+                                                                              data-dt-idx="6"
+                                                                              tabindex="0"
+                                                                              class="page-link">6</a></li>
+                                    <li class="paginate_button page-item next" id="example1_next"><a href="#"
+                                                                                                     aria-controls="example1"
+                                                                                                     data-dt-idx="7"
+                                                                                                     tabindex="0"
+                                                                                                     class="page-link">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>

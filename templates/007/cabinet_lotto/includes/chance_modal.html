@@ -1,0 +1,58 @@
+{% load static %}
+{% load i18n %}
+<div data-modal-id="js-game-modal-single" class="game-modal js-game-modal">
+    <div class="game-modal__overlay"></div>
+    <div class="game-modal__box">
+        <div class="game-modal__header">
+            <div class="ui-game-btn-reset-wrap">
+                <button type="button" class="ui-game-btn-reset js-game-modal-close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <span class="ui-game-btn-reset-text">{% trans 'Clear and close' %}</span>
+            </div>
+            <div class="ui-game-btn-ok-wrap">
+                <span class="ui-game-btn-ok-text">{% trans 'Save and close' %}</span>
+                <button type="button" class="ui-game-btn-ok js-game-modal-save">
+                    <i class="fa fa-check"></i>
+                </button>
+            </div>
+        </div>
+        <div data-selected-suit="123" class="js-selected-suit game-modal__body">
+            <div class="ui-game-row-cards ui-game-row-cards__m-b">
+                <div data-card-value="7" class="ui-game-single-card ui-game-card-suit js-card-for-select">
+                    7
+                </div>
+                <div data-card-value="8" class="ui-game-single-card ui-game-card-suit js-card-for-select">
+                    8
+                </div>
+                <div data-card-value="9" class="ui-game-single-card ui-game-card-suit js-card-for-select">
+                    9
+                </div>
+                {% if game_version == 'chance_systematic' %}
+                    <div data-card-value="T" class="ui-game-single-card ui-game-card-suit js-card-for-select">
+                        10
+                    </div>
+                {% else %}
+                    <div data-card-value="10" class="ui-game-single-card ui-game-card-suit js-card-for-select">
+                        10
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="ui-game-row-cards">
+                <div data-card-value="J" class="ui-game-single-card ui-game-card-suit js-card-for-select">
+                    J
+                </div>
+                <div data-card-value="Q" class="ui-game-single-card ui-game-card-suit js-card-for-select">
+                    Q
+                </div>
+                <div data-card-value="K" class="ui-game-single-card ui-game-card-suit js-card-for-select">
+                    K
+                </div>
+                <div data-card-value="A" class="ui-game-single-card ui-game-card-suit js-card-for-select">
+                    A
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

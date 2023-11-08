@@ -1,0 +1,183 @@
+{% load static %}
+{% load i18n %}
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'Black List' %}</h5>
+                </div>
+                {% if l_find %}
+                    {% include l_find %}
+                {% endif %}
+                <div class="card-body">
+                    <button type="button"
+                            class="btn btn-info mybtn_cabb1"
+                            onclick="btn_blocklist_new()">
+                        {% trans 'New' %}
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans '#' %}</th>
+                                        <th>{% trans 'Active' %}</th>
+                                        <th>{% trans 'Create' %}</th>
+                                        <th>{% trans 'User' %}</th>
+                                        <th>{% trans 'Type' %}</th>
+                                        <th>{% trans 'Text' %}</th>
+                                        <th>{% trans 'Description' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ItemLine in list_blacklist %}
+                                        <tr class="js_tic_row">
+                                            <td>
+                                                {% if True %}
+                                                    <button type="button"
+                                                            class="btn btn-info mybtn_cabb1"
+                                                            onclick="btn_blocklist_enable({{ ItemLine.id }})">
+                                                        {% if ItemLine.enabled %}
+                                                            {% trans 'Disable' %}
+                                                        {% else %}
+                                                            {% trans 'Enable' %}
+                                                        {% endif %}
+                                                    </button>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ ItemLine.id }}</td>
+                                            <td>
+                                                {% if ItemLine.enabled %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                            </td>
+
+                                            <td>{{ ItemLine.created|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ ItemLine.create_user.profile.name }}<br>{{ ItemLine.create_user }}
+                                            </td>
+                                            <td>{{ ItemLine.type_blacklist }}</td>
+                                            <td>{{ ItemLine.text }}</td>
+                                            <td>{{ ItemLine.description }}</td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans '#' %}</th>
+                                        <th>{% trans 'Active' %}</th>
+                                        <th>{% trans 'Create' %}</th>
+                                        <th>{% trans 'User' %}</th>
+                                        <th>{% trans 'Type' %}</th>
+                                        <th>{% trans 'Text' %}</th>
+                                        <th>{% trans 'Description' %}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        {% if l_pagination %}
+                            {% include l_pagination %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    function btn_blocklist_enable(l_blist_id) {
+        console.log("btn_blocklist_enable");
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        blist_id: l_blist_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb_blocklist_enable/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                // 'OK my boss, I didn\'t think you were so greedy'
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+    function btn_blocklist_new() {
+        console.log("btn_blocklist_new");
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_blocklist_new/",
+            success: function (res) {
+                $("#id_ResAjax_cabb_form").html(res);
+                return $('.js-modal__cabb_form').modal('show');
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>

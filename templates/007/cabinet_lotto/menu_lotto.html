@@ -1,0 +1,56 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+<!-- lottery video Area Start -->
+
+<section data-game-theme-color="#1DCCF7" data-game-theme-color-rgb="29, 204, 247" class="js-game-theme-color game-item main-bg full-height-without-footer">
+<!--    <div class="container">-->
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="col-lg-12">-->
+                <div class="ui-game">
+
+                    <h2 class="ui-game__title">
+                        <span class="ui-game__title-text">5000.000 $</span>
+                    </h2>
+
+                    <div class="ui-game-timer js-ui-game-timer" data-timer-sec="172801">
+
+                        <!--                        <span class="ui-game-timer__dots ui-game-timer__dots_1">:</span>-->
+                        <!--                        <span class="ui-game-timer__dots ui-game-timer__dots_2">:</span>-->
+                        <!--                        <span class="ui-game-timer__dots ui-game-timer__dots_3">:</span>-->
+
+                        <div class="ui-game-timer__item">
+                            <span class="ui-game-timer__item-number js-game-timer-days"></span>
+                            <span class="ui-game-timer__item-name">{% trans 'days' %}</span>
+                        </div>
+                        <div class="ui-game-timer__item">
+                            <span class="ui-game-timer__item-number js-game-timer-hours"></span>
+                            <span class="ui-game-timer__item-name">{% trans 'hours' %}</span>
+                        </div>
+                        <div class="ui-game-timer__item">
+                            <span class="ui-game-timer__item-number js-game-timer-min"></span>
+                            <span class="ui-game-timer__item-name">{% trans 'min' %}</span>
+                        </div>
+                        <div class="ui-game-timer__item">
+                            <span class="ui-game-timer__item-number js-game-timer-sec">sec</span>
+                            <span class="ui-game-timer__item-name">{% trans 'sec' %}</span>
+                        </div>
+                    </div>
+
+                    <div class="ui-game-links">
+                        <div class="ui-game-links-inner">
+                            <a class="ui-game-links__game ui-game-links__game-1" href="{% url 'cab_game_lotto' 'lotto_02' %}">{% trans '??' %}</a>
+                            <a class="ui-game-links__game ui-game-links__game-2" href="{% url 'cab_game_lotto' 'lotto_01' %}">{% trans '??' %}</a>
+                            <a class="ui-game-links__game ui-game-links__game-3" href="{% url 'cab_game_lotto' 'lotto_03' %}">{% trans '??' %}</a>
+                            <div class="ui-game-links__manin">
+                                <span class="ui-game-links__manin-inner-border"></span>
+                                {% trans '??' %}
+                            </div>
+                        </div>
+                    </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</section>
+

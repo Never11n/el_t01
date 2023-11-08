@@ -1,0 +1,74 @@
+{% extends "007/cabinet/cabinet.html" %}
+{% load static %}
+{% load i18n %}
+<input id="id_ticket_active" type="hidden" value="{{ ticket_id_00 }}" />
+<input id="id_ticket_active_status" type="hidden" value="{{ ticket_status_00 }}" />
+<input id="id_item_game" type="hidden" value="{{ item_game_user.id }}" />
+
+<!-- game-play Area Start -->
+
+<div class="header-padding">
+    <div class="hero-area hero-area-cab hide-on-mob">
+        <div class="container">
+            <div class="hero-area__inner">
+                <h1 class="hero-area__title">{% trans 'Scratch HISHGAD On Mobile' %}</h1>
+                {# <img class="hero-area__img" src="{% static 'main/007/images/hero-area__img.png' %}" alt="">#}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-box game-play" data-start-time="2000">
+    <div class="container game-play-box">
+        <div class="main-box__inner">
+            <div class="row m-b-20">
+                <div class="col-lg-6 col-md-12">
+                    <h6 class="cab-play-game-name"> {% trans 'HISHGAD Game' %} #{{ item_game_user.id }} </h6>
+                    <div class="card game-play-table">
+                        <div class="card-body table-responsive p-0 ui-table_tickets">
+                            <table class="table table-head-fixed text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans 'Game' %}</th>
+                                        <th>{% trans 'N Ticket' %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for ItemTicket in game_play_list %}
+                                    <tr id="id_ticket_{{ ItemTicket.id }}"
+                                        class="{{ ItemTicket.class }} ui-btn_ticket_info js-btn_ticket_info ui-mark"
+                                        data-id="{{ ItemTicket.id }}">
+                                        {{ ItemTicket.html|safe }}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <h6 class="cab-play-ticket-name"> {% trans 'tickets' %} {{ item_game_user.ticket_num }} </h6>
+
+                    <div id="id-scratch_box" class="game-play-scrach d-flex justify-content-center js-scratch_box">
+                    </div>
+
+                    <div class="text-center">
+                        <a id="id_btn_ap" href="##" class="mybtn1  cab-play-btn {% if ticket_status_00 == " 01" %} {%
+                            else %}disabled{% endif %}" onclick="ClearCanvas()">{% trans 'Auto Play' %}</a>
+                    </div>
+                    {# <p class="cab-play-info-text text-center" {% if ticket_status_00=="01" %} hidden{% endif %}>#}
+                        {# {% trans 'Wait for button activation!' %}#}
+                        {# </p>#}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(PollingTicketInfo, 5000);
+        StartTicketFirst();
+    }
+</script>

@@ -1,0 +1,64 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+<div class="header-padding">
+    <div class="hero-area">
+        <div class="container">
+            <div class="hero-area__inner">
+                <h1 class="hero-area__title">{% trans 'Scratch HISHGAD On Mobile' %}</h1>
+                <div class="links hide-on-mob">
+                    <a href="#" class="mybtn1"
+                       data-toggle="modal"
+                       data-target="#signin">{% trans 'REGISTER NOW' %}</a>
+                </div>
+                <img class="hero-area__img" src="{% static 'main/007/images/hero-area__img.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- start content -->
+    <div class="main-box inner-mob-shadow">
+        <div class="container">
+            <div class="main-box__inner">
+
+                <div class="text-center hide-on-desktop register-btn-wrap">
+                    <a href="#" class="mybtn1 "
+                       data-toggle="modal"
+                       data-target="#signin">{% trans 'Register Now' %}</a>
+                </div>
+
+                <h4 class="main-box__title">
+                    {% trans 'Frequently Asked Questions' %}
+                </h4>
+
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-list__item">
+                        {% trans 'Home' %}
+                    </li>
+                    <li class="breadcrumb-list__item">
+                        <span class="breadcrumb-list__icon-wrap">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+                    </li>
+                    <li class="breadcrumb-list__item">
+                        {% trans 'Frequently Asked Questions' %}
+                    </li>
+                </ul>
+
+                <div class="main-text-right-rtf">
+                    {% for ItemFAQ in faqtabl %}
+                    <div class="faq__item">
+                        <div class="faq__item_q_info">
+                            {% trans ItemFAQ.faq_title %}
+                        </div>
+                        <div class="faq__item_a_info">
+                            {% trans 'Answer:' %} {% trans ItemFAQ.faq_info|safe %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end content -->
+</div>

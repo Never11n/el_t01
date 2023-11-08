@@ -1,0 +1,128 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+<form id="id_form_start_game" action="{% url 'cab_game_buy' %}"
+      method="post">
+    {% csrf_token %}
+    <input type="hidden" name="addparam" value="{{ addparam }}">
+    <input type="hidden" name="game_order" value="{{ item_game_user.id }}">
+    <input type="hidden" name="ticket_order" value="{{ item_ticket_type.id }}">
+    <h2 class="cab-game-title hide-on-desktop">
+        {% trans item_ticket_type.caption %}
+    </h2>
+    <div class="row no-gutter game-item-wrap">
+        <div class="col-lg-8 game-description">
+            <h2 class="cab-game-title hide-on-mob">
+                {% trans item_ticket_type.caption %}
+            </h2>
+            <div class="row">
+                <!-- start price title  -->
+                <div class="col-12 game-item-col">
+                    <div class="row">
+                        <div class="col-4 desc-title">
+                            <p>{% trans 'Ticket Name' %}</p>
+                        </div>
+                        <div class="col-8 desc-text desc-text__name">
+                            <p class="text-uppercase">{% trans item_ticket_type.caption %}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end price title -->
+                <!-- start price title  -->
+                <div class="col-12 game-item-col">
+                    <div class="row">
+                        <div class="col-4 desc-title">
+                            <p>{% trans 'Ticket price' %}</p>
+                        </div>
+                        <div class="col-8 desc-text desc-text__price">
+                            <p>{{ item_ticket_type.cost_2 }} {% trans item_ticket_type.type_currency.code %}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end price title -->
+                <!-- start win title  -->
+                <div class="col-12 desc-block game-item-col">
+                    <div class="row">
+                        <div class="col-4 desc-title">
+                            <p>{% trans 'Max Win' %}</p>
+                        </div>
+                        <div class="col-8 desc-text desc-text__max-win">
+                            <p>{% set_int_separate item_ticket_type.max_win %} {% trans item_ticket_type.type_currency.code %}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end win title -->
+                <!-- start win description  -->
+                <div class="col-12 desc-block game-item-col">
+                    <div class="row">
+                        <div class="col-4 desc-title">
+                            <p>{% trans 'Winning description' %}</p>
+                        </div>
+                        <div class="col-8 desc-text">
+                            <p>{% trans item_ticket_type.description_01|safe %}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end win description -->
+                <!-- start instruction title -->
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-4 desc-title desc-title__game-instructions">
+                            <p>{% trans 'Game Instructions' %}</p>
+                        </div>
+                        <div class="col-lg-8 desc-text">
+                            <p>
+                                {% trans item_ticket_type.description_02|safe %}
+<!--                                <span class="desc-text__bold">-->
+<!--                                    {% trans 'You can win up to 5 times in one ticket!' %}-->
+<!--                                </span>-->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end instruction title -->
+            </div>
+        </div>
+        <div class="col-lg-4 game-ticket-wrap">
+            <div class="order-game">
+                <div class="col-md-12 ticket-box d-flex justify-content-center">
+                    <a href="#">
+                        <img src="{{ item_ticket_type.foto_1.url }}" class="ticket-img">
+                    </a>
+                </div>
+                <div class="col-md-12 counter-box d-flex justify-content-center">
+                    <div class="quantity_inner">
+                        <div class="bt_minus">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                        <input type="text" value="1" size="3" class="quantity"
+                               name="quantity_ticket"
+                               data-max-count="{{ item_ticket_type.max_t }}"/>
+                        <div class="bt_plus">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <button class="mybtn1 mybtn-bottom">
+                        {% trans 'Buy now' %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center m-b-40 hide-on-desktop">
+        <button class="mybtn1 mybtn-bottom">
+            {% trans 'Buy now' %}
+        </button>
+    </div>
+    <div class="text-center">
+        <a href="/" class="all-game-link">{% trans 'ALL TICKETS' %}</a>
+    </div>
+</form>
+

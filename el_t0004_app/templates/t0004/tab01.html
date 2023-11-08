@@ -1,0 +1,17 @@
+{% load static %}
+{% load i18n %}
+<div class="mainpage">
+    <div class="img-holder">
+        <img src="{{STATIC_PREFIX}}/main/{{company_code}}/img/logo.png" alt="logo" class="logo">
+    </div>
+
+    <div class="button-holder">
+        <button class="button" onclick="nextPage('btn_to_registr')">
+            <b>{% trans 'להתחלה לחץ כאן' %}</b>
+        </button>
+    </div>
+
+    <div class="img-holder2">
+        <img src="{{STATIC_PREFIX}}/main/{{company_code}}/img/games.png" alt="games" class="games">
+    </div>
+</div>

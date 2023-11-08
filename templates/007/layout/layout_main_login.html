@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ PAGE_TITLE }}</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="{% static 'img/logo-og.png' %}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="{{ PAGE_TITLE }}"/>
+    <meta property="og:description" content="{{ PAGE_DESCRIPTION }}"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'lte/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{% static 'lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'lte/dist/css/adminlte.min.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/sweetalert2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lightbox.min.css' %}">
+
+    <link rel="icon" href="{% static 'img/favicon.ico' %}"/>
+    <link rel="apple-touch-icon" sizes="256x256" href="{% static "img/apple-touch-icon.png" %}">
+
+</head>
+<body class="hold-transition login-page">
+{% block layoutbody %}
+{% endblock %}
+
+<!-- jQuery -->
+<script src="{% static 'lte/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'lte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'lte/dist/js/adminlte.min.js' %}"></script>
+
+{% include l_include_script_us %}
+
+</body>
+</html>

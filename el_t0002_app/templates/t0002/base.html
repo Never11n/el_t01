@@ -1,0 +1,312 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>American Football Club Home page html website template</title>
+    <meta name="description" content="">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:image" content="path/to/image.jpg">
+
+    <link rel="shortcut icon" href="{% static 'main/002/img/favicon/fav.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'main/002/img/favicon/fav.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'main/002/img/favicon/fav.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'main/002/img/favicon/fav.png' %}">
+
+    <!-- Bootstrap v3.3.4 Grid Styles -->
+    <link rel="stylesheet" href="{% static 'main/002/css/bootstrapGrid.min.css' %}" type="text/css">
+    <!-- Header CSS (First Sections of Website: paste after release from header.min.css here) -->
+    <link rel="stylesheet" href="{% static 'main/002/css/header.min.css' %}" type="text/css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="{% static 'main/002/css/fonts.min.css' %}" type="text/css">
+    <!-- Load CSS Start -->
+    <link rel="stylesheet" href="{% static 'main/002/css/main.min.css' %}" type="text/css">
+
+    {% block stylesheet %}
+    {% endblock %}
+
+</head>
+
+<body class="isHome gallery-W">
+    <!-- preloader -->
+    <div class="pl">
+        <div class="round1 anti"></div>
+        <div class="pl_r"></div>
+        <div class="pl_l"></div>
+    </div>
+
+    <div class="wrapper">
+
+        <header class="main-head clearfix">
+            <div class="container">
+
+                <div class="header-top">
+                    <div class="row">
+
+                        <div class="mini-menu hidden-lg hidden-md">
+                            <a href="#" class="toggle-mnu"><span></span></a>
+                        </div> <!-- End Mini-menu -->
+
+
+                        <div class="col-lg-3 col-md-4 hidden-sm hidden-xs">
+                            <h1>Join our club</h1>
+                        </div>
+
+                        <div class="col-lg-5 col-md-4 hidden-sm hidden-xs">
+                            <div class="row">
+                                <div class="col-lg-6 hidden-md hidden-sm hidden-xs">
+                                    <p>We are always welcoming of new members</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div> <!-- End Row -->
+            </div> <!-- End Header-top -->
+
+            <!-- Start navigation -->
+            <nav id="menu" class="nav-line hidden-sm hidden-xs default">
+
+            </nav> <!-- End Nav -->
+
+            <nav class="nav-line-hidden hidden-lg hidden-md ">
+
+            </nav> <!-- End Nav -->
+
+    </div> <!-- End Container -->
+
+    </header> <!-- End Header -->
+
+    {% block body%}
+    {% endblock%}
+
+    <footer class="page-footer t-white">
+        <div class="footer-wrap">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 padding-null">
+                        <div class="content-wrap-footer">
+                            <div class="content-footer">
+
+                                <div class="logo-footer">
+                                    <a href="index.html">
+                                        <img class="responsive-img" src="{% static 'main/002/img/logo1.png' %}"
+                                            alt="logo">
+                                    </a>
+                                </div>
+
+                                <div class="b-contacts-wrap clearfix">
+
+                                    <div class="b-inner1">
+                                        <p class="orange-text">American Football Club</p>
+                                        <p>154 Bloomfield Way, Liberty, </p>
+                                        <p>ME 04949</p>
+                                        <a href="contacts.html" class="email-link">Info@youremail.com</a>
+                                    </div>
+
+                                    <div class="b-inner2">
+                                        <p>Call us:</p>
+                                        <p class="number">1-800-1234567</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="copyright">
+                                    <p>© 2023 | Privacy Policy</p>
+                                </div>
+
+                            </div> <!-- End content-footer -->
+                        </div><!-- End content-wrap-footer -->
+                    </div><!-- End col-md-6 -->
+
+                </div> <!-- End Row -->
+            </div> <!-- End Container -->
+        </div> <!-- End footer-wrap -->
+    </footer><!-- End Page-Footer -->
+
+    </div> <!-- End Wrapper -->
+
+    <div class="hidden"></div>
+
+    <!-- Load Scripts Start -->
+    <script src="{% static 'main/002/js/libs.js' %}"></script>
+    <script src="{% static 'main/002/js/common.js' %}"></script>
+    <script src="{% static 'main/002/js/libs/instafeed/instafeed.min.js' %}"></script>
+    <script>
+        // Instagram Feed
+        var feed = new Instafeed({
+            get: 'user',
+            userId: '5448325247',
+            clientId: '30901797efa241ab816a94b5cd869fd2',
+            limit: 6,
+            sortBy: 'most-liked',
+            resolution: "standard_resolution",
+            accessToken: '5448325247.3090179.15e6598014134f2aa662b2fb6cd4ee9d',
+            template: '<a href="{{link}}" target="_blank"><img src="{{image}}" /></a>'
+        });
+        feed.run();
+    </script>
+    <script>
+        function input_field_not_exist(name) {
+            return ($('input[name=' + name + ']')).length === 0;
+        }
+
+        function input_field_value(name) {
+            return ($('input[name=' + name + ']')).val();
+        }
+
+        function input_field_value_is_empty(name) {
+            return ($('input[name=' + name + ']')).val() === '';
+        }
+
+        function input_field_exist(name) {
+            return !(($('input[name=' + name + ']')).length === 0);
+        }
+
+        function textarea_field_exist(name) {
+            return !(($('textarea[name=' + name + ']')).length === 0);
+        }
+        function btn_modal_shop_register() {
+            console.log("btn_modal_register");
+            var imgId = document.getElementById('img').getAttribute('data-img-id');
+            var link = '/register-shopuser/' + imgId;
+            var m_name = input_field_value('f_name');
+            var m_shopcode = input_field_value('f_shopcode');
+            var m_phone = input_field_value('f_phone');
+            var isValid;
+            if (input_field_exist('f_name')) {
+                if (input_field_value_is_empty('f_name')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("Please enter your Name"),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#d33',
+                    });
+                    mLine_wrong = $('#id_f_name');
+                    if (mLine_wrong.length) {
+                        $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
+                    }
+                    return false;
+                }
+            }
+            if (input_field_exist('f_shopcode')) {
+                if (!(m_txt_error === "ok")) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: m_txt_error,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#d33',
+                    });
+                    mLine_wrong = $('#id_f_shopcode');
+                    if (mLine_wrong.length) {
+                        $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
+                    }
+                    return false;
+                }
+            }
+            if (input_field_exist('f_phone')) {
+                if (input_field_value_is_empty('f_phone')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("Please enter your phone number"),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#d33',
+                    });
+                    mLine_wrong = $('#input-phone');
+                    if (mLine_wrong.length) {
+                        $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
+                    }
+                    return false;
+                }
+            }
+            $.ajax({
+                type: "POST",
+                async: false,
+                data: {
+                    f_name: m_name,
+                    f_shopcode: m_shopcode,
+                    f_phone: m_phone,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                url: link,
+                success: function (res) {
+                    console.log(res)
+                    if (res.AnswerCod === "00") {
+                        // $('.js-modal__register').modal('hide');
+                        console.log(res)
+                        location.href = res.RedirectUrl;
+                        // Swal.fire({
+                        //     type: "success",
+                        //     icon: 'success',
+                        //     title: gettext('Registration completed'),
+                        //     background: '#ffffff',
+                        //     html: gettext("Registration completed successfully, follow the instructions in the mail"),
+                        //     confirmButtonText: gettext('OK'),
+                        //     confirmButtonColor: '#33c833',
+                        //     });
+                        // return true;
+                    }
+                    else if (res.AnswerCod === "00gift") {
+                        $('.js-modal__register').modal('hide');
+                        location.href = res.RedirectUrl;
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: res.AnswerText,
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                },
+                error: function (res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occurred while creating the user profile, please try again later"),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            });
+        }
+    </script>
+    <script>
+        function nextPage(btn) {
+            const main = $('#main'),
+                registr = $('#registration'),
+                game = $('#game');
+            if (btn === 'btn_to_registr') {
+                console.log(main)
+                main.removeClass("d-block").addClass("d-none");
+                registr.removeClass("d-none").addClass("d-block");
+            }
+            if (btn === 'btn_to_game') {
+                registr.removeClass("d-block").addClass("d-none");
+                game.removeClass("d-none").addClass("d-block")
+            }
+        }
+    </script>
+</body>
+
+</html>

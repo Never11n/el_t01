@@ -1,0 +1,26 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+
+<!-- Hero Area Start -->
+<div class="header-padding">
+    <div class="hero-area">
+        <div class="container">
+            <div class="hero-area__inner">
+                <img class="hero-area__img_ticket_l" src="{% static 'main/007/images/top_ticket_l.png' %}" alt="">
+                <h1 class="hero-area__title">{% trans 'Scratch HISHGAD On Mobile' %}</h1>
+                {% if not user.is_authenticated %}
+                <div class="links hide-on-mob">
+                    <a href="#" class="mybtn1"
+                       data-toggle="modal"
+                       data-target="#signin">{% trans 'REGISTER NOW' %}</a>
+                </div>
+                {% endif %}
+{#                <img class="hero-area__img" src="{% static 'main/007/images/hero-area__img.png' %}" alt="">#}
+                <img class="hero-area__img_ticket_r" src="{% static 'main/007/images/top_ticket_r.png' %}" alt="">
+                <img class="hero-area__img_ticket_mob" src="{% static 'main/007/images/top_ticket_l.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->

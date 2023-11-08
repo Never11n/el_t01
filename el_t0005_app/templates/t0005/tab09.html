@@ -1,0 +1,26 @@
+{% load static %}
+{% load i18n %}
+<div class="tab_text_3 tab_text_color_3">
+    <span>{% trans 'Enter a received code' %}</span>
+</div>
+
+<div class="form_login">
+    {% csrf_token %}
+    <input type="hidden" id="url_path" name="url_path" value="{{ utm_code }}">
+    <input type="hidden" id="get_param" name="get_param" value="{{ get_param }}">
+    <input type="hidden" id="profile_id" name="profile_id" value="">
+    <div class="form_login_input">
+        <input type="text" class=""
+               autocomplete="off"
+               id="input-code"
+               name="f_phonecode"
+               placeholder="{% trans 'Code' %}*">
+    </div>
+</div>
+
+<div class="tab_text_4">
+    <button class="btn_2 mybtn1-register-btn"
+       onclick="verifyPhoneCode()">
+        {% trans 'CONFIRM' %}
+    </button>
+</div>

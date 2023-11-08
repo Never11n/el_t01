@@ -1,0 +1,21 @@
+{% load static %}
+{% load i18n %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <iframe class="tranzila-frame" id="encoder_iframe" height="600px" width="455px"
+                    src="{{ m_url }}{{ get_param }}">
+            </iframe>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <a href="{% url 'cab_game_order' item_game_user.id %}"
+               class="mybtn1">{% trans 'Back to site' %}</a>
+        </div>
+        {% if False %}
+        <div class="col-12 d-flex justify-content-center">
+            <a href="{% url 'cab_game_item' item_game_user.id %}"
+               class="mybtn1 mybtn6">{% trans 'IMITATION' %}</a>
+        </div>
+        {% endif %}
+    </div>
+</div>

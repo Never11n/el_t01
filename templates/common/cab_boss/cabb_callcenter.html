@@ -1,0 +1,594 @@
+{% load static %}
+{% load i18n %}
+<style>
+    .us-callcentr-head-b1 {
+        color: white;
+        background-color:#300a52;
+        border-radius: 50px;
+        padding: 10px 30px 10px 30px;
+        width: fit-content;
+        margin-bottom: 50px;
+    }
+
+    .us-callcentr-text-b1 {
+        font-weight: bold;
+        margin-bottom: 15px;
+        padding: 10px 20px 10px 20px;
+        background-color: #f2e146;
+        border-radius: 50px;
+        width: fit-content;
+    }
+
+    [dir="rtl"] .us-callcentr-text-b1 {
+        text-align: right;
+    }
+
+    .us-callcentr-head-b2 {
+        color: white;
+        background-color:#300a52;
+        border-radius: 50px;
+        padding: 10px 30px 10px 30px;
+        width: fit-content;
+        margin-bottom: 50px;
+    }
+
+    .us-callcentr-text-b2 {
+        margin-bottom: 15px;
+        padding: 10px 20px 10px 20px;
+        background-color: #fff;
+        border-radius: 50px;
+    }
+
+    [dir="rtl"] .us-callcentr-text-b2 {
+        text-align: right;
+    }
+
+    .us-callcentr-head-b3 {
+        color: white;
+        background-color:#300a52;
+        border-radius: 50px;
+        padding: 10px 30px 10px 30px;
+        width: fit-content;
+        margin-bottom: 50px;
+    }
+
+    .us-callcentr-text-b3 {
+        font-weight: bold;
+        margin-bottom: 15px;
+        padding: 10px 20px 10px 20px;
+        background-color: #fff;
+        border-radius: 50px;
+        width: fit-content;
+    }
+
+    [dir="rtl"] .us-callcentr-text-b3 {
+        text-align: right;
+    }
+
+    .us-callcentr-head-b4 {
+        color: white;
+        background-color:#300a52;
+        border-radius: 50px;
+        padding: 10px 30px 10px 30px;
+        width: fit-content;
+        margin-bottom: 50px;
+    }
+
+    .us-callcentr-text-b4 {
+        margin-bottom: 15px;
+        padding: 10px 20px 10px 20px;
+        background-color: #fff;
+        border-radius: 50px;
+        width: fit-content;
+    }
+
+    [dir="rtl"] .us-callcentr-text-b4 {
+        text-align: right;
+    }
+
+</style>
+
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'User info' %}</h5>
+                </div>
+                <div class="card card-default card">
+                    <div class="card-header">
+                        <h3 class="card-title">{% trans 'Search user' %}</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body" style="display: block;">
+                        <input type="hidden" name="find_type_game_verabl" id='id_find_type_game_verabl' value="{{ menu_tickets_item }}"/>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Name:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">
+                                                <i class="fas fa-edit"></i>
+                                              </div>
+                                            </div>
+                                            <input type="text"
+                                                   class="form-control float-right"
+                                                   id="id_find_uname"
+                                                   name="find_uname"
+                                                   value="{{ m_uName }}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>E-mail:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">
+                                                <i class="fas fa-envelope"></i>
+                                              </div>
+                                            </div>
+                                            <input type="text"
+                                                   class="form-control float-right"
+                                                   id="id_find_uemail"
+                                                   name="find_uemail"
+                                                   value="{{ m_uEmail }}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Phone:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">
+                                                <i class="fas fa-phone"></i>
+                                              </div>
+                                            </div>
+                                            <input type="text"
+                                                   class="form-control float-right"
+                                                   id="id_find_uphone"
+                                                   name="find_uphone"
+                                                   value="{{ m_uPhone }}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>{% trans 'Date range:' %}</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                              </span>
+                                            </div>
+                                            <input type="text"
+                                                   class="form-control float-right"
+                                                   id="id_find_date_range_empty"
+                                                   name="find_date_range"
+                                                   value="{{ date_range_comment }}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <div class="input-group-append">
+                                        <button type="button"
+                                                onclick="btn_form_find()"
+                                                class="btn btn-default"
+                                        ><i class="fas fa-search"></i>{% trans 'Show' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                {% if users_list %}
+                    <div class="card-body">
+                        <div class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 table-cabb">
+                                    <table id="id_table_tic" class="table table-bordered table-striped ">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>{% trans 'Name' %}</th>
+                                                <th>{% trans 'Email' %}</th>
+                                                <th>{% trans 'Phone' %}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for user in users_list %}
+                                                <tr>
+                                                    <td><a href="/cabb_callcenter/?uId={{ user.id }}" class="btn btn-info mybtn_cabb1">Select</a></td>
+                                                    <td>{{ user.name }}</td>
+                                                    <td>{{ user.user.email }}</td>
+                                                    <td>{{ user.mobile }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if comment_list %}
+                    <div class="card-body">
+                        <div class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 table-cabb">
+                                    <table id="id_table_2" class="table table-bordered table-striped ">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>{% trans 'Name' %}</th>
+                                                <th>{% trans 'Email' %}</th>
+                                                <th>{% trans 'Phone' %}</th>
+                                                <th>{% trans 'Comment' %}</th>
+                                                <th>{% trans 'Date' %}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for comment in comment_list %}
+                                                <tr>
+                                                    <td><a href="/cabb_callcenter/?uId={{ comment.user_profile.id }}" class="btn btn-info mybtn_cabb1">Select</a></td>
+                                                    <td>{{ comment.user_profile.name }}</td>
+                                                    <td>{{ comment.user_profile.user.email }}</td>
+                                                    <td>{{ comment.user_profile.mobile }}</td>
+                                                    <td>{{ comment.text }}</td>
+                                                    <td>{{ comment.date_return }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if user_slides %}
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6 p-3" style="background-color:#ffa2d6; border-radius: 30px;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="us-callcentr-head-b1">
+                                            {{ previous_month }}
+                                        </div>
+                                        <div class="us-callcentr-text-b1">
+                                            {% trans 'All tickets' %}: {{ user_info.previous_month_agg_count }}
+                                        </div>
+                                        <div class="us-callcentr-text-b1">
+                                            {% trans 'All money' %}: {{ user_info.previous_month_agg_amount }}
+                                        </div>
+                                        <div class="us-callcentr-text-b1">
+                                            {% trans 'Leading ticket (amount)' %}:
+                                            {{ sorted_previous_tickets.0.game_type__caption }} ({{ sorted_previous_tickets.0.tickets }})
+                                        </div>
+                                        <div class="us-callcentr-text-b1" >
+                                            {% trans 'Additional ticket (amount)' %}:
+                                            {{ sorted_previous_tickets.1.game_type__caption }} ({{ sorted_previous_tickets.1.tickets }})
+                                        </div>
+                                        <div class="us-callcentr-text-b1" >
+                                            {% trans 'Subscription (money/win)' %}: {{ user_info.previous_month_agg_amount_subs }} / {{ user_info.previous_month_agg_win_sub }}
+                                        </div>
+                                         <div class="us-callcentr-text-b1" >
+                                            {% trans 'Total win' %}: {{ user_info.previous_month_agg_total_win }}
+                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                         <canvas id="pieChart"
+                                                style="min-height: 150px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-3" style="background-color:#ffbfb3; border-radius: 30px;">
+                                <div class="us-callcentr-head-b2">
+                                    {% trans 'Client details' %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="us-callcentr-text-b2">
+                                            {% trans 'Name' %}:  {{ user_info.name }}
+                                        </div>
+                                        <div class="us-callcentr-text-b2">
+                                            {% trans 'Phone' %}:  {{ user_info.phone }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="us-callcentr-text-b2">
+                                            {% trans 'Email' %}: {{ user_info.email }}
+                                        </div>
+                                        <div class="us-callcentr-text-b2">
+                                            {% trans 'Age' %}:  {{ user_info.age }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="us-callcentr-head-b2">
+                                    {% trans 'Notes' %}
+                                </div>
+                                <div class="col-12 mb-2 p-0" >
+                                    <input id="comment_text" type="text"
+                                           class="input-field pt-2 pb-1 pl-2 pr-2 w-100"
+                                           style="background-color:#fff; border-radius: 50px;"
+                                           placeholder="{% trans 'Enter a comment' %}">
+                                </div>
+                                <div class="row">
+                                            <div class="col-6">
+                                                <div class="input-group date subs_datepicker__parent"
+                                                     id="id_date_return"
+                                                     data-target-input="nearest">
+                                                    <input type="text"
+                                                           class="form-control datetimepicker-input subs_datepicker"
+                                                           id="id_date_return1"
+                                                           data-target="#id_date_return"
+                                                           name="f_date_start"
+                                                           value="" placeholder="{% trans 'Enter return date' %}"/>
+                                                    <div class="input-group-append"
+                                                         data-target="#id_date_return"
+                                                         data-toggle="datetimepicker">
+                                                        <div class="input-group-text subs_datepicker__append">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" onclick="save_comment_callcenter('{{  user_info.profile_id }}')"
+                                                    class="pt-2 pb-1 pl-3 pr-2 text-light" style="background-color:#300a52; border-radius: 50px;">
+                                                {% trans 'Submit' %}
+                                            </button>
+                                        </div>
+                                            <div class="col-12" id="last_comment_block">{{ last_comment }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 p-3" style="background-color:#f5f5b8; border-radius: 40px;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="us-callcentr-head-b3">
+                                            {{ previous_previous_month }}
+                                        </div>
+                                        <div class="us-callcentr-text-b3">
+                                            {% trans 'All tickets' %}: {{ user_info.previous_previous_month_agg_count }}
+                                        </div>
+                                        <div class="us-callcentr-text-b3">
+                                            {% trans 'All money' %}: {{ user_info.previous_previous_month_agg_amount }}
+                                        </div>
+                                        <div class="us-callcentr-text-b3">
+                                            {% trans 'Leading ticket (amount)' %}:
+                                            {{ sorted_previous_previous_tickets.0.game_type__caption }} ({{ sorted_previous_previous_tickets.0.tickets }})
+                                        </div>
+                                        <div class="us-callcentr-text-b3">
+                                            {% trans 'Additional ticket (amount)' %}:
+                                            {{ sorted_previous_previous_tickets.1.game_type__caption }} ({{ sorted_previous_previous_tickets.1.tickets }})
+                                        </div>
+                                        <div class="us-callcentr-text-b3" >
+                                            {% trans 'Subscription (money/win)' %}: {{ user_info.previous_previous_month_agg_amount_subs }} / {{ user_info.previous_previous_month_agg_win_sub }}
+                                        </div>
+                                         <div class="us-callcentr-text-b3" >
+                                            {% trans 'Total win' %}: {{ user_info.previous_previous_month_agg_total_win }}
+                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                         <canvas id="pieChart2"
+                                                style="min-height: 150px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-md-6 p-3" style="background-color:#e2d3ff; border-radius: 30px;">
+                                 <div class="row">
+                                     <div class="col-md-6">
+                                        <div class="us-callcentr-head-b4">
+                                            {% trans 'Full information' %}
+                                        </div>
+                                        <div class="us-callcentr-text-b4">
+                                            {% trans 'Register date' %}: {{ user_info.register|date:"d.m.Y" }}
+                                        </div>
+                                        <div class="us-callcentr-text-b4">
+                                            {% trans 'All months' %}: {{ user_info.months_on_site }}
+                                        </div>
+                                        <div class="us-callcentr-text-b4">
+                                            {% trans 'Active months' %}: {{ user_info.users_months_activity_month_count }}
+                                        </div>
+                                        <div class="us-callcentr-text-b4">
+                                            {% trans 'Average tickets in month' %}: {{ user_info.users_months_activity_avg_tickets }}
+                                        </div>
+                                         <div class="us-callcentr-text-b4 text-bold" style="background-color:#f2e146;">
+                                            {% trans 'Average money in month' %}: {{ user_info.users_months_activity_avg_amount }}
+                                        </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <canvas id="pieChart3"
+                                                style="min-height: 250px; height: 300px; max-height: 100%; max-width: 100%;"></canvas>
+                                     </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if not_user_with_params %}
+                    <div class="card-body">{% trans 'No user with this parametres' %}</div>
+                {% endif %}
+                {% if select_params %}
+                    <div class="card-body">{% trans 'Enter email, phone or name to search' %}</div>
+                {% endif %}
+                {% if comment_list_empty %}
+                    <div class="card-body">{% trans 'No schedules for these dates' %}</div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    window.onload = function () {
+        $( "#id_find_date_range" ).daterangepicker({
+            defaultDate: null
+        });
+         $("#id_date_return").datetimepicker({
+            format: "DD.MM.YYYY"
+        });
+         try {
+            var donutData = {
+                labels: {{ previous_month_labels|safe }},
+                datasets:  [
+                    {
+                        data: {{ previous_month_values }},
+                        backgroundColor: ['#60c8f7', '#034c6e', '#81bbc7', '#024452', '#96b4e0', '#072c63',
+                                          '#3c6096', '#28048a', '#b6bff0', '#b6f0e8', '#3a84b5'],
+                    }
+                ]
+            };
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+            var pieData = donutData;
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                 elements: {
+                    arc: {
+                        borderWidth: 0,
+
+                    }
+                }
+            };
+            new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            });
+            var donutData2 = {
+            labels: {{ previous_previous_month_labels|safe }},
+            datasets: [
+                {
+                    data: {{ previous_previous_month_values }},
+                    backgroundColor: ['#60c8f7', '#034c6e', '#81bbc7', '#024452', '#96b4e0', '#072c63',
+                                      '#3c6096', '#28048a', '#b6bff0', '#b6f0e8', '#3a84b5'],
+                }
+            ]
+            };
+            var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d');
+            var pieData2 = donutData2;
+            var pieOptions2 = {
+                maintainAspectRatio: false,
+                responsive: true,
+                 elements: {
+                    arc: {
+                        borderWidth: 0,
+
+                    }
+                }
+            };
+            new Chart(pieChartCanvas2, {
+                type: 'pie',
+                data: pieData2,
+                options: pieOptions2
+            });
+            var donutData3 = {
+                labels: {{ activity_labels|safe }},
+                datasets: [
+                    {
+                        data: {{ activity_values }},
+                        backgroundColor: ['#3297a1', '#74f7e4'],
+                    }
+                ]
+            };
+            Chart.pluginService.register({
+              beforeDraw: function(chart) {
+                var width = chart.chart.width,
+                    height = chart.chart.height,
+                    ctx = chart.chart.ctx;
+
+                ctx.restore();
+                var fontSize = (height / 150).toFixed(2);
+                ctx.font = fontSize + "em sans-serif";
+                ctx.textBaseline = "middle";
+
+                var text = '',
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = height / 2;
+
+                ctx.fillText(text, textX, textY);
+                ctx.save();
+              }
+            });
+            var pieChartCanvas3 = $('#pieChart3').get(0).getContext('2d');
+            var pieData3 = donutData3;
+            var pieOptions3 = {
+                maintainAspectRatio: false,
+                responsive: true,
+                 elements: {
+                    arc: {
+                        borderWidth: 0,
+
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            };
+            new Chart(pieChartCanvas3, {
+                type: 'doughnut',
+                data: pieData3,
+                options: pieOptions3
+            });
+        } catch(err) {
+           console.log('Charts done');
+        }
+    }
+    function save_comment_callcenter(l_id) {
+        let last_comment_block = $('#last_comment_block');
+         $.ajax({
+             type: "POST",
+             async: false,
+             data: {
+                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                 f_id: l_id,
+                 f_text: $('#comment_text').val(),
+                 f_date_return: $('#id_date_return1').val()
+             },
+             url: "/save_comment_callcenter/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    last_comment_block.html(res.AnswerText);
+                     $("#comment_text").val('');
+                     $("#id_date_return1").val('');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occurred during user verification, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                return false;
+            }
+        });
+     }
+</script>

@@ -1,0 +1,273 @@
+{% load static %}
+{% load i18n %}
+<table class="table table-bordered">
+{#    <tbody>#}
+{#    <tr>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_1.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_1.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_1.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_1.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_1.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_2.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_2.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_2.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_2.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_2.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_3.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_3.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_3.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_3.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_3.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_4.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_4.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_4.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_4.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_4.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_5.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_5.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_5.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_5.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_5.clear }}#}
+{#        </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_6.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_6.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_6.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_6.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_6.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_7.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_7.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_7.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_7.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_7.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_8.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_8.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_8.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_8.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_8.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_9.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_9.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_9.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_9.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_9.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_10.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_10.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_10.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_10.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_10.clear }}#}
+{#        </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_11.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_11.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_11.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_11.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_11.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_12.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_12.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_12.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_12.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_12.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_13.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_13.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_13.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_13.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_13.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_14.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_14.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_14.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_14.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_14.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_15.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_15.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_15.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_15.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_15.clear }}#}
+{#        </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_16.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_16.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_16.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_16.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_16.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_17.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_17.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_17.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_17.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_17.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_18.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_18.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_18.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_18.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_18.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_19.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_19.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_19.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_19.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_19.clear }}#}
+{#        </td>#}
+{#        <td class="{% if item_ticket.answ_tabl.c_20.w_l == 'win' %} table-success {% endif %}">#}
+{#            {{ item_ticket.answ_tabl.c_20.kard }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_20.win }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_20.w_l }}<br>#}
+{#            {{ item_ticket.answ_tabl.c_20.clear }}#}
+{#        </td>#}
+{#    </tr>#}
+{#    </tbody>#}
+
+    <tbody>
+    <tr>
+        <td></td>
+        <td class="{% if item_ticket.answ_tabl.c_1.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_1.kard }}
+            <br>{{ item_ticket.answ_tabl.c_1.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_1.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_1.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_2.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_2.kard }}
+            <br>{{ item_ticket.answ_tabl.c_2.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_2.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_2.clear }}#}
+        </td>
+    </tr>
+    <tr>
+        <td class="{% if item_ticket.answ_tabl.c_3.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_3.kard }}
+            <br>{{ item_ticket.answ_tabl.c_3.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_3.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_3.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_4.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_4.kard }}
+            <br>{{ item_ticket.answ_tabl.c_4.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_4.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_4.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_5.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_5.kard }}
+            <br>{{ item_ticket.answ_tabl.c_5.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_5.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_5.clear }}#}
+        </td>
+    </tr>
+    <tr>
+        <td class="{% if item_ticket.answ_tabl.c_6.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_6.kard }}
+            <br>{{ item_ticket.answ_tabl.c_6.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_6.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_6.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_7.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_7.kard }}
+            <br>{{ item_ticket.answ_tabl.c_7.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_7.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_7.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_8.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_8.kard }}
+            <br>{{ item_ticket.answ_tabl.c_8.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_8.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_8.clear }}#}
+        </td>
+    </tr>
+    <tr>
+        <td class="{% if item_ticket.answ_tabl.c_9.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_9.kard }}
+            <br>{{ item_ticket.answ_tabl.c_9.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_9.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_9.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_10.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_10.kard }}
+            <br>{{ item_ticket.answ_tabl.c_10.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_10.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_10.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_11.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_11.kard }}
+            <br>{{ item_ticket.answ_tabl.c_11.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_11.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_11.clear }}#}
+        </td>
+    </tr>
+    <tr>
+        <td class="{% if item_ticket.answ_tabl.c_12.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_12.kard }}
+            <br>{{ item_ticket.answ_tabl.c_12.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_12.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_12.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_13.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_13.kard }}
+            <br>{{ item_ticket.answ_tabl.c_13.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_13.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_13.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_14.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_14.kard }}
+            <br>{{ item_ticket.answ_tabl.c_14.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_14.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_14.clear }}#}
+        </td>
+    </tr>
+    <tr>
+        <td class="{% if item_ticket.answ_tabl.c_15.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_15.kard }}
+            <br>{{ item_ticket.answ_tabl.c_15.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_15.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_15.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_16.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_16.kard }}
+            <br>{{ item_ticket.answ_tabl.c_16.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_16.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_16.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_17.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_17.kard }}
+            <br>{{ item_ticket.answ_tabl.c_17.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_17.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_17.clear }}#}
+        </td>
+    </tr>
+    <tr>
+        <td class="{% if item_ticket.answ_tabl.c_18.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_18.kard }}
+            <br>{{ item_ticket.answ_tabl.c_18.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_18.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_18.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_19.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_19.kard }}
+            <br>{{ item_ticket.answ_tabl.c_19.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_19.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_19.clear }}#}
+        </td>
+        <td class="{% if item_ticket.answ_tabl.c_20.w_l == 'win' %} table-success {% endif %}">
+            {{ item_ticket.answ_tabl.c_20.kard }}
+            <br>{{ item_ticket.answ_tabl.c_20.win }}
+{#            <br>{{ item_ticket.answ_tabl.c_20.w_l }}#}
+{#            <br>{{ item_ticket.answ_tabl.c_20.clear }}#}
+        </td>
+    </tr>
+    </tbody>
+
+</table>

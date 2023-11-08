@@ -1,0 +1,17 @@
+<input type="hidden" id="game_version" value="{{ game_version }}"/>
+<input type="hidden" id="game_type" value="{{ game_type }}"/>
+<input type="hidden" id="form_type" value="{{ form_type }}"/>
+<input type="hidden" id="price" value="{% if ticket_info.price %}{{ ticket_info.price }}{% else %}1{% endif %}"/>
+
+<input type="hidden" class="js_block_hidden_input" id="block1" value="{{ ticket_info.block1 }}"/>
+<input type="hidden" class="js_block_hidden_input" id="block2" value="{{ ticket_info.block2 }}"/>
+<input type="hidden" class="js_block_hidden_input" id="block3" value="{{ ticket_info.block3 }}"/>
+<input type="hidden" class="js_block_hidden_input" id="block4" value="{{ ticket_info.block4 }}"/>
+<input type="hidden" class="js_block_hidden_input" id="block5" value="{{ ticket_info.block5 }}"/>
+
+<input type="hidden" id="games_count" value="1"/>
+<input type="hidden" id="total_sum" value="5"/>
+
+<input type="hidden" id="subscription" value="0"/>
+<input type="hidden" id="subscription_day" value=""/>
+<input type="hidden" id="subscription_automatic" value="0"/>

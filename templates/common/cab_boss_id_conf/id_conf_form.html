@@ -1,0 +1,189 @@
+{% load static %}
+{% load i18n %}
+<div class="modal-body">
+    <div class="modal-header">
+        <h4 class="modal-title text-dark">{% trans 'ID confirmation' %}
+            {% if typeform == 'photo' %} ({% trans 'Add photo' %}){% endif %}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="text-dark" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="col-md-12">
+        <div class="card card-secondary cab-table-border">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% trans 'User id' %}: {{ idconf.user.id }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'User name' %}: {{ idconf.user.profile.name }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'User email' %}: {{ idconf.user }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'User phone' %}: {{ idconf.user.profile.mobile }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'User ID number' %}: {{ idconf.user.profile.i_doc }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'User birthday' %}: {{ idconf.user.profile.date_birthday|date:"d.m.Y" }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'Сonfirmation request date ' %}: {{ idconf.dt_add|date:"d.m.Y H:i:s" }}
+                    </div>
+                </div>
+            </div>
+            {% if typeform == 'check' %}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="id_reject_reason">{% trans 'Reject/repeat reason (if not ok)' %}</label>
+                            <textarea type="text" id="id_reject_reason"
+                                      class="form-control" name="f_reject_reason"
+                                      value="{{ idconf.reject_reason }}"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="id_notes">{% trans 'Notes' %}</label>
+                        <input type="text" id="id_notes"
+                               class="form-control" name="f_notes"
+                               value="{{ idconf.description }}">
+                    </div>
+                </div>
+            </div>
+            {% elif typeform == 'photo' %}
+            <div class="card-body">
+                <div class="main-form-group">
+                    <label>{% trans 'Photo 1' %}</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="FileId_01" name="f_file_01">
+                            <label class="custom-file-label" for="FileId_01">{% trans 'Choose file' %}</label>
+                        </div>
+                    </div>
+
+                    <div class="main-form-group">
+                        <label>{% trans 'Photo 2' %}</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="FileId_02" name="f_file_02">
+                                <label class="custom-file-label" for="FileId_02">{% trans 'Choose file' %}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+                <div class="row flex-md-row ">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="modal-footer justify-content-between">
+                            {% if typeform == 'check' %}
+                            <button type="button"
+                                    class="btn btn-info"
+                                    onclick="btn_idform_save('confirm')">
+                                {% trans 'Confirm' %}
+                            </button>
+<!--                            <button type="button"-->
+<!--                                    class="btn btn-warning"-->
+<!--                                    onclick="btn_idform_save('repeat')">-->
+<!--                                {% trans 'Repeat' %}-->
+<!--                            </button>-->
+                            <button type="button"
+                                    class="btn btn-danger"
+                                    onclick="btn_idform_save('reject')">
+                                {% trans 'Reject' %}
+                            </button>
+                            {% elif typeform == 'photo' %}
+                            <button type="button"
+                                    class="btn btn-info"
+                                    onclick="btn_idform_save('add_photo')">
+                                {% trans 'Save' %}
+                            </button>
+                            {% endif %}
+                            <button type="button" class="btn btn-dark"
+                                    data-dismiss="modal">
+                                {% trans 'Close' %}
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function btn_idform_save(l_action) {
+            let formData = new FormData();
+            let csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+            formData.append('csrfmiddlewaretoken', csrftoken);
+            formData.append('f_id', '{{ idconf.id }}');
+            formData.append('f_action', l_action);
+            if ($("#id_reject_reason").length){
+                let f_reject_reason = $("#id_reject_reason").val().trim();
+                formData.append('f_reject_reason', f_reject_reason);
+                if ((l_action === "reject" | l_action === "repeat") && !f_reject_reason) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please, enter reject/repeat reason"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                return false;
+            }
+            }
+            if ($("#id_notes").length){
+                formData.append('f_notes', $("#id_notes").val());
+            }
+            if ($("#FileId_01").length){
+                formData.append('photo1',  $("#FileId_01")[0].files[0]);
+            }
+            if ($("#FileId_02").length) {
+                formData.append('photo2', $("#FileId_02")[0].files[0]);
+            }
+
+            $.ajax({
+                type: "POST",
+                async: false,
+                processData: false,
+                contentType: false,
+                data: formData,
+                url: "/cabb-idconf/",
+                success: function (res) {
+                    if (res.AnswerCod == '01') {
+                        $('.js-modal__cabb_form').modal('hide');
+                        location.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: res.AnswerText,
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                },
+                error: function (res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            });
+        }
+        $('.custom-file-input').on('change', function (event) {
+            $(this).next('.custom-file-label').html(event.target.files[0].name);
+        })
+    </script>

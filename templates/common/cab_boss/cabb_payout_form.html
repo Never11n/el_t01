@@ -1,0 +1,192 @@
+{% load static %}
+{% load i18n %}
+<div class="modal-body">
+    <div class="modal-header">
+        <h4 class="modal-title text-dark">{% trans 'Payout form' %}
+            {% if typeform == 'photo' %} ({% trans 'Add photo' %}){% endif %}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="text-dark" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="col-md-12">
+        <div class="card card-secondary cab-table-border">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% trans 'User id' %}: {{ payout.user_id.id }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'User name' %}: {{  payout.user_id.profile.name }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'User email' %}: {{  payout.user_id }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'User phone' %}: {{  payout.user_id.profile.mobile }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'Request date ' %}: {{  payout.created|date:"d.m.Y H:i:s" }}
+                    </div>
+                    <div class="col-sm-12">
+                        {% trans 'Amount' %}: {{  payout.amount }}
+                    </div>
+                </div>
+            </div>
+            {% if typeform == 'check' %}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="id_payout_amount">{% trans 'Amount' %}</label>
+                            <input type="number"
+                                   class="form-control"
+                                   id="id_payout_amount"
+                                   name="f_payout_amount"
+                                   value="{{ payout.amount }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="id_reject_reason">{% trans 'Reject reason (if not ok)' %}</label>
+                            <textarea type="text" id="id_reject_reason"
+                                      class="form-control" name="f_reject_reason"
+                                      >{{ payout.reject_reason }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="id_notes">{% trans 'Notes' %}</label>
+                        <textarea type="text" id="id_notes"
+                                  class="form-control" name="f_notes"
+                                  >{{ payout.description }}</textarea>
+                    </div>
+                </div>
+            </div>
+            {% elif typeform == 'photo' %}
+            <div class="card-body">
+                <div class="main-form-group">
+                    <label>{% trans 'Photo' %}</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="FileId_01" name="photo">
+                            <label class="custom-file-label" for="FileId_01">{% trans 'Choose file' %}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+                <div class="row flex-md-row ">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="modal-footer justify-content-between">
+                            {% if typeform == 'check' %}
+                             <button type="button"
+                                    class="btn btn-primary"
+                                    onclick="btn_payout_form_save('in_process')">
+                                {% trans 'In process' %}
+                            </button>
+                            <button type="button"
+                                    class="btn btn-info"
+                                    onclick="btn_payout_form_save('confirm')">
+                                {% trans 'Confirm' %}
+                            </button>
+                            <button type="button"
+                                    class="btn btn-warning"
+                                    onclick="btn_payout_form_save('save')">
+                                {% trans 'Save' %}
+                            </button>
+                                {% if not rejected_payouts %}
+                                <button type="button"
+                                        class="btn btn-danger"
+                                        onclick="btn_payout_form_save('reject')">
+                                    {% trans 'Reject' %}
+                                </button>
+                                {% endif %}
+                            {% elif typeform == 'photo' %}
+                            <button type="button"
+                                    class="btn btn-info"
+                                    onclick="btn_payout_form_save('add_photo')">
+                                {% trans 'Save' %}
+                            </button>
+                            {% endif %}
+                            <button type="button" class="btn btn-dark"
+                                    data-dismiss="modal">
+                                {% trans 'Close' %}
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function btn_payout_form_save(l_action) {
+            let formData = new FormData();
+            let csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+            formData.append('csrfmiddlewaretoken', csrftoken);
+            formData.append('f_id', '{{ payout.id }}');
+            formData.append('f_action', l_action);
+            if ($("#id_reject_reason").length){
+                let f_reject_reason = $("#id_reject_reason").val().trim();
+                formData.append('f_reject_reason', f_reject_reason);
+                if ((l_action === "reject") && !f_reject_reason) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please, enter reject reason"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                return false;
+            }
+            }
+            if ($("#id_notes").length){
+                formData.append('f_notes', $("#id_notes").val());
+            }
+            if ($("#id_payout_amount").length){
+                formData.append('f_payout_amount', $("#id_payout_amount").val());
+            }
+            if ($("#FileId_01").length){
+                formData.append('photo',  $("#FileId_01")[0].files[0]);
+            }
+            $.ajax({
+                type: "POST",
+                async: false,
+                processData: false,
+                contentType: false,
+                data: formData,
+                url: "/cabb_payout_form/",
+                success: function (res) {
+                    if (res.AnswerCod == '01') {
+                        $('.js-modal__cabb_form').modal('hide');
+                        location.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: res.AnswerText,
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                },
+                error: function (res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            });
+        }
+        $('.custom-file-input').on('change', function (event) {
+            $(this).next('.custom-file-label').html(event.target.files[0].name);
+        })
+    </script>

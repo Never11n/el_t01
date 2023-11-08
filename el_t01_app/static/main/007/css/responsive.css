@@ -1,0 +1,2472 @@
+@media (max-width: 1199px) {
+
+    .header .mainmenu-area .navbar .mybtn1 {
+        margin-left: 15px;
+        padding: 10px 29px;
+    }
+
+    .header .mainmenu-area .navbar .mybtn11 {
+        padding: 10px 29px;
+    }
+
+    .header .mainmenu-area .navbar::after {
+        border-bottom: 66px solid #070b28;
+    }
+
+    .header .mainmenu-area .navbar::before,
+    .header .mainmenu-area .navbar::after {
+        display: none;
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area .left .icon {
+        top: 30px;
+        margin-right: 0px;
+        display: inline-block;
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area {
+        display: flow-root;
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area .right {
+        margin-top: 30px;
+        display: block;
+        flex: unset;
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area {
+        margin-bottom: 21px;
+        padding-bottom: 21px;
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities .bottom-area .pp {
+        text-align: unset;
+        margin-left: 0px;
+        top: 0px;
+        margin-top: 0px;
+        display: block;
+        position: unset;
+        width: 100%;
+        float: unset;
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities {
+        padding: 0px 30px 25px;
+    }
+
+    .play-games .all-games .nav li a {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+    }
+
+    .play-games .all-games .nav li a .icon img {
+        max-width: 40px;
+        max-height: 40px;
+        min-width: 40px;
+        min-height: 40px
+    }
+
+    .play-games .all-games .nav li a .icon {
+        margin-top: 16px;
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities .bottom-area .players-count {
+        display: block;
+    }
+
+    .breadcrumb-area.bc-lottery {
+        padding: 204px 0px 150px;
+    }
+
+    .breadcrumb-area.bc-tournaments .bc-img {
+        right: 0px;
+    }
+
+    .breadcrumb-area.bc-tournaments {
+        padding: 210px 0px 100px;
+    }
+
+    .flip-clock-wrapper ul {
+        width: 40px;
+        height: 60px;
+    }
+
+    .flip-clock-wrapper ul li a div.up:after {
+        top: 29px;
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .flip-clock-wrapper ul li a div div.inn {
+        font-size: 40px;
+        line-height: 62px;
+    }
+
+    .flip-clock-dot.top {
+        top: 15px;
+    }
+
+    .flip-clock-divider {
+        height: 84px;
+    }
+
+    .flip-clock-divider .flip-clock-label {
+        right: -74px;
+    }
+
+    .breadcrumb-area.about {
+        padding: 204px 0px 94px;
+    }
+
+    .team .team-members .team-member-inner .single-team .social-area {
+        padding: 30px 20px 30px;
+    }
+
+    .breadcrumb-area.bc-affiliate .bc-img {
+        bottom: auto;
+        width: 65%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .breadcrumb-area.bc-affiliate {
+        padding: 203px 0px 174px;
+    }
+
+    .ref-commission .ab-img {
+        left: -228px;
+    }
+
+    .breadcrumb-area.bc-awards {
+        padding: 203px 0px 94px;
+    }
+
+    .breadcrumb-area.bc-awards .bc-img {
+        width: 60%;
+    }
+
+    .breadcrumb-area.bonus {
+        padding: 203px 0px 96px;
+    }
+
+    .breadcrumb-area.cart {
+        padding: 203px 0px 94px;
+    }
+
+    .breadcrumb-area.bc-faq {
+        padding: 203px 0px 95px;
+    }
+
+    .breadcrumb-area.h-i-w {
+        padding: 203px 0px 93px;
+    }
+
+    .breadcrumb-area.h-i-w .bc-img {
+        width: 60%;
+    }
+
+    .breadcrumb-area.bc-terms {
+        padding: 203px 0px 150px;
+    }
+
+    .breadcrumb-area.bc-terms .bc-img {
+        width: 55%;
+    }
+
+    .breadcrumb-area.bc-contact {
+        padding: 203px 0px 94px;
+    }
+
+    .contact .left-img {
+        top: 390px;
+        left: 6px;
+        max-width: 480px;
+    }
+
+    .index2 .hero-area {
+        padding: 358px 0px 424px;
+    }
+
+    .video-play-btn2 span:before {
+        display: none;
+    }
+
+    .index2 .features {
+        padding: 277px 0px 90px;
+    }
+
+    .contact .section-heading {
+        margin-bottom: 80px;
+    }
+
+
+}
+
+@media (max-width: 991px) {
+
+    .header-nav-mob {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .header-language-wrap {
+        margin-right: 20px;
+    }
+
+    [dir="rtl"] .header-language-wrap {
+        margin-right: 0;
+        margin-left: 20px;
+    }
+
+    [dir="rtl"] .header .mainmenu-area .navbar #main_menu .navbar-nav .nav-item {
+        text-align: center;
+    }
+
+    .mainmenu-area {
+        position: relative;
+        z-index: 1;
+    }
+
+    .mainmenu-area:after {
+        transition: 0s;
+    }
+
+    .mainmenu-area:after {
+        content: '';
+        position: absolute;
+        background: #5A5A5A;
+        width: 300%;
+        height: calc(100% - 78px);
+        left: -100%;
+        top: 78px;
+        z-index: -1;
+    }
+
+    .dropdown-menu.dropdown-menu_head-languag {
+        transform: translateX(calc(-100% + 50px));
+    }
+
+    [dir="rtl"] .dropdown-menu.dropdown-menu_head-languag {
+        transform: translateX(0);
+    }
+
+    .header .mainmenu-area {
+        padding: 11px 0;
+    }
+
+    .navbar-toggler[aria-expanded='false'] .navbar-toggler-icon {
+        background: url(../images/mob-menu-icon.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: inherit;
+        width: 30px;
+        height: 30px;
+    }
+
+    .navbar-toggler[aria-expanded='true'] .navbar-toggler-icon {
+        background: url(../images/mob-menu-icon_close.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+
+    .header .mainmenu-area .navbar .navbar-brand {
+
+    }
+
+    .main-modal-mob-navigation {
+        display: flex;
+
+        position: absolute;
+        top: 0;
+        width: 100%;
+        left: auto;
+    }
+
+    .main-modal-mob-navigation__item {
+        width: 50%;
+
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+
+        color: #FFFFFF;
+        text-transform: uppercase;
+        background: #9E9E9E;
+        padding: 15px 10px;
+        border: none;
+        box-shadow: none;
+    }
+
+    .main-modal-mob-navigation__item:focus {
+        outline: none;
+    }
+
+    .main-modal-mob-navigation__item.main-modal-mob-navigation__item_active {
+        background: #5A5A5A;
+    }
+
+    .mybtn1 {
+        padding: 10px 25px;
+    }
+
+    .mybtn4 {
+        border-radius: 18px;
+        padding: 10px;
+    }
+
+    .modal-dialog .modal-content .close {
+        right: 30px;
+        top: 65px;
+    }
+
+    .main-modal,
+    .main-modal__inner {
+        background: #5A5A5A;
+    }
+
+    .main-modal-body {
+        padding: 100px 30px 20px
+    }
+
+    .main-modal__inner {
+        margin: 0;
+    }
+
+    .modal-dialog-close__img {
+        max-width: 30px;
+    }
+
+    .main-modal-title {
+        font-size: 22px;
+    }
+
+    .main-modal-title.main-modal-title_recovery {
+        margin-bottom: 12px;
+    }
+
+    .main-modal-title.main-modal-title_login {
+        margin-bottom: 37px;
+    }
+
+    .main-modal-fieldset-login {
+        margin-bottom: 10px;
+    }
+
+    .main-modal-login-wrap {
+        margin-bottom: 0;
+    }
+
+    .main-modal-fieldset-login .main-modal-form-control {
+        height: 43px;
+        font-size: 14px;
+    }
+
+    .main-modal-sub-title {
+        font-size: 16px;
+    }
+
+    .main-modal-sub-title.main-modal-sub-title_recovery {
+        margin-bottom: 40px;
+    }
+
+    .main-modal-fieldset-recovery {
+        margin-bottom: 40px;
+    }
+
+    .main-modal-btn {
+        min-width: 230px;
+    }
+
+    .main-modal-title_register {
+        display: none;
+    }
+
+    .main-modal-sub-title.main-modal-sub-title_register {
+        font-size: 21px;
+        margin-bottom: 27px;
+    }
+
+    .register-form-box_col,
+    .register-form-inner-box_col {
+        width: 100%;
+    }
+
+    .main-modal-fieldset-register .main-modal-form-control {
+        min-height: 43px;
+    }
+
+    .main-modal-fieldset-register .main-check-group-wrap {
+        display: block;
+    }
+
+    .main-modal-fieldset-register .main-check-group {
+        margin-bottom: 11px;
+    }
+
+    .main-modal-fieldset-register .main-check-group label {
+        font-size: 10px;
+    }
+
+    .main-modal-fieldset-register .main-check-group-wrap {
+        margin-bottom: 20px;
+    }
+
+    .hero-area {
+        padding: 30px 0 0;
+
+        /*background: url(../images/hero-area-bg_mob.png);*/
+        /*background: url(../images/hero-area-bg_mob_2.png);*/
+        background: url(../images/hero-area-bg_mob_3.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        text-align: center;
+    }
+
+    .hero-area-cab .hero-area__title,
+    .hero-area__title {
+        max-width: 100%;
+        font-size: 30px;
+        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+
+    .hero-area-cab .hero-area__inner,
+    .hero-area__inner {
+        padding: 0;
+    }
+
+    .hero-area-cab .hero-area__img,
+    .hero-area__img {
+        position: static;
+        max-height: 100%;
+    }
+
+    .hero-area-cab .hero-area__img_ticket_r,
+    .hero-area__img_ticket_r {
+        position: static;
+        max-height: 100%;
+        display: none;
+    }
+
+    .hero-area-cab .hero-area__img_ticket_l,
+    .hero-area__img_ticket_l {
+        position: static;
+        max-height: 100%;
+        display: none;
+    }
+
+    .hero-area-cab .hero-area__img_ticket_mob,
+    .hero-area__img_ticket_mob {
+        position: static;
+        max-height: 100%;
+        display: block;
+    }
+
+    .header-registration-wrap,
+    .header-login-wrap {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .header-login-wrap .mybtn2 {
+        background: linear-gradient(180deg, #68FF50 0%, #2FBA18 99.48%);
+    }
+
+    .register-btn-wrap {
+        margin-bottom: 55px;
+    }
+
+    .inner-mob-shadow {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 150px);
+    }
+
+    .section-heading .title {
+        font-weight: 700;
+        font-size: 25px;
+    }
+
+    .section-heading .subtitle {
+        font-weight: 400;
+        font-size: 15px;
+    }
+
+    .featured-game .game-slider .item .single-game .game-name {
+        font-weight: 700;
+        font-size: 24px;
+    }
+
+    .featured-game .game-slider .item .single-game .game-maxwin {
+        font-weight: 500;
+        font-size: 20px;
+    }
+
+    .featured-game .game-slider .item .single-game .game-cost {
+        font-weight: 500;
+        font-size: 20px;
+    }
+
+    .featured-game .game-slider .item .single-game {
+        margin: 15px 15px 55px;
+    }
+
+    .featured-game .game-slider .mybtn3 {
+        border-radius: 18px;
+    }
+
+    .single-game {
+        height: 410px;
+    }
+
+    .sub-footer__items-1,
+    .sub-footer__items-2,
+    .sub-footer__items-3,
+    .sub-footer__items-4,
+    .sub-footer__items-5 {
+        width: 100%;
+    }
+
+    .sub-footer__logo-wrap {
+        margin-bottom: 33px;
+    }
+
+    .sub-footer-menu__title {
+        font-weight: 700;
+        font-size: 21px;
+        margin-bottom: 9px;
+    }
+
+    .sub-footer__text {
+        /*max-width: 90%;*/
+        /*margin-bottom: 20px;*/
+        margin-bottom: 0;
+        margin-top: 0;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .list-pay-system {
+        justify-content: center;
+    }
+
+    .list-pay-system__item {
+        margin-right: 15px;
+    }
+
+    .list-pay-system__item:last-child {
+        margin-right: 0;
+    }
+
+    .sub-footer {
+        background: #282828;
+    }
+
+    .sub-footer__items-5.sub-footer__to-right {
+        text-align: center;
+    }
+
+    .social-links-list.social-links-list__flex-end {
+        justify-content: center;
+    }
+
+    .social-links-list {
+        margin-bottom: 40px;
+    }
+
+    .sub-footer__info {
+        max-width: 90%;
+        font-weight: 300;
+        font-size: 14px;
+    }
+
+    .list-pay-system__img {
+        min-width: 22px;
+    }
+
+    .footer__content {
+        font-size: 14px;
+    }
+
+    .service-based-on__img-wrap,
+    .service-based-on__content {
+        width: 100%;
+    }
+
+    .service-based-on__img {
+        position: static;
+    }
+
+    .service-based-on {
+        padding: 70px 0 40px;
+    }
+
+    .service-based-on__title {
+        font-weight: 700;
+        font-size: 25px;
+        margin-bottom: 50px;
+    }
+
+    .service-based-on__content {
+        padding: 50px 0 20px;
+    }
+
+    .service-based-on__item:after {
+        width: 34px;
+        height: 28px;
+    }
+
+    .service-based-on__item {
+        font-weight: 400;
+        font-size: 16px;
+    }
+
+    .service-based-on__list {
+        margin-bottom: 30px;
+    }
+
+    .service-based-on__btn-wrap {
+        text-align: center;
+    }
+
+    .last-winner {
+        background: none;
+    }
+
+    .last-winner-item.last-winner-item_active {
+        transform: scale(1);
+    }
+
+    .last-winner-item {
+        width: 100%;
+        padding: 15px;
+        box-shadow: none;
+        /*margin: 3px 1px;*/
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .owl-carousel .owl-item img.last-winner-item__img,
+    .last-winner-item__img {
+        /*object-fit: none;*/
+        width: auto;
+    }
+
+    .last-winner-item__name {
+        font-size: 20px;
+    }
+
+    .last-winner-item__btn {
+        min-width: 190px;
+    }
+
+    .last-winner-item__img-wrap {
+        min-height: 200px;
+    }
+
+    .last-winner-list {
+        width: calc(100% - 100px);
+        margin: 0 auto;
+    }
+
+    .contact-btn-wrap {
+        text-align: center;
+    }
+
+    .contact-btn {
+        min-width: 250px;
+        padding: 12px 30px;
+        font-size: 28px;
+        display: inline-block;
+        border-radius: 19px;
+    }
+
+    .main-box__title {
+        font-size: 25px;
+    }
+
+    .breadcrumb-list__item {
+        font-size: 20px;
+    }
+
+    .main-form-group {
+        margin-bottom: 25px;
+    }
+
+    .main-form-control {
+        border-radius: 18px;
+        font-size: 16px;
+    }
+
+    .main-form-control::placeholder {
+        font-size: 16px;
+    }
+
+    .cab-game-title {
+        font-weight: 700;
+        text-align: center;
+        font-size: 25px;
+        margin-bottom: 25px;
+    }
+
+    .cab-game-title.cab-game-title_mob-left {
+        text-align: left;
+    }
+
+    .pay-method-list__img-wrap {
+        max-width: inherit;
+        text-align: center;
+    }
+
+    .game-ticket-wrap {
+        margin-bottom: 30px;
+    }
+
+    .desc-title__game-instructions {
+        text-align: center;
+    }
+
+    .game-item-wrap {
+        margin-bottom: 20px;
+    }
+
+    .game-description {
+        order: 2;
+
+    }
+
+    .game-description .desc-title p {
+    }
+
+    .pay-method-list__item {
+        width: 50%;
+    }
+
+    .mob-text-center {
+        text-align: center;
+    }
+
+    .game-pay__img-wrap {
+        margin-bottom: 30px;
+    }
+
+    .payment-agreement {
+        justify-content: center;
+    }
+
+    .cab-pass__item {
+        width: 100%;
+    }
+
+    .cab-pass__item:first-child {
+        order: 2;
+        margin-bottom: 30px;
+    }
+
+    .cab-pass__text {
+        max-width: 100%;
+    }
+
+    .cab-form .main-form-control {
+        height: 34px;
+    }
+
+    .cab-form .main-form-control {
+        border-radius: 16px;
+    }
+
+    .cab-form .main-form-control::placeholder {
+        font-size: 14px;
+    }
+
+    .cab-pass__btn {
+        min-width: 132px;
+        font-size: 16px;
+        border-radius: 10px;
+        text-transform: none;
+        padding: 5px 30px;
+    }
+
+    .cab-payout-title {
+        font-weight: 300;
+        font-size: 20px;
+    }
+
+    .cap-payout-item-name {
+        font-size: 14px;
+    }
+
+    .history-title {
+        font-size: 16px;
+        max-width: 100%;
+    }
+
+    .balance-title {
+        font-size: 21px;
+        margin-bottom: 20px;
+    }
+
+    .payadd-title {
+        font-size: 20px;
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .payadd-section-title {
+        font-weight: 700;
+        font-size: 24px;
+    }
+
+    .payadd-item-name {
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .payadd-item-description {
+      font-weight: 500;
+      font-size: 18px;
+    }
+
+    .payadd-btn {
+      font-size: 20px;
+      min-width: 290px;
+      padding: 20px;
+    }
+
+    .faq__item_q_info {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    .faq__item_a_info {
+    }
+
+    .main-text {
+        font-size: 16px;
+    }
+
+    .cab-play-btn {
+        min-width: 244px;
+    }
+
+    .cab-play-game-name {
+        font-size: 21px;
+    }
+
+    .cab-play-ticket-name {
+        font-size: 20px;
+    }
+
+
+
+
+
+
+
+
+    [dir="rtl"] .footer .copy-bg .copright-area-links {
+        text-align: center;
+    }
+
+    .mybtn-bottom,
+    .mybtn-bottom-big-transform {
+        transform: translate(0, 0);
+    }
+
+    .header .mainmenu-area.cab-mainmenu-area {
+        padding: 10px 0;
+    }
+
+    .m-b-20_mob {
+        margin-bottom: 20px;
+    }
+
+    [dir="rtl"] .sub-footer-menu__title {
+        text-align: center;
+    }
+
+    .about-page-section__img-wrap {
+        margin-bottom: 30px;
+    }
+
+    .featured-game {
+        padding: 57px 0px 20px;
+    }
+
+    .sub-footer-slider-slider-wrap {
+        margin-bottom: 30px;
+    }
+
+    .mainmenu-area .navbar .nav-item {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .header-btn-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header-join-us {
+        margin-bottom: 10px;
+    }
+
+    .sub-footer__menu-wrap {
+        margin-bottom: 40px;
+    }
+
+    .sub-footer-menu__item {
+        justify-content: center;
+    }
+
+    .sub-footer-slider-slider-wrap {
+        margin-bottom: 30px;
+    }
+
+    .line-separator:after {
+        background-size: contain;
+    }
+
+    .sub-footer-menu {
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: 55px;
+    }
+
+    .sub-footer-menu__title:after {
+        transform: translateX(-50%);
+        left: 50%;
+        width: 60%;
+    }
+
+    .hide-on-mob {
+        display: none;
+    }
+
+    .hide-on-desktop {
+        display: block;
+    }
+
+    .mob-order-1 {
+        order: 1;
+    }
+
+    .header .mainmenu-area .navbar #main_menu .navbar-nav .nav-item .nav-link {
+        margin-right: 0;
+    }
+
+    .main-title {
+        background: url(../images/main-title-bg.png);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .hero-area .left-content {
+        background: url(../images/main-title-bg-mob.png);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .header .mainmenu-area .navbar #main_menu .navbar-nav .nav-item .nav-link .mr-hover-effect {
+        display: none;
+    }
+
+    .header .top-header .content .left-content .left-list li p,
+    .header .top-header .content .right-content .right-list li .sign-in,
+    .header .top-header .content .right-content .right-list li i {
+        font-size: 14px;
+    }
+
+    .header .mainmenu-area .navbar {
+        display: flex;
+        /*justify-content: flex-end;*/
+    }
+
+    .header .navbar-light .navbar-toggler {
+        min-height: 65px;
+    }
+
+    /*.hero-area {*/
+    /*  padding: 110px 0px 35px;*/
+    /*}*/
+    .hero-area .hero-img {
+        top: 40px;
+    }
+
+    .hero-area .hero-img .shape.man {
+        -webkit-animation: unset;
+        -moz-animation: unset;
+        animation: unset;
+    }
+
+    .features .single-feature {
+        margin-bottom: 30px;
+        display: block;
+    }
+
+    .features {
+        padding-bottom: 80px;
+    }
+
+    .section-heading .text,
+    .how-it-work .single-work p,
+    .funfact .single-fun p {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .activities .table tr th,
+    .activities .table tr td {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .funfact .single-fun .count-area {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .funfact .single-fun {
+        margin-bottom: 22px;
+    }
+
+    .activities {
+        padding: 110px 0px 88px;
+    }
+
+    .get-start {
+        padding: 111px 0px 120px;
+    }
+
+    .get-start .right-image {
+        text-align: center;
+        margin-top: 60px;
+    }
+
+    .single-winer .bottom-area .left {
+        font-size: 24px;
+    }
+
+    .single-winer .top-area .left .date {
+        margin-bottom: 8px;
+    }
+
+    .single-winer {
+        margin-bottom: 30px;
+    }
+
+    .single-winer {
+        padding: 30px 30px 23px;
+    }
+
+    .footer .subscribe-box .button-area .mybtn1 {
+        margin-top: 40px;
+    }
+
+    .footer .footer-widget .title {
+        text-transform: uppercase;
+        font-size: 24px;
+        line-height: 34px;
+        margin-bottom: 8px;
+    }
+
+    .footer-widget.info-link-widget {
+        margin-top: 22px;
+    }
+
+    .footer .copy-bg .left-area {
+        text-align: center;
+    }
+
+    .footer .copy-bg .copright-area-links {
+        text-align: center;
+    }
+
+    .footer .subscribe-box .heading-area .sub-title {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .header .top-header .content .left-content .left-list li .language-selector .language {
+        font-size: 14px;
+    }
+
+    .header .top-header .content .left-content .left-list li::before,
+    .header .top-header .content .right-content .right-list li::before {
+        font-size: 14px;
+    }
+
+    .footer .subscribe-box {
+        margin-bottom: 90px;
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities {
+        margin-bottom: 30px;
+    }
+
+    .play-games .all-games {
+        padding: 89px 0px 120px;
+    }
+
+    .play-games .all-games .nav li a {
+        margin: 5px;
+    }
+
+    .play-games .all-games {
+        padding: 83px 0px 120px;
+    }
+
+    .breadcrumb-area .title {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .breadcrumb-area.play {
+        padding: 188px 0px 218px;
+    }
+
+    .breadcrumb-area .bc-img {
+        position: absolute !important;
+        right: 0px !important;
+        max-width: 50% !important;
+        top: 65% !important;
+        bottom: auto !important;
+        transform: translateY(-50%) !important;
+    }
+
+    .breadcrumb-area.bc-lottery {
+        padding: 187px 0px 152px;
+    }
+
+    .lottery-area .lottery-staticstics .single-staticstics {
+        margin-bottom: 30px;
+    }
+
+    .lottery-area .daily-lottery {
+        padding: 83px 0px 120px;
+    }
+
+    .lottery-area .daily-lottery .draw-time .draw-counter span {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .activities .tab-menu-area .nav-lend .nav-item .nav-link {
+        padding: 0px 30px;
+    }
+
+    .how-it-work .bg-shape {
+        display: none;
+    }
+
+    .how-it-work .section-heading {
+        margin-bottom: 52px;
+    }
+
+    .how-it-work .single-work {
+        text-align: center;
+        margin-bottom: 36px;
+    }
+
+    .question-area {
+        padding: 49px 0px 120px;
+    }
+
+    .question-area .section-heading {
+        margin-top: 51px;
+    }
+
+    .breadcrumb-area.bc-tournaments {
+        padding: 188px 0px 94px;
+    }
+
+    .tournament-time-box {
+        margin-bottom: 30px;
+    }
+
+    .tournaments .info-table {
+        margin-top: 30px;
+    }
+
+    .breadcrumb-area.about {
+        padding: 189px 0px 94px;
+    }
+
+    .about-page-section {
+        padding: 10px 0 80px;
+    }
+
+    .features .single-feature.landscape .content .title {
+        margin-top: 37px;
+    }
+
+    .features .single-feature.landscape {
+        text-align: center;
+    }
+
+    .features .single-feature.landscape .icon {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .single-feature.landscape .content {
+        display: inline-block;
+        text-align: center;
+    }
+
+    .single-feature.landscape {
+        padding: 45px 30px 22px;
+    }
+
+    .team .team-members .team-member-inner .single-team {
+        border-radius: 20px;
+        margin-bottom: 30px;
+    }
+
+    .team .mybtn1 {
+        display: inline-block;
+        margin-top: 30px;
+    }
+
+    .community-blog .single-box {
+        margin-bottom: 30px;
+    }
+
+    .community-blog {
+        padding: 120px 0px 90px;
+    }
+
+    .breadcrumb-area.about {
+        padding: 229px 0px 94px;
+    }
+
+    .community-blog .single-box .content .text {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .community-blog .single-box .content .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .breadcrumb-area.bc-affiliate {
+        padding: 187px 0px 174px;
+    }
+
+    .single-process {
+        margin-bottom: 30px;
+    }
+
+    .affiliate-program .single-program .content .title {
+        margin-top: 37px;
+    }
+
+    .affiliate-program .single-program {
+        text-align: center;
+    }
+
+    .affiliate-program .single-program .icon {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .affiliate-program .single-program .content {
+        display: block;
+        text-align: center;
+    }
+
+    .affiliate-program .single-program {
+        padding: 45px 30px 22px;
+        display: block;
+    }
+
+    .ref-commission .ab-img {
+        display: none;
+    }
+
+    .single-process .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .single-process .text {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .breadcrumb-area.bc-awards .bc-img {
+        bottom: 0px !important;
+        top: auto !important;
+        transform: unset !important;
+    }
+
+    .breadcrumb-area.bonus {
+        padding: 187px 0px 96px;
+    }
+
+    .single-deposit-bonus {
+        margin-bottom: 30px;
+    }
+
+    .deposit-bonuses {
+        padding: 112px 0px 90px;
+    }
+
+    .single-deposit-bonus .content .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .breadcrumb-area.cart {
+        padding: 188px 0px 94px;
+    }
+
+    .cart-area .message-one p {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .cart-area .message-two .left p {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .payment-method .text {
+        font-size: 20px;
+        line-height: 30px;
+        text-align: center;
+    }
+
+    .payment-method .title {
+        font-size: 24px;
+        line-height: 34px;
+        text-align: center;
+    }
+
+    .breadcrumb-area.bc-faq {
+        padding: 188px 0px 95px;
+    }
+
+    .faq-wrapper .tab-content {
+        padding: 0 0px;
+    }
+
+    .breadcrumb-area.h-i-w {
+        padding: 187px 0px 93px;
+    }
+
+    .single-h-play {
+        margin-bottom: 30px;
+    }
+
+    .how-play {
+        padding: 112px 0px 563px;
+    }
+
+    .breadcrumb-area.bc-terms {
+        padding: 187px 0px 150px;
+    }
+
+    .help-section .help-box .help-box-inner .title {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .help-section.writter-artical-details .help-box .help-box-inner2 .single-artical .top-title {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .help-section.writter-artical-details .help-box .help-box-inner2 .single-artical .writer-profile .writer-content .w-name {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .breadcrumb-area.bc-contact {
+        padding: 187px 0px 94px;
+    }
+
+    .contact .left-img {
+        display: none;
+    }
+
+    .contact .contact-form-wrapper {
+        padding-right: 0px;
+    }
+
+    .index2 .header .mainmenu-area {
+        background: #252f5a;
+    }
+
+    .index2 .hero-area {
+        padding: 238px 0px 341px;
+    }
+
+    .index2 .hero-area {
+        padding: 238px 0px 314px;
+    }
+
+    .video-play-btn2:after {
+        width: 115px;
+        height: 115px;
+    }
+
+    .video-play-btn2:before {
+        width: 130px;
+        height: 130px;
+    }
+
+    .video-play-btn2 span {
+        width: 145px;
+        height: 145px;
+    }
+
+    .video-play-btn2 {
+        margin: 82px 0px 0px;
+    }
+
+    .about-section .about-box .about-box-inner .section-heading {
+        padding-top: 186px;
+        text-align: center;
+    }
+
+    .recent-winners .mybtn2 {
+        margin-top: 30px;
+    }
+
+    .our-vision .single-vision {
+        margin-bottom: 55px;
+    }
+
+    .our-vision {
+        padding: 112px 0px 60px;
+    }
+
+    .header .mainmenu-area .navbar #main_menu .navbar-nav .nav-item .dropdown-menu {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    div#main_menu .navbar-nav {
+        overflow-y: auto;
+        padding-top: 47px;
+    }
+
+    .header.cab-header div#main_menu .navbar-nav {
+        height: 450px;
+    }
+
+    .header div#main_menu .navbar-nav {
+        text-align: center;
+    }
+
+    [dir="rtl"] .header .mainmenu-area .navbar .navbar-collapse {
+        text-align: right;
+    }
+
+    .main-site div#main_menu .navbar-nav {
+        height: auto;
+    }
+
+    .marketing-tools .section-heading {
+        margin-bottom: 51px;
+    }
+
+    .marketing-tools .single-tools {
+        margin-bottom: 36px;
+    }
+
+    .marketing-tools {
+        padding: 112px 0px 80px;
+    }
+
+    .marketing-tools .single-tools .content .text {
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 300;
+    }
+
+    .testimonial .single-testimonial .review-text p {
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 300;
+    }
+
+    .how-it-work {
+        padding: 97px 0px 484px;
+    }
+
+
+}
+
+@media (max-width: 767px) {
+    .hero-area .left-content .content .title {
+        font-size: 50px;
+        line-height: 60px;
+        text-align: center;
+    }
+
+    .hero-area__mob-title {
+        justify-content: center;
+    }
+
+    .hero-area .left-content .content .subtitle {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .hero-area .left-content .content .text {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .hero-img2 {
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+
+    .header .top-header .content {
+        /*display: flow-root;*/
+    }
+
+    .header .top-header .content .left-content {
+        text-align: center;
+        /*margin-bottom: 15px;*/
+    }
+
+    .header .top-header .content .right-content {
+        text-align: center;
+    }
+
+    .activities .tab-menu-area .nav-lend .nav-item .nav-link {
+        padding: 0px 30px;
+        font-size: 16px;
+    }
+
+    .footer .subscribe-box {
+        padding: 50px 30px 55px;
+    }
+
+    .hero-area .left-content {
+        text-align: center;
+    }
+
+    .responsive-table {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .activities .tab-menu-area .nav-lend .nav-item .nav-link {
+        line-height: 40px;
+        margin: 3px;
+    }
+
+    .activities .tab-menu-area .nav-lend {
+        padding: 14px 15px;
+    }
+
+    .funfact .single-fun .count-area {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .breadcrumb-area.play {
+        padding: 230px 0px 218px;
+    }
+
+    .breadcrumb-area.bc-lottery {
+        padding: 230px 0px 152px;
+    }
+
+    .breadcrumb-area.bc-tournaments {
+        padding: 230px 0px 94px;
+    }
+
+    .tournament-time-box .top-area .status {
+        font-size: 14px;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .tournament-time-box .top-area .title {
+        font-size: 22px;
+        line-height: 32px;
+    }
+
+    .tournaments .info-table .main-box .inner-table-content .header-area ul .nav-item .nav-link {
+        padding: 0px 30px;
+        margin: 0px 3px;
+    }
+
+    .tournaments .info-table .main-box .inner-table-content .table tr td {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .breadcrumb-area.bc-affiliate {
+        padding: 229px 0px 174px;
+    }
+
+    .breadcrumb-area.bc-awards {
+        padding: 228px 0px 94px;
+    }
+
+    .breadcrumb-area.bonus {
+        padding: 229px 0px 96px;
+    }
+
+    .breadcrumb-area.cart {
+        padding: 230px 0px 94px;
+    }
+
+    .cart-area .message-one {
+        padding: 22px 30px 28px;
+    }
+
+    .cart-area .message-two {
+        display: flow-root;
+    }
+
+    .cart-area .message-two .left p {
+        margin-bottom: 30px;
+    }
+
+    .cart-area .cart-table-area .table tr td .qty {
+        width: 120px;
+    }
+
+    .breadcrumb-area.bc-faq {
+        padding: 229px 0px 95px;
+    }
+
+    .breadcrumb-area.h-i-w {
+        padding: 230px 0px 93px;
+    }
+
+    .breadcrumb-area.bc-terms {
+        padding: 229px 0px 150px;
+    }
+
+    .serch-area .serch-box .list {
+        display: block;
+    }
+
+    .serch-area .serch-box .list li.button {
+        width: 100%;
+        margin-top: 30px;
+        margin-left: 0px;
+    }
+
+    .serch-area .serch-box {
+        padding: 20px 50px 40px;
+        border-radius: 20px;;
+    }
+
+    .help-section .help-box .help-box-inner .title {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .help-section .help-box .help-box-inner2-hearer .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .help-section .help-box .help-box-inner2 .single-artical .content .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .help-section .help-box {
+        padding: 29px 30px 40px !important;
+    }
+
+    .help-section.writter-artical-details .help-box {
+        padding: 29px 30px 40px !important;
+    }
+
+    .breadcrumb-area.bc-contact {
+        padding: 230px 0px 94px;
+    }
+
+    .index2 .hero-area {
+        padding: 283px 0px 314px;
+    }
+
+    .get-start .left-area .section-heading {
+        text-align: center;
+    }
+
+    .activities .shape.shape1,
+    .activities .shape.shape2,
+    .activities .shape.shape3 {
+        display: none;
+    }
+
+
+}
+
+
+@media (max-width: 575px) {
+
+    .hero-area .left-content .content .subtitle {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .hero-area .left-content .content .title {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .section-heading .title {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .features .single-feature .content .title {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .tournaments .info-table .main-box .main-header-area .nav li a {
+
+        line-height: 30px;
+        font-size: 20px;
+        margin: 0px 1px;
+    }
+
+    .tournaments .info-table .main-box .main-header-area .nav li::before {
+        height: 18px;
+    }
+
+    .tournaments .info-table .main-box .inner-table-content .header-area ul .nav-item .nav-link {
+        margin: 3px 3px;
+    }
+
+    .tournaments .info-table .main-box .inner-table-content .header-area ul {
+        border-radius: 10px;
+        padding: 14px 15px;
+    }
+
+    .single-process .num {
+        font-size: 140px;
+    }
+
+    .footer .subscribe-box .heading-area .sub-title {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .footer .subscribe-box .heading-area .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .four-zero-four .content .inner-content .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .breadcrumb-area .bc-img {
+        display: none;
+    }
+
+    .breadcrumb-area {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities {
+        padding: 0px 30px 27px;
+    }
+
+    .play-games .all-games .nav {
+        margin-bottom: 55px;
+    }
+
+    .flip-clock-divider .flip-clock-label {
+        font-size: 16px;
+    }
+
+    .flip-clock-divider .flip-clock-label {
+        bottom: -20px;
+    }
+
+    .flip-clock-divider .flip-clock-label {
+        right: -72px;
+    }
+
+    .flip-clock-divider.hours .flip-clock-label {
+        right: -80px;
+    }
+
+    .flip-clock-divider.minutes .flip-clock-label {
+        right: -87px;
+    }
+
+    .tournament-time-box .timer-area {
+        padding: 50px 30px 55px;
+    }
+
+    .testimonial .single-testimonial .people .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .marketing-tools .single-tools .content .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .how-play {
+        padding: 112px 0px 571px;
+    }
+
+    .features.about-page {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sorteo-accordion .card-header .btn-link.collapsed::before,
+    .sorteo-accordion .card-header .btn-link::before {
+        display: none;
+    }
+
+    .sorteo-accordion .card-body {
+        margin-top: 10px;
+        padding: 16px 30px 8px;
+    }
+
+    .sorteo-accordion .card-body p {
+        font-size: 14px;
+    }
+
+    .sorteo-accordion .card-header .btn-link {
+        display: block;
+        position: relative;
+    }
+
+    .sorteo-accordion .card-header .btn-link i {
+        display: inline-block;
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .sorteo-accordion .card-header .btn-link {
+        padding: 17px 10px 17px 70px;
+    }
+
+    .login-modal .modal-dialog .modal-content .modal-body .logo-area::after {
+        display: none;
+    }
+
+    .login-modal .modal-dialog .modal-content .modal-body .logo-area {
+        padding-top: 30px;
+    }
+
+    .login-modal .modal-dialog .modal-content .modal-body .header-area {
+        padding: 16px 30px 10px;
+    }
+
+    .login-modal .modal-dialog .modal-content .modal-body .header-area .sub-title {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .login-modal .modal-dialog .modal-content .modal-body .form-footer p {
+        font-size: 16px;
+    }
+
+    .login-modal .modal-dialog .modal-content .modal-body .form-area .form-group .box {
+        display: flow-root;
+    }
+
+    .login-modal .modal-dialog .modal-content .modal-body .form-area {
+        padding: 0px 20px 10px;
+    }
+
+    .login-modal .modal-dialog .modal-content .modal-body .header-area {
+        padding: 16px 20px 10px;
+    }
+
+    .login-modal .modal-dialog .modal-content .modal-body .form-footer {
+        padding: 0px 20px 6px;
+    }
+
+    .single-winer .top-area .left .name,
+    .single-winer .bottom-area .left,
+    .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area .right .title,
+    .tournaments .info-table .main-box .info-content .info-box .title,
+    .tournament-time-box .top-area .title,
+    .tournament-time-box .timer-area .title,
+    .team .team-members .team-member-inner .single-team .image .content .name,
+    .single-process .title,
+    .affiliate-program .single-program .content .title,
+    .marketing-tools .single-tools .content .title,
+    .testimonial .single-testimonial .people .title,
+    .single-awards .content .title,
+    .community-blog .single-box .content .title,
+    .single-bonus .content .title,
+    .single-deposit-bonus .content .title,
+    .single-h-play .title,
+    .help-section .help-box .help-box-inner2-hearer .title,
+    .help-section .help-box .help-box-inner2 .single-artical .content .title,
+    .help-section.writter-artical-details .help-box .help-box-inner2 .single-artical .writer-profile .writer-content .w-name,
+    .help-section.writter-artical-details .help-box .help-box-inner2 .single-artical .inner-content .title,
+    .help-section.writter-artical-details .help-box .help-box-inner2 .single-artical .footer-content .heading,
+    .contact .contact-form-wrapper .contact-box .title,
+    .how-it-work .single-work .title,
+    .lottery-area .lottery-staticstics .single-staticstics .right .count span,
+    .lottery-area .daily-lottery .draw-time .subtitle {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .help-section.writter-artical-details .help-box .help-box-inner2 .single-artical .inner-content p {
+        font-size: 20px;
+        font-weight: 300;
+    }
+
+    .help-section .help-box .help-box-inner3-hearer .title,
+    .help-section.writter-artical-details .help-box .help-box-inner2 .single-artical .top-title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .breadcrumb-area .title {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .lottery-video .video-box {
+        height: 400px;
+    }
+
+    .cart-area .cart-table-area .table {
+        width: 900px;
+    }
+
+    .team .team-members .team-member-inner .single-team .image .content .designation {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .activities .table {
+        width: 800px;
+    }
+
+    .index2 .hero-area {
+        padding: 232px 0px 264px;
+    }
+
+    .footer .footer-widget .title {
+        font-size: 22px;
+        line-height: 32px;
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area {
+        text-align: center;
+    }
+
+    .play-games .gaming-activities .gaming-activities-inner .single-activities .bottom-area {
+        text-align: center;
+    }
+
+    .lottery-area .lottery-staticstics .single-staticstics {
+        padding: 30px 30px 30px;
+        border-radius: 10px;
+        background-color: rgba(29, 40, 80, 0.6);
+    }
+
+    .question-area .section-heading .title {
+        margin-bottom: 18px;
+    }
+
+    .tournaments .info-table .main-box .inner-table-content .table {
+        width: 670px;
+    }
+
+    .about-page-section .about-video .play-video {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+    }
+
+    .about-page-section .section-heading {
+        margin-top: 50px;
+    }
+
+    .help-section .help-box .help-box-inner .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .single-game img,
+    .single-bonus .content img {
+        animation: unset;
+    }
+
+
+}
+
+
+@media (max-width: 500px) {
+    .flip-clock-wrapper ul {
+        width: 28px;
+        height: 33px;
+    }
+
+    .flip-clock-wrapper ul li a div.up:after {
+        top: 29px;
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .flip-clock-wrapper ul li a div div.inn {
+        font-size: 20px;
+        line-height: 35px;
+    }
+
+    .flip-clock-dot.top {
+        top: 10px;
+    }
+
+    .flip-clock-divider {
+        height: 57px;
+    }
+
+    .flip-clock-divider .flip-clock-label {
+        right: -74px;
+    }
+
+    .flip-clock-divider {
+        width: 10px;
+    }
+
+    .flip-clock-dot {
+        width: 5px;
+        height: 5px;
+        left: 2px;
+    }
+
+    .flip-clock-wrapper ul {
+        margin: 2px;
+    }
+
+    .flip-clock-divider .flip-clock-label {
+        bottom: -18px;
+        right: -46px;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    .flip-clock-divider.hours .flip-clock-label {
+        right: -51px;
+    }
+
+    .flip-clock-divider.minutes .flip-clock-label {
+        right: -59px;
+    }
+
+    .tournament-time-box .timer-area {
+        padding: 50px 30px 50px;
+    }
+
+    .tournament-time-box .top-area .title {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .tournament-time-box .top-area .sub-title {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .tournament-time-box .top-area .status {
+        font-size: 12px;
+        height: 22px;
+        line-height: 22px;
+        left: -70px;
+        top: 14px;
+    }
+
+
+}
+
+
+@media (max-width: 469px) {
+
+}
+
+
+@media (max-width: 414px) {
+
+    .header .top-header .content .left-content .left-list li {
+        margin-right: 15px;
+    }
+
+    .header .top-header .content .left-content .left-list li::before {
+        right: -14px;
+    }
+
+    .activities .tab-menu-area .nav-lend {
+        border-radius: 10px;
+    }
+
+    .footer .subscribe-box .heading-area .title {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .single-game img {
+        max-width: 150px;
+    }
+
+    .single-game {
+        /*height: 280px;*/
+        /*line-height: 280px;*/
+    }
+
+    .lottery-area .daily-lottery .draw-time .draw-counter,
+    .lottery-area .daily-lottery .draw-time .draw-counter span {
+        font-size: 24px !important;
+        line-height: 34px !important;
+    }
+
+    .help-section .help-box .help-box-inner2 .single-artical .writer-profile {
+        display: flow-root;
+        text-align: center;
+    }
+
+    .help-section .help-box .help-box-inner2 .single-artical .writer-profile img {
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    .help-section .help-box .help-box-inner2 .single-artical {
+        text-align: center;
+    }
+
+    .serch-area .serch-box {
+        padding: 20px 30px 40px;
+    }
+
+    .help-section.writter-artical-details .help-box .help-box-inner2 .single-artical .writer-profile {
+        display: flow-root;
+    }
+
+    .help-section.writter-artical-details .help-box .help-box-inner2 .single-artical .writer-profile img {
+        margin-right: 0px;
+    }
+
+    .features .single-feature .icon,
+    .affiliate-program .single-program .icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .features .single-feature .icon img,
+    .affiliate-program .single-program .icon img {
+        width: 40px;
+    }
+
+    .features .single-feature .icon.one,
+    .features .single-feature .icon.two,
+    .features .single-feature .icon.three,
+    .features .single-feature .icon.four,
+    .features .single-feature .icon.four,
+    .features .single-feature .icon.five,
+    .features .single-feature .icon.six,
+    .affiliate-program .single-program .icon.one,
+    .affiliate-program .single-program .icon.two,
+    .affiliate-program .single-program .icon.three,
+    .affiliate-program .single-program .icon.four,
+    .affiliate-program .single-program .icon.four,
+    .affiliate-program .single-program .icon.five,
+    .affiliate-program .single-program .icon.six {
+        line-height: 80px;
+    }
+
+    .footer .subscribe-box .heading-area .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .hero-area .left-content .content .title {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .hero-area .left-content .content .subtitle {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .hero-area .mybtn1 {
+        font-size: 14px;
+        padding: 9px 20px;
+    }
+
+    .breadcrumb-area .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .sorteo-accordion .card-header .btn-link {
+        font-size: 16px;
+    }
+
+    .breadcrumb-area.play {
+        padding: 232px 0px 218px;
+    }
+
+    .breadcrumb-area.bc-tournaments {
+        padding: 232px 0px 94px;
+    }
+
+    .breadcrumb-area.bc-lottery {
+        padding: 232px 0px 152px;
+    }
+
+    .breadcrumb-area.about {
+        padding: 232px 0px 94px;
+    }
+
+    .breadcrumb-area.bc-affiliate {
+        padding: 232px 0px 174px;
+    }
+
+    .breadcrumb-area.bc-awards {
+        padding: 232px 0px 94px;
+    }
+
+    .breadcrumb-area.bonus {
+        padding: 232px 0px 96px;
+    }
+
+    .breadcrumb-area.cart {
+        padding: 232px 0px 94px;
+    }
+
+    .breadcrumb-area.bc-faq {
+        padding: 232px 0px 95px;
+    }
+
+    .breadcrumb-area.h-i-w {
+        padding: 232px 0px 93px;
+    }
+
+    .breadcrumb-area.bc-terms {
+        padding: 232px 0px 150px;
+    }
+
+    .breadcrumb-area.bc-contact {
+        padding: 232px 0px 94px;
+    }
+
+
+}
+
+
+@media (max-width: 390px) {
+    .game-description .desc-title p {
+        font-size: 14px;
+    }
+
+    .breadcrumb-area .bc-img {
+        display: none;
+    }
+
+    .register-form-data-select {
+        width: 66px;
+        margin-right: 4px;
+    }
+
+    .register-form-data-select.register-form-data-select_sm {
+        width: 46px;
+    }
+
+    .tournament-time-box .timer-area {
+        padding: 50px 20px 50px;
+    }
+
+    .payment-method .method-slider {
+        padding: 0px 40px;
+    }
+
+    .community-blog .single-box {
+        display: flow-root;
+    }
+
+    .community-blog .single-box .img {
+        margin-right: 0px;
+        margin-bottom: 22px;
+    }
+
+    .header .top-header .content .right-content .right-list > li .cart-icon.tm-dropdown .tm-dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        -webkit-transform: translateX(-30%);
+        -ms-transform: translateX(-30%);
+        transform: translateX(-30%);
+    }
+
+    .footer .subscribe-box .form-area input {
+        font-size: 14px;
+    }
+
+    .footer .subscribe-box .icon {
+        display: none;
+    }
+
+    .footer .subscribe-box .col-8 {
+        max-width: 100% !important;
+        flex: 100% !important;
+    }
+
+    .footer .subscribe-box .heading-area .title {
+        margin-bottom: 32px;
+    }
+
+    .lottery-area .buy-tickets .buy-tickets-box .content {
+        padding: 20px 15px 20px;
+    }
+
+}
+
+
+@media (max-width: 343px) {
+    .index2 .hero-area {
+        padding: 258px 0 264px;
+    }
+
+    .breadcrumb-area.play {
+        padding: 257px 0px 218px;
+    }
+
+    .breadcrumb-area.bc-lottery {
+        padding: 257px 0px 218px;
+    }
+
+    .breadcrumb-area.bc-lottery {
+        padding: 257px 0px 152px;
+    }
+
+    .breadcrumb-area.bc-tournaments {
+        padding: 257px 0px 94px;
+    }
+
+    .breadcrumb-area.about {
+        padding: 257px 0px 94px;
+    }
+
+    .breadcrumb-area.bc-affiliate {
+        padding: 257px 0px 174px;
+    }
+
+    .breadcrumb-area.bc-awards {
+        padding: 257px 0px 94px;
+    }
+
+    .breadcrumb-area.bonus {
+        padding: 257px 0px 96px;
+    }
+
+    .breadcrumb-area.bc-faq {
+        padding: 257px 0px 95px;
+    }
+
+    .breadcrumb-area.h-i-w {
+        padding: 257px 0px 93px;
+    }
+
+    .breadcrumb-area.bc-terms {
+        padding: 257px 0px 150px;
+    }
+
+    .breadcrumb-area.bc-contact {
+        padding: 257px 0px 94px;
+    }
+
+}
+
+
+@media (max-width: 767px) {
+    .featured-game .game-slider .owl-controls {
+        margin-top: 0;
+    }
+
+    .featured-game .game-slider .owl-controls .owl-nav .owl-next {
+        left: -15px;
+    }
+
+}
+
+@media (max-width: 1199px) {
+    .ui-table_tickets {
+        height: auto;
+    }
+
+    .game-play .game-play-scrach {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .mybtn5,
+    .mybtn6 {
+        padding: 14px 20px;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .ui-btn_newgame {
+        order: 2;
+    }
+
+    .ui-btn_repeatgame {
+        order: 3;
+    }
+
+    .ui-btn_autoplay {
+        order: 1;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-area .links {
+        position: static;
+        bottom: auto;
+        left: auto;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer .copy-bg .copright-area-links li {
+        margin-right: 11px;
+    }
+
+    .footer .copy-bg .copright-area-links li::after {
+        right: -10px;
+    }
+
+    .header .mainmenu-area .navbar #main_menu .navbar-nav .nav-item.dropdown .dropdown-menu {
+        display: block;
+    }
+
+    .ui_sign-in-btn {
+        margin-left: 0;
+        border: 2px solid var(--btn-border-11);
+        padding: 5px 10px;
+        border-radius: 50px;
+    }
+}
+

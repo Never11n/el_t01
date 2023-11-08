@@ -1,0 +1,53 @@
+{% load static %}
+{% load i18n %}
+
+<h4 class="main-box__title">
+    {% trans 'Change Password' %}
+</h4>
+
+<ul class="breadcrumb-list">
+    <li class="breadcrumb-list__item">
+        {% trans 'Home' %}
+    </li>
+    <li class="breadcrumb-list__item">
+                        <span class="breadcrumb-list__icon-wrap">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+    </li>
+    <li class="breadcrumb-list__item">
+        {% trans 'Change Password' %}
+    </li>
+</ul>
+<div class="cab-pass cab-form main-text-right-rtf">
+    <div class="cab-pass__item">
+        <form id="id_form_cab_pass" action="{% url 'cab_pasw_save' %}" method="post">
+            {% csrf_token %}
+            <div class="main-form-group">
+                <input type="password" class="main-form-control"
+                       id="id_set_password1"
+                       name="f_u_password1" placeholder="{% trans 'Password' %}">
+                <img class="main-form-control-icon" src="{% static 'main/007/images/lock-icon.svg' %}" alt="">
+            </div>
+            <div class="main-form-group">
+                <input type="password" class="main-form-control"
+                       name="f_u_password2" placeholder="{% trans 'Confirm Password' %}">
+                <img class="main-form-control-icon" src="{% static 'main/007/images/lock-icon.svg' %}" alt="">
+            </div>
+        </form>
+        <!-- /.card-body -->
+        <div class="">
+            <a id="id_btn_ng"
+               href="##"
+               class="mybtn2 cab-pass__btn"
+               onclick="btn_cab_pass()"
+            >{% trans 'Save' %}</a>
+        </div>
+    </div>
+    <div class="cab-pass__item">
+        <p class="cab-pass__text">
+            {% trans 'Secure yourself with long password, including capital letters, symbols and numbers.' %}
+        </p>
+
+    </div>
+</div>
+

@@ -1,0 +1,60 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+{% get_static_prefix as STATIC_PREFIX %}
+<section data-game-theme-color="{{ theme_color }}" data-game-theme-color-rgb="" class="js-game-theme-color game-item main-bg full-height-without-footer">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="ui-game">
+                    <h2 class="ui-game__ticket-title">
+                        {% trans head_name_ticket %} ({{game.id }})
+                    </h2>
+                    <h3 class="ui-game__title 2">
+                        {% trans 'Lottery number' %}: {% if ticket.answ_lottery_number %}{{ ticket.answ_lottery_number }}{% else %}---{% endif %}<br>
+{#                        {% trans 'Choosen Cost' %}: {{ lotto_ticket_info.price }}{{ sum_currency }}<br>#}
+                        {% trans 'Amount game' %}: {{ sum_currency }}{{ game.ticket_sum }}<br>
+{#                        {% trans 'Form type' %}: {{ lotto_ticket_info.form_type }}<br>#}
+                        {% trans 'Status' %}: {{ status }}
+                    </h3>
+                    {% include tmpl_main_block %}
+                    <div class="ui-game-box">
+                        <div>
+                            <div class="ui-game-info-header">
+                                <span class="ui-game-info-header__text">
+                                    {% trans 'Win' %}
+                                </span>
+                                <span class="ui-game-info-header__number">3</span>
+                            </div>
+                            <div class="ui-game-card-count">
+                                <label class="ui-game-circle-input-label">
+                                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_md ui-game-circle-input-label-display__no-bg"
+                                          style="width: max-content;">
+                                        {% if status_verbal == 'finish' %}
+                                            {% if win_sum %}
+                                                {% trans 'Win' %} {{ win_sum }} {{ sum_currency }}
+                                            {% else %}
+                                                {% trans 'Not win' %}
+                                            {% endif %}
+                                        {% else %}
+                                            {% trans 'Awaiting the results' %}
+                                        {% endif %}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-game-btn-footer">
+                        <a href="/cab-game-lotto/{{ lotto_type }}/" class="ui-game-btn ui-game-btn_light">{% trans 'Buy another ticket' %}</a>
+                        <a href="/cab-game-lotto/{{ lotto_type }}/{{ ticket.id }}" class="ui-game-btn ui-game-btn_light">{% trans 'Buy the same ticket' %}</a>
+                    </div>
+                    {% if tmpl_block_cabala %}
+                    <div class="ui-game-box">
+                        {% include tmpl_block_cabala %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

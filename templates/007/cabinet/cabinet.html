@@ -1,0 +1,30 @@
+{% extends l_layout_file %}
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+{% block layoutbody %}
+    {% if cabinet_form %}
+        <div class="header-padding">
+            <div class="hero-area hero-area-cab">
+                <div class="container">
+                    <div class="hero-area__inner">
+                        <h1 class="hero-area__title">{% trans 'Scratch HISHGAD On Mobile' %}</h1>
+{#                        <img class="hero-area__img" src="{% static 'main/007/images/hero-area__img.png' %}" alt="">#}
+                        <img class="hero-area__img" src="{% static 'main/007/images/top_ticket_r.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="main-box inner-mob-shadow">
+                <div class="container">
+                    <div class="main-box__inner">
+                        {% endif %}
+                            {% for item_body in l_body_list %}
+                                {% include item_body %}
+                            {% endfor %}
+                        {% if cabinet_form %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

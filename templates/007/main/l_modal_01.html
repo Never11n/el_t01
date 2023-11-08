@@ -1,0 +1,251 @@
+{% load static %}
+{% load i18n %}
+<!-- SignIn Area Start -->
+<div class="modal fade main-modal" id="signin" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="signin"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered main-modal__inner" role="document">
+
+        <div class="modal-content main-modal-content">
+            <div class="main-modal-mob-navigation">
+                <button type="button" class="main-modal-mob-navigation__item js-login-modal-open">
+                    {% trans 'Login' %}
+                </button>
+                <button type="button" class="main-modal-mob-navigation__item main-modal-mob-navigation__item_active js-register-modal-open">
+                    {% trans 'Register' %}
+                </button>
+            </div>
+            <div class="modal-body main-modal-body">
+
+                <button type="button" class="close modal-dialog-close" aria-hidden="true" data-dismiss="modal" aria-label="Close">
+                    <img class="modal-dialog-close__img" src="{% static 'main/007/images/close-icon.png' %}" alt="">
+                </button>
+
+                <h4 class="main-modal-title main-modal-title_register">{% trans 'Register' %}</h4>
+                <p class="main-modal-sub-title main-modal-sub-title_register">{% trans 'Let the machines scratch for you!' %}</p>
+
+                <div class="form-area">
+                    <form action="#" method="POST" autocomplete="off">
+                        <input type="hidden" id="url_path" name="url_path" value="{{ utm_code }}">
+                        <input type="hidden" id="get_param" name="get_param" value="{{ get_param }}">
+
+                        <fieldset class="main-modal-fieldset-register">
+                            <div class="register-form-box">
+                                <div class="register-form-box_col">
+                                    <div class="main-modal-form-group">
+                                        <input type="text"
+                                               class="main-modal-form-control"
+                                               id="input-name"
+                                               autocomplete="off"
+                                               name="f_name"
+                                               placeholder="{% trans 'Full Name*' %}"
+                                        >
+                                    </div>
+                                    <div class="main-modal-form-group">
+                                        <input type="email"
+                                               class="main-modal-form-control"
+                                               id="input-email"
+                                               autocomplete="off"
+                                               name="f_email"
+                                               placeholder="{% trans 'E-Mail*' %}"
+                                        >
+                                    </div>
+                                    <div class="main-modal-form-group">
+                                        <input type="text" class="main-modal-form-control"
+                                               id="input-id"
+                                               autocomplete="off"
+                                               name="f_id"
+                                               placeholder="{% trans 'Passport ID*' %}">
+                                    </div>
+                                    <div class="main-modal-form-group">
+                                        <input type="text"
+                                               class="main-modal-form-control"
+                                               id="input-phone"
+                                               autocomplete="off"
+                                               name="f_phone"
+                                               placeholder="{% trans 'Phone*' %}">
+                                    </div>
+                                </div>
+                                <div class="register-form-box_col">
+                                    <div class="main-modal-form-group">
+                                        <div class="register-form-date">
+                                            <span class="register-form-date__text">
+                                                {% trans 'Birthday Date*' %}
+                                            </span>
+                                            <div class="register-form-date__control">
+                                                <select class="birthdayDatePickerselect register-form-data-select register-form-data-select_sm" id="input-day" name="f_re_day">
+                                                    <option value="" disabled selected hidden>{% trans 'DD' %}</option>
+                                                    <option>01</option>
+                                                    <option>02</option>
+                                                    <option>03</option>
+                                                    <option>04</option>
+                                                    <option>05</option>
+                                                    <option>06</option>
+                                                    <option>07</option>
+                                                    <option>08</option>
+                                                    <option>09</option>
+                                                    <option>10</option>
+                                                    <option>11</option>
+                                                    <option>12</option>
+                                                    <option>13</option>
+                                                    <option>14</option>
+                                                    <option>15</option>
+                                                    <option>16</option>
+                                                    <option>17</option>
+                                                    <option>18</option>
+                                                    <option>19</option>
+                                                    <option>20</option>
+                                                    <option>21</option>
+                                                    <option>22</option>
+                                                    <option>23</option>
+                                                    <option>24</option>
+                                                    <option>25</option>
+                                                    <option>26</option>
+                                                    <option>27</option>
+                                                    <option>28</option>
+                                                    <option>29</option>
+                                                    <option>30</option>
+                                                    <option>31</option>
+                                                </select>
+
+                                                <select class="birthdayDatePickerselect register-form-data-select" id="input-month" name="f_re_month">
+                                                    <option value="" disabled selected hidden>{% trans 'MM' %}</option>
+                                                    <option value="01">{% trans 'January' %}</option>
+                                                    <option value="02">{% trans 'February' %}</option>
+                                                    <option value="03">{% trans 'March' %}</option>
+                                                    <option value="04">{% trans 'April' %}</option>
+                                                    <option value="05">{% trans 'May' %}</option>
+                                                    <option value="06">{% trans 'June' %}</option>
+                                                    <option value="07">{% trans 'July' %}</option>
+                                                    <option value="08">{% trans 'August' %}</option>
+                                                    <option value="09">{% trans 'September' %}</option>
+                                                    <option value="10">{% trans 'October' %}</option>
+                                                    <option value="11">{% trans 'November' %}</option>
+                                                    <option value="12">{% trans 'December' %}</option>
+                                                </select>
+
+                                                <select class="birthdayDatePickerselect register-form-data-select register-form-data-select_sm" id="input-year" name="f_re_year">
+                                                    <option value="" disabled selected hidden>{% trans 'YYYY' %}</option>
+                                                    {% for ItemYear in dict_birthday_year %}
+                                                    <option>{{ ItemYear }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="register-form-inner-box">
+                                        <div class="register-form-inner-box_col">
+                                            <div class="main-modal-form-group">
+                                                <input type="text" class="main-modal-form-control"
+                                                       id="input-street"
+                                                       autocomplete="off"
+                                                       name="f_street"
+                                                       placeholder="{% trans 'Street*' %}">
+                                            </div>
+                                        </div>
+
+                                        <div class="register-form-inner-box_col">
+                                            <div class="register-form-inner-box">
+                                                <div class="register-form-inner-box_col">
+                                                    <div class="main-modal-form-group">
+                                                        <input type="text" class="main-modal-form-control"
+                                                               id="input-building"
+                                                               autocomplete="off"
+                                                               name="f_building"
+                                                               placeholder="{% trans 'Building ID*' %}">
+                                                    </div>
+                                                </div>
+                                                <div class="register-form-inner-box_col">
+                                                    <div class="main-modal-form-group">
+                                                        <input type="text" class="main-modal-form-control"
+                                                               id="input-apartments"
+                                                               autocomplete="off"
+                                                               name="f_apartments"
+                                                               placeholder="{% trans 'Apartment ID*' %}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="register-form-inner-box">
+                                        <div class="register-form-inner-box_col">
+                                            <div class="main-modal-form-group">
+                                                <input type="text"
+                                                       class="main-modal-form-control"
+                                                       id="input-city"
+                                                       autocomplete="off"
+                                                       name="f_city"
+                                                       placeholder="{% trans 'City*' %}">
+                                            </div>
+                                        </div>
+                                        <div class="register-form-inner-box_col">
+                                            <div class="main-modal-form-group">
+                                                <input type="text"
+                                                       class="main-modal-form-control"
+                                                       id="input-zip-code"
+                                                       autocomplete="off"
+                                                       name="f_re_zip_code"
+                                                       placeholder="{% trans 'Postal/Zip Code*' %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="register-form-inner-box">
+                                        <div class="register-form-inner-box_col">
+                                            <div class="main-modal-form-group">
+                                                <input type="password"
+                                                       class="main-modal-form-control"
+                                                       id="input-password"
+                                                       autocomplete="off"
+                                                       name="f_password"
+                                                       placeholder="{% trans 'Password*' %}">
+                                            </div>
+                                        </div>
+                                        <div class="register-form-inner-box_col">
+                                            <div class="main-modal-form-group">
+                                                <input type="password"
+                                                       class="main-modal-form-control"
+                                                       id="input-con-password"
+                                                       autocomplete="off"
+                                                       name="f_re_password"
+                                                       placeholder="{% trans 'Confirm Password*' %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-check-group-wrap main-modal-form-group">
+                                <div class="check-group main-check-group">
+                                    <input type="checkbox" class="check-box-field main-check-field"
+                                           id="id_input-terms"
+                                           name="f_terms"
+                                    >
+                                    <label class="" for="id_input-terms">
+                                        {% trans 'I Agree with Terms, Conditions & Privacy Policy' %}
+                                    </label>
+                                </div>
+
+                                <div class="check-group main-check-group">
+                                    <input type="checkbox" class="check-box-field main-check-field"
+                                           id="id_input-reklama"
+                                           name="f_reklama"
+                                    >
+                                    <label class="" for="id_input-reklama">
+                                        {% trans 'I Agree Receiving Information & Marketing Content' %}
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="text-center">
+                            <a href="#"
+                               class="mybtn1 register-btn"
+                               onclick="btn_modal_register()"
+                               >
+                               {% trans 'START SCRATCHING' %}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SignIn Area End -->

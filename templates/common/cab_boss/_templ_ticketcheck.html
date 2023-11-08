@@ -1,0 +1,53 @@
+{% load static %}
+{% load i18n %}
+    <input id="id_payadd_id" type="hidden" value="{{ item_ticket.id }}">
+    <div class="card-header">
+        <h3 class="card-title text-primary">{% trans 'User' %} = {{ games_id.id }},
+            {{ item_ticket.games_id.user_id.profile.name}},
+            {{ item_ticket.games_id.user_id.profile.mobile}},
+            {{ item_ticket.games_id.user_id.email}}
+        </h3>
+    </div>
+    <div class="card-body">
+        <!-- radio -->
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5 class="card-title m-0 text-muted">{% trans 'Ticket' %}</h5>
+                    </div>
+                    <div class="col-sm-12">
+                        <img class="img-fluid" src="{{ item_ticket.img_08 }}" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="row">
+            <div class="card-header col-12">
+                <h3 class="card-title text-info">{% trans 'Status' %} = {{ item_ticket.status }}</h3>
+            </div>
+            <div class="card-header col-12">
+                <h3 class="card-title text-info">{% trans 'Request' %} = {{ item_ticket.req_id }}</h3>
+            </div>
+            <div class="card-header col-12">
+                <h3 class="card-title text-info">{% trans 'Date answer' %} = {{ item_ticket.answ_dt|date:"d.m.Y H:i:s" }}</h3>
+            </div>
+            <div class="card-header col-12">
+                <h3 class="card-title text-info">{% trans 'Nom ticket' %} = {{ item_ticket.answ_nom }}</h3>
+            </div>
+            <div class="card-header col-12">
+                <h3 class="card-title text-info">{% trans 'Balanse before' %} = {{ item_ticket.balance_01 }}</h3>
+            </div>
+            <div class="card-header col-12">
+                <h3 class="card-title text-info">{% trans 'Cost' %} = {{ item_ticket.cost_2 }}</h3>
+            </div>
+            <div class="card-header col-12">
+                <h3 class="card-title text-info">{% trans 'Win' %} = {{ item_ticket.answ_win_sum }}</h3>
+            </div>
+            <div class="card-header col-12">
+                <h3 class="card-title text-info">{% trans 'Balance after' %} = {{ item_ticket.balance_02 }}</h3>
+            </div>
+
+        </div>
+    </div>

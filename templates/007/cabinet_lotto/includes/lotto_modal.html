@@ -1,0 +1,256 @@
+{% load static %}
+{% load i18n %}
+<!-- modal -->
+<div data-modal-id="js-ui-game-lotto-modal" class="game-modal js-game-modal">
+    <div class="game-modal__overlay"></div>
+    <div class="game-modal__box">
+        <div class="game-modal__header">
+            <div class="ui-game-btn-reset-wrap">
+                <button data-line="123" data-reset="line" type="button" class="ui-game-btn-reset js-modal-reset-button-line js-game-modal-close js-game-reset">
+                    <i class="fa fa-times"></i>
+                </button>
+                <span class="ui-game-btn-reset-text">{% trans 'Clear and close' %}</span>
+            </div>
+            <div class="ui-game-btn-ok-wrap">
+                <span class="ui-game-btn-ok-text">{% trans 'Save and close' %}</span>
+                <button type="button" class="ui-game-btn-ok js-game-modal-close js-game-modal-save">
+                    <i class="fa fa-check"></i>
+                </button>
+            </div>
+        </div>
+        <div data-selected-line="123" class="js-selected-line game-modal__body">
+            <form class="js-ui-game-reset-from js-ui-game-count-selected-checkbox">
+                <div class="ui-game-balls-options-wrap">
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="01" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="01" />
+                            <span class="ui-game-ball-input-label-display">1</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="02" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="02" />
+                            <span class="ui-game-ball-input-label-display">2</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="03" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="03" />
+                            <span class="ui-game-ball-input-label-display">3</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="04" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="04" />
+                            <span class="ui-game-ball-input-label-display">4</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="05" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="05" />
+                            <span class="ui-game-ball-input-label-display">5</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="06" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="06" />
+                            <span class="ui-game-ball-input-label-display">6</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="07" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="07" />
+                            <span class="ui-game-ball-input-label-display">7</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="08" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="08" />
+                            <span class="ui-game-ball-input-label-display">8</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="09" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="09" />
+                            <span class="ui-game-ball-input-label-display">9</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="10" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="10" />
+                            <span class="ui-game-ball-input-label-display">10</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="11" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="11" />
+                            <span class="ui-game-ball-input-label-display">11</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="12" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="12" />
+                            <span class="ui-game-ball-input-label-display">12</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="13" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="13" />
+                            <span class="ui-game-ball-input-label-display">13</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="14" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="14" />
+                            <span class="ui-game-ball-input-label-display">14</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="15" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="15" />
+                            <span class="ui-game-ball-input-label-display">15</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="16" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="16" />
+                            <span class="ui-game-ball-input-label-display">16</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="17" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="17" />
+                            <span class="ui-game-ball-input-label-display">17</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="18" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="18" />
+                            <span class="ui-game-ball-input-label-display">18</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="19" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="19" />
+                            <span class="ui-game-ball-input-label-display">19</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="20" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="20" />
+                            <span class="ui-game-ball-input-label-display">20</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="21" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="21" />
+                            <span class="ui-game-ball-input-label-display">21</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="22" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="22" />
+                            <span class="ui-game-ball-input-label-display">22</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="23" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="23" />
+                            <span class="ui-game-ball-input-label-display">23</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="24" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="24" />
+                            <span class="ui-game-ball-input-label-display">24</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="25" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="25" />
+                            <span class="ui-game-ball-input-label-display">25</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="26" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="26" />
+                            <span class="ui-game-ball-input-label-display">26</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="27" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="27" />
+                            <span class="ui-game-ball-input-label-display">27</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="28" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="28" />
+                            <span class="ui-game-ball-input-label-display">28</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="29" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="29" />
+                            <span class="ui-game-ball-input-label-display">29</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="30" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="30" />
+                            <span class="ui-game-ball-input-label-display">30</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="31" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="31" />
+                            <span class="ui-game-ball-input-label-display">31</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="32" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="32" />
+                            <span class="ui-game-ball-input-label-display">32</span>
+                        </label>
+                    </div>
+
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="33" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="33" />
+                            <span class="ui-game-ball-input-label-display">33</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="34" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="34" />
+                            <span class="ui-game-ball-input-label-display">34</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="35" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="35" />
+                            <span class="ui-game-ball-input-label-display">35</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="36" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="36" />
+                            <span class="ui-game-ball-input-label-display">36</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="37" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-line" value="37" />
+                            <span class="ui-game-ball-input-label-display">37</span>
+                        </label>
+                        <label class="ui-game-ball-input-label visually-hide">
+                            <span class="ui-game-ball-input-label-display">70</span>
+                        </label>
+                        <label class="ui-game-ball-input-label visually-hide">
+                            <span class="ui-game-ball-input-label-display">70</span>
+                        </label>
+                        <label class="ui-game-ball-input-label visually-hide">
+                            <span class="ui-game-ball-input-label-display">70</span>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- modal 2-->
+<div data-modal-id="js-ui-game-lotto-modal-2" class="game-modal js-game-modal">
+    <div class="game-modal__overlay"></div>
+    <div class="game-modal__box">
+        <div class="game-modal__header">
+            <div class="ui-game-btn-reset-wrap">
+                <button data-line="123" data-reset="strong" type="button" class="ui-game-btn-reset js-modal-reset-button-line js-game-modal-2-close js-game-reset">
+                    <i class="fa fa-times"></i>
+                </button>
+                <span class="ui-game-btn-reset-text">{% trans 'Clear and close' %}</span>
+            </div>
+            <div class="ui-game-btn-ok-wrap">
+                <span class="ui-game-btn-ok-text">{% trans 'Save and close' %}</span>
+                <button type="button" class="ui-game-btn-ok js-game-modal-2-close js-game-modal-save">
+                    <i class="fa fa-check"></i>
+                </button>
+            </div>
+        </div>
+        <div data-selected-line="123" class="js-selected-line game-modal__body">
+            <form class="js-ui-game-reset-from js-ui-game-count-selected-checkbox">
+                <div class="ui-game-balls-options-wrap">
+                    <div class="ui-game-balls-options-row">
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="1" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-strong" value="1" />
+                            <span class="ui-game-ball-input-label-display">1</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="2" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-strong" value="2" />
+                            <span class="ui-game-ball-input-label-display">2</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="3" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-strong" value="3" />
+                            <span class="ui-game-ball-input-label-display">3</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="4" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-strong" value="4" />
+                            <span class="ui-game-ball-input-label-display">4</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="5" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-strong" value="5" />
+                            <span class="ui-game-ball-input-label-display">5</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="6" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-strong" value="6" />
+                            <span class="ui-game-ball-input-label-display">6</span>
+                        </label>
+                        <label class="ui-game-ball-input-label">
+                            <input data-number-value="7" type="checkbox" name="ui-game-ball-option" class="ui-game-ball-input ui-game-ball-input-strong" value="7" />
+                            <span class="ui-game-ball-input-label-display">7</span>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

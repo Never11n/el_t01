@@ -1,0 +1,69 @@
+{% load static %}
+{% load i18n %}
+
+{% csrf_token %}
+<input id="pay_operation_id" type="hidden" value="{{ m_pay_operation_id }}">
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <iframe class="tranzila-frame" id="encoder_iframe" height="600px" width="455px"
+                    src="{{ m_url }}{{ get_param }}">
+            </iframe>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <a href="{% url 'cab_game_order' item_game_user.id %}"
+               class="mybtn1">{% trans 'Back to site' %}</a>
+        </div>
+        {% if False %}
+            <div class="col-12 d-flex justify-content-center">
+                <a href="{% url 'cab_game_item' item_game_user.id %}"
+                   class="mybtn1 mybtn6">{% trans 'IMITATION' %}</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script type="text/javascript">
+    function PollingPaymentInfo() {
+        var m_pay_operation_id = $('#pay_operation_id').val();
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                pay_operation_id: m_pay_operation_id,
+            },
+            url: "/game_payment_info/",
+            success: function (res) {
+                console.log(res);
+                if (res.AnswerCod == "01") {
+                    let m_list_t = res.TicketInfo;
+                    location.href = "/cab-game-play/" + res.GameId + "/";
+                }
+                if (res.AnswerCod == "00") {
+                    if (res.NextTimeout > 0) {
+                        setTimeout(PollingPaymentInfo, res.NextTimeout);
+                    } else {
+                        location.href = "/cabinet/";
+                    }
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                return false;
+            }
+        });
+    }
+    window.onload = function () {
+        setTimeout(PollingPaymentInfo, 5000);
+    }
+</script>
+

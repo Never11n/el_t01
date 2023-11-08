@@ -1,0 +1,108 @@
+{% load static %}
+{% load i18n %}
+<section class="main-text-right-rtf">
+    <h4 class="main-box__title">
+        {% trans 'Cash Payment' %}
+    </h4>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-list__item">
+            {% trans 'Home' %}
+        </li>
+        <li class="breadcrumb-list__item">
+            <span class="breadcrumb-list__icon-wrap">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+        </li>
+        <li class="breadcrumb-list__item">
+            {% trans 'Cash Payment' %}
+        </li>
+    </ul>
+    <h5 class="cab-payout-title">
+        {% trans 'Cash deposit, after the courier has collected the money then this amount will go into your account, good luck.' %}
+    </h5>
+    <p class="cab-payout-sub-title hide-on-mob">
+        {% trans 'Transfer money to Balance' %}
+    </p>
+    <div class="text-muted">
+        <div class="row">
+            <p class="text-sm col-md-4">{% trans 'Name' %}
+                <b class="d-block">{{ me.profile.name }}</b>
+            </p>
+            <p class="text-sm col-md-4">{% trans 'Phone' %}
+                <b class="d-block">{{ me.profile.mobile }}</b>
+            </p>
+            <p class="text-sm col-md-4">{% trans 'E-mail' %}
+                <b class="d-block">{{ me.email }}</b>
+            </p>
+        </div>
+    </div>
+    <form class="cab-form cab-form-no-border" id="id_form_payout" action="{% url 'cab_cashadd_save' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" id="id_balance" value="{{ me.profile.balance }}"/>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="font-weight-bold cap-payout-item-name"
+                       for="id_cashadd_city">{% trans 'City' %}</label> {# City- עיר #}
+                <input type="text"
+                       id="id_cashadd_city"
+                       class="form-control"
+                       name="f_cashadd_city"
+                >
+            </div>
+            <div class="form-group col-md-6">
+                <label class="font-weight-bold cap-payout-item-name"
+                       for="id_cashadd_street">{% trans 'Street' %}</label> {# רחוב - street #}
+                <input type="text"
+                       id="id_cashadd_street"
+                       class="form-control"
+                       name="f_cashadd_street"
+                >
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="font-weight-bold cap-payout-item-name"
+                       for="id_cashadd_building">{% trans 'Building' %}</label> {# Building- מספר בניין #}
+                <input type="text"
+                       id="id_cashadd_building"
+                       class="form-control"
+                       name="f_cashadd_building"
+                >
+            </div>
+            <div class="form-group col-md-6">
+                <div class="form-group">
+                    <label class="font-weight-bold cap-payout-item-name"
+                           for="id_cashadd_amount">{% trans 'Amount Cash' %}</label> {# סכום שברצונך להפקיד #}
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="number"
+                                   class="form-control"
+                                   id="id_cashadd_amount"
+                                   name="f_cashadd_amount"
+                                   min="1000"
+                                   max="11000"
+                                   value="1000"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-12 ui-payadd_info">
+            <p class="text-muted">{% trans 'An amount between 1,000 and 11,000 NIS can be deposited.' %}</p>
+            <p class="text-muted">{% trans 'The collection cost will be added to the deposit amount. Costs range from 50-200 depending on the area of residence, our representative will get back to you with the details.' %}</p>
+            <p class="text-muted">{% trans 'Receipt will be issued after collecting the amount received.' %}</p>
+        </div>
+    </div>
+    <div class="mob-text-center">
+        <a id="id_btn_ng"
+           href="##"
+           class="mybtn2 cab-payout-btn"
+           onclick="btn_cashadd_save()"
+        >
+            {% trans 'save' %}
+        </a>
+    </div>
+</section>

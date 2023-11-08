@@ -1,0 +1,14 @@
+{#{% with "{{ GL_MainSkin }}"|add"/mail/mail_layout.html" as mem_extend %}#}
+{#{% with mem_extend="002/mail/mail_layout.html"  %}#}
+{#{% define "002/mail/mail_layout.html" as mem_extend %}#}
+{% extends "002/mail/mail_layout.html" %}
+{% load static %}
+{% load i18n %}
+{% block caption %}
+    {% trans 'FEEDBACK' %}
+{% endblock %}
+{% block description %}
+    <div class="marginBottom25" style="margin-bottom: 25px;">
+        {{ text_replay }}
+    </div>
+{% endblock %}

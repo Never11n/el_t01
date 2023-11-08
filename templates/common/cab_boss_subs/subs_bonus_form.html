@@ -1,0 +1,204 @@
+{% load static %}
+{% load i18n %}
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{ m_form_title }}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                             <div class="form-group">
+                                                 <div class="form-group clearfix">
+                                                    <div class="icheck-success d-inline">
+                                                        <input type="checkbox"
+                                                               class="js__calc_check"
+                                                        {% if m_form_type == 'new' %}
+                                                        checked
+                                                        {% else %}
+                                                        {% if m_enabled %}
+                                                        checked
+                                                        {% endif %}
+                                                        {% endif %}
+                                                        id="id_enabled"
+                                                        name="f_enabled"
+                                                        value="m_enabled">
+                                                        <label for="id_enabled">
+                                                            {% trans 'Enabled' %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_ticket_type">{% trans 'Type ticket' %}</label>
+                                                <select class="custom-select js__calc_select"
+                                                        id="id_ticket_type"
+                                                        name="f_ticket_type">
+                                                    {% for Item in dict_tickets_type %}
+                                                        <option
+                                                                {% if Item.verbal == m_ticket_type.verbal %} selected="selected"
+                                                                {% endif %}
+                                                                data-cost="{{ Item.cost_2 }}"
+                                                                value="{% trans Item.verbal %}">{% trans Item.caption %} ({{ Item.cost_2 }}) </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="id_min_days">{% trans 'Min days' %}</label>
+                                                <input type="number"
+                                                       id="id_min_days"
+                                                       class="form-control"
+                                                       name="f_min_days"
+                                                       value="{{ m_min_days }}"
+                                                       >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="id_max_days">{% trans 'Max days' %}</label>
+                                                <input type="number"
+                                                       id="id_max_days"
+                                                       class="form-control"
+                                                       name="f_max_days"
+                                                       value="{{ m_max_days }}"
+                                                       >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                         <div class="form-group">
+                                            <label for="id_payment_type">{% trans 'Payment type' %}</label>
+                                             <select class="form-control"
+                                                     id="id_payment_type"
+                                                     name="f_payment_type">
+                                                 {% for payment_type in m_payment_types_list %}
+                                                 <option {% if payment_type == m_type_payment %} selected="selected" {% endif %}
+                                                         value="{{ payment_type.verbal }}">{{ payment_type.caption }}</option>
+                                                    {% endfor %}
+                                                 </select>
+                                         </div>
+                                    </div>
+                                         <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="id_amount">{% trans 'Bonus amount' %}</label>
+                                                <input type="number"
+                                                       step="0.01"
+                                                       id="id_amount"
+                                                       class="form-control"
+                                                       name="f_amount"
+                                                       value="{{ m_bonus_amount }}"
+                                                       >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                         <div class="form-group">
+                                            <label for="id_manager">{% trans 'Manager' %}</label>
+                                             <select class="form-control"
+                                                     id="id_manager"
+                                                     name="f_manager">
+                                                 <option value="all_managers" {% if m_for_all %} selected="selected" {% endif %}
+                                                 >{% trans 'For all managers' %}</option>
+                                                 {% for manager in m_managers_list %}
+                                                 <option {% if manager == m_manager %} selected="selected" {% endif %}
+                                                         value="{{ manager.id }}">{{ manager.name }}
+                                                 </option>
+                                                 {% endfor %}
+                                             </select>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row flex-md-row ">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                onclick="btn_subs_bonus_save()"
+                                        >{% trans 'Save' %}</button>
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                data-dismiss="modal"
+                                        >{% trans 'Close' %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function btn_subs_bonus_save() {
+        let enabled = 0;
+        if ($('#id_enabled').is(':checked')) { enabled = 1}
+        let manager = $("#id_manager").val(),
+            payment_type = $("#id_payment_type").val(),
+            ticket_type = $("#id_ticket_type").val(),
+            min_days = +$("#id_min_days").val(),
+            max_days = +$("#id_max_days").val(),
+            bonus_amount = $("#id_amount").val();
+        $.ajax({
+                type: "POST",
+                async: false,
+                data: {
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    m_form_type: '{{ m_form_type }}',
+                    f_id: '{{ m_item_id }}',
+                    f_enabled: enabled,
+                    f_manager: manager,
+                    f_payment_type: payment_type,
+                    f_ticket_type: ticket_type,
+                    f_min_days: min_days,
+                    f_max_days: max_days,
+                    f_bonus_amount: bonus_amount
+                },
+                url: "/subs_bonus_form_save/",
+                success: function (res) {
+                    if (res.AnswerCod == '01') {
+                        $('.js-modal__cabb_form').modal('hide');
+                        location.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: res.AnswerText,
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                },
+                error: function (res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            });
+
+    }
+</script>

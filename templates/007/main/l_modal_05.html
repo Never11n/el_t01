@@ -1,0 +1,166 @@
+{% load static %}
+{% load i18n %}
+<!-- SignIn Area Start -->
+<div class="modal fade login-modal" id="recovery" tabindex="-1" role="dialog" aria-labelledby="suport"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="{% trans 'Close' %}"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-body">
+                <div class="logo-area">
+                    <img class="logo" src="{% static 'main/005/images/logo.webp' %}" alt="">
+                </div>
+                <div class="header-area">
+                    <h4 class="title">{% trans 'Recovery Password' %}</h4>
+                    <p class="sub-title">{% trans 'A new password will be sent to you at the specified email address or phone number.' %}</p>
+                </div>
+                <div class="form-area">
+                    <form id="id_form_recovery" action="{% url 'recovery' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" id="recoveryType" name="recoveryType" value="">
+                        <div class="main-form-group">
+                            <label class="main-form-label" for="id_fl_email_recovery">{% trans 'Email' %}</label>
+                            <input type="email" class="main-form-control"
+                                   id="id_fl_email_recovery"
+                                   name="fl_email_recovery"
+                                   placeholder="{% trans 'Enter your Email' %}">
+                        </div>
+                        <label class="main-form-label text-center" >{% trans 'or' %}</label>
+                        <div class="main-form-group">
+                            <label class="main-form-label" for="id_fl_phone_recovery">{% trans 'Phone number' %}</label>
+                            <input type="email" class="main-form-control"
+                                   id="id_fl_phone_recovery"
+                                   name="fl_phone_recovery"
+                                   placeholder="{% trans 'Enter your phone number' %}">
+                        </div>
+                        <div class="main-form-group text-center">
+                               <a href="#"
+                               class="mybtn1"
+                               onclick="btn_modal_recovery_new('phone')"
+                               >
+                               {% trans 'Send sms' %}
+                            </a>
+                            <a href="#"
+                               class="mybtn1"
+                               onclick="btn_modal_recovery_new('email')"
+                               >
+                               {% trans 'Send email' %}
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function btn_modal_recovery_new(recovery_type) {
+        let data,
+            hidden_type = $('#recoveryType');
+        hidden_type.val(recovery_type);
+
+        if (recovery_type === 'email') {
+            let m_email_recovery = "",
+                isValid;
+            if (input_field_exist('fl_email_recovery')) {
+                m_email_recovery = input_field_value('fl_email_recovery');
+            }
+            if (input_field_exist('fl_email_recovery')) {
+                if (input_field_value_is_empty('fl_email_recovery')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("Please enter your Email/Login"),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#d33',
+                    });
+                    return false;
+                }
+                isValid = validateEmail(input_field_value('fl_email_recovery'));
+                if (!isValid) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("Invalid email format"),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#d33',
+                    });
+                    return false;
+                }
+            }
+            data = {
+                fl_email: m_email_recovery
+            }
+        } else if (recovery_type === 'phone') {
+            let m_phone_recovery = "",
+                isValid;
+            if (input_field_exist('fl_phone_recovery')) {
+                m_phone_recovery = input_field_value('fl_phone_recovery');
+            }
+            if (input_field_exist('fl_phone_recovery')) {
+                if (input_field_value_is_empty('fl_phone_recovery')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("Please enter your phone number"),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#d33',
+                    });
+                    return false;
+                }
+                isValid = validatePhone(input_field_value('fl_phone_recovery'));
+                if (!isValid) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("Invalid phone format"),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#d33',
+                    });
+                    return false;
+                }
+            }
+            data = {
+                fl_phone: m_phone_recovery
+            }
+        }
+        $.ajax({
+            type: "GET",
+            data: data,
+            url: "/check-loginrecovery/",
+            success: function (res) {
+                if (res.AnswerCod === "00") {
+                    $("#id_form_recovery").submit();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#d33',
+                    });
+                    return false;
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occurred during user verification, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                return false;
+            }
+        });
+    }
+</script>

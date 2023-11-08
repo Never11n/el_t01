@@ -1,0 +1,103 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'List Pay Oparation of USER' %} {{ ItemRow.games_id.user_id.profile.name }} {{ ItemRow.games_id.user_id.profile.mobile }} {{ ItemRow.games_id.user_id.email }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr class="js_tic_row">
+                                        <th>{% trans 'Id' %}</th>
+                                        <th>{% trans 'Date' %}</th>
+                                        <th>{% trans 'Name' %}</th>
+                                        <th>{% trans 'Amount' %}</th>
+                                        <th>{% trans 'Status' %}</th>
+                                        <th>{% trans 'Description' %}</th>
+                                        <th>{% trans 'Manager' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ItemRow in list_balanceOperation %}
+                                        <tr class="js_tic_row">
+                                            <td>{{ ItemRow.id }}</td>
+
+                                            <td>{{ ItemRow.created|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{% trans ItemRow.type_balanceoperation.caption %}</td>
+                                            <td>{{ ItemRow.amount }}</td>
+                                            <td><span class="tag tag-success">{% trans ItemRow.status.caption %}</span></td>
+                                            <td>{{ ItemRow.description }}</td>
+                                            <td>{{ ItemRow.t_create_user.profile.name }}</td>
+
+{##}
+{#                                            <td class="text-nowrap">{{ ItemRow.games_id_id }}#}
+{#                                                ({{ ItemRow.games_id.ticket_num }})#}
+{#                                            </td>#}
+{#                                            <td>#}
+{#                                                {% if ItemRow.status == "00" %}#}
+{#                                                    {% trans 'start' %}#}
+{#                                                {% elif ItemRow.status == "01" %}#}
+{#                                                    {% trans 'ready' %}#}
+                                                    {#                                            {% elif ItemRow.status == "02"  %}#}
+                                                    {#                                                {% trans 'start' %}#}
+{#                                                {% elif ItemRow.status == "30" %}#}
+{#                                                    {% trans 'error' %}#}
+{#                                                {% elif ItemRow.status == "33" %}#}
+{#                                                    {% trans 'finish' %}#}
+{#                                                {% endif %}#}
+{#                                            </td>#}
+                                            {#                                        <td>{{ ItemRow.games_id.user_id }}</td>#}
+{#                                            <td>{{ ItemRow.games_id.user_id.profile.name }}<br>#}
+{#                                                {{ ItemRow.games_id.user_id.profile.mobile }}<br>#}
+{#                                                {{ ItemRow.games_id.user_id.email }}#}
+{#                                            </td>#}
+{#                                            <td class="text-nowrap">{{ ItemRow.req_dt|date:"d.m.Y H:i:s" }}</td>#}
+{#                                            <td class="text-nowrap">{{ ItemRow.answ_dt|date:"d.m.Y H:i:s" }}</td>#}
+{#                                            <td class="text-nowrap">{{ ItemRow.game_type }}</td>#}
+{#                                            <td class="center">#}
+{#                                                {% if ItemRow.answ_win %}#}
+{#                                                    <i class="icon far fa-check-circle text-green"></i>#}
+{#                                                {% else %}#}
+{#                                                    <i class="icon fas fa-ban text-red"></i>#}
+{#                                                {% endif %}#}
+{#                                            </td>#}
+{#                                            <td class="text-nowrap">{{ ItemRow.answ_nom }}</td>#}
+{#                                            <td>{{ ItemRow.games_id.t_payment }}</td>#}
+                                            {#                                        <td>{{ ItemRow.games_id.ticket_sum }}</td>#}
+{#                                            <td>{{ ItemRow.balance_01 }}</td>#}
+{#                                            <td>{{ ItemRow.cost_2 }}</td>#}
+{#                                            <td>{{ ItemRow.answ_win_sum }}</td>#}
+{#                                            <td>{{ ItemRow.balance_02 }}</td>#}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>{% trans 'Id' %}</th>
+                                        <th>{% trans 'Date' %}</th>
+                                        <th>{% trans 'Name' %}</th>
+                                        <th>{% trans 'Amount' %}</th>
+                                        <th>{% trans 'Status' %}</th>
+                                        <th>{% trans 'Description' %}</th>
+                                        <th>{% trans 'Manager' %}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        {% if l_pagination %}
+                            {% include l_pagination %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>

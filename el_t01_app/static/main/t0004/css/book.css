@@ -1,0 +1,186 @@
+html,
+body {
+    height: 100vh;
+    width: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.mainpage {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    width: 57vh;
+    height: 100vh;
+    background-image: url(../img/fon1.png);
+    background-size: 100%;
+}
+
+.img-holder {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.logo {
+    width: 100%;
+    height: 25%
+}
+
+.img-holder2 {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: end;
+}
+
+.games {
+    width: 90%;
+    height: 40%;
+    margin-bottom: 3%
+}
+
+.button-holder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.button {
+    width: 50%;
+    height: 20%;
+    font-size: 60px;
+    border-radius: 50px;
+    border: 5px solid #fff;
+    background-color: #0f3e87;
+    color: #fef200;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
+.modal-fade-main-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    margin-right: 45%;
+}
+
+.main-modal-fieldset-register {
+    background-color: rgba(202, 201, 201, 0.7);
+    width: 300%;
+    padding-left: 50%;
+    padding-right: 50%;
+    border-radius: 10%;
+}
+
+.main-modal-form-group {
+    margin: 15%;
+}
+
+input {
+    padding: 5%;
+    border: none;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.1);
+    transform: scale(3, 2);
+    border-radius: 15px;
+    margin-left: 25%;
+    text-align: right;
+}
+
+.text-center {
+    margin: 15%;
+    padding: 5%;
+    transform: scale(2.7);
+    border: 3px solid #fff;
+    background-color: #0f3e87;
+    box-shadow: 0 0 15px 4px rgba(255, 255, 0, 0.5);
+    border-radius: 15px;
+    font-size: 20px;
+    margin-left: 150%;
+    width: 100%;
+    margin-top: 45%;
+    text-align: center;
+}
+
+.mybtn1-register-btn {
+    text-decoration: none;
+    color: #fef200
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 56.5vh;
+    background-image: url(../img/fon22.jpg);
+}
+
+.slogo {
+    margin-top: 10%;
+    box-shadow: 0px 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.text {
+    width: 100%;
+    font-size: 130px;
+    text-align: center;
+    color: #0f3e87;
+
+}
+
+.col-1 {
+    margin-bottom: 0;
+}
+
+.col-2 {
+    margin-top: 0;
+    margin-bottom: -20%;
+}
+
+.game {
+    display: flex;
+    height: 100vh;
+    width: 60%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/fon3.jpg)
+}
+
+.tickets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-right: 5%;
+    margin-top: -20%
+}
+
+.closed {
+    position: absolute;
+    width: 90%;
+    height: 50%;
+}
+
+.open {
+    width: 90%;
+    height: 50%;
+    box-shadow: 0 10px 100px rgba(0, 0, 0, 0.5)
+}

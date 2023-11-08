@@ -1,0 +1,23 @@
+{% load static %}
+{% load i18n %}
+<div class="ui-game-timer js-ui-game-timer" data-timer-sec="{{ timer_to_start }}">
+    <!--<span class="ui-game-timer__dots ui-game-timer__dots_1">:</span>-->
+    <!--<span class="ui-game-timer__dots ui-game-timer__dots_2">:</span>-->
+    <!--<span class="ui-game-timer__dots ui-game-timer__dots_3">:</span>-->
+    <div class="ui-game-timer__item">
+        <span class="ui-game-timer__item-number js-game-timer-days"></span>
+        <span class="ui-game-timer__item-name">{% trans 'days' %}</span>
+    </div>
+    <div class="ui-game-timer__item">
+        <span class="ui-game-timer__item-number js-game-timer-hours"></span>
+        <span class="ui-game-timer__item-name">{% trans 'hours' %}</span>
+    </div>
+    <div class="ui-game-timer__item">
+        <span class="ui-game-timer__item-number js-game-timer-min"></span>
+        <span class="ui-game-timer__item-name">{% trans 'min' %}</span>
+    </div>
+    <div class="ui-game-timer__item">
+        <span class="ui-game-timer__item-number js-game-timer-sec">sec</span>
+        <span class="ui-game-timer__item-name">{% trans 'sec' %}</span>
+    </div>
+</div>

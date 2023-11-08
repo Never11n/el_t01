@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html {% if lang == "he" or lang == "ar" %}dir="rtl"{% endif %}>
+{#<html>#}
+<head>
+    <title>{{ PAGE_TITLE }}</title>
+    {% for item_head in l_head_list %}
+        {% include item_head %}
+    {% endfor %}
+</head>
+
+<body>
+{% csrf_token %}
+
+<div class="preloader" id="preloader">
+    <div class="loader loader-1">
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
+    </div>
+</div>
+
+
+{% block layoutbody %}
+{% endblock %}
+
+{% for item_script in l_script_list %}
+    {% include item_script %}
+{% endfor %}
+
+</body>
+</html>

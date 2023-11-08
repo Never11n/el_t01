@@ -1,0 +1,98 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'Subscription' %} № {{ subscription.id }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-md-12 table-cabb">
+                                <table class="table table-bordered">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>{% trans 'User info' %}</th>
+                                            <th>{% trans 'Subscription info' %}</th>
+                                            <th>{% trans 'Should be' %}</th>
+                                            <th>{% trans 'Real' %}</th>
+                                            <th>{% trans 'Debt' %}</th>
+                                            <th>{% trans 'Left' %}</th>
+                                            <th>{% trans 'All left' %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="{% if subscription.status == 'ok' %}table-success
+                                                   {% elif subscription.status == 'not_ok' %}
+                                                   table-danger{% else %}{% endif %}">
+                                            <td>
+                                                Name: {{ subscription.user.profile.name }}<br>
+                                                Email: {{ subscription.user }}<br>
+                                                Phone: {{ subscription.user.profile.mobile }}<br>
+                                            </td>
+                                            <td>
+                                                ID: {{ subscription.id }}<br>
+                                                Dates active: {{ subscription.dt_start|date:"d.m.Y" }} - {{ subscription.dt_stop|date:"d.m.Y" }}<br>
+                                                Enabled now: {% if subscription.enabled %} {% trans 'Yes' %}
+                                                             {% else %} {% trans 'No' %} {% endif %}<br>
+                                                Ticket type: {{ subscription.ticket_list.caption }}<br>
+                                                Tickets per day: {{ subscription.ticket_list.count }}<br>
+                                                Tickets count for all period: {{ subscription.ticket_list.tickets_amount }}<br>
+                                                Games/Sms count for all period: {{ subscription.ticket_list.days_sub_works }}<br>
+                                                Paid money: {{ subscription.money_paid }}<br>
+                                                {% if subscription.period %}Period: {{ subscription.period }} {% endif %}
+                                            </td>
+                                            <td>
+                                                For today games should be: {{ subscription.games_should_be}}<br>
+                                                For today tickets should be: {{ subscription.tickets_should_be}}<br>
+                                                For today sms should be: {{ subscription.games_should_be}}</td>
+                                            <td>
+                                                Games real: {{ subscription.games_count }}<br>
+                                                Tickets real: {{ subscription.tickets_games }}<br>
+                                                Sms real: {{ subscription.sms_count }}<br>
+                                                Money real: {{ subscription.money_real }}<br>
+                                                Sms list:<br>
+                                                {% if subscription.sms_real_by_period %}
+                                                    {% for key, value in subscription.sms_real_by_period.items %}
+                                                        ---------{{ key }}---------<br>
+                                                        {% for sms in value %}
+                                                            Sms id - {{ sms.id }}, sent at {{ sms.dt_stop|date:"d.m.Y H:i:s" }}<br>
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {% for sms in subscription.sms_real %}
+                                                    Sms id - {{ sms.id }}, sent at {{ sms.dt_stop|date:"d.m.Y H:i:s" }}<br>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                Games debt: {{ subscription.games_debt }}<br>
+                                                Tickets debt: {{ subscription.tickets_debt }}<br>
+                                                Sms debt: {{ subscription.sms_debt }}<br>
+                                                Money debt: {{ subscription.money_debt }}
+                                            </td>
+                                            <td>
+                                                Games left: {{ subscription.games_left }}<br>
+                                                Tickets left: {{ subscription.tickets_left }}<br>
+                                                SMS left: {{ subscription.games_left }}<br>
+                                                Money left: {{ subscription.money_left }}
+                                            </td>
+                                            <td>
+                                                Games: {{ subscription.all_games_left }}<br>
+                                                Tickets: {{ subscription.all_tickets_left }}<br>
+                                                SMS: {{ subscription.all_games_left }}<br>
+                                                Money: {{ subscription.all_money_left }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

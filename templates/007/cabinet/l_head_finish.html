@@ -1,0 +1,26 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!--  -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<link href="{% static 'vendor/bootstrapfilestyle/open-iconic/font/css/open-iconic-bootstrap.css' %}" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!-- favicon -->
+<link rel="icon" href="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/favicon.ico"  type="image/x-icon">
+<link rel="shortcut icon" href="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="256x256" href="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/apple-touch-icon.png">
+<!-- bootstrap -->
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/css/bootstrap.min.css">
+<!-- Plugin css -->
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/css/plugin.css">
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/css/var.css">
+<!-- stylesheet -->
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/css/style.css">
+<!-- game -->
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/css/game_lotto/style.css">
+<!-- responsive -->
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/css/responsive.css">
+{#<!-- SweetAlert2 -->#}
+<link rel="stylesheet" href="{% static 'vendor/sweetalert2/dist/sweetalert2.min.css' %}">
+

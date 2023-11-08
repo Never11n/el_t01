@@ -1,0 +1,47 @@
+/* Variables */
+
+:root {
+    --btn-color-1_1: #fc0000;
+    --btn-color-1_2: #fd5252;
+
+    --btn-color-2_1: #fc0000;
+    --btn-color-2_2: #fd5252;
+
+    --btn-color-3_1: #363183;
+    --btn-color-3_2: #5750b0;
+    --btn-color-3_1-hover: #fd5252;
+    --btn-color-3_2-hover: #fd5252;
+
+    --heade-color: #fc0000;
+
+    --single-game-color: #fc0000;
+    --owl-nav-color: #fc0000;
+
+    --hero-area-bg-color-1: #606060;
+    --hero-area-bg-color-2: #a1a1a1;
+
+    --featured-game-bg-color-1: #606060;
+    --featured-game-bg-color-2: #a1a1a1;
+
+    --about-section-bg-color-1: #606060;
+    --about-section-bg-color-2: #a1a1a1;
+
+    --preloader-bg: #606060;
+    --preloader-line: #fc0000;
+
+    --footer-bg: #606060;
+    --footer-link: #fc0000;
+
+    /*    new     */
+    --main-color: #f5d448;
+    --main-color2: #e52623;
+    --btn-color-1_1_05: #f5d448;
+    --btn-color-rgba-1_1_05: rgba(256, 256, 256,0.3);
+
+
+    --dark-color: #040404;
+    --main-green: #46EE99;
+    --main-red: #F01A28;
+
+    --header-padding: 77px;
+}

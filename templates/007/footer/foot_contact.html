@@ -1,0 +1,114 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+
+
+<div class="header-padding">
+    <div class="hero-area">
+        <div class="container">
+            <div class="hero-area__inner">
+                <h1 class="hero-area__title">{% trans 'Scratch HISHGAD On Mobile' %}</h1>
+                {% if not user.is_authenticated %}
+                <div class="links hide-on-mob">
+                    <a href="#" class="mybtn1"
+                       data-toggle="modal"
+                       data-target="#signin">{% trans 'REGISTER NOW' %}</a>
+                </div>
+                {% endif %}
+                <img class="hero-area__img" src="{% static 'main/007/images/hero-area__img.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- start content -->
+    <div class="main-box inner-mob-shadow">
+        <div class="container">
+            <div class="main-box__inner">
+                {% if not user.is_authenticated %}
+                <div class="text-center hide-on-desktop register-btn-wrap">
+                    <a href="#" class="mybtn1 "
+                       data-toggle="modal"
+                       data-target="#signin">{% trans 'Register Now' %}</a>
+                </div>
+                {% endif %}
+                <h4 class="main-box__title">
+                    {% trans 'Contact Us' %}
+                </h4>
+
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-list__item">
+                        {% trans 'Home' %}
+                    </li>
+                    <li class="breadcrumb-list__item">
+                        <span class="breadcrumb-list__icon-wrap">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+                    </li>
+                    <li class="breadcrumb-list__item">
+                        {% trans 'Contact Us' %}
+                    </li>
+                </ul>
+
+                <form class="" id="id_form_contact" action="{% url 'feedback' %}" method="post">
+                    {% csrf_token %}
+                    <div class="main-form-group">
+                        <input type="text"
+                               class="main-form-control"
+                               placeholder="{% trans 'Full Name' %}"
+                               value="{{ m_fullname }}"
+                               name="f_fullname"
+                               {% if m_fullname %}disabled{% endif %}
+                        >
+                    </div>
+                    <div class="main-form-group">
+                        <input type="email"
+                               class="main-form-control"
+                               placeholder="{% trans 'E-Mail' %}"
+                               value="{{ m_email }}"
+                               name="f_email"
+                               {% if m_email %}disabled{% endif %}
+                        >
+                    </div>
+                    <div class="main-form-group">
+                            <textarea class="main-form-control"
+                                      name="f_text"
+                                      rows="8"
+                                      placeholder="{% trans 'Message' %}"></textarea>
+                    </div>
+                    {% if GL_check_reCAPTCHA_on_feedback %}
+                        <div class="main-form-group">
+                            <div class="g-recaptcha" data-sitekey="{{ GL_reCAPTCHA_token }}"></div>
+                        </div>
+                    {% endif %}
+                    <div class="contact-btn-wrap">
+                        <a onclick="btn_feedback_save()"
+                           class="mybtn2 contact-btn">{% trans 'Send' %}
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end content -->
+</div>
+<script src="https://www.google.com/recaptcha/api.js?explicit&hl={{ lang }}"></script>
+<script type="text/javascript">
+    function btn_feedback_save() {
+        if ($(".g-recaptcha").length) {
+            if (!grecaptcha.getResponse()) {
+             Swal.fire({
+                icon: 'error',
+                title: gettext('ERROR'),
+                background: '#cacaca',
+                html: gettext("Please click the reCAPTCHA checkbox"),
+                confirmButtonText: gettext('Back to form'),
+                confirmButtonColor: '#d33',
+            });
+            return false;
+        } else {
+            $("#id_form_contact").submit();
+        }
+        } else {
+            $("#id_form_contact").submit();
+        }
+    }
+</script>

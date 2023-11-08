@@ -1,0 +1,39 @@
+{% load i18n %}
+<div class="modal fade js-modal__cabb_payout" id="cabb_payout">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-secondary">{% trans 'Check Bank Transfer' %}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12" id="id_ResPayOut">
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button"
+                        class="btn btn-dark"
+                        data-dismiss="modal"
+                        onclick="btn_payadd_conf('01')"
+                >{% trans 'Confirm' %}</button>
+                <button type="button"
+                        class="btn btn-dark"
+                        data-dismiss="modal"
+                        onclick="btn_payadd_conf('02')"
+                >{% trans 'Block' %}</button>
+                <button type="button"
+                        class="btn btn-dark"
+                        data-dismiss="modal"
+                >{% trans 'Close' %}</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

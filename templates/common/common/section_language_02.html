@@ -1,0 +1,37 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+{#{% if section_language_dropdown %}#}
+<!-- Language Dropdown Menu -->
+<div class="d-none">
+    <form action="{% url 'set_language' %}" id="lang_form" method="POST">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="">
+        <input name="language" type="hidden" value="">
+        <input type="submit">
+    </form>
+</div>
+
+<div class="dropdown head-languag">
+    <button class="head-languag" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
+    {% for Item_lang in site_lang %}
+        {% if lang == Item_lang.lang_code %}
+            <img class="flag-icon" src="{% static 'img/flags/4x3/' %}{{ Item_lang.lang_code }}.svg">
+{#            {{ Item_lang.lang_name }} - {% trans Item_lang.lang_name %}#}
+            {% trans Item_lang.lang_name %}
+        {% endif %}
+    {% endfor %}
+    </button>
+    <div class="dropdown-menu dropdown-menu_head-languag" aria-labelledby="dropdownMenu2">
+        {% for Item_lang in site_lang %}
+{#            <button class="dropdown-item" type="button">{{ Item_lang.lang_name }} - {% trans Item_lang.lang_name %}</button>#}
+            <button class="dropdown-item {% if lang == Item_lang.lang_code %}active{% endif %}">
+            <a class=""
+               onclick="change_lang('{{ Item_lang.lang_code }}')">
+            <img class="flag-icon" src="{% static 'img/flags/4x3/' %}{{ Item_lang.lang_code }}.svg">
+            {{ Item_lang.lang_name }} - {% trans Item_lang.lang_name %}
+            </a>
+            </button>
+        {% endfor %}
+    </div>
+</div>

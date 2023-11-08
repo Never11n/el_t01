@@ -1,0 +1,18 @@
+{% load static %}
+{% load i18n %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+<div class="game">
+
+    <div class="logotype">
+        <img src="{{STATIC_PREFIX}}/main/{{company_code}}/img/logo.png" alt="logo" class="slogo">
+    </div>
+    <div class="text">
+        <b><p class="col-1">{% trans '!הכרטיס מוכן'%}</p></b>
+    </div>
+
+    <div class="tickets">
+            <img src="{{STATIC_PREFIX}}/main/{{company_code}}/img/open.jpg" class="open">
+            <img src="{{STATIC_PREFIX}}/main/{{company_code}}/img/closed.jpg" class="closed">
+    </div>
+</div>

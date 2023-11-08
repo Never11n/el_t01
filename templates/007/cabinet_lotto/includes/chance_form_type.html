@@ -1,0 +1,52 @@
+{% load static %}
+{% load i18n %}
+{% get_static_prefix as STATIC_PREFIX %}
+<div class="ui-game-box">
+    <div>
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">{{ form_type_text_header }}</span>
+            <span class="ui-game-info-header__number">1</span>
+        </div>
+        <div class="ui-game-card-count ui-game-card-count_mb">
+            <label class="ui-game-circle-input-label">
+                <input type="radio" checked name="ui-game-card-count"
+                       class="ui-game-circle-input ui-game-circle-input-form-type" value="1"/>
+                <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_md ui-game-circle-input-label-display__no-bg">1</span>
+            </label>
+            <label class="ui-game-circle-input-label">
+                <input type="radio" name="ui-game-card-count"
+                       class="ui-game-circle-input ui-game-circle-input-form-type" value="2"/>
+                <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_md ui-game-circle-input-label-display__no-bg">2</span>
+            </label>
+            <label class="ui-game-circle-input-label">
+                <input type="radio" name="ui-game-card-count"
+                       class="ui-game-circle-input ui-game-circle-input-form-type" value="3"/>
+                <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_md ui-game-circle-input-label-display__no-bg">3</span>
+            </label>
+            <label class="ui-game-circle-input-label">
+                <input type="radio" name="ui-game-card-count"
+                       class="ui-game-circle-input ui-game-circle-input-form-type" value="4"/>
+                <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_md ui-game-circle-input-label-display__no-bg">4</span>
+            </label>
+        </div>
+        {% if form_type_part_2 %}
+            <a href="/" class="ui-game-full-bnt">
+                                <span class="ui-game-full-bnt__img-wrap">
+                                    <img class="ui-game-full-bnt__img ui-game-full-bnt__img_m-r"
+                                         src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg"
+                                         alt="spades">
+                                    <img class="ui-game-full-bnt__img"
+                                         src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg"
+                                         alt="hearts">
+                                </span>
+                text
+                <span class="ui-game-full-bnt__img-wrap">
+                                    <img class="ui-game-full-bnt__img ui-game-full-bnt__img_m-r"
+                                         src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="clubs">
+                                    <img class="ui-game-full-bnt__img"
+                                         src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="diamonds">
+                                </span>
+            </a>
+        {% endif %}
+    </div>
+</div>

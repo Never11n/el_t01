@@ -1,0 +1,165 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+{% load i18n %}
+{% load el_t01_tags %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div>
+            <div class="ui-game-balls-wrap">
+                <div class="ui-game-balls-wrap-row">
+                    {% for num in lotto_ticket_info.tables.numbers %}
+                    <div class="ui-game-ball ui-game-ball_m js-ui-game-lotto-modal-open"
+                    {% if num in winning_numbers %}
+                         style="background-color:#1DCCF7;color: #fff;"
+                    {% endif %}>{{ num }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="ui-game-balls-wrap">
+                <div class="ui-game-balls-wrap-row">
+                    {% for strong in lotto_ticket_info.tables.strong %}
+                    <div class="ui-game-ball ui-game-ball_m ui-game-ball_light js-ui-game-lotto-modal-2-open"
+                    {% if strong == win_strong %}
+                         style="background-color:#1DCCF7;color: #fff;"
+                    {% endif %}>{{ strong }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if lotto_ticket_info.extra %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">
+                {% trans 'Extra' %}
+            </span>
+            <span class="ui-game-info-header__number">2</span>
+        </div>
+        {% if lotto_ticket_info.extra_list %}
+        <div class="ui-game-balls-wrap">
+            <div class="ui-game-balls-wrap-row js-ui-game-balls-wrap-row">
+                {% if higlight_user_extra %}
+                    {% for number in higlight_user_extra %}
+                        <div class="ui-game-ball"
+                             {% if number.1 %} style="background-color:#1DCCF7;color: #fff;"{% endif %}
+                        >{{ number.0 }}</div>
+                    {% endfor %}
+                {% else %}
+                    {% for number in lotto_ticket_info.extra_list %}
+                        <div class="ui-game-ball">{{ number }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+
+        <div class="ui-game-card-count">
+            <label class="ui-game-circle-input-label">
+                <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_md ui-game-circle-input-label-display__no-bg"
+                      style="width: max-content;">
+                        {% trans 'Awaiting the results' %}
+
+                </span>
+            </label>
+        </div>
+        {% endif %}
+
+    </div>
+    </div>
+{% endif %}
+{% if winning_numbers %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">
+                {% trans 'Lottery number' %}: {{ ticket.answ_lottery_number }}<br>
+                {% trans 'Draw date' %}: {{ draw_date|date:"d.m.Y H:i:s" }}<br>
+            </span>
+        </div>
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">
+                {% trans 'Winning numbers' %}
+            </span>
+        </div>
+        <div class="ui-game-balls-wrap">
+            <div class="ui-game-balls-wrap-row js-ui-game-balls-wrap-row">
+                {% for number in winning_numbers %}
+                    <div class="ui-game-ball"
+                    {% if number in lotto_ticket_info.tables.numbers %}
+                         style="background-color:#1DCCF7;color: #fff;"
+                    {% endif %}
+                    >{{ number }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">
+                {% trans 'Strong number' %}
+            </span>
+        </div>
+        <div class="ui-game-balls-wrap">
+            <div class="ui-game-balls-wrap-row js-ui-game-balls-wrap-row row justify-content-end mr-1">
+                <div class="ui-game-ball"
+                    {% if win_strong in lotto_ticket_info.tables.strong %}
+                         style="background-color:#1DCCF7;color: #fff;"
+                    {% endif %}
+                    >{{ win_strong }}
+                </div>
+            </div>
+        </div>
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">
+                {% trans 'Extra numbers' %}
+            </span>
+        </div>
+        <div class="ui-game-balls-wrap">
+            <div class="ui-game-balls-wrap-row js-ui-game-balls-wrap-row">
+                 {% if higlight_winning_extra %}
+                    {% for number in higlight_winning_extra %}
+                        <div class="ui-game-ball"
+                             {% if number.1 %} style="background-color:#1DCCF7;color: #fff;"{% endif %}
+                        >{{ number.0 }}</div>
+                    {% endfor %}
+                {% else %}
+                    {% for number in winning_extras %}
+                        <div class="ui-game-ball">{{ number }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% if win_table %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">
+                {% trans 'Winning table' %}
+            </span>
+        </div>
+        <table class="table table-bordered table-striped text-white">
+            <thead>
+            <tr>
+                <th>{% trans 'Guessed' %}</th>
+                <th>{% trans 'Number of winners' %}</th>
+                <th>{% trans 'Sum' %}</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for key, value in win_table.items %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value.num }}</td>
+                        <td>{{ value.sum }} {{ sum_currency }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endif %}
+{% endif %}

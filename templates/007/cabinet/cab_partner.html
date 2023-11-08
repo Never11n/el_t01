@@ -1,0 +1,33 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+
+<!-- Featured Game Area Start -->
+<section class="block-partner">
+    <!-- Features Area End -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 justify-content-center">
+                {% for ItemPartner in dict_partner %}
+                    <div class="about__content-slider-item">
+                        <div class="text-center">
+                            {{ ItemPartner.text }}
+                        </div>
+                        {% if ItemPartner.image %}
+                            <div class="about__content-slider-item-p text-center">
+                                <a id="{{ ItemPartner.company }}" href="{{ ItemPartner.url }}" class="" target="_blank">
+                                    <img src="{{ ItemPartner.image.url }}" alt=""
+                                         class="about__content-slider-item-img ui__img-responsive">
+                                </a>
+                            </div>
+                        {% endif %}
+                        <div class="text-center">
+                            <a id="{{ ItemPartner.company }}" href="{{ ItemPartner.url }}" class="" target="_blank">{{ ItemPartner.url }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Featured Game Area	End -->

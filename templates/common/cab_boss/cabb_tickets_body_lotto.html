@@ -1,0 +1,505 @@
+{% load static %}
+{% load i18n %}
+<div class="dataTables_wrapper dt-bootstrap4">
+    <div class="row">
+        <div class="col-sm-12 table-cabb">
+            <table id="id_table_tic" class="table table-bordered table-striped ">
+                <thead>
+                <tr class="js_tic_row">
+                    {% if not without_buttons %}
+                        <th></th>{% endif %}
+                    <th>{% trans 'N req' %}</th>
+                    <th>{% trans 'Id game' %}</th>
+                    <th>{% trans 'Status' %}</th>
+                    <th>{% trans 'User' %}</th>
+                    <th>{% trans 'Request data' %}</th>
+                    <th>{% trans 'Send Request' %}</th>
+                    <th>{% trans 'Cabala date' %}</th>
+                    <th>{% trans 'Name Game' %}</th>
+                    <th>{% trans 'Win/Loss' %}</th>
+                    <th>{% trans 'N ticket' %}</th>
+                    <th>{% trans 'Payment Methody' %}</th>
+                    <th>{% trans 'Balance befor' %}</th>
+                    <th>{% trans 'Cost 1' %}</th>
+                    <th>{% trans 'Cost 2' %}</th>
+                    <th>{% trans 'Discount' %}</th>
+                    <th>{% trans 'Cost Discount' %}</th>
+                    <th>{% trans 'Sum WIN' %}</th>
+                    <th>{% trans 'Balance after' %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ItemTicket in list_tickets %}
+                    {% if without_buttons %}
+                        <tr class="{% if ItemTicket.t_check %}
+                                   {% if ItemTicket.answ_win %} table-success {% endif %}
+                                   {% else %} table-warning
+                                   {% endif %}
+                                   {% if ItemTicket.status == "03" %} table-warning {% endif %}">
+                            {% else %}
+                        <tr class="js_tic_row
+                                   {% if ItemTicket.answ_win %}
+                                   table-success
+                                   {% endif %}
+                                   {% if ItemTicket.id in less_15_min_left %}
+                                   table-warning
+                                   {% elif ItemTicket.id in draw_is_over %}
+                                   table-danger
+                                   {% endif %}">
+                    {% endif %}
+                {% if not without_buttons %}
+                    <td>
+                         <button type="button"
+                                class="btn btn-primary mybtn_cabb1 btn-sm"
+                                onclick="btn_lotto_ticket_status({{ ItemTicket.id }})">
+                            <i class="fa fa-refresh"></i>Get Foto
+                        </button>
+                         <button type="button"
+                                 class="btn btn-info mybtn_cabb1"
+                                 onclick="btn_calc_lotto_win_sum({{  ItemTicket.id }})">{% trans 'Calc win' %}
+                         </button>
+                        <button type="button"
+                                class="btn {% if ItemTicket.t_check %} btn-info {% else %} btn-warning {% endif %} mybtn_cabb1 btn-sm"
+                                onclick="btn_ticketcheck_02({{ ItemTicket.id }})">
+                            <i class="far fa-check-circle "></i>
+                        </button>
+                         <button type="button"
+                                class="btn btn-danger mybtn_cabb1 btn-sm"
+                                onclick="btn_lotto_ticket_cancel({{ ItemTicket.id }})">
+                            <i class="fa fa-refresh"></i>Cancel
+                        </button>
+                        {% if ItemTicket.t_check %}
+                            <div>
+                                {{ ItemTicket.t_check_user.profile.name }}
+                            </div>
+                            <div>
+                                {{ ItemTicket.t_check_dt|date:"d.m.Y H:i:s" }}
+                            </div>
+                        {% else %}
+                            </td>
+                        {% endif %}
+                {% endif %}
+                <td>{{ ItemTicket.id }}
+                    <br>Pais: {{ ItemTicket.answ_lottery_number }}
+                    <br>Pais draw date: {{ ItemTicket.lotto_result.draw_date|date:"d.m.Y H:i" }}
+                </td>
+                <td class="text-nowrap">{{ ItemTicket.games_id_id }}
+                    ({{ ItemTicket.games_id.ticket_num }})
+                        <br>Lottomatic: {{ ItemTicket.answ_nom }}
+                </td>
+                <td>
+                    Ticket: {% if ItemTicket.status == "00" %}
+                        {% trans 'start' %}
+                    {% elif ItemTicket.status == "01" %}
+                        {% trans 'ready' %}
+                    {% elif ItemTicket.status == "02" %}
+                        {% trans 'wait confirm' %}
+                    {% elif ItemTicket.status == "03" %}
+                        {% trans 'error SOD' %}
+                    {% elif ItemTicket.status == "33" %}
+                        {% trans 'finish' %}
+                    {% endif %}
+
+                    Game status:{{ ItemTicket.games_id.t_status.caption }} <br>
+                    {% if ItemTicket.img_06 %} Photo ok
+                    {% else %} No photo
+                    {% endif %}
+                </td>
+                <td>
+                    {{ ItemTicket.games_id.user_id.profile.name }}
+                    <br>{{ ItemTicket.games_id.user_id.profile.mobile }}
+                    <br>{{ ItemTicket.games_id.user_id.email }}
+                    {% if ItemTicket.games_id.game_type.verbal == "game_gift" %}
+                        <br><b>{% trans 'Gift to' %}</b>
+                        <br>{{ ItemTicket.games_id.user_recipient.profile.name }}
+                        <br>{{ ItemTicket.games_id.user_recipient.profile.mobile }}
+                        <br>{{ ItemTicket.games_id.user_recipient.email }}
+                    {% endif %}
+                </td>
+               <td class="text-nowrap">
+                   {% if ItemTicket.game_type.t_type.verbal == 'lotto' %}
+                       {% if ItemTicket.answ_tabl.lotto_ticket_info.double %} Double <br>{% endif %}
+                       Extra - {% if ItemTicket.answ_tabl.lotto_ticket_info.extra  %} YES {% else %} NO {% endif %}<br>
+                       {% if ItemTicket.answ_tabl.lotto_ticket_info.extra_list  %} Extra list: {{ ItemTicket.answ_tabl.lotto_ticket_info.extra_list }} <br>{% endif %}
+                       {% if ItemTicket.game_type.verbal == 'lotto_regular' %}
+                           {% for line in ItemTicket.answ_tabl.lotto_ticket_info.tables %}
+                            {% if line.numbers|length > 0 %}
+                                {{ line.numbers }} | {{ line.strong_number }}<br>
+                            {% endif %}
+                           {% endfor %}
+                       {% else %}
+                        {{ ItemTicket.answ_tabl.lotto_ticket_info.tables.numbers }} |
+                        {{ ItemTicket.answ_tabl.lotto_ticket_info.tables.strong }}<br>
+                       {% endif %}
+                   {% elif ItemTicket.game_type.t_type.verbal == '777' %}
+                        Form type: {{ ItemTicket.answ_tabl.lotto_ticket_info.form_type }}<br>
+                        {% for line in ItemTicket.answ_tabl.lotto_ticket_info.tables %}
+                            {{ line.numbers }}<br>
+                        {% endfor %}
+                   {% elif ItemTicket.game_type.t_type.verbal == '123' %}
+                         Form type: {{ ItemTicket.answ_tabl.lotto_ticket_info.form_type }}<br>
+                         Price: {{ ItemTicket.answ_tabl.lotto_ticket_info.price }}<br>
+                        {% for line in ItemTicket.answ_tabl.lotto_ticket_info.tables %}
+                            {{ line.numbers }}<br>
+                        {% endfor %}
+                   {% elif ItemTicket.game_type.t_type.verbal == 'chance' %}
+                   {% if ItemTicket.answ_tabl.lotto_ticket_info.card_spades|length > 0 %}
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-spade-fill" viewBox="0 0 16 16">
+                            <path d="M7.184 11.246A3.5 3.5 0 0 1 1 9c0-1.602 1.14-2.633 2.66-4.008C4.986 3.792 6.602 2.33 8 0c1.398 2.33 3.014 3.792 4.34 4.992C13.86 6.367 15 7.398 15 9a3.5 3.5 0 0 1-6.184 2.246 19.92 19.92 0 0 0 1.582 2.907c.231.35-.02.847-.438.847H6.04c-.419 0-.67-.497-.438-.847a19.919 19.919 0 0 0 1.582-2.907z"/>
+                       </svg> {{ ItemTicket.answ_tabl.lotto_ticket_info.card_spades }}<br>
+                   {% endif %}
+                   {% if ItemTicket.answ_tabl.lotto_ticket_info.card_hearts|length > 0 %}
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                       </svg> {{ ItemTicket.answ_tabl.lotto_ticket_info.card_hearts }}<br>
+                   {% endif %}
+                   {% if ItemTicket.answ_tabl.lotto_ticket_info.card_diamonds|length > 0 %}
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-diamond" viewBox="0 0 16 16">
+                            <path d="M8.384 1.226a.463.463 0 0 0-.768 0l-4.56 6.468a.537.537 0 0 0 0 .612l4.56 6.469a.463.463 0 0 0 .768 0l4.56-6.469a.537.537 0 0 0 0-.612l-4.56-6.468zM6.848.613a1.39 1.39 0 0 1 2.304 0l4.56 6.468a1.61 1.61 0 0 1 0 1.838l-4.56 6.468a1.39 1.39 0 0 1-2.304 0L2.288 8.92a1.61 1.61 0 0 1 0-1.838L6.848.613z"/>
+                       </svg> {{ ItemTicket.answ_tabl.lotto_ticket_info.card_diamonds }}<br>
+                   {% endif %}
+                   {% if ItemTicket.answ_tabl.lotto_ticket_info.card_clubs|length > 0 %}
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-club-fill" viewBox="0 0 16 16">
+                            <path d="M11.5 12.5a3.493 3.493 0 0 1-2.684-1.254 19.92 19.92 0 0 0 1.582 2.907c.231.35-.02.847-.438.847H6.04c-.419 0-.67-.497-.438-.847a19.919 19.919 0 0 0 1.582-2.907 3.5 3.5 0 1 1-2.538-5.743 3.5 3.5 0 1 1 6.708 0A3.5 3.5 0 1 1 11.5 12.5z"/>
+                       </svg> {{ ItemTicket.answ_tabl.lotto_ticket_info.card_clubs }}
+                   {% endif %}
+                   {% endif %}
+
+               </td>
+                <td class="text-nowrap">{{ ItemTicket.req_dt|date:"d.m.Y H:i:s" }}</td>
+                <td class="text-nowrap">{{ ItemTicket.t_cabala_dt|date:"d.m.Y H:i:s" }}</td>
+                <td class="text-nowrap">{{ ItemTicket.game_type }}</td>
+                <td class="center">
+                    {% if ItemTicket.answ_win %}
+                        <i class="icon far fa-check-circle text-green"></i>
+                    {% else %}
+                        <i class="icon fas fa-ban text-red"></i>
+                    {% endif %}
+                </td>
+                <td class="text-nowrap">
+                    {% if ItemTicket.answ_nom_00 != ItemTicket.answ_nom %}
+                        <div class="text-red">{{ ItemTicket.answ_nom_00 }}</div>
+                    {% endif %}
+                    {{ ItemTicket.answ_nom }}
+                </td>
+                <td>{{ ItemTicket.games_id.t_payment }}</td>
+                {#                                        <td>{{ ItemTicket.games_id.ticket_sum }}</td>#}
+                <td>{{ ItemTicket.balance_01 }}</td>
+                <td>{{ ItemTicket.cost_1 }}</td>
+                <td>{{ ItemTicket.cost_02 }}</td>
+                <td>{{ ItemTicket.cost_discount }}</td>
+                <td>{{ ItemTicket.cost_2 }}</td>
+                <td>
+                    {% if ItemTicket.answ_win_sum_00 != ItemTicket.answ_win_sum %}
+                        <div class="text-red">{{ ItemTicket.answ_win_sum_00 }}</div>
+                    {% endif %}
+                    {{ ItemTicket.answ_win_sum }}
+                </td>
+                <td>{{ ItemTicket.balance_02 }}</td>
+                <td>{{ ItemTicket.error_job }}</td>
+                {% if not without_buttons %}
+                    <td>
+                        {% if True %}
+                            <a href="{{ ItemTicket.img_08 }}" target="_blank"
+                               class="btn btn-info mybtn_cabb1 btn-sm"
+                            ><i class="fa fa-camera"></i></a>
+                            {#  {% trans 'Pic' %} #}
+                            {#                                            <button type="button"#}
+                            {#                                                    class="btn btn-info mybtn_cabb1 btn-sm"#}
+                            {#                                                    onclick="btn_ticket_edit({{ ItemTicket.id }})"#}
+                            {#                                            >#}
+                            {#                                                {% trans 'Pic' %}#}
+                            {#                                            </button>#}
+                            {#                                            <br>#}
+                        {% endif %}
+                        {% if True %}
+                            <a href="https://wa.me/+972{{ ItemTicket.games_id.user_id.profile.mobile }}"
+                               target="_blank"
+                               style="text-decoration:none;"
+                               role="link"
+                               aria-label="link to whatsapp">
+                                <img src="{% static 'img/whatsapp.png' %}"
+                                     height="25"
+                                     alt="link to whatsapp">
+                            </a>
+                        {% endif %}
+                        {% if True %}
+                            <br>
+                            <a href="/cabb_users/?uEmail={{ ItemTicket.games_id.user_id.email }}" target="_blank"
+                               class="btn btn-info mybtn_cabb1 btn-sm"
+                            >{% trans 'Go To User' %}</a>
+                        {% endif %}
+                    </td>
+                {% endif %}
+
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    {% if not without_buttons %}
+                        <th></th>{% endif %}
+                    <th>{% trans 'N req' %}</th>
+                    <th>{% trans 'Id game' %}</th>
+                    <th>{% trans 'Status' %}</th>
+                    <th>{% trans 'User' %}</th>
+                    <th>{% trans 'Request data' %}</th>
+                    <th>{% trans 'Send Request' %}</th>
+                    <th>{% trans 'Cabala date' %}</th>
+                    <th>{% trans 'Name Game' %}</th>
+                    <th>{% trans 'Win/Loss' %}</th>
+                    <th>{% trans 'N ticket' %}</th>
+                    <th>{% trans 'Payment Methody' %}</th>
+                    <th>{% trans 'Balance befor' %}</th>
+                    <th>{% trans 'Cost 1' %}</th>
+                    <th>{% trans 'Cost 2' %}</th>
+                    <th>{% trans 'Discount' %}</th>
+                    <th>{% trans 'Cost Discount' %}</th>
+                    <th>{% trans 'Sum WIN' %}</th>
+                    <th>{% trans 'Balance after' %}</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    {% if l_pagination %}
+        {% include l_pagination %}
+    {% endif %}
+</div>
+
+<script type="text/javascript">
+    function btn_calc_lotto_win_sum(ticket_id) {
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        ticket_id: ticket_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/calc_lotto_win_sum/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                Swal.fire(gettext('Done!'), '', 'info');
+                return false;
+            }
+        });
+    }
+    function btn_ticketcheck(ticket_id) {
+        console.log('btn_ticket_check');
+        $("#id_ResAjax").html("");
+        $.ajax({
+            type: "POST",
+            data: {
+                ticket_id: ticket_id,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_ticketcheck/",
+            success: function (res) {
+                console.log("success");
+                $("#id_ResAjax").html(res);
+                if (res != 'error' && res != 'ok') {
+                    return swal({
+                        title: gettext("Ошибка"),
+                        text: res,
+                        type: "warning",
+                        animation: false,
+                        showCancelButton: false,
+                        confirmButtonColor: "#15b284",
+                        confirmButtonText: gettext("Ок"),
+                        closeOnConfirm: true
+                    }).then(function (isConfirm) {
+                        if (isConfirm === true) {
+                            $('.modal-content').removeClass('modal-content-error');
+                            return false;
+                        } else {
+                            $('.modal-content').removeClass('modal-content-error');
+                            return false;
+                        }
+                    });
+                }
+            },
+            error: function (res) {
+                console.log("error");
+            }
+        });
+        return $('.js-modal__cabb_ticketcheck').modal('show');
+    }
+
+    function btn_ticketcheck_02(ticket_id) {
+        console.log('btn_ticket_check');
+        $("#id_ResAjax").html("");
+        $.ajax({
+            type: "POST",
+            data: {
+                ticket_id: ticket_id,
+                f_type: "02",
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_ticketcheck/",
+            success: function (res) {
+                $(".js_ResAjax").html(res);
+                if (res != 'error' && res != 'ok') {
+                    return swal({
+                        title: gettext("Ошибка"),
+                        text: res,
+                        type: "warning",
+                        animation: false,
+                        showCancelButton: false,
+                        confirmButtonColor: "#15b284",
+                        confirmButtonText: gettext("Ок"),
+                        closeOnConfirm: true
+                    }).then(function (isConfirm) {
+                        if (isConfirm === true) {
+                            $('.modal-content').removeClass('modal-content-error');
+                            return false;
+                        } else {
+                            $('.modal-content').removeClass('modal-content-error');
+                            return false;
+                        }
+                    });
+                }
+            },
+            error: function (res) {
+                console.log("error");
+            }
+        });
+        return $('.js-modal__cabb_blank').modal('show');
+    }
+    function btn_lotto_ticket_status(ticket_id) {
+        $.ajax({
+        type: "POST",
+        async: false,
+        data: {
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            f_ticket_id: ticket_id,
+            f_need_img: true
+        },
+        url: "/cabb_get_status_lotto_ticket/",
+        success: function (res) {
+            if (res.AnswerCod === '01') {
+                 Swal.fire({
+                    icon: 'success',
+                    title: gettext('SUCCESS'),
+                    background: '#cacaca',
+                    html: res.AnswerText,
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: res.AnswerText,
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+     function btn_lotto_ticket_cancel(l_ticket_id) {
+        console.log('btn_ticket_action');
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        ticket_id: l_ticket_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cancel_lotto_ticket/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+</script>

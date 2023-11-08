@@ -1,0 +1,74 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">
+                        {% trans 'Payment answers uploaded from Tranzilla' %}
+                    </h5>
+                </div>
+                {% if l_find %}
+                    {% include l_find %}
+                {% endif %}
+                <div class="card-body">
+                    <a style="color: #192160;" onmouseover="this.style.color='#54299e'" onmouseout="this.style.color='#192160'"
+                       href="{% url 'cabb_report' 'Rep_14' %}">
+                        <span>{% trans 'Comparison with Balance operations' %}</span>
+                    </a><br>
+                    <a style="color: #192160;" onmouseover="this.style.color='#54299e'" onmouseout="this.style.color='#192160'"
+                       href="{% url 'upload_payment_answers' %}">
+                        <span>{% trans 'Upload file from tranzilla' %}</span>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                        <tr>
+                                            <th>{% trans 'Tranzilla Index' %}</th>
+                                            <th>{% trans 'Created date' %}</th>
+                                            <th>{% trans 'Balance operation id' %}</th>
+                                            <th>{% trans 'Info' %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if not list_answers %}
+                                        <tr>
+                                            <td colspan="4"> {% trans 'No data for' %}
+                                                {% if date_range %} {{ date_range }}
+                                                {% else %} {% now 'd.m.Y' %}
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% for answer in list_answers %}
+                                        <tr>
+                                            <td>{{ answer.payment_index }}</td>
+                                            <td>{{ answer.created_date|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ answer.balance_operation_id.id }}</td>
+                                            <td>
+                                                Status: {{ answer.json_data.status }}<br>
+                                                Money: {{ answer.json_data.amount|floatformat }}<br>
+                                                Paid with : {{ answer.json_data.paid_with }}<br>
+                                                Card 4 digits: {{ answer.json_data.card_last_4_digits }}<br>
+
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% if l_pagination %}
+                            {% include l_pagination %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

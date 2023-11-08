@@ -1,0 +1,190 @@
+
+{% load static %}
+{% load i18n %}
+
+
+
+<div class="content">
+    <div class="modal-fade-main-modal" id="signin" tabindex="-1" role="dialog" data-backdrop="static"
+        data-keyboard="false" aria-labelledby="signin" aria-hidden="true">
+
+        <div class="modal-body-main-modal-body">
+
+            <div class="form-area">
+
+                <form action="#" method="POST" autocomplete="off">
+                    {% csrf_token %}
+                    <input type="hidden" id="url_path" name="url_path" value="{{ utm_code }}">
+
+                    <input type="hidden" id="get_param" name="get_param" value="{{ get_param }}">
+
+                    <fieldset class="main-modal-fieldset-register">
+
+                        <div class="register-form-box">
+
+                            <div class="main-modal-form-group">
+                                <input type="text" class="main-modal-form-control" id="input-name" autocomplete="off"
+                                    name="f_name" placeholder="{% trans 'Full Name*' %}">
+                            </div>
+
+                            <div class="main-modal-form-group">
+                                <input type="text" class="main-modal-form-control" id="input-phone" autocomplete="off"
+                                    name="f_phone" placeholder="{% trans 'Phone*' %}">
+                            </div>
+
+                            <div class="main-modal-form-group">
+                                <input type="text" class="main-modal-form-control" id="input-code" autocomplete="off"
+                                    name="f_shopcode" placeholder="{% trans 'Code*' %}">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="text-center">
+                        <a href="#" class="mybtn1-register-btn" onclick="btn_modal_shop_register()">
+                            {% trans 'CONFIRM' %}
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    function input_field_not_exist(name) {
+        return ($('input[name=' + name + ']')).length === 0;
+    }
+
+    function input_field_value(name) {
+        return ($('input[name=' + name + ']')).val();
+    }
+
+    function input_field_value_is_empty(name) {
+        return ($('input[name=' + name + ']')).val() === '';
+    }
+
+    function input_field_exist(name) {
+        return !(($('input[name=' + name + ']')).length === 0);
+    }
+
+    function textarea_field_exist(name) {
+        return !(($('textarea[name=' + name + ']')).length === 0);
+    }
+    function btn_modal_shop_register() {
+        console.log("btn_modal_register");
+        var link = '/reg-ext-shop';
+        var m_name = input_field_value('f_name');
+        var m_shopcode = input_field_value('f_shopcode');
+        var m_phone = input_field_value('f_phone');
+        var isValid;
+        if (input_field_exist('f_name')) {
+            if (input_field_value_is_empty('f_name')) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter your Name"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('#id_f_name');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        if (input_field_exist('f_shopcode')) {
+            if (input_field_value_is_empty("f_shopcode")) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext('Enter code!'),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('#id_f_shopcode');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        if (input_field_exist('f_phone')) {
+            if (input_field_value_is_empty('f_phone')) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter your phone number"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('#input-phone');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                f_name: m_name,
+                f_shopcode: m_shopcode,
+                f_phone: m_phone,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: link,
+            success: function (res) {
+                console.log(res)
+                if (res.AnswerCod === "00") {
+                    // $('.js-modal__register').modal('hide');
+                    console.log(res)
+                    location.href = res.RedirectUrl;
+                    // Swal.fire({
+                    //     type: "success",
+                    //     icon: 'success',
+                    //     title: gettext('Registration completed'),
+                    //     background: '#ffffff',
+                    //     html: gettext("Registration completed successfully, follow the instructions in the mail"),
+                    //     confirmButtonText: gettext('OK'),
+                    //     confirmButtonColor: '#33c833',
+                    //     });
+                    // return true;
+                }
+                else if (res.AnswerCod === "00gift") {
+                    $('.js-modal__register').modal('hide');
+                    location.href = res.RedirectUrl;
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occurred while creating the user profile, please try again later"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>
+

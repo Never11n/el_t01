@@ -1,0 +1,134 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            {#            <div class="col-lg-12">#}
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'New Transaction' %}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr class="js_tic_row">
+                                        <th></th>
+                                        <th></th>
+                                        <th>{% trans 'User' %}</th>
+                                        <th>{% trans 'Date req' %}</th>
+{#                                        <th>{% trans 'Account Name' %}</th>#}
+{#                                        <th>{% trans 'Name Bank' %}</th>#}
+{#                                        <th>{% trans 'Branch' %}</th>#}
+{#                                        <th>{% trans 'Account number' %}</th>#}
+                                        <th>{% trans 'Amount' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ItemPayadd in list_payadd %}
+                                        <tr class="js_tic_row {% if ItemPayadd.answ_win %}
+                                     table-success
+                                   {% else %}
+{#                                     table-danger#}
+                                   {% endif %}"
+                                        >
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1 btn-sm"
+                                                        onclick="btn_payadd_ok('{{ ItemPayadd.id }}')"
+                                                >
+                                                    {% trans "OK" %}
+                                                </button>
+                                            </td>
+                                            <td>{{ ItemPayadd.id }}</td>
+                                            <td>{{ ItemPayadd.user_id }}</td>
+                                            <td>{{ ItemPayadd.created|date:"d.m.Y H:i:s" }}</td>
+{#                                            <td>{{ ItemPayadd.acc_name }}</td>#}
+{#                                            <td>{{ ItemPayadd.name_bank }}</td>#}
+{#                                            <td>{{ ItemPayadd.branch }}</td>#}
+{#                                            <td>{{ ItemPayadd.acc_num }}</td>#}
+                                            <td>{{ ItemPayadd.amount }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th>{% trans 'User' %}</th>
+                                        <th>{% trans 'Date req' %}</th>
+{#                                        <th>{% trans 'Account Name' %}</th>#}
+{#                                        <th>{% trans 'Name Bank' %}</th>#}
+{#                                        <th>{% trans 'Branch' %}</th>#}
+{#                                        <th>{% trans 'Account number' %}</th>#}
+                                        <th>{% trans 'Amount' %}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing
+                                    1
+                                    to 10 of 57
+                                    entries
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                    <ul class="pagination">
+                                        <li class="paginate_button page-item previous disabled" id="example1_previous">
+                                            <a
+                                                    href="#"
+                                                    aria-controls="example1"
+                                                    data-dt-idx="0"
+                                                    tabindex="0"
+                                                    class="page-link">Previous</a>
+                                        </li>
+                                        <li class="paginate_button page-item active"><a href="#"
+                                                                                        aria-controls="example1"
+                                                                                        data-dt-idx="1"
+                                                                                        tabindex="0"
+                                                                                        class="page-link">1</a>
+                                        </li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="example1"
+                                                                                  data-dt-idx="2"
+                                                                                  tabindex="0"
+                                                                                  class="page-link">2</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="example1"
+                                                                                  data-dt-idx="3"
+                                                                                  tabindex="0"
+                                                                                  class="page-link">3</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="example1"
+                                                                                  data-dt-idx="4"
+                                                                                  tabindex="0"
+                                                                                  class="page-link">4</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="example1"
+                                                                                  data-dt-idx="5"
+                                                                                  tabindex="0"
+                                                                                  class="page-link">5</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="example1"
+                                                                                  data-dt-idx="6"
+                                                                                  tabindex="0"
+                                                                                  class="page-link">6</a></li>
+                                        <li class="paginate_button page-item next" id="example1_next"><a href="#"
+                                                                                                         aria-controls="example1"
+                                                                                                         data-dt-idx="7"
+                                                                                                         tabindex="0"
+                                                                                                         class="page-link">Next</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+

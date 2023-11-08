@@ -1,0 +1,184 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+<!--<div class="main-bg-dark line-separator">-->
+
+<!--    &lt;!&ndash; About page section Area Start &ndash;&gt;-->
+<!--    <section class="about-page-section get-start p-t-80">-->
+<!--        <div class="container">-->
+<!--            <div class="text-center about-page-section__img-wrap">-->
+<!--                <img src="{% static 'main/005/images/logo.png' %}" alt="">-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div class="col-lg-6 d-flex align-self-center">-->
+<!--&lt;!&ndash;                <div class="col-lg-6 d-flex align-self-center mob-order-1">&ndash;&gt;-->
+<!--                    <div class="about-video">-->
+<!--                        <img src="{% static 'main/005/images/video_machine.png' %}" alt="">-->
+<!--                        <a href="https://www.youtube.com/watch?v=AnL-l4CR7qQ" class="play-video mfp-iframe">-->
+<!--                            <img src="{% static 'main/005/images/play-icon-red.png' %}" alt="">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-6 ">-->
+<!--                    <div class="section-heading">-->
+<!--&lt;!&ndash;                        <h5 class="subtitle">&ndash;&gt;-->
+<!--&lt;!&ndash;                            {% trans 'how it works' %}&ndash;&gt;-->
+<!--&lt;!&ndash;                        </h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h2 class="title">&ndash;&gt;-->
+<!--&lt;!&ndash;                            {% trans 'our machines' %}&ndash;&gt;-->
+<!--&lt;!&ndash;                        </h2>&ndash;&gt;-->
+<!--                        <p class="text">-->
+<!--                            {% trans 'New in Israel!<br>' %}-->
+<!--                            {% trans 'Scratching the lottery tickets of the Lottery directly from the mobile phone and / or the computer<br>' %}-->
+<!--                            {% trans 'The winnings are accepted into an account on the website and immediately afterwards can be withdrawn to the bank account<br><br>' %}-->
+<!--                            {% trans 'We are proud to present the new and unique card scraping machines of their kind.  You order on the website, the machine scratches the card for you, and with a winning card you will receive the win directly to your account on the website!' %}-->
+<!--                        </p>-->
+<!--&lt;!&ndash;                        <a href="#" class="mybtn1"&ndash;&gt;-->
+<!--&lt;!&ndash;                               data-toggle="modal"&ndash;&gt;-->
+<!--&lt;!&ndash;                               data-target="#signin">{% trans 'Play Now' %}</a>&ndash;&gt;-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+    <!-- About page section Area End -->
+
+<section class="last-winner">
+    <div class="container">
+        <div class="section-heading">
+            <h4 class="title last-winner__title">
+                {% trans 'Last Winning HISHGAD Tickets' %}
+            </h4>
+        </div>
+        <div class="last-winner-list js-last-winner-list">
+
+            <div class="last-winner-item">
+                <div class="last-winner-item__img-wrap">
+                    <img class="last-winner-item__img" src="{% static 'main/007/images/tickets/queen.png' %}" alt="">
+                </div>
+                <div class="last-winner-item__info">
+                    <div class="last-winner-item__win">
+                        {% trans 'Won' %}
+                        <span class="color-green">{% trans '2,000 ILS' %}</span>
+                    </div>
+                    <div class="last-winner-item__name">
+                        {% trans 'Z, Haifa' %}
+                    </div>
+                    <div class="last-winner-item__price">
+                        {% trans 'Cost' %}
+                        <span class="color-violet">{% trans '60 ILS' %}</span>
+                    </div>
+                </div>
+                <button class="mybtn4 last-winner-item__btn" type="button">
+                    {% trans 'PLAY NOW' %}
+                </button>
+            </div>
+
+            <div class="last-winner-item last-winner-item_active">
+                <div class="last-winner-item__img-wrap">
+                    <img class="last-winner-item__img" src="{% static 'main/007/images/tickets/bascket.png' %}" alt="">
+                </div>
+                <div class="last-winner-item__info">
+                    <div class="last-winner-item__win">
+                        {% trans 'Won' %}
+                        <span class="color-green">{% trans '100 ILS' %}</span>
+                    </div>
+                    <div class="last-winner-item__name">
+                        {% trans 'A, Tel Aviv' %}
+                    </div>
+                    <div class="last-winner-item__price">
+                        {% trans 'Cost' %}
+                        <span class="color-violet">{% trans '13 ILS' %}</span>
+                    </div>
+                </div>
+                <button class="mybtn4 last-winner-item__btn" type="button">
+                    {% trans 'PLAY NOW' %}
+                </button>
+            </div>
+
+            <div class="last-winner-item">
+                <div class="last-winner-item__img-wrap">
+                    <img class="last-winner-item__img" src="{% static 'main/007/images//tickets/bjack.png' %}" alt="">
+                </div>
+                <div class="last-winner-item__info">
+                    <div class="last-winner-item__win">
+                        {% trans 'Won' %}
+                        <span class="color-green">{% trans '2,000 ILS' %}</span>
+                    </div>
+                    <div class="last-winner-item__name">
+                        {% trans 'M, Bat Yam' %}
+                    </div>
+                    <div class="last-winner-item__price">
+                        {% trans 'Cost' %}
+                        <span class="color-violet">{% trans '24 ILS' %}</span>
+                    </div>
+                </div>
+                <button class="mybtn4 last-winner-item__btn" type="button">
+                    {% trans 'PLAY NOW' %}
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="last-winner">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="section-heading">
+                    <h2 class="title">
+                        חישגד בנייד אונליין!
+                    </h2>
+                    <p class="subtitle color-black">
+                         כרטיסי הגירוד מבית מפעל הפיס במקום אחד! בואו לבחור מתוך מגוון של כרטיסי גירוד: חישגד כדורסל, חישגד בורסה, קזינו, בלאק ג'ק 21, מלכת הלבבות, אס = פרס, מגה כסף ועוד.
+                    </p>
+                    <p class="subtitle">
+                         כל זה קורה בתהליך רישום מהיר ופשוט, באמצעות פלטפורמה חדשנית שכבר ביצעה מהפכה בחוויה ובהנגשה של כרטיסי הגירוד הפיזיים והחיבור לעולם הדיגיטלי.
+                    </p>
+                    <p class="subtitle">
+                        מי אנחנו ואיך קורה הקסם? "חישליין" החלה לפעול בשנת 2022 עם פיתוח חדשני המאפשר לגרד כרטיסי חישגד דרך הנייד, המחשב, הטאבלט והכל זמין עבורכם 24/7. אנו בעלי זיכיון לשימוש בפטנט טכנולוגי שבו כל מי שמעל גיל 18 יכול להירשם ולהנות מחוויה טכנולוגית פורצת דרך.
+                    </p>
+                    <p class="subtitle">
+                        גאים להיות מובילי התחום ! רוצים לדעת עלינו קצת יותר?
+                        <a style="color: #0024f1; font-size: 18px;" class="sub-footer-menu__link" href="{% url 'aboutus' %}">בקרו בעמוד אודות חישליין</a>
+                    </p>
+                    <p class="subtitle">
+                        בטוח ומאובטח: אנו שמים דגש על אבטחה ופרטיות. הפלטפורמה המתקדמת שלנו משתמשת בטכניקות הצפנה מתקדמות ובשרתים מאובטחים כדי להגן על נתוני המשתמש ולהבטיח סודיות מלאה לכל אורך ההליך.
+                    </p>
+                    <p class="subtitle">
+                        {% trans 'שקיפות מלאה: הטכנולוגיה המתקדמת שלנו מאפשרת לכם לצפות בכרטיס הגירוד ולאסוף את הכרטיס במקרה של זכיה ממשרדי החברה בכל עת. כאשר אתם מגרדים את הכרטיס בנייד, נשלחת פקודה לרובוט בו נמצאים כרטיסי חישגד של מפעל הפיס והרובוט מגרד וחושף את תוצאות הכרטיס. ' %}
+                    </p>
+                    <p class="subtitle">
+                        אתם נהנים מהביטחון של שקיפות מלאה גם בזכות מצלמה המותקנת על המכונה, מקבלים צילום של המספר הסידורי של מפעל הפיס וברגע שיש זכיה הכסף מועבר אליכם ישירות.
+                    </p>
+                    <p class="subtitle">
+                         המערכת המתקדמת שלנו יכולה לזהות כל כרטיס זוכה ואת סכום הזכיה. כמו כן, במידה ואתם המאושרים והמעושרים  אתם בוחרים אם להמשיך ולשחק או למשוך את סכום הזכייה. (נהנים ומשחקים באחריות).
+                    </p>
+                    <p class="subtitle">
+                         עבורכם 24/7: אנו מעמידים לרשותכם מוקד זמין 24/7 שבו ייענו כל דרישותיכם, תרגישו בנוח לפנות אלינו ונשמח לעמוד לרשותכם.
+                    </p>
+                    <p class="subtitle">
+                         חישגד אונליין עומדת בחזית המהפכה הדיגיטלית, ומספקת חווית משתמש המותאמת לצרכים ולציפיות שלכם. אתם יכולים להסתגל בקלות לפלטפורמה ולמקסם את הפרודוקטיביות שלכם. התמקדנו בעיקר בחווית המשתמש כמו גם בגמישות והנגישות. הפלטפורמה תואמת מכשירי סלולר שונים, מחשבים נייחים וניידים, טאבלטים וסמארטפונים.
+                    </p>
+                    <p class="subtitle">
+                         בנוסף, חישליין מעדכנת מעת לעת פונקציות נוספות, חידושים טכנולוגיים ומוסיפה עוד מוצרים מבית מפעל הפיס. כל זה תוך עמידה על אספקת החוויה, השירות והמחיר הטוב ביותר. בזכות פיתוח ואופטימיזציה ברמות הגבוהות ביותר תהנו מחוויה דיגיטלית מתקדמת ללא חסמים טכנולוגיים או גיאוגרפיים. את כל הקסם הזה אנחנו מספקים ישירות לנייד הפרטי שלכם ובשבילכם.
+                    </p>
+{#                    <p class="subtitle">#}
+{#                        {% trans 'Receive Winnings Directly To Your Bank Account' %}#}
+{#                    </p>#}
+{#                    <p class="subtitle">#}
+{#                        {% trans 'Receive Winnings Directly To Your Bank Account' %}#}
+{#                    </p>#}
+{#                    <p class="subtitle">#}
+{#                        {% trans 'Receive Winnings Directly To Your Bank Account' %}#}
+{#                    </p>#}
+{#                    <p class="subtitle">#}
+{#                        {% trans 'Receive Winnings Directly To Your Bank Account' %}#}
+{#                    </p>#}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

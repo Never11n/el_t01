@@ -1,0 +1,14 @@
+{% load static %}
+{% load i18n %}
+{% if report_item.export and report_list %}
+    <div class="card-tools cabb-page-btnexp">
+        <a href="/cabb_report_exp/{{ menu_reports_item }}/1/{% if get_param  %}?{{ get_param }}{% endif %}"
+           class="btn btn-block btn-outline-primary">{% trans 'Export EXCEL' %}</a>
+    </div>
+{% endif %}
+{% if report_item.export_add and report_list %}
+    <div class="card-tools cabb-page-btnexp">
+        <a href="/cabb_report_exp/{{ menu_reports_item }}/2/{% if get_param  %}?{{ get_param }}{% endif %}"
+           class="btn btn-block btn-outline-primary">{% trans report_item.export_add_name %}</a>
+    </div>
+{% endif %}

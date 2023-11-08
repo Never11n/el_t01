@@ -1,0 +1,156 @@
+{% load static %}
+{% load i18n %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+{#            <form action="iframe.php" target="my-iframe" method="post">#}
+{#			  <label for="text">Some text:</label>#}
+{#              <input type="text" name="text" id="text">#}
+{#			  <input type="submit" value="post">#}
+{#            </form>#}
+{#            <iframe name="my-iframe" src="iframe.php"></iframe>#}
+
+{#            <form action="{{ m_url }}" target="tranzila-frame-bit" method="post">#}
+{#              <input type="text" name="sum" value="{{ m_sum }}">#}
+{#              <input type="text" name="currency" value="{{ m_currency }}">#}
+{#              <input type="text" name="lang" value="{{ m_lang }}">#}
+{#              <input type="text" name="company" value="{{ m_company }}">#}
+{##}
+{#              <input type="text" name="success_url_address" value="{{ m_success_url_address }}">#}
+{#              <input type="text" name="fail_url_address" value="{{ m_fail_url_address }}">#}
+{#              <input type="text" name="u71" value="1">#}
+{#              <input type="text" name="tranmode" value="A">#}
+{#              <input type="text" name="hide_cc" value="1">#}
+{#              <input type="text" name="bit_pay" value="1">#}
+{#              <input type="text" name="email" value="{{ m_email }}">#}
+{##}
+{#			  <input type="submit" value="post">#}
+{##}
+{#            </form>#}
+<form id="gsTranzillaIframe"
+      name="formname"
+      method="POST"
+{#      action="https://direct.tranzila.com/comsi2021/iframenew.php"#}
+      action="https://direct.tranzila.com/shmulik3355ch/iframenew.php"
+      target="iframe"
+{#      style="display:none">#}
+      style="">
+
+<input type="" name="sum" value="7">
+<input type="" name="currency" value="1">
+<input type="" name="lang" value="il">
+<input type="" name="email" value="">
+<input type="" name="phone" value="05555555555">
+<input type="" name="contact" value="">
+<input type="" name="company" value="WinWin">
+{#<input type="hidden" name="hp" value="">#}
+{#<input type="hidden" name="IMaam" value="0.17">#}
+{#<input type="hidden" name="selection" value="">#}
+{#<input type="hidden" name="json_purchase_data" value="">#}
+<input type="" name="u71" value="1">
+{#<input type="hidden" id="_wpnonce" name="_wpnonce" value="cc416008dd">#}
+{#<input type="hidden" name="_wp_http_referer" value="/%d7%a2%d7%9e%d7%95%d7%93-%d7%a8%d7%9b%d7%99%d7%a9%d7%94/">#}
+<input type="" name="hide_cc" value="0">
+<input type="" name="bit_pay" value="1">
+<input type="submit" value="post">
+
+{#    createInputAttachMapForm('success_url_address', '{{ m_success_url_address }}');#}
+{#    createInputAttachMapForm('fail_url_address', '{{ m_fail_url_address }}');#}
+
+</form>
+
+<iframe id="frame" name="iframe" height="650" width="500" frameborder="0"></iframe>
+
+
+{#            <iframe class="tranzila-frame"#}
+{#                    id="encoder_iframe"#}
+{#                    height="600px"#}
+{#                    width="600px"#}
+{#                    src="{{ m_url }}"#}
+{#                    name="tranzila-frame-bit"#}
+{#            >#}
+{#<html lang="en">#}
+{#<head></head>#}
+{#<body>#}
+{#<script>#}
+{#    function createInputAttachMapForm(name, val) {#}
+{#        var mapInput = document.createElement("input");#}
+{#        mapInput.type = "hidden";#}
+{#        mapInput.name = name;#}
+{#        mapInput.value = val;#}
+{#        mapForm.appendChild(mapInput);#}
+{#    }#}
+{##}
+{#    var mapForm = document.createElement("form");#}
+{#    mapForm.method = "POST";#}
+{#    mapForm.action = "{{ m_url }}";#}
+{##}
+    {#createInputAttachMapForm('language', '{{ language }}');#}
+    {#createInputAttachMapForm('amount', '{{ amount }}');#}
+    {#createInputAttachMapForm('productPrice[]', '{{ productPrice }}');#}
+    {#createInputAttachMapForm('orderReference', '{{ orderReference }}');#}
+    {#createInputAttachMapForm('merchantTransactionType', '{{ merchantTransactionType }}');#}
+    {#createInputAttachMapForm('currency', '{{ currency }}');#}
+    {#createInputAttachMapForm('merchantDomainName', '{{ merchantDomainName }}');#}
+    {#createInputAttachMapForm('clientPhone', '{{ clientPhone }}');#}
+    {#createInputAttachMapForm('clientEmail', '{{ clientEmail }}');#}
+    {#createInputAttachMapForm('productCount[]', '{{ productCount }}');#}
+    {#createInputAttachMapForm('productName[]', '{{ productName }}');#}
+    {#createInputAttachMapForm('merchantAuthType', '{{ merchantAuthType }}');#}
+    {#createInputAttachMapForm('clientLastName', '{{ clientLastName }}');#}
+    {#createInputAttachMapForm('orderDate', '{{ orderDate }}');#}
+    {#createInputAttachMapForm('clientFirstName', '{{ clientFirstName }}');#}
+    {#createInputAttachMapForm('serviceUrl', '{{ serviceUrl }}');#}
+    {#createInputAttachMapForm('merchantSignature', '{{ merchantSignature }}');#}
+    {#createInputAttachMapForm('merchantAccount', '{{ merchantAccount }}');#}
+    {#createInputAttachMapForm('merchantTransactionSecureType', '{{ merchantTransactionSecureType }}');#}
+{##}
+    {#createInputAttachMapForm('supplier', '{{ m_supplier }}');#}
+    {#createInputAttachMapForm('TranzilaPW', '{{ m_tranzila_pw }}');#}
+    {#createInputAttachMapForm('cred_type', '1');#}
+{##}
+{#    createInputAttachMapForm('sum', '{{ m_sum }}');#}
+{#    createInputAttachMapForm('currency', '{{ m_currency }}');#}
+{#    createInputAttachMapForm('lang', '{{ m_lang }}');#}
+{#    createInputAttachMapForm('company', '{{ m_company }}');#}
+{#    createInputAttachMapForm('success_url_address', '{{ m_success_url_address }}');#}
+{#    createInputAttachMapForm('fail_url_address', '{{ m_fail_url_address }}');#}
+{#    createInputAttachMapForm('u71', '1');#}
+{#    createInputAttachMapForm('tranmode', 'A');#}
+{#    createInputAttachMapForm('hide_cc', '1');#}
+{#    createInputAttachMapForm('bit_pay', '1');#}
+{##}
+{#    createInputAttachMapForm('email', '{{ m_email }}');#}
+{##}
+    {#createInputAttachMapForm('tranmode', 'AK');#}
+    {#{% if me.profile.tranzila_token  %}#}
+    {#    createInputAttachMapForm('TranzilaTK', '{{ me.profile.tranzila_token }}');#}
+    {#{% endif %}#}
+{##}
+    {#https://secure5.tranzila.com/cgi-bin/tranzila71u.cgi?supplier=shmulik3355tok&TranzilaPW=gjdukl78&TranzilaTK=x4f3b93b782fae52312&expdate=0927&myid=123456789&s=1&1=1=#}
+{##}
+{#    document.body.appendChild(mapForm);#}
+{#    mapForm.submit();#}
+{#</script>#}
+{#</body>#}
+{#</html>#}
+{#            </iframe>#}
+{#            <iframe class="tranzila-frame"#}
+{#                    id="encoder_iframe" #}
+{#                    height="600px" #}
+{#                    width="455px"#}
+{#                    src="{{ m_url }}{{ get_param }}">#}
+{#            </iframe>#}
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <a href="{% url 'cab_game_order' item_game_user.id %}"
+               class="mybtn1">{% trans 'Back to site' %}</a>
+        </div>
+        {% if False %}
+        <div class="col-12 d-flex justify-content-center">
+            <a href="{% url 'cab_game_item' item_game_user.id %}"
+               class="mybtn1 mybtn6">{% trans 'IMITATION' %}</a>
+        </div>
+        {% endif %}
+    </div>
+</div>

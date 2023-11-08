@@ -1,0 +1,393 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'Subscription List' %}</h5>
+                </div>
+                {% if l_find %}
+                    {% include l_find %}
+                {% endif %}
+                <div class="card-body">
+                    <button type="button"
+                            class="btn btn-info mybtn_cabb1"
+                            onclick="btn_subscription_form('new')">
+                        {% trans 'New' %}
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans '#' %}</th>
+                                        <th>{% trans 'Active' %}</th>
+                                        <th>{% trans 'Creation date' %}</th>
+                                        <th>{% trans 'Modified date' %}</th>
+                                        <th>{% trans 'Creator' %}</th>
+                                        <th>{% trans 'Manager/bonus' %}</th>
+                                        <th>{% trans 'Owner' %}</th>
+                                        <th>{% trans 'Subs Start' %}</th>
+                                        <th>{% trans 'Subs Stop' %}</th>
+                                        <th>{% trans 'Days' %}</th>
+                                        <th>{% trans 'Tickets' %}</th>
+                                        <th>{% trans 'Cost' %}</th>
+                                        <th>{% trans 'Paid' %}</th>
+                                        <th>{% trans 'Auto payment/card info' %}</th>
+                                        <th>{% trans 'Description' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ItemLine in list_subscription %}
+                                        <tr class="js_tic_row {% if ItemLine.last_pay %}{% else %}table-danger{% endif %}">
+                                            <td>
+                                                {% if True %}
+                                                    <button type="button"
+                                                            class="btn btn-info mybtn_cabb1"
+                                                            onclick="btn_subs_enable({{ ItemLine.id }})"
+                                                    >
+                                                        {% if ItemLine.enabled %}
+                                                            {% trans 'Disable' %}
+                                                        {% else %}
+                                                            {% trans 'Enable' %}
+                                                        {% endif %}
+                                                    </button>
+                                                {% endif %}
+                                                {% if True %}
+                                                    <br>
+                                                    <button type="button"
+                                                            class="btn btn-info mybtn_cabb1"
+                                                            onclick="btn_subscription_form('edit', {{ ItemLine.id }})"
+                                                    >
+                                                        {% trans 'Edit' %}
+                                                    </button>
+                                                {% endif %}
+                                                {% if False %}
+                                                    <br>
+                                                    <button type="button"
+                                                            class="btn btn-info mybtn_cabb1"
+                                                            onclick="btn_subscription_form('renew', {{ ItemLine.id }})"
+                                                    >
+                                                        {% trans 'Renew' %}
+                                                    </button>
+                                                {% endif %}
+                                                {% if False %}
+                                                    <br>
+                                                    <button type="button"
+                                                            class="btn btn-info mybtn_cabb1"
+                                                            onclick="btn_blocklist_enable({{ ItemLine.id }})">
+                                                        {% trans 'Start' %}
+                                                    </button>
+                                                {% endif %}
+                                                {% if True %}
+                                                    <br>
+                                                    <button type="button"
+                                                            class="btn btn-info mybtn_cabb1"
+                                                            onclick="btn_subs_act({{ ItemLine.id }}, 'get_m')">
+                                                        {% trans 'Get M' %}
+                                                    </button>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {{ ItemLine.id }}<br>
+                                                <a href="{% url 'cabb_sub_info' ItemLine.id %}"
+                                                   target="_blank"
+                                                   class="btn btn-info mybtn_cabb1">
+                                                    <i class="far fa-info-circle"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {% if ItemLine.enabled %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                                <br>
+                                                {% if ItemLine.creator == "00" %}
+                                                    {% trans 'Manager' %}
+                                                {% endif %}
+                                                {% if ItemLine.creator == "01" %}
+                                                    {% trans 'User' %}
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ ItemLine.dt_add|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ ItemLine.dt_modified|date:"d.m.Y H:i:s" }}</td>
+                                            <td class="{% if ItemLine.creator == "01" and ItemLine.enabled == False %}table-warning{% endif %} {% if ItemLine.creator == "01" and ItemLine.enabled == True %}table-success{% endif %}">
+                                                {{ ItemLine.user_id_creator.profile.name }}<br>{{ ItemLine.user_id_creator }}
+                                            </td>
+                                            <td>
+                                                {% if ItemLine.manager %}{{  ItemLine.manager }}{% else %}-{% endif %} /
+                                                {% if ItemLine.bonus %}{{ ItemLine.bonus }}{% else %}-{% endif %}
+                                            </td>
+                                            <td class="{% if ItemLine.creator == "01" and ItemLine.enabled == False %}table-warning{% endif %} {% if ItemLine.creator == "01" and ItemLine.enabled == True %}table-success{% endif %}">
+                                                {{ ItemLine.user_id.profile.name }}<br>
+                                                {{ ItemLine.user_id }}<br>
+                                                {{ ItemLine.user_id.profile.mobile }}<br>
+                                            </td>
+
+                                            <td>{{ ItemLine.dt_start|date:"d.m.Y" }}</td>
+                                            <td>{{ ItemLine.dt_stop|date:"d.m.Y" }}</td>
+
+                                            <td>
+                                                {% if ItemLine.day_1 %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                                {% trans 'Sun' %}, {{ ItemLine.time_1 }}
+                                                <br>
+                                                {% if ItemLine.day_2 %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                                {% trans 'Mon' %}, {{ ItemLine.time_2 }}
+                                                <br>
+                                                {% if ItemLine.day_3 %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                                {% trans 'Tue' %}, {{ ItemLine.time_3 }}
+                                                <br>
+                                                {% if ItemLine.day_4 %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                                {% trans 'Wed' %}, {{ ItemLine.time_4 }}
+                                                <br>
+                                                {% if ItemLine.day_5 %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                                {% trans 'Thu' %}, {{ ItemLine.time_5 }}
+                                                <br>
+                                                {% if ItemLine.day_6 %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                                {% trans 'Fri' %}, {{ ItemLine.time_6 }}
+                                                <br>
+                                                {% if ItemLine.day_7 %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                                {% trans 'Sat' %}, {{ ItemLine.time_7 }}
+                                            </td>
+                                            <td>
+                                                {{ ItemLine.ticket_list.caption }}
+                                                <br>{% trans 'In day' %}: {{ ItemLine.ticket_list.count }}
+                                                <br>{% trans 'Active days' %}: {{ ItemLine.ticket_list.days_sub_works }}
+                                                <br>{% trans 'All tickets' %}: {{ ItemLine.ticket_list.tickets_amount }}
+                                            </td>
+                                            <td>
+                                                {% trans 'Subs' %}:{{ ItemLine.amount_subs }}
+                                                <br>{% trans 'Add' %}:{{ ItemLine.amount_add }}
+                                                <br>{% trans 'Total' %}:{{ ItemLine.amount_total }}
+                                            </td>
+                                            <td>
+                                                {{ ItemLine.paid_date|date:"d.m.Y" }}
+                                                <br>{{ ItemLine.paid_amount }}
+                                            </td>
+                                            <td>
+                                                {% if ItemLine.auto_pay %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                                <br>{% trans 'token:' %} {{ ItemLine.u_paycard.tranzila_tk }}
+                                                <br>{% trans 'last 4:' %} {{ ItemLine.u_paycard.ccno }}
+                                                <br>{% trans 'Exp. month:' %} {{ ItemLine.u_paycard.expmonth }}
+                                                <br>{% trans 'Exp. year:' %} {{ ItemLine.u_paycard.expyear }}
+                                                <br>{% trans 'Amount:' %} {{ ItemLine.auto_pay_amount }}
+                                                <br>{% trans 'Period:' %} {{ ItemLine.auto_pay_day }}
+                                            </td>
+                                            <td>{{ ItemLine.description|safe }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans '#' %}</th>
+                                        <th>{% trans 'Active' %}</th>
+                                        <th>{% trans 'Creation date' %}</th>
+                                        <th>{% trans 'Modified date' %}</th>
+                                        <th>{% trans 'Creator user' %}</th>
+                                        <th>{% trans 'Manager/bonus' %}</th>
+                                        <th>{% trans 'User Owner' %}</th>
+                                        <th>{% trans 'Subs Start' %}</th>
+                                        <th>{% trans 'Subs Stop' %}</th>
+                                        <th>{% trans 'Days' %}</th>
+                                        <th>{% trans 'Tickets' %}</th>
+                                        <th>{% trans 'Cost' %}</th>
+                                        <th>{% trans 'Paid' %}</th>
+                                        <th>{% trans 'Auto payment/card info' %}</th>
+                                        <th>{% trans 'Description' %}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        {% if l_pagination %}
+                            {% include l_pagination %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    function btn_subs_enable(l_subs_id) {
+        console.log("btn_subs_enable");
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        subs_id: l_subs_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb_subs_enable/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                // 'OK my boss, I didn\'t think you were so greedy'
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+    function btn_subscription_form(l_form_type, l_id) {
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                f_id: l_id,
+                f_form_type: l_form_type,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_subs_form/",
+            success: function (res) {
+                $("#id_ResAjax_cabb_form").html(res);
+                return $('.js-modal__cabb_form').modal('show');
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+    function btn_subs_act(l_id, l_act) {
+        {#$("#id_ResAjax_cabb_form").html("");#}
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        f_id: l_id,
+                        f_act: l_act,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb_subs_act/",
+                    success: function (res) {
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                        {#$("#id_ResAjax_cabb_form").html(res);#}
+                        {#return $('.js-modal__cabb_form').modal('show');#}
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occured, please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+
+            } else {
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+</script>

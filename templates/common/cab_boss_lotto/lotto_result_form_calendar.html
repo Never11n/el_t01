@@ -1,0 +1,165 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{ m_form_title }}</h3>
+                                </div>
+                                <div class="card-body">
+                                     <div class="row">
+                                         <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_lotto_type">{% trans 'Lotto Type' %}</label>
+                                                <select class="custom-select"
+                                                        id="id_lotto_type"
+                                                        name="f_lotto_type">
+                                                    {% for Item in lotto_types %}
+                                                        {% if Item.verbal == t_lotto_result.lotto_type.verbal %}
+                                                        <option selected="selected"
+                                                                value="{{ Item.verbal }}">{% trans Item.caption %}</option>
+                                                        {% else %}
+                                                        <option value="{{ Item.verbal }}">{% trans Item.caption %}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                         <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_lottery_number">{% trans 'Start lottery number' %}</label>
+                                                <input type="number"
+                                                       id="id_lottery_number"
+                                                       class="form-control"
+                                                       name="f_lottery_number"
+                                                       min="1"
+                                                       value="">
+                                            </div>
+                                        </div>
+                                     </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>{% trans 'Date start:' %}</label>
+                                               <div class="input-group date" id="id_date_1"
+                                                     data-target-input="nearest">
+                                                    <input type="text"
+                                                           class="form-control datetimepicker-input"
+                                                           id="id_date_start"
+                                                           data-target="#id_date_1"
+                                                           name="f_date_start"
+                                                           value="{{ m_dt_start|date:'d.m.Y'}}"
+                                                    >
+                                                    <div class="input-group-append" data-target="#id_date_1"
+                                                         data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>{% trans 'Date end:' %}</label>
+                                                <div class="input-group date" id="id_date_2"
+                                                     data-target-input="nearest">
+                                                    <input type="text"
+                                                           class="form-control datetimepicker-input"
+                                                           id="id_date_stop"
+                                                           data-target="#id_date_2"
+                                                           name="f_date_stop"
+                                                           value="{{ m_dt_stop|date:'d.m.Y' }}"
+                                                    >
+                                                    <div class="input-group-append" data-target="#id_date_2"
+                                                         data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="row flex-md-row ">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                onclick="btn_lotto_result_calendar_save()"
+                                        >{% trans 'Save' %}
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                data-dismiss="modal"
+                                        >{% trans 'Close' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+     $('#id_date_1').datetimepicker({
+         format: 'DD.MM.YYYY',
+         minDate: new Date()
+    });
+    $('#id_date_2').datetimepicker({
+        format: 'DD.MM.YYYY',
+        minDate: new Date()
+    });
+    function btn_lotto_result_calendar_save() {
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                f_lotto_type: $("#id_lotto_type").val(),
+                f_date_start: $('#id_date_start').val(),
+                f_date_stop: $('#id_date_stop').val(),
+                f_lottery_number: $('#id_lottery_number').val()
+            },
+            url: "/lotto_result_form_calendar_save/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    $('.js-modal__cabb_form').modal('hide');
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+
+    }
+</script>

@@ -1,0 +1,32 @@
+{% load static %}
+{% load i18n %}
+    <input id="id_payout_id" type="hidden" value="{{ item_payout.id }}">
+    <div class="card-header">
+        <h3 class="card-title text-primary">ORDER = {{ item_payout.id }},
+            {{ item_payout.user_id.profile.name}},
+            {{ item_payout.user_id.profile.mobile}},
+            {{ item_payout.user_id.email}},
+            {{ item_payout.created|date:"d.m.Y H:i:s" }}
+        </h3>
+    </div>
+    <div class="card-body">
+        <!-- radio -->
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5 class="card-title m-0 text-muted">{% trans 'Document' %}</h5>
+                    </div>
+                    <div class="col-sm-12">
+                        <img class="img-fluid" src="/{{ item_payout.upload_doc }}" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="row">
+            <div class="card-header col-12 d-flex justify-content-center">
+                <h3 class="card-title text-info">SUM = {{ item_payout.amount }}</h3>
+            </div>
+        </div>
+    </div>

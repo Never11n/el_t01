@@ -1,0 +1,156 @@
+{% load static %}
+{% load i18n %}
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title text-secondary">{% trans 'Check Ticket' %} {{ item_ticket.req_id }}, {% trans 'Status' %}
+            = {{ item_ticket.status }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% csrf_token %}
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-primary">
+                            {% trans 'Ticket' %} {{ item_ticket.req_id }}
+                        </h3>
+                        <br>
+                        <h3 class="card-title text-primary">{% trans 'User' %} = {{ games_id.id }},
+                            {{ item_ticket.games_id.user_id.profile.name }},
+                            {{ item_ticket.games_id.user_id.profile.mobile }},
+                            {{ item_ticket.games_id.user_id.email }}
+                        </h3>
+                        <h3 class="card-title text-info">{% trans 'Balanse before' %}
+                            = {{ item_ticket.balance_01 }}
+                            {% trans 'Cost' %} = {{ item_ticket.cost_2 }}
+                            {% trans 'Balance after' %} = {{ item_ticket.balance_02 }}</h3>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="content">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h5 class="card-title m-0 text-secondary">{% trans 'Ticket before' %}</h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img class="img-fluid" src="{{ item_ticket.img_03 }}" alt="Photo BEFORE">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img class="img-fluid" src="{{ item_ticket.img_07 }}" alt="Photo BEFORE">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h5 class="card-title m-0 text-secondary">{% trans 'Ticket after' %}</h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img class="img-fluid" src="{{ item_ticket.img_04 }}" alt="Photo AFTER">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img class="img-fluid" src="{{ item_ticket.img_08 }}" alt="Photo AFTER">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="card-header col-sm-6">
+                                <label>TICKET NUMBER</label>
+                                <input id="id_f_answ_nom" name="f_answ_nom" class="form-control"
+                                       value="{{ item_ticket.answ_nom }}">
+                            </div>
+{#                            <div class="card-header col-4">#}
+{#                                <label>OPTION</label>#}
+{#                                <input id="id_f_answ_option" name="f_answ_option" class="form-control"#}
+{#                                       value="{{ item_ticket.answ_option }}">#}
+{#                            </div>#}
+                            <div class="card-header col-sm-6">
+                                <label>WIN SUM</label>
+                                <input id="id_f_answ_win_sum" name="f_answ_win_sum" class="form-control"
+                                       value="{{ item_ticket.answ_win_sum }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                        {% if false %}
+                            <div class="card-body table-responsive p-0  col-sm-12">
+                                <label>TABLE GAME</label>
+                                <textarea class="form-control" rows="10"
+                                          id="id_f_answ_tabl" name="f_answ_tabl"
+                                >{{ item_ticket.answ_tabl }}</textarea>
+                            </div>
+                        {% endif %}
+                            <div class="card-body table-responsive p-0  col-sm-12">
+                                {% if template_result_name %}
+                                    {% include template_result_name %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button"
+                class="btn btn-dark"
+                data-dismiss="modal"
+                onclick="btn_ticketcheck_conf_02('0101')"
+        >{% trans 'Confirm' %}</button>
+        <button type="button"
+                class="btn btn-dark"
+                data-dismiss="modal"
+                onclick="btn_ticketcheck_conf_02('02')"
+        >{% trans 'Error' %}</button>
+        <button type="button"
+                class="btn btn-dark"
+                data-dismiss="modal"
+        >{% trans 'Close' %}</button>
+    </div>
+</div>
+{#                        <form id="id`_form_login" action="{% url 'login' %}" method="post">#}
+<script type="text/javascript">
+    function btn_ticketcheck_conf_02(l_param) {
+        m_answ_nom = $("#id_f_answ_nom").val();
+        m_answ_win_sum = $("#id_f_answ_win_sum").val();
+
+        $.ajax({
+            type: "POST",
+            data: {
+                f_id: {{ item_ticket.id }},
+                f_param: l_param,
+                f_answ_nom: m_answ_nom,
+                f_answ_win_sum: m_answ_win_sum,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_ticketcheck_conf/",
+            success: function (res) {
+                location.reload();
+                return;
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occurred during user verification, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                return false;
+            }
+        });
+    }
+</script>

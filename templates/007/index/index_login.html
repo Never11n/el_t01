@@ -1,0 +1,71 @@
+{% extends "layout/layout_main_login.html" %}
+{% load static %}
+{% load i18n %}
+{% block layoutbody %}
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><b>{% trans PAGE_TITLE %}</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg"><b>{% trans 'Вход в' %} {% trans PAGE_TITLE %}</b></p>
+                <form id="id_form_login" action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input id="id_fl_email"
+                               name="fl_email"
+                               type="text"
+                               class="form-control"
+                               placeholder="Login"
+                        >
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-edit"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input id="id_fl_password"
+                               name="fl_password"
+                               type="password"
+                               class="form-control"
+                               placeholder="Password"
+                        >
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input itemid="id_fl_remember_me"
+                                       name="fl_remember_me"
+                                       type="checkbox"
+                                       id="remember"
+                                >
+                                <label for="remember">
+                                    {% trans 'Не выходить из системы' %}
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <a href="#"
+                               class="btn btn-primary btn-block"
+                               onclick="modal_btn_login()"
+                            >
+                                {% trans 'Войти' %}
+                            </a>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+{% endblock %}

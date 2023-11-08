@@ -1,0 +1,15 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+{% if GL_Whatsapp_call_centr_phone != "None" %}
+<a href="https://wa.me/{{ GL_Whatsapp_call_centr_phone }}"
+   class="btn_call_centr_wa"
+   target="_blank"
+   style="text-decoration:none;"
+   role="link"
+   aria-label="link to whatsapp">
+    <img src="{% static 'img/whatsapp_02.png' %}"
+         height="50"
+         alt="link to whatsapp">
+</a>
+{% endif %}

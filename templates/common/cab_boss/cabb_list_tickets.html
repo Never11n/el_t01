@@ -1,0 +1,54 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'List TICKETS' %}</h5>
+                </div>
+                {% if l_find %}
+                    {% include l_find %}
+                {% endif %}
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr>
+                                        <th>{% trans 'Name' %}</th>
+                                        <th>{% trans 'Verbal' %}</th>
+                                        <th>{% trans 'TimeOut' %}</th>
+                                        <th>{% trans 'Next Date' %}</th>
+                                        <th>{% trans 'Next Time' %}</th>
+                                        <th>{% trans 'Next Number' %}</th>
+                                        <th>{% trans 'Prev Time' %}</th>
+                                        <th>{% trans 'Prev Date' %}</th>
+                                        <th>{% trans 'Prev Number' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in dict_tickets_type_lotto %}
+                                        <tr class="js_tic_row">
+                                            <td>{{ item.caption }}</td>
+                                            <td>{{ item.verbal }}</td>
+                                            <td>{{ item.setting.timeout_pause }}</td>
+                                            <td>{{ item.setting.next_draw_date }}</td>
+                                            <td>{{ item.setting.next_draw_time }}</td>
+                                            <td>{{ item.setting.next_number }}</td>
+                                            <td>{{ item.setting.prev_draw_time }}</td>
+                                            <td>{{ item.setting.prev_draw_date }}</td>
+                                            <td>{{ item.setting.prev_number }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,109 @@
+{% load static %}
+{% load i18n %}
+
+<section>
+    <h4 class="main-box__title">
+        {% trans 'My Tickets' %}
+    </h4>
+
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-list__item">
+            {% trans 'Home' %}
+        </li>
+        <li class="breadcrumb-list__item">
+            <span class="breadcrumb-list__icon-wrap">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+        </li>
+        <li class="breadcrumb-list__item">
+            {% trans 'My Tickets' %}
+        </li>
+    </ul>
+    <h6 class="history-title main-text-right-rtf">
+        {% trans 'In this page you can scratch purchased HISHGAD tickets, or watch previous games.' %}
+    </h6>
+    <input id="id_ticket_active" type="hidden" value=""/>
+    <input id="id_item_game" type="hidden" value="{{ item_game_user.id }}"/>
+    <div class="">
+        <div class="table-responsive p-0"> {# ui-table_tickets #}
+            <table class="table table-head-fixed text-wrap main-text-right-rtf">
+                <tbody>
+                {% for ItemGame in game_history_list %}
+                    {% ifchanged ItemGame.games_id_id %}
+                        <tr id="id_ticket_{{ ItemGame.id }}"
+                            class="{{ ItemTicket.class }} ui-btn_ticket_info table-active"
+                        >
+                            <td>
+                                <a href="/cab-game-play/{{ ItemGame.games_id_id }}"
+                                   target="_blank"
+                                   class="btn btn-info btn-sm">{% trans 'Show' %}</a>
+                            </td>
+                            <td>
+                                {% trans 'Game' %} #{{ ItemGame.games_id_id }}
+                                ({% trans 'tickets' %} {{ ItemGame.games_id.ticket_num }})
+                            </td>
+                            <td colspan="7">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{% trans 'Game' %}</th>
+                            <th>{% trans 'Date' %}</th>
+                            <th>{% trans 'N Ticket' %}</th>
+                            <th>{% trans 'Pay' %}</th>
+                            <th>{% trans 'Win' %}</th>
+                            <th>{% trans 'Bal. before' %}</th>
+                            <th>{% trans 'Cost' %}</th>
+                            <th>{% trans 'Win sum' %}</th>
+                            <th>{% trans 'Bal. after' %}</th>
+                        </tr>
+                    {% endifchanged %}
+
+                    <tr id="id_ticket_{{ ItemGame.id }}"
+                        class="{% if ItemGame.answ_win %}table-success{% endif %}"
+                    >
+                        <td>
+                            ({{ ItemGame.id }}) {{ ItemGame.game_type.caption }}
+                            {% if ItemGame.status == "33" %}
+                            {% else %}
+                                <br>{% trans 'not play' %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if ItemGame.answ_dt %}{{ ItemGame.answ_dt|date:"d.m.Y H:i:s" }}{% endif %}
+                        </td>
+                        <td>
+                            {{ ItemGame.answ_nom }}
+                        </td>
+                        <td>
+                            {{ ItemGame.games_id.t_payment.caption }}
+                        </td>
+                        <td>
+                            {% if ItemGame.answ_win %}
+                                <i class="icon far fa-check-circle text-green"></i>
+                            {% else %}
+                                <i class="icon fas fa-ban text-red"></i>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ ItemGame.balance_01 }}
+                        </td>
+                        <td>
+                            {{ ItemGame.cost_2 }}
+                        </td>
+                        <td>
+                            {% if ItemGame.status == "33" %}
+                                {% if ItemGame.answ_win_sum %}{{ ItemGame.answ_win_sum }}{% else %}0{% endif %}
+                            {% else %}{% trans 'not known' %}{% endif %}
+                        </td>
+                        <td>
+                            {{ ItemGame.balance_02 }}
+                        </td>
+                    </tr>
+                {% empty %}
+                    {% trans 'Sorry, the list is empty.' %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

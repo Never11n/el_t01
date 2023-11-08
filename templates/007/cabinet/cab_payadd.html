@@ -1,0 +1,145 @@
+{% load static %}
+{% load i18n %}
+
+<section class="main-text-right-rtf">
+    <h4 class="main-box__title">
+        {% trans 'Bank Transfer' %}
+    </h4>
+
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-list__item">
+            {% trans 'Home' %}
+        </li>
+        <li class="breadcrumb-list__item">
+            <span class="breadcrumb-list__icon-wrap">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+        </li>
+        <li class="breadcrumb-list__item">
+            {% trans 'Bank Transfer' %}
+        </li>
+    </ul>
+    <div class="payadd-title">
+        <p>
+            {% trans 'Add Funds to your Balance.' %}
+        </p>
+        <p>
+            {% trans 'You can make a bank transfer to service account as it appears below.' %}
+        </p>
+    </div>
+    <div class="payadd-wrap">
+        <div class="payadd-info-section">
+            <p class="payadd-section-title">
+                {% trans 'Service Bank Credentials' %}
+            </p>
+            <div class="row m-b-15">
+                <div class="col-lg-4 col-md-5 col-5">
+                    <p class="payadd-item-name">
+                        {% trans 'Bank' %}
+                    </p>
+                </div>
+                <div class="col-lg-5 col-md-5 col-7">
+                    <p class="payadd-item-description">
+                        {% trans 'Bank Mizrahi' %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row m-b-15">
+                <div class="col-lg-4 col-md-5 col-5">
+                    <p class="payadd-item-name">
+                        {% trans 'Account Name' %}
+                    </p>
+                </div>
+                <div class="col-lg-5 col-md-5 col-6">
+                    <p class="payadd-item-description">
+                        {% trans 'Udaci ltd.' %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row m-b-15">
+                <div class="col-lg-4 col-md-5 col-5">
+                    <p class="payadd-item-name">
+                        {% trans 'Branch ID' %}
+                    </p>
+                </div>
+                <div class="col-lg-5 col-md-5 col-7">
+                    <p class="payadd-item-description">
+                        {% trans '540' %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row m-b-15">
+                <div class="col-lg-4 col-md-5 col-5">
+                    <p class="payadd-item-name">
+                        {% trans 'Account Number' %}
+                    </p>
+                </div>
+                <div class="col-lg-5 col-md-5 col-7">
+                    <p class="payadd-item-description">
+                        {% trans '151117' %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <form id="id_form_payadd"
+              action="{% url 'cab_payadd_save' %}"
+              method="post"
+              enctype="multipart/form-data"
+              class="cab-form cab-form-no-border"
+        >
+            {% csrf_token %}
+            <p class="payadd-section-title">
+                {% trans 'Transfer Verification' %}
+            </p>
+
+            <div class="row m-b-30">
+                <div class="col-lg-4 col-md-5 col-5">
+                    <p class="payadd-item-name">
+                        {% trans 'Transfer Amount' %}
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-5 col-7">
+                    <p class="payadd-item-description">
+                        <input type="number"
+                               id="id_add_amount"
+                               class="main-form-control"
+                               name="f_add_amount"
+                               min="0"
+                               max="{{ me.profile.balance }}"
+                               placeholder="{% trans 'Insert Transfer Sum' %}"
+                        >
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-5 col-5">
+                    <p class="payadd-item-name">
+                        {% trans 'Transfer Verification' %}
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-5 col-7">
+                    <p class="payadd-item-description">
+                        <input type="file"
+                               class="main-form-control"
+                               id="id_add_file"
+                               name="f_add_file"
+                        >
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="mob-text-center">
+        <a id="id_btn_ng"
+           href="##"
+           class="mybtn1 payadd-btn"
+           onclick="btn_payadd_save()"
+        >
+            {% trans 'Add Funds' %}
+        </a>
+    </div>
+</section>

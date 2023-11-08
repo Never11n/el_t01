@@ -1,0 +1,14 @@
+{% load static %}
+{% load i18n %}
+{# wait #}
+<div class="col-md-12 scratch js_scratch_pic">
+    <div class="container-scratch d-flex justify-content-center" id="js-container">
+        <div class="">
+            <h5 class="subtitle">{{ wait_title }}</h5>
+            <video controls  autoplay muted width="100%" loop="loop"
+                   poster="{{ wait_poster }}">
+                <source id='mp4' src="{{ wait_source }}" type='{{ wait_source_type }}'/>
+            </video>
+        </div>
+    </div>
+</div>

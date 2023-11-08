@@ -1,0 +1,224 @@
+{% load static %}
+{% load i18n %}
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="cabs_newtask main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{% trans 'User' %}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="ui__mfeedback_replay-items">
+                                            <div class="ui__mfeedback_replay-item">
+                                                <div class="ui__mfeedback_replay-item-caption">
+                                                    {% trans 'User:' %}
+                                                </div>
+                                                <div id='id_balance_s01' class="ui__mfeedback_replay-item-text">
+                                                    {{ m_user.id }}
+                                                </div>
+                                            </div>
+                                            <div class="ui__mfeedback_replay-item">
+                                                <div class="ui__mfeedback_replay-item-caption">
+                                                    {% trans 'Name:' %}
+                                                </div>
+                                                <div id='id_balance_s02' class="ui__mfeedback_replay-item-text">
+                                                    {{ m_user.name }}
+                                                </div>
+                                            </div>
+                                            <div class="ui__mfeedback_replay-item">
+                                                <div class="ui__mfeedback_replay-item-caption">
+                                                    {% trans 'Phone:' %}
+                                                </div>
+                                                <div id='id_balance_s03' class="ui__mfeedback_replay-item-text">
+                                                    {{ m_user.mobile }}
+                                                </div>
+                                            </div>
+                                            <div class="ui__mfeedback_replay-item">
+                                                <div class="ui__mfeedback_replay-item-caption">
+                                                    {% trans 'Balance now:' %}
+                                                </div>
+                                                <div id='id_balance_s04' class="ui__mfeedback_replay-item-text">
+                                                    {{ m_user.balance }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{% trans 'Create Balance Operation' %}</h3>
+                                </div>
+                                <input id="id_user_id" name="f_t_user" type="hidden" value="{{ m_user.id }}">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_t_amount">{% trans 'Amount Operation' %}</label>
+                                                <input type="number"
+                                                       id="id_t_amount"
+                                                       class="form-control"
+                                                       name="f_t_amount"
+                                                       value=""
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_t_typeoperation">{% trans 'Type operation' %}</label>
+                                                <select class="custom-select"
+                                                        id="id_t_typeoperation"
+                                                        name="f_t_typeoperation">
+                                                    {% for Item in dict_type_balanceoperation %}
+                                                        <option value="{% trans Item.verbal %}">{% trans Item.caption %}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="id_t_description">{% trans "Description" %}</label>
+                                                <textarea class="form-control" rows="3"
+                                                          id="id_t_description"
+                                                          name="f_t_description"
+                                                          placeholder={% trans "Description" %}></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="id_t_data">{% trans 'Data' %}</label>
+                                                <input type="date"
+                                                       id="id_t_data"
+                                                       class="form-control"
+                                                       name="f_t_data"
+                                                       value="{{ m_date }}"
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="id_t_hours">{% trans 'Hours' %}</label>
+                                                <select class="form-control"
+                                                        id="id_t_hours"
+                                                        name="f_t_hours">
+                                                    {% for ItemHour in m_range_hours %}
+                                                        <option value="{{ ItemHour }}" {% if ItemHour == m_hour %}selected{% endif %}>{{ ItemHour }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="id_t_minut">{% trans 'Minutes' %}</label>
+                                                <select class="form-control"
+                                                        id="id_t_minut"
+                                                        name="f_t_minut">
+                                                    {% for ItemMinut in m_range_minut %}
+                                                        <option value="{{ ItemMinut }}" {% if ItemMinut == m_minut %}selected{% endif %}>{{ ItemMinut }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="row flex-md-row ">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="button"
+                                                    class="btn btn-dark"
+                                                    {#                                                    data-dismiss="modal"#}
+                                                    onclick="btn_payoperation()"
+                                            >{% trans 'Set' %}</button>
+                                            <button type="button"
+                                                    class="btn btn-dark"
+                                                    data-dismiss="modal"
+                                            >{% trans 'Close' %}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+
+<script type="text/javascript">
+    function btn_payoperation() {
+        // check field
+        let m_user_id = $("#id_user_id").val();
+        let m_t_amount = $("#id_t_amount").val();
+        let m_t_typeoperation = $("#id_t_typeoperation").val();
+        let m_t_data = $("#id_t_data").val();
+        let m_t_hours = $("#id_t_hours").val();
+        let m_t_minut = $("#id_t_minut").val();
+        let m_t_description = $("#id_t_description").val();
+        console.log("m_user_id         = ", m_user_id);
+        console.log("m_t_amount        = ", m_t_amount);
+        console.log("m_t_typeoperation = ", m_t_typeoperation);
+        console.log("m_t_data          = ", m_t_data);
+        console.log("m_t_hours         = ", m_t_hours);
+        console.log("m_t_minut         = ", m_t_minut);
+
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                user_id: m_user_id,
+                t_amount: m_t_amount,
+                t_typeoperation: m_t_typeoperation,
+                t_data: m_t_data,
+                t_hours: m_t_hours,
+                t_minut: m_t_minut,
+                t_description: m_t_description,
+            },
+            url: "/cabb_user_payoperation_save/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    $('.js-modal__cabb_form').modal('hide');
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+
+</script>

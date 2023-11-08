@@ -1,0 +1,15 @@
+{% extends './base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block body%}
+    <div id="main" class="d-block">
+        {% include './tab01.html' %}
+    </div>
+    <div id="registration" class="d-none">
+        {% include './tab02.html' %}   
+    </div>
+    <div id="game" class="d-none">
+        {% include './tab03.html' %}
+    </div>
+{% endblock %}

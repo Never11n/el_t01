@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html {% if lang == "he" or lang == "ar" %}dir="rtl"{% endif %}>
+<head>
+<meta name="facebook-domain-verification" content="jk9oyh0ae2xpo3yeclnmb74qclj6j0" />
+<meta name="facebook-domain-verification" content="jw3si8rkbs0wv9kkgny9ct9nd3xe9q" />
+{#<meta name="description" content="חדש בישראל! גירוד כרטיסי חישגד בנייד! גרדו עכשיו והתחילו להרוויח! בבית, במשרד, או בכל מקום שתבחרו! מגרדים כרטיסי חישגד ומקבלים כסף לחשבון הבנק!">#}
+<meta name="description" content="חיש גד אונליין | גירוד חישגד בנייד | כרטיסי חיש גד מפעל הפיס, מלכת הלבבות, כרטיס זוכה מקבל כסף מיידי!  לוטו, צ'אנס, 777 | חישליין">
+{#<meta name="keywords" content="חיש גד און ליין, מילוי טופס חיש גד באינטרנט">#}
+<meta name="keywords" content="חיש גד אונליין, חישגד מפעל הפיס">
+{#<meta name="title" content="'סקראץ חישגד - גירוד חישגד באינטרנט חישגד בנייד חישגד אונליין"/>#}
+<meta name="title" content="'חישגד אונליין | גירוד חישגד בנייד און ליין | כרטיסי חישגד מפעל הפיס | "/>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YGCLF1HCQ6"></script>
+<script> window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-YGCLF1HCQ6');
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '710168854277119');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=710168854277119&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<script data-obct type = "text/javascript">
+  /** DO NOT MODIFY THIS CODE**/
+  !function(_window, _document) {
+    var OB_ADV_ID = '00066577caafd1c47bb04114c63a1492ff';
+    if (_window.obApi) {
+      var toArray = function(object) {
+        return Object.prototype.toString.call(object) === '[object Array]' ? object : [object];
+      };
+      _window.obApi.marketerId = toArray(_window.obApi.marketerId).concat(toArray(OB_ADV_ID));
+      return;
+    }
+    var api = _window.obApi = function() {
+      api.dispatch ? api.dispatch.apply(api, arguments) : api.queue.push(arguments);
+    };
+    api.version = '1.1';
+    api.loaded = true;
+    api.marketerId = OB_ADV_ID;
+    api.queue = [];
+    var tag = _document.createElement('script');
+    tag.async = true;
+    tag.src = '//amplify.outbrain.com/cp/obtp.js';
+    tag.type = 'text/javascript';
+    var script = _document.getElementsByTagName('script')[0];
+    script.parentNode.insertBefore(tag, script);
+  }(window, document);
+
+  obApi('track', 'PAGE_VIEW');
+</script>
+
+
+<title>{{ PAGE_TITLE }}</title>
+{% for item_head in l_head_list %}
+    {% include item_head %}
+{% endfor %}
+</head>
+
+<body>
+
+{% csrf_token %}
+<!-- preloader area start -->
+<div class="preloader" id="preloader">
+    <div class="loader loader-1">
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
+    </div>
+</div>
+<!-- preloader area end -->
+
+{% for item_header in l_header_list %}
+    {% include item_header %}
+{% endfor %}
+
+{% if templ_call_centr_wa %}
+    {% include templ_call_centr_wa %}
+{% endif %}
+
+{% block layoutbody %}
+{% endblock %}
+
+{% for item_footer in l_footer_list %}
+    {% include item_footer %}
+{% endfor %}
+
+<!-- Back to Top Start -->
+<div class="bottomtotop">
+    <i class="fas fa-chevron-right"></i>
+</div>
+<!-- Back to Top End -->
+
+{% for item_script in l_script_list %}
+    {% include item_script %}
+{% endfor %}
+
+{% for item_modal in l_modal_list %}
+    {% include item_modal %}
+{% endfor %}
+
+<!-- bootstrap filestyle -->
+<script type="text/javascript">
+    $('#id_add_file').filestyle({
+        htmlIcon: '<span class="oi oi-folder"></span> ',
+        text: ''
+    });
+</script>
+
+<script>(function () {
+    var s = document.createElement("script");
+    s.setAttribute("data-account", "D8OeFWxdFg");
+    s.setAttribute("src", "https://cdn.userway.org/widget.js");
+    document.body.appendChild(s);
+})();</script>
+<noscript>Enable JavaScript to ensure <a href="https://userway.org">website accessibility</a></noscript>
+
+{% if False %}
+<script type="text/javascript">
+ var vsid = "si2464294ca6b64";
+ (function() {
+ var vsjs = document.createElement('script'); vsjs.type = 'text/javascript'; vsjs.async = true; vsjs.setAttribute('defer', 'defer');
+  vsjs.src = 'https://www.virtualspirits.com/vsa/chat.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(vsjs, s);
+ })();
+</script>
+{% endif %}
+
+{% for item in l_layout_scripts_chat_bot %}
+    {% include item %}
+{% endfor %}
+
+</body>
+</html>

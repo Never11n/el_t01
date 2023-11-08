@@ -1,0 +1,365 @@
+{% load static %}
+{% load i18n %}
+<div class="dataTables_wrapper dt-bootstrap4">
+    <div class="row">
+        <div class="col-sm-12 table-cabb">
+            <table id="id_table_tic" class="table table-bordered table-striped ">
+                <thead>
+                <tr class="js_tic_row">
+                    {% if not without_buttons %}
+                        <th></th>{% endif %}
+                    <th>{% trans 'N req' %}</th>
+                    <th>{% trans 'Id game' %}</th>
+                    <th>{% trans 'Status' %}</th>
+                    <th>{% trans 'User' %}</th>
+                    <th>{% trans 'Send Request' %}</th>
+                    <th>{% trans 'Reply date' %}</th>
+                    <th>{% trans 'Name Game' %}</th>
+                    <th>{% trans 'Win/Loss' %}</th>
+                    <th>{% trans 'N ticket' %}</th>
+                    <th>{% trans 'Payment Methody' %}</th>
+                    <th>{% trans 'Balance befor' %}</th>
+                    <th>{% trans 'Cost 1' %}</th>
+                    <th>{% trans 'Cost 2' %}</th>
+                    <th>{% trans 'Discount' %}</th>
+                    <th>{% trans 'Cost Discount' %}</th>
+                    <th>{% trans 'Sum WIN' %}</th>
+                    <th>{% trans 'Balance after' %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ItemTicket in list_tickets %}
+                    {% if without_buttons %}
+                        <tr class="{% if ItemTicket.t_check %}
+                                   {% if ItemTicket.answ_win %} table-success {% endif %}
+                                   {% else %} table-warning
+                                   {% endif %}
+                                   {% if ItemTicket.status == "03" %} table-warning {% endif %}">
+                            {% else %}
+                        <tr class="js_tic_row {% if ItemTicket.answ_win %}
+                                   table-success {% endif %}">
+                    {% endif %}
+                {% if not without_buttons %}
+                    <td>
+                        {#  status#}
+                        {#  ('00', 'start'),#}
+                        {#  --('01', 'ready'),#}
+                        {#  --('02', 'wait confirm'),#}
+                        {#  ('03', 'error SOD'),#}
+                        {#  --# ('04', 'step 4'),#}
+                        {#  --# ('05', 'step 5'),#}
+                        {#  ('30', 'error'),#}
+                        {#  --('33', 'finish game'),#}
+                        {% if ItemTicket.game_type.t_type.verbal != 'old' %}
+                             <button type="button"
+                                    class="btn btn-primary mybtn_cabb1 btn-sm"
+                                    onclick="btn_lotto_ticket_status({{ ItemTicket.id }})">
+                                <i class="fa fa-refresh"></i>Get Foto
+                            </button>
+                        {% else %}
+                            {% if ItemTicket.status == "00" or ItemTicket.status == "03" or ItemTicket.status == "30" %}
+                                <button type="button"
+                                        class="btn btn-danger mybtn_cabb1 btn-sm"
+                                        onclick="btn_ticketrestart({{ ItemTicket.id }})">
+                                    <i class="fa fa-refresh"></i>RESTART
+                                </button>
+                            {% else %}
+                            {% endif %}
+                        {% endif %}
+                        {% if false %}
+                            <button type="button"
+                                    class="btn {% if ItemTicket.t_check %} btn-info {% else %} btn-warning {% endif %} mybtn_cabb1 btn-sm"
+                                    onclick="btn_ticketcheck({{ ItemTicket.id }})">
+                                <i class="far fa-check-circle ">111</i>
+                            </button>
+                        {% endif %}
+                        <button type="button"
+                                class="btn {% if ItemTicket.t_check %} btn-info {% else %} btn-warning {% endif %} mybtn_cabb1 btn-sm"
+                                onclick="btn_ticketcheck_02({{ ItemTicket.id }})">
+                            <i class="far fa-check-circle "></i>
+                        </button>
+                        {% if ItemTicket.t_check %}
+                            <div>
+                                {{ ItemTicket.t_check_user.profile.name }}
+                            </div>
+                            <div>
+                                {{ ItemTicket.t_check_dt|date:"d.m.Y H:i:s" }}
+                            </div>
+                        {% else %}
+                            </td>
+                        {% endif %}
+                {% endif %}
+                <td>{{ ItemTicket.id }}
+                    {% if ItemTicket.game_type.t_type.verbal != 'old' %}
+                        <br>Pais: {{ ItemTicket.answ_lottery_number }}
+                        <br>Pais draw date: {{ ItemTicket.lotto_result.draw_date|date:"d.m.Y H:i" }}
+                    {% endif %}
+                </td>
+                <td class="text-nowrap">{{ ItemTicket.games_id_id }}
+                    ({{ ItemTicket.games_id.ticket_num }})
+                    {% if ItemTicket.game_type.t_type.verbal != 'old' %}
+                        <br>Lottomatic: {{ ItemTicket.answ_nom }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if ItemTicket.game_type.t_type.verbal == 'old' %}
+                        {% if ItemTicket.status == "00" %}
+                            {% trans 'start' %}
+                        {% elif ItemTicket.status == "01" %}
+                            {% trans 'ready' %}
+                        {% elif ItemTicket.status == "02" %}
+                            {% trans 'wait confirm' %}
+                        {% elif ItemTicket.status == "03" %}
+                            {% trans 'error SOD' %}
+                        {% elif ItemTicket.status == "33" %}
+                            {% trans 'finish' %}
+                        {% endif %}
+                    {% else %}
+                        {{ ItemTicket.games_id.t_status.caption }} <br>
+                        {% if ItemTicket.img_06 %} Photo ok
+                        {% else %} No photo
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td>
+                    {{ ItemTicket.games_id.user_id.profile.name }}
+                    <br>{{ ItemTicket.games_id.user_id.profile.mobile }}
+                    <br>{{ ItemTicket.games_id.user_id.email }}
+                    {% if ItemTicket.games_id.game_type.verbal == "game_gift" %}
+                        <br><b>{% trans 'Gift to' %}</b>
+                        <br>{{ ItemTicket.games_id.user_recipient.profile.name }}
+                        <br>{{ ItemTicket.games_id.user_recipient.profile.mobile }}
+                        <br>{{ ItemTicket.games_id.user_recipient.email }}
+                    {% endif %}
+                </td>
+                <!--                        <td>{{ ItemTicket.games_id.user_id.profile.name }}<br>-->
+                <!--                            {{ ItemTicket.games_id.user_id.profile.mobile }}<br>-->
+                <!--                            {{ ItemTicket.games_id.user_id.email }}-->
+                <!--                        </td>-->
+                <td class="text-nowrap">{{ ItemTicket.req_dt|date:"d.m.Y H:i:s" }}</td>
+                <td class="text-nowrap">{{ ItemTicket.answ_dt|date:"d.m.Y H:i:s" }}</td>
+                <td class="text-nowrap">{{ ItemTicket.game_type }}</td>
+                <td class="center">
+                    {% if ItemTicket.answ_win %}
+                        <i class="icon far fa-check-circle text-green"></i>
+                    {% else %}
+                        <i class="icon fas fa-ban text-red"></i>
+                    {% endif %}
+                </td>
+                <td class="text-nowrap">
+                    {% if ItemTicket.answ_nom_00 != ItemTicket.answ_nom %}
+                        <div class="text-red">{{ ItemTicket.answ_nom_00 }}</div>
+                    {% endif %}
+                    {{ ItemTicket.answ_nom }}
+                </td>
+                <td>{{ ItemTicket.games_id.t_payment }}</td>
+                {#                                        <td>{{ ItemTicket.games_id.ticket_sum }}</td>#}
+                <td>{{ ItemTicket.balance_01 }}</td>
+                <td>{{ ItemTicket.cost_1 }}</td>
+                <td>{{ ItemTicket.cost_02 }}</td>
+                <td>{{ ItemTicket.cost_discount }}</td>
+                <td>{{ ItemTicket.cost_2 }}</td>
+                <td>
+                    {% if ItemTicket.answ_win_sum_00 != ItemTicket.answ_win_sum %}
+                        <div class="text-red">{{ ItemTicket.answ_win_sum_00 }}</div>
+                    {% endif %}
+                    {{ ItemTicket.answ_win_sum }}
+                </td>
+                <td>{{ ItemTicket.balance_02 }}</td>
+                <td>{{ ItemTicket.error_job }}</td>
+                {% if not without_buttons %}
+                    <td>
+                        {% if True %}
+                            <a href="{{ ItemTicket.img_08 }}" target="_blank"
+                               class="btn btn-info mybtn_cabb1 btn-sm"
+                            ><i class="fa fa-camera"></i></a>
+                            {#  {% trans 'Pic' %} #}
+                            {#                                            <button type="button"#}
+                            {#                                                    class="btn btn-info mybtn_cabb1 btn-sm"#}
+                            {#                                                    onclick="btn_ticket_edit({{ ItemTicket.id }})"#}
+                            {#                                            >#}
+                            {#                                                {% trans 'Pic' %}#}
+                            {#                                            </button>#}
+                            {#                                            <br>#}
+                        {% endif %}
+                        {% if True %}
+                            <a href="https://wa.me/+972{{ ItemTicket.games_id.user_id.profile.mobile }}"
+                               target="_blank"
+                               style="text-decoration:none;"
+                               role="link"
+                               aria-label="link to whatsapp">
+                                <img src="{% static 'img/whatsapp.png' %}"
+                                     height="25"
+                                     alt="link to whatsapp">
+                            </a>
+                        {% endif %}
+                        {% if True %}
+                            <br>
+                            <a href="/cabb_users/?uEmail={{ ItemTicket.games_id.user_id.email }}" target="_blank"
+                               class="btn btn-info mybtn_cabb1 btn-sm"
+                            >{% trans 'Go To User' %}</a>
+                        {% endif %}
+                    </td>
+                {% endif %}
+
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th></th>
+                    <th>{% trans 'N req' %}</th>
+                    <th>{% trans 'Id game' %}</th>
+                    <th>{% trans 'Status' %}</th>
+                    <th>{% trans 'User name' %}</th>
+                    <th>{% trans 'User phone' %}</th>
+                    <th>{% trans 'Send Request' %}</th>
+                    <th>{% trans 'Reply date' %}</th>
+                    <th>{% trans 'Name Game' %}</th>
+                    <th>{% trans 'Win/Loss' %}</th>
+                    <th>{% trans 'N ticket' %}</th>
+                    <th>{% trans 'Payment Methody' %}</th>
+                    <th>{% trans 'Balance befor' %}</th>
+                    <th>{% trans 'Cost 1' %}</th>
+                    <th>{% trans 'Cost 2' %}</th>
+                    <th>{% trans 'Sum WIN' %}</th>
+                    <th>{% trans 'Balance after' %}</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    {% if l_pagination %}
+        {% include l_pagination %}
+    {% endif %}
+</div>
+
+<script type="text/javascript">
+    function btn_ticketcheck(ticket_id) {
+        console.log('btn_ticket_check');
+        $("#id_ResAjax").html("");
+        $.ajax({
+            type: "POST",
+            data: {
+                ticket_id: ticket_id,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_ticketcheck/",
+            success: function (res) {
+                console.log("success");
+                $("#id_ResAjax").html(res);
+                if (res != 'error' && res != 'ok') {
+                    return swal({
+                        title: gettext("Ошибка"),
+                        text: res,
+                        type: "warning",
+                        animation: false,
+                        showCancelButton: false,
+                        confirmButtonColor: "#15b284",
+                        confirmButtonText: gettext("Ок"),
+                        closeOnConfirm: true
+                    }).then(function (isConfirm) {
+                        if (isConfirm === true) {
+                            $('.modal-content').removeClass('modal-content-error');
+                            return false;
+                        } else {
+                            $('.modal-content').removeClass('modal-content-error');
+                            return false;
+                        }
+                    });
+                }
+            },
+            error: function (res) {
+                console.log("error");
+            }
+        });
+        return $('.js-modal__cabb_ticketcheck').modal('show');
+    }
+
+    function btn_ticketcheck_02(ticket_id) {
+        console.log('btn_ticket_check');
+        $("#id_ResAjax").html("");
+        $.ajax({
+            type: "POST",
+            data: {
+                ticket_id: ticket_id,
+                f_type: "02",
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: "/cabb_ticketcheck/",
+            success: function (res) {
+                $(".js_ResAjax").html(res);
+                if (res != 'error' && res != 'ok') {
+                    return swal({
+                        title: gettext("Ошибка"),
+                        text: res,
+                        type: "warning",
+                        animation: false,
+                        showCancelButton: false,
+                        confirmButtonColor: "#15b284",
+                        confirmButtonText: gettext("Ок"),
+                        closeOnConfirm: true
+                    }).then(function (isConfirm) {
+                        if (isConfirm === true) {
+                            $('.modal-content').removeClass('modal-content-error');
+                            return false;
+                        } else {
+                            $('.modal-content').removeClass('modal-content-error');
+                            return false;
+                        }
+                    });
+                }
+            },
+            error: function (res) {
+                console.log("error");
+            }
+        });
+        return $('.js-modal__cabb_blank').modal('show');
+    }
+    function btn_lotto_ticket_status(ticket_id) {
+        $.ajax({
+        type: "POST",
+        async: false,
+        data: {
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            f_ticket_id: ticket_id,
+            f_need_img: true
+        },
+        url: "/cabb_get_status_lotto_ticket/",
+        success: function (res) {
+            if (res.AnswerCod === '01') {
+                 Swal.fire({
+                    icon: 'success',
+                    title: gettext('SUCCESS'),
+                    background: '#cacaca',
+                    html: res.AnswerText,
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: res.AnswerText,
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>

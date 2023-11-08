@@ -1,0 +1,61 @@
+<!-- flag-icon-css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
+
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+
+{% if False %}
+<!-- Language Dropdown Menu -->
+<li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+        <i class="flag-icon flag-icon-us"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right p-0">
+        <a href="#" class="dropdown-item active">
+            <i class="flag-icon flag-icon-us mr-2"></i> English
+        </a>
+        <a href="#" class="dropdown-item">
+            <i class="flag-icon flag-icon-de mr-2"></i> German
+        </a>
+        <a href="#" class="dropdown-item">
+            <i class="flag-icon flag-icon-fr mr-2"></i> French
+        </a>
+        <a href="#" class="dropdown-item">
+            <i class="flag-icon flag-icon-es mr-2"></i> Spanish
+        </a>
+    </div>
+</li>
+{% endif %}
+
+{% if True %}
+    <!-- Language Dropdown Menu -->
+    <div class="d-none">
+        <form action="{% url 'set_language' %}" id="lang_form" method="POST">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="">
+            <input name="language" type="hidden" value="">
+            <input type="submit">
+        </form>
+    </div>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link flag-dropdown" data-toggle="dropdown" href="#" >
+            {% for Item_lang in site_lang %}
+                {% if lang == Item_lang.lang_code %}
+                    <img class="flag-icon" src="{% static 'img/flags/4x3/' %}{{ Item_lang.lang_code }}.svg">
+                {% endif %}
+            {% endfor %}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right p-0">
+            {% for Item_lang in site_lang %}
+                <a href="#" class="dropdown-item {% if lang == Item_lang.lang_code %}active{% endif %}"
+                   onclick="change_lang('{{ Item_lang.lang_code }}')"
+                >
+                    <img class="flag-icon" src="{% static 'img/flags/4x3/' %}{{ Item_lang.lang_code }}.svg">
+                    {{ Item_lang.lang_name }} - {% trans Item_lang.lang_name %}
+                </a>
+            {% endfor %}
+        </div>
+    </li>
+{% endif %}

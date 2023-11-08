@@ -1,0 +1,57 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'Upload a file from Tranzilla' %}</h5>
+                </div>
+                <div class="card-body">
+                    <form id="id_form_upload_payment_answers" action="{% url 'upload_payment_answers' %}" method="post"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            {% if problem %}
+                            <div class="main-form-group">
+                                <span class="text-danger">{{ problem }}</span>
+                            </div>
+                            {% endif %}
+                            <div class="main-form-group">
+                                <span>{% trans 'Choose a file to upload' %}.</span>
+                            </div>
+                            <div class="main-form-group">
+                                <span>{% trans 'The file must be in csv format' %}.</span>
+                            </div>
+
+                            <div class="main-form-group">
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="FileId_01" name="f_file_01">
+                                        <label class="custom-file-label" for="FileId_01">
+                                            {% trans 'Choose file'%}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12 d-flex justify-content-center cab-withdraw-btn">
+                            <button type="submit"
+                                    id="id_btn_ng"
+                                    class="mybtn1 main-box-btn-center">{% trans 'Upload' %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+     window.onload = function() {
+         $('.custom-file-input').on('change', function (event) {
+             $(this).next('.custom-file-label').html(event.target.files[0].name);
+         })
+     }
+</script>

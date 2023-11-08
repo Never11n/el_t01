@@ -1,0 +1,87 @@
+{% load i18n %}
+<div tabindex="-1" role="dialog" class="modal ui__modal js-modal__register fade">
+    <div class="modal-dialog text-center">
+        <div class="modal-content">
+            <div class="modal-body text-left clearfix">
+                <div class="login-box">
+                    <div class="login-logo">
+                    </div>
+                    <!-- /.login-logo -->
+                    <div class="card">
+                        <div class="card-body register-card-body">
+                            <div class="login-box-msg">
+                                <div class="ui__modal-caption"><b>{% trans 'Регистрация нового пользователя' %}</b>
+                                </div>
+                                <div data-dismiss="modal" aria-label="Close" class="ui__modal-caption ui__modal-close">
+                                    <span class="fas fa-times"></span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input id="id_f_name" name="f_name" type="text" class="form-control"
+                                    placeholder="{% trans 'Имя' %}">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input id="id_f_email" name="f_email" type="email" class="form-control"
+                                    placeholder="{% trans 'Email/Логин' %}">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input name="f_password" type="password" class="form-control"
+                                    placeholder="{% trans 'Пароль' %}">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input name="f_re_password" type="password" class="form-control"
+                                    placeholder="{% trans 'Повторить пароль' %}">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="icheck-primary">
+                                        <input name="f_terms" type="checkbox" id="agreeTerms" value="agree">
+                                        <label for="agreeTerms">
+                                            {% trans 'Я согласен с' %} <a href="#" class="text-center text-blue">{%
+                                                trans 'правилами' %}</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-12">
+                                    <a href="#" class="btn btn-primary btn-block" onclick="modal_btn_register()">
+                                        {% trans 'Регистрация' %}
+                                    </a>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <p class="mb-1">
+                                <a href="#" class="text-center text-blue" onclick="modal_already_have_login()">
+                                    {% trans 'У меня уже есть логин' %}
+                                </a>
+                            </p>
+                        </div>
+                        <!-- /.form-box -->
+                    </div><!-- /.card -->
+
+                </div>
+                <!-- /.login-box -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+{% load static %}
+{% load i18n %}
+<div class="main-box-inner main-bg-white">
+    <div class="card-body table-responsive p-0">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <p class="text-black">{% trans 'Date range:' %}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="id_find_date_range"
+                                   name="find_date_range"
+                                   value="{{ date_range }}">
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-md-4">
+                    <button type="button"
+                            onclick="btn_form_find()"
+                            class="btn btn-warning"><i class="fas fa-search"></i>{% trans 'Show' %}
+                    </button>
+               </div>
+
+        <table class="table table-head-fixed text-nowrap main-text-right-rtf table-bordered">
+          <thead>
+            <tr>
+              <th class="pl-4">{% trans 'Date' %}</th>
+              <th>{% trans 'Name' %}</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for profile in referrals_list %}
+              <tr>
+                <td class="pl-4">{{ profile.date_joined|date:"d.m.Y H:i:s" }}</td>
+                <td>{{ profile.name }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<script>
+    window.onload = function () {
+        $('#id_find_date_range').daterangepicker({
+            locale: {
+                format: 'DD.MM.YYYY'
+            }
+        });
+    }
+</script>

@@ -1,0 +1,60 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+
+{% for line in lotto_ticket_info.tables %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">{% trans 'Line' %} {{ forloop.counter }}</span>
+        </div>
+
+        <div class="ui-game-price-radio-wrap row">
+            <div class="col-12 d-flex justify-content-center">
+                {% for number in line.numbers %}
+                <label class="ui-game-circle-input-label">
+                    <input type="radio" disabled  name="number-block1-line1"
+                           class="ui-game-circle-input number-block-line" style="cursor: default;"/>
+                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs"
+                          {% if line.numbers in winning_numbers %}style="background-color:#fd7e14;cursor: default;"
+                          {% else %}style="cursor: default;"{% endif %}>
+                        {{ number }}
+                    </span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endfor %}
+{% if winning_numbers %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">
+                {% trans 'Lottery number' %}: {{ ticket.answ_lottery_number }}<br>
+                {% trans 'Draw date' %}: {{ draw_date|date:"d.m.Y H:i:s" }}<br>
+                {% trans 'Winning numbers' %}
+            </span>
+        </div>
+
+        <div class="ui-game-price-radio-wrap row">
+            <div class="col-12 d-flex justify-content-center">
+                {% for number in winning_numbers %}
+                <label class="ui-game-circle-input-label">
+                    <input type="radio" disabled  name="number-block1-line1"
+                           class="ui-game-circle-input number-block-line" style="cursor: default;"/>
+                    <span class="ui-game-circle-input-label-display ui-game-circle-input-label-display_xs"
+                          {% if winning_numbers in user_numbers %}style="background-color:#fd7e14;cursor: default;"
+                          {% else %}style="cursor: default;"{% endif %}>
+                        {{ number }}
+                    </span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endif %}

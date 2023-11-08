@@ -1,0 +1,126 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            {#            <div class="col-lg-12">#}
+            <div class="card">
+            <div class="card-header">
+                <h5 class="card-title m-0">{% trans 'Rejected payouts' %}</h5>
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12 table-cabb">
+                            <table id="id_table_tic" class="table table-bordered table-striped ">
+                                <thead>
+                                <tr class="js_tic_row" >
+                                    <th></th>
+                                    <th>{% trans 'N' %}</th>
+                                    <th>{% trans 'User' %}</th>
+                                        <th>{% trans 'Date req' %}</th>
+                                        <th>{% trans 'Account Name' %}</th>
+                                        <th>{% trans 'Name Bank' %}</th>
+                                        <th>{% trans 'Branch' %}</th>
+                                        <th>{% trans 'Account number' %}</th>
+                                        <th>{% trans 'Amount' %}</th>
+                                        <th>{% trans 'Percent' %}</th>
+                                        <th>{% trans 'Amount minus percent' %}</th>
+                                        <th>{% trans 'User Check' %}</th>
+                                        <th>{% trans 'Date Check' %}</th>
+                                        <th>{% trans 'Reject reason' %}</th>
+                                        <th>{% trans 'Notes' %}</th>
+                                        <th>{% trans 'Photo url' %}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for ItemPayout in list_payout %}
+                                   <tr>
+                                       <td>
+                                           <button type="button"
+                                                        class="btn btn-info mybtn_cabb1"
+                                                        onclick="btn_payout_form({{ ItemPayout.id }}, 'check')">
+                                                        <i class="far fa-edit"></i>
+                                           </button>
+                                           <button type="button"
+                                                   class="btn btn-info mybtn_cabb1"
+                                                   onclick="btn_payout_form({{ ItemPayout.id }}, 'photo')">
+                                               <i class="fas fa-image"></i>
+                                           </button>
+                                       </td>
+                                       <td>{{ ItemPayout.id }}</td>
+                                       <td>{{ ItemPayout.user_id }}</td>
+                                            <td>{{ ItemPayout.created|date:"d.m.Y H:i:s" }}</td>
+                                            <td>{{ ItemPayout.acc_name }}</td>
+                                            <td>{{ ItemPayout.name_bank }}</td>
+                                            <td>{{ ItemPayout.branch }}</td>
+                                            <td>{{ ItemPayout.acc_num }}</td>
+                                            <td>{{ ItemPayout.amount }}</td>
+                                            <td>{{ ItemPayout.percent }}</td>
+                                            <td>{{ ItemPayout.amount_minus_percent }}</td>
+                                            <td>{{ ItemPayout.t_check_user }}</td>
+                                            <td>{{ ItemPayout.t_check_dt }}</td>
+                                            <td>{{ ItemPayout.reject_reason }}</td>
+                                            <td>{{ ItemPayout.description }}</td>
+                                            <td>{% if ItemPayout.photo %}
+                                                     <a href="{{ MEDIA_URL }}{{ ItemPayout.photo }}" target="_blank" class="text-dark">
+                                                        Click here to see photo</a>
+                                                {% endif %}
+                                            </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    function btn_payout_form(l_id, l_typeform) {
+        let m_url = "/cabb_payout_form/";
+        $("#id_ResAjax_cabb_form").html("");
+        $.ajax({
+            type: "GET",
+            async: false,
+            data: {
+                f_id: l_id,
+                f_typeform: l_typeform,
+                f_rejected_payouts: true
+            },
+            url: m_url,
+            success: function (res) {
+                console.log("res = ", res);
+                if (res.AnswerCod === '01') {
+                    $("#id_ResAjax_cabb_form").html(res.html);
+                    return $('.js-modal__cabb_form').modal('show');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: gettext("An error occured, please try again later."),
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+</script>

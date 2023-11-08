@@ -1,0 +1,20 @@
+<input type="hidden" id="game_version" value="{{ game_version }}"/>
+<input type="hidden" id="game_type" value="{{ game_type }}"/>
+<input type="hidden" id="form_type"
+       value="{% if ticket_info.form_type %}{{ ticket_info.form_type }}{% else %}{{ form_type }}{% endif %}"/>
+<input data-card-num=1 type="hidden" class="js_card_hidden_input" id="card_spades"
+       value="{% for card in ticket_info.card_spades %}{{ card }}{% endfor %}"/>
+<input data-card-num=2 type="hidden" class="js_card_hidden_input" id="card_hearts"
+       value="{% for card in ticket_info.card_hearts %}{{ card }}{% endfor %}"/>
+<input data-card-num=3 type="hidden" class="js_card_hidden_input" id="card_diamonds"
+       value="{% for card in ticket_info.card_diamonds %}{{ card }}{% endfor %}"/>
+<input data-card-num=4 type="hidden" class="js_card_hidden_input" id="card_clubs"
+       value="{% for card in ticket_info.card_clubs %}{{ card }}{% endfor %}"/>
+<input type="hidden" id="price"
+       value="{% if ticket_info.price %}{{ ticket_info.price }}{% else %}5{% endif %}"/>
+<input type="hidden" id="games_count" value="1"/>
+<input type="hidden" id="total_sum" value="5"/>
+
+<input type="hidden" id="subscription" value="0"/>
+<input type="hidden" id="subscription_day" value=""/>
+<input type="hidden" id="subscription_automatic" value="0"/>

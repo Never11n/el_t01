@@ -1,0 +1,76 @@
+{% load static %}
+{% load i18n %}
+<div class="card card-default collapsed-card">
+    <div class="card-header">
+        <h3 class="card-title">{% trans 'Search' %}</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body" style="display: none;">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>{% trans 'Date range create:' %}</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="far fa-calendar-alt"></i>
+                        </span>
+                        </div>
+                        <input type="text"
+                               class="form-control float-right"
+                               id="id_find_date_range_empty"
+                               name="find_date_range"
+                               value="{{ date_range }}"
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>{% trans 'Email owner:' %}</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                        </div>
+                        <input type="text"
+                               class="form-control float-right"
+                               id="id_find_uemail"
+                               name="find_uemail"
+                               value="{{ m_uEmail }}"
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>{% trans 'Only active' %}</label>
+                    <div class="input-group">
+                        <input type="checkbox"
+                               class="form-control float-right"
+                               id="id_find_active"
+                               name="find_active"
+                               value="1"
+                               {% if m_active %} checked {% endif %}
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="card-tools">
+                <div class="input-group input-group-sm">
+                    <button type="button"
+                            onclick="btn_form_find()"
+                            class="btn btn-info "
+                    ><i class="fas fa-search"></i>{% trans 'Show' %}
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

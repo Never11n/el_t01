@@ -1,0 +1,37 @@
+{% extends './base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block body %}
+    <div id="tab" class="tab_main">
+        <div id="tab_list" class="tab_list">
+            <div id="main" class="d-block tab_content">
+                {% include './tab01.html' %}
+            </div>
+            <div id="login" class="d-none tab_content">
+                {% include './tab02.html' %}
+            </div>
+            <div id="registration" class="d-none tab_content">
+                {% include './tab03.html' %}
+            </div>
+            <div id="barcode" class="d-none tab_content">
+                {% include './tab04.html' %}
+            </div>
+            <div id="info" class="d-none tab_content">
+                {% include './tab05.html' %}
+            </div>
+            <div id="game" class="d-none tab_content">
+                {% include './tab06.html' %}
+            </div>
+            <div id="prizes" class="d-none tab_content">
+                {% include './tab07.html' %}
+            </div>
+            <div id="mail" class="d-none tab_content">
+                {% include './tab08.html' %}
+            </div>
+            <div id="phone" class="d-none tab_content">
+                {% include './tab09.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% load static %}
+{% load i18n %}
+<html lang="en">
+<head></head>
+<body>
+<script>
+    function createInputAttachMapForm(name, val) {
+        var mapInput = document.createElement("input");
+        mapInput.type = "hidden";
+        mapInput.name = name;
+        mapInput.value = val;
+        mapForm.appendChild(mapInput);
+    }
+
+    var mapForm = document.createElement("form");
+    mapForm.method = "POST";
+    mapForm.action = "{{ m_url }}";
+
+    {#createInputAttachMapForm('language', '{{ language }}');#}
+    {#createInputAttachMapForm('amount', '{{ amount }}');#}
+    {#createInputAttachMapForm('productPrice[]', '{{ productPrice }}');#}
+    {#createInputAttachMapForm('orderReference', '{{ orderReference }}');#}
+    {#createInputAttachMapForm('merchantTransactionType', '{{ merchantTransactionType }}');#}
+    {#createInputAttachMapForm('currency', '{{ currency }}');#}
+    {#createInputAttachMapForm('merchantDomainName', '{{ merchantDomainName }}');#}
+    {#createInputAttachMapForm('clientPhone', '{{ clientPhone }}');#}
+    {#createInputAttachMapForm('clientEmail', '{{ clientEmail }}');#}
+    {#createInputAttachMapForm('productCount[]', '{{ productCount }}');#}
+    {#createInputAttachMapForm('productName[]', '{{ productName }}');#}
+    {#createInputAttachMapForm('merchantAuthType', '{{ merchantAuthType }}');#}
+    {#createInputAttachMapForm('clientLastName', '{{ clientLastName }}');#}
+    {#createInputAttachMapForm('orderDate', '{{ orderDate }}');#}
+    {#createInputAttachMapForm('clientFirstName', '{{ clientFirstName }}');#}
+    {#createInputAttachMapForm('serviceUrl', '{{ serviceUrl }}');#}
+    {#createInputAttachMapForm('merchantSignature', '{{ merchantSignature }}');#}
+    {#createInputAttachMapForm('merchantAccount', '{{ merchantAccount }}');#}
+    {#createInputAttachMapForm('merchantTransactionSecureType', '{{ merchantTransactionSecureType }}');#}
+
+    {#createInputAttachMapForm('supplier', '{{ m_supplier }}');#}
+    {#createInputAttachMapForm('TranzilaPW', '{{ m_tranzila_pw }}');#}
+    {#createInputAttachMapForm('cred_type', '1');#}
+
+    createInputAttachMapForm('sum', '{{ m_sum }}');
+    createInputAttachMapForm('currency', '{{ m_currency }}');
+    createInputAttachMapForm('lang', '{{ m_lang }}');
+    {#createInputAttachMapForm('company', '{{ m_company }}');#}
+    createInputAttachMapForm('success_url_address', '{{ m_success_url_address }}');
+    createInputAttachMapForm('fail_url_address', '{{ m_fail_url_address }}');
+
+    {#createInputAttachMapForm('myid', '{{ m_myid }}');#}
+    {#createInputAttachMapForm('expmonth', '{{ expmonth }}');#}
+    {#createInputAttachMapForm('expyear', '{{ expyear }}');#}
+    {#createInputAttachMapForm('expdate', '0927');#}
+    {#createInputAttachMapForm('bit_pay', 0);#}
+    {#createInputAttachMapForm('cred_type', 1);#}
+
+    {#createInputAttachMapForm('hide_cc', 1);#}
+    createInputAttachMapForm('order_id', '{{ m_order_id }}');
+    {#createInputAttachMapForm('email', '{{ m_email }}');#}
+
+    {#createInputAttachMapForm('tranmode', 'AK');#}
+    {#{% if me.profile.tranzila_token  %}#}
+    {#    createInputAttachMapForm('TranzilaTK', '{{ me.profile.tranzila_token }}');#}
+    {#{% endif %}#}
+
+    {#https://secure5.tranzila.com/cgi-bin/tranzila71u.cgi?supplier=shmulik3355tok&TranzilaPW=gjdukl78&TranzilaTK=x4f3b93b782fae52312&expdate=0927&myid=123456789&s=1&1=1=#}
+
+    document.body.appendChild(mapForm);
+    mapForm.submit();
+</script>
+</body>
+</html>

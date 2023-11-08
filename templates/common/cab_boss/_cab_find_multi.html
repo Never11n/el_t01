@@ -1,0 +1,262 @@
+{% load static %}
+{% load i18n %}
+<div class="card card-default collapsed-card">
+    <div class="card-header">
+        <h3 class="card-title">{% trans 'Search' %}</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body" style="display: none;">
+        {#        <form role="form" id="id_form_cab_find" action="{#% url 'cab_ticket_find' %" method="post">#}
+        {#            {% csrf_token %}#}
+
+        <input type="hidden"
+               name="find_type_game_verabl"
+               id='id_find_type_game_verabl'
+               value="{{ menu_tickets_item }}"/>
+
+        <div class="row">
+
+            {% if l_find_type_game %}
+                <input type="hidden" name="find_type_game_list" id='id_find_type_game_list' value=""/>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>{% trans 'Type GAME' %}</label>
+                        <select class="duallistbox" multiple="multiple">
+                            {% for item_dict in dict_tickets_type %}
+                                <option selected
+                                        data-code="{{ item_dict.verbal }}">{% trans item_dict.caption %}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if l_find_date_range %}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{% trans 'Date range:' %}</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="id_find_date_range"
+                                   name="find_date_range"
+                                   value="{{ date_range }}"
+                            >
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if l_find_date_range_2 %}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{% trans 'Date range 2:' %}</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="id_find_date_range_2"
+                                   name="find_date_range_2"
+                                   value="{{ date_range_2 }}"
+                            >
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if l_find_datetime_range %}
+                <div class="col-md-12">
+                    <!-- Date and time range -->
+                    <div class="form-group">
+                        <label>{% trans 'Date and time range:' %}</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="id_find_datetime_range"
+                                   name="find_datetime_range"
+                                   value="{{ m_datetime_range }}"
+                            >
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                </div>
+            {% endif %}
+            {% if l_find_name %}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{% trans 'Name:' %}</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-edit"></i>
+                                  </span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="id_find_uname"
+                                   name="find_uname"
+                                   value="{{ m_uName }}"
+                            >
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if l_find_uemail %}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{% trans 'E-mail:' %}</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                  </span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="id_find_uemail"
+                                   name="find_uemail"
+                                   value="{{ m_uEmail }}"
+                            >
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if l_find_uphone %}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{% trans 'Phone:' %}</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-phone"></i>
+                                  </span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="id_find_uphone"
+                                   name="find_uphone"
+                                   value="{{ m_uPhone }}"
+                            >
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if l_find_id_confirmation %}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{% trans 'ID card number:' %}</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-id-card"></i>
+                                  </span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="id_find_idcard"
+                                   name="find_idcard"
+                                   value="{{ m_idcard }}"
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label class="mr-3">{% trans 'Status:' %}</label>
+                    <div id="id_conf_statuses" class="form-check form-check-inline">
+                        <input id="id_conf_status_wait" class="form-check-input" type="checkbox"
+                               {% if 'wait' in statuses %} checked {% endif %}>
+                        <label class="form-check-label mr-3" for="id_conf_status_wait">{% trans 'WAIT' %}</label>
+
+                        <input id="id_conf_status_success" class="form-check-input" type="checkbox"
+                               {% if 'ok' in statuses %} checked {% endif %}>
+                        <label class="form-check-label mr-3" for="id_conf_status_success">{% trans 'OK' %}</label>
+
+{#                        <input id="id_conf_status_repeat" class="form-check-input" type="checkbox"#}
+{#                               {% if 'repeat' in statuses %} checked {% endif %}>#}
+{#                        <label class="form-check-label mr-3" for="id_conf_status_repeat">{% trans 'REPEAT' %}</label>#}
+
+                        <input id="id_conf_status_reject" class="form-check-input" type="checkbox"
+                               {% if 'reject' in statuses %} checked {% endif %}>
+                        <label class="form-check-label mr-3" for="id_conf_status_reject">{% trans 'REJECT' %}</label>
+                    </div>
+
+                </div>
+
+            {% endif %}
+            {% if l_find_only_paid_confirmation %}
+                 <div class="col-md-12">
+                     <label class="mr-3">{% trans 'Only made payment' %}</label>
+                     <div class="form-check form-check-inline">
+                         <input id="id_conf_only_paid" class="form-check-input" type="checkbox"
+                               {% if only_paid %} checked {% endif %}>
+                    </div>
+                 </div>
+            {% endif %}
+            {% if l_find_payout_status %}
+            <div class="col-md-12">
+                    <label class="mr-3">{% trans 'Status:' %}</label>
+                    <div id="payout_statuses" class="form-check form-check-inline">
+                        <input id="payout_status_new" class="form-check-input ml-3" type="checkbox"
+                               {% if '00' in payout_statuses %} checked {% endif %}>
+                        <label class="form-check-label" for="payout_status_new">{% trans 'NEW' %}</label>
+                        <input id="payout_status_ok" class="form-check-input ml-3" type="checkbox"
+                               {% if '01' in payout_statuses %} checked {% endif %}>
+                        <label class="form-check-label" for="payout_status_ok">{% trans 'OK' %}</label>
+                        <input id="payout_status_reject" class="form-check-input ml-3" type="checkbox"
+                               {% if '02' in payout_statuses %} checked {% endif %}>
+                        <label class="form-check-label" for="payout_status_reject">{% trans 'REJECT' %}</label>
+                    </div>
+                </div>
+            {% endif %}
+            {% if l_find_date %}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{% trans 'Date:' %}</label>
+                        <div class="input-group date">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                            <input type="text"
+                                   class="form-control float-right"
+                                   id="id_find_date"
+                                   name="find_date"
+                                   value="{{ date }}"
+                            >
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="card-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+                <div class="input-group-append">
+                    <button type="button"
+                            onclick="btn_form_find()"
+                            class="btn btn-info"
+                    ><i class="fas fa-search"></i>{% trans 'Show' %}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

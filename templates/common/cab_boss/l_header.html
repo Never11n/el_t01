@@ -1,0 +1,421 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+    <!-- Header Area Start  -->
+    <header class="header ui-cabb">
+        <!--Main-Menu Area Start-->
+        <div class="mainmenu-area">
+            <div class="container-cabb">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_menu"
+                                aria-controls="main_menu"
+                                aria-expanded="false" aria-label="{% trans 'Toggle navigation' %}">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                            <div class="collapse navbar-collapse fixed-height" id="main_menu">
+                                <ul class="left-list">
+                                    <li>
+                                        {% include lf_language %}
+                                    </li>
+                                </ul>
+                                <ul class="navbar-nav ml-auto">
+                                    {% if me.profile.settings.permit_cabb.callcenter_menu %}
+                                    <li class="nav-item">
+                                        <a class="nav-link
+                                               {% if menu_item == 'nav-link_callcenter_menu' %}
+                                               active{% endif %}"
+                                           href="{% url 'cabb_callcenter' %}">{% trans 'Callcenter' %}
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% if me.profile.settings.permit_cabb.tasks %}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle
+                                               {% if menu_item == 'nav-link_cabs_list' or menu_item == 'nav-link_cabs_newtask' %}
+                                               active{% endif %}"
+                                               href="#" role="button"
+                                               data-toggle="dropdown"
+                                               aria-haspopup="true"
+                                               aria-expanded="false">
+                                                {% trans 'Tasks' %}
+                                                <div class="mr-hover-effect"></div>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item {% if menu_item == 'nav-link_cabs_list' %} active {% endif %}"
+                                                       href="{% url 'cabs_list' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Tasks' %}</a>
+                                                </li>
+                                                <li><a class="dropdown-item {% if menu_item == 'nav-link_cabs_newtask_sms' %} active {% endif %}"
+                                                       href="{% url 'cabs_newtask' 'sms'%}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'New Task sms' %}</a>
+                                                </li>
+                                                <li><a class="dropdown-item {% if menu_item == 'nav-link_cabs_newtask_whatsapp' %} active {% endif %}"
+                                                       href="{% url 'cabs_newtask' 'whatsapp'%}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'New Task whatsapp' %}</a>
+                                                </li>
+                                                <li><a class="dropdown-item {% if menu_item == 'nav-link_cabs_newtask_email' %} active {% endif %}"
+                                                       href="{% url 'cabs_newtask' 'email'%}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'New Task email' %}</a>
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                    {% endif %}
+                                    {% if me.profile.settings.permit_cabb.users_menu %}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle
+                                           {% if menu_item == 'nav-link_cabb_users' %} active
+                                           {% elif menu_item_2 == 'nav-link_cabb_users' %}active
+                                           {% endif %}"
+                                           href="#" role="button"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false">
+                                            {% trans 'Users' %}
+                                            <div class="mr-hover-effect"></div>
+                                        </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_users' %} active {% endif %}" href="{% url 'cabb_users' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Users' %}</a>
+                                                </li>
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_confs' %} active {% endif %}" href="{% url 'id_confirmation' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Users id confirm' %}</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_cabb_subs' %}active{% endif %}"
+                                                   href="{% url 'cabb_subs' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Subscription List' %}</a></li>
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_cabb_bonuses' %}active{% endif %}"
+                                                   href="{% url 'cabb_subs_bonuses' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Subs. bonus list' %}</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_cabb_lotto_subs' %}active{% endif %}"
+                                                   href="{% url 'cabb_lotto_subs' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Lotto Subscription List' %}</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_cabb_blist' %}active{% endif %}"
+                                                   href="{% url 'cabb_blist' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Black List' %}</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_bloggers' %}active{% endif %}"
+                                                       href="{% url 'cabb_bloggers' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Bloggers' %}</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_discounts' %}active{% endif %}"
+                                                       href="{% url 'cabb_discounts' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Discounts' %}</a></li>
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_discount_lists' %}active{% endif %}"
+                                                       href="{% url 'cabb_discount_lists' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Discount owners' %}</a></li>
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_discount_histories' %}active{% endif %}"
+                                                       href="{% url 'cabb_discount_histories' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Discount history' %}</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item {% if menu_user_item == 'nav-link_notifications_list' %}active{% endif %}"
+                                                       href="{% url 'cabb_system_notifications' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'System notifications' %}</a></li>
+
+                                            </ul>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% if me.profile.settings.permit_cabb.games_tickets_menu %}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle
+                                           {% if menu_item == 'nav-link_cabb_games' or menu_item == 'nav-link_cabb_tickets' %} active
+                                           {% endif %}"
+                                           href="#" role="button"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false">
+                                            {% trans 'Games' %} / {% trans 'Tickets' %}
+                                            <div class="mr-hover-effect"></div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item {% if menu_item == 'nav-link_cabb_tickets_check' %}active{% endif %}"
+                                                   href="{% url 'cabb_tickets_check' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'CHECKING Tickets' %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item {% if menu_item == 'nav-link_cabb_lotto_tickets_check-all' %}active{% endif %}"
+                                                   href="{% url 'cabb_lotto_tickets_check' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'CHECKING LOTTO ALL' %}
+                                                </a>
+                                            </li>
+                                            {% for ItemLotto in list_lotto_types %}
+                                                <li>
+                                                    <a class="dropdown-item {% if menu_item == 'nav-link_cabb_lotto_tickets_check-'|add:ItemLotto.verbal %}active{% endif %}"
+                                                       href="{% url 'cabb_lotto_tickets_check' %}?ticket={{ ItemLotto.verbal }}">
+                                                        <i class="fa fa-angle-double-right"></i>{% trans 'CHECKING' %}
+                                                        - {{ ItemLotto.caption }}
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                            <li>
+                                                <a class="dropdown-item {% if menu_item == 'nav-link_cabb_tickets' %}active{% endif %}"
+                                                   href="{% url 'cabb_tickets' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'User Tickets' %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item {% if menu_item == 'nav-link_cabb_games' %}active{% endif %}"
+                                                   href="{% url 'cabb_games' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Games' %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item {% if menu_item == 'nav-link_lotto_profits' %}active{% endif %}"
+                                                   href="{% url 'cabb_lotto_profits' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Lotto profits' %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item {% if menu_item == 'nav-link_lotto_results' %}active{% endif %}"
+                                                   href="{% url 'cabb_lotto_results' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Lotto results' %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item {% if menu_item == 'nav-link_list_tickets' %}active{% endif %}"
+                                                   href="{% url 'cabb_list_tickets' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'List TICKETS' %}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    {% endif %}
+                                    {% if me.profile.settings.permit_cabb.feedback_menu %}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle {% if menu_item == 'nav-link_cabb_feedback' %}active{% endif %}"
+                                           href="#" role="button"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false">
+                                            {% if count_feed_new > 0 %}
+                                            <span class="count">{{ count_feed_new }}</span>
+                                            {% endif %}
+                                            {% trans 'Feedback' %}
+                                            <div class="mr-hover-effect"></div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{% url 'cabb_feedback_new' %}"> <i
+                                                    class="fa fa-angle-double-right"></i>{% trans 'New feedback' %}</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'cabb_feedback_ok' %}"> <i
+                                                    class="fa fa-angle-double-right"></i>{% trans 'Replay feedback' %}</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'cabb_feedback_block' %}"> <i
+                                                    class="fa fa-angle-double-right"></i>{% trans 'Block feedback' %}</a></li>
+                                        </ul>
+                                    </li>
+                                    {% endif %}
+                                    {% if me.profile.settings.permit_cabb.payments_menu %}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle
+                                                 {% if menu_item == 'nav-link_cabb_payout' or menu_item == 'nav-link_cabb_payadd' or menu_item == 'nav-link_cabb_cashadd'%}
+                                                 active{% endif %}"
+                                           href="#" role="button"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false">
+                                            {% if count_payout_new > 0  or count_payadd_new > 0 or count_cashadd_new > 0 %}
+                                                <span class="count">!</span>
+                                            {% endif %}
+                                            {% trans 'Payments' %}
+                                            <div class="mr-hover-effect"></div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'cabb_payout_new' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'New PayOut' %}
+                                                    {% if count_payout_new > 0 %}
+                                                        <span class="text-danger">({{ count_payout_new }})</span>
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'cabb_payout_ok' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'OK PayOut' %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'cabb_payout_reject' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Rejected PayOut' %}
+                                                </a>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'cabb_payadd_new' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'New Transaction' %}
+                                                    {% if count_payadd_new > 0 %}
+                                                    <span class="text-danger">({{ count_payadd_new }})</span>
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'cabb_payadd_ok' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'OK Transaction' %}
+                                                </a>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'cabb_cashadd_new' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'New Cash Payment' %}
+                                                    {% if count_cashadd_new > 0 %}
+                                                    <span class="text-danger">({{ count_cashadd_new }})</span>
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'cabb_cashadd_ok' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'OK Cash Payment' %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'cabb_cashadd_block' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Block Cash Payment' %}
+                                                </a>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'payment_answers' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Payment answers' %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'upload_payment_answers' %}">
+                                                    <i class="fa fa-angle-double-right"></i>{% trans 'Upload Payment answers' %}
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    {% endif %}
+<!--                                    <li class="nav-item dropdown">-->
+<!--                                        <a class="nav-link dropdown-toggle {% if menu_item == 'nav-link_cabb_payout' %}active{% endif %}"-->
+<!--                                           href="#" role="button"-->
+<!--                                           data-toggle="dropdown"-->
+<!--                                           aria-haspopup="true"-->
+<!--                                           aria-expanded="false">-->
+
+<!--                                            {% trans 'PayOut' %}-->
+<!--                                            <div class="mr-hover-effect"></div>-->
+<!--                                        </a>-->
+<!--                                        <ul class="dropdown-menu">-->
+<!--                                            <li><a class="dropdown-item" href="{% url 'cabb_payout_new' %}"> <i-->
+<!--                                                    class="fa fa-angle-double-right"></i>{% trans 'New PayOut' %}-->
+<!--                                                    {% if count_payout_new > 0 %}-->
+<!--                                                        <span class="text-danger">({{ count_payout_new }})</span>-->
+<!--                                                    {% endif %}</a>-->
+<!--                                            </li>-->
+<!--                                            <li><a class="dropdown-item" href="{% url 'cabb_payout_ok' %}"> <i-->
+<!--                                                    class="fa fa-angle-double-right"></i>{% trans 'OK PayOut' %}</a></li>-->
+<!--                                        </ul>-->
+<!--                                    </li>-->
+<!--                                    <li class="nav-item dropdown">-->
+<!--                                        <a class="nav-link dropdown-toggle {% if menu_item == 'nav-link_cabb_payadd' %}active{% endif %}"-->
+<!--                                           href="#" role="button"-->
+<!--                                           data-toggle="dropdown"-->
+<!--                                           aria-haspopup="true"-->
+<!--                                           aria-expanded="false">-->
+<!--                                            {% trans 'Transaction' %}-->
+<!--                                            <div class="mr-hover-effect"></div>-->
+<!--                                        </a>-->
+<!--                                        <ul class="dropdown-menu">-->
+<!--                                            <li><a class="dropdown-item" href="{% url 'cabb_payadd_new' %}"> <i-->
+<!--                                                    class="fa fa-angle-double-right"></i>{% trans 'New Transaction' %}-->
+<!--                                                {% if count_payadd_new > 0 %}-->
+<!--                                                <span class="text-danger">({{ count_payadd_new }})</span>-->
+<!--                                                {% endif %}</a>-->
+<!--                                            </li>-->
+<!--                                            <li><a class="dropdown-item" href="{% url 'cabb_payadd_ok' %}"> <i-->
+<!--                                                    class="fa fa-angle-double-right"></i>{% trans 'OK Transaction' %}</a></li>-->
+<!--                                        </ul>-->
+<!--                                    </li>-->
+
+<!--                                    <li class="nav-item dropdown">-->
+<!--                                        <a class="nav-link dropdown-toggle {% if menu_item == 'nav-link_cabb_cashadd' %}active{% endif %}"-->
+<!--                                           href="#" role="button"-->
+<!--                                           data-toggle="dropdown"-->
+<!--                                           aria-haspopup="true"-->
+<!--                                           aria-expanded="false">-->
+<!--                                            {% trans 'Cash Payment' %}-->
+<!--                                            <div class="mr-hover-effect"></div>-->
+<!--                                        </a>-->
+<!--                                        <ul class="dropdown-menu">-->
+<!--                                            <li><a class="dropdown-item" href="{% url 'cabb_cashadd_new' %}"> <i-->
+<!--                                                    class="fa fa-angle-double-right"></i>{% trans 'New Cash Payment' %}-->
+<!--                                                {% if count_cashadd_new > 0 %}-->
+<!--                                                    <span class="text-danger">({{ count_cashadd_new }})</span>-->
+<!--                                                    {% endif %}</a>-->
+<!--                                            </li>-->
+<!--                                            <li><a class="dropdown-item" href="{% url 'cabb_cashadd_ok' %}"> <i-->
+<!--                                                    class="fa fa-angle-double-right"></i>{% trans 'OK Cash Payment' %}</a></li>-->
+<!--                                            <li><a class="dropdown-item" href="{% url 'cabb_cashadd_block' %}"> <i-->
+<!--                                                    class="fa fa-angle-double-right"></i>{% trans 'Block Cash Payment' %}</a></li>-->
+<!--                                        </ul>-->
+<!--                                    </li>-->
+                                    {% if me.profile.settings.permit_cabb.reports_menu %}
+                                    <li class="nav-item dropdown">
+                                        <a class=" reports nav-link dropdown-toggle {% if menu_item == 'nav-link_cabb_reports' %}active{% endif %}"
+                                           href="{% url 'cabb_reports' %}"
+                                           data-target="#"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false">
+                                            {% trans 'Reports' %}
+                                            <div class="mr-hover-effect"></div>
+                                        </a>
+                                        <ul class="dropdown-menu" style="overflow: scroll;max-height: 600px;">
+                                            {% for item_dict in dict_report_list %}
+                                                <li><a class="dropdown-item {% if menu_reports_item == item_dict.verbal %} active {% endif %}"
+                                                       href="{% url 'cabb_report' item_dict.verbal %}">
+                                                    <i class="fa fa-angle-double-right"></i>
+                                                    {% trans item_dict.caption %}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    {% endif %}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle {% if menu_item == 'nav-link_profile' %}active{% endif %}"
+                                           href="#" role="button"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false">
+                                            {{ me.profile.name }}
+                                            <div class="mr-hover-effect"></div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+{#                                            <li><a class="dropdown-item" href="{% url 'cab_pasw' %}"> <i#}
+{#                                                    class="fa fa-angle-double-right"></i>{% trans 'Change pasword' %}</a></li>#}
+{#                                            <li><a class="dropdown-item" href="{% url 'cab_balance' %}"> <i#}
+{#                                                    class="fa fa-angle-double-right"></i>{% trans 'Balance' %}</a></li>#}
+{#                                            <li><a class="dropdown-item" href="{% url 'cab_history' %}"> <i#}
+{#                                                    class="fa fa-angle-double-right"></i>{% trans 'My Game' %}</a></li>#}
+{#                                            <li><a class="dropdown-item" href="{% url 'cab_contact' %}"> <i#}
+{#                                                    class="fa fa-angle-double-right"></i>{% trans 'Contact' %}</a></li>#}
+{#                                            <li><a class="dropdown-item" href="faq.html"> <i#}
+{#                                                    class="fa fa-angle-double-right"></i>{% trans 'Faq' %}</a></li>#}
+                                            <li><a class="dropdown-item" href="/logout/"> <i
+                                                    class="fa fa-angle-double-right"></i>{% trans 'Logout' %}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Main-Menu Area Start-->
+    </header>
+    <!-- Header Area End  -->
+<script>
+    window.onload = (function() {
+    $('.reports').click(function() {
+        location.href = $(this).attr('href');
+    });
+});
+</script>

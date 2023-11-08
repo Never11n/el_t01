@@ -1,0 +1,38 @@
+{% extends "layout/layout.html" %}
+{% load static %}
+{% load i18n %}
+{% block extra_head %}
+    <title> {% trans 'Страница не найдена' %}</title>
+    <meta property="og:image" content="{% static 'img/logo-og.png' %}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{% trans 'Страница не найдена' %}"/>
+    <meta property="og:description" content="{% trans 'Страница не найдена' %}"/>
+{% endblock %}
+{% block layoutbody %}
+    <div class="error page">
+        <div class="container">
+        <a href="" class="btn-scroll-up js-btn-scroll-up"> </a>
+        <a href="" class="btn-scroll-down js-btn-scroll-down"></a>
+
+            <div class="error__info">
+                <div class="error__info-headings">
+                    <div class="error__info-heading">
+                        {% trans 'Ошибка' %}
+                        <span class="text-green-lighter">
+                        404
+                    </span>
+                    </div>
+                    <div class="error__info-descr">
+                        {% trans 'К сожалению, указанная Вами страница не найдена.' %}
+                        <a href="{% url 'index' %}" class="error__info-descr-link">
+                            {% trans 'Вернуться на предыдущую страницу' %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        simple_get('/log404', {url: window.location.href})
+    </script>
+{% endblock %}

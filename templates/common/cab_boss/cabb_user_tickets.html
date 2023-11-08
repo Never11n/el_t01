@@ -1,0 +1,247 @@
+{% load static %}
+{% load i18n %}
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title m-0">{% trans 'List Games of USER' %}</h5>
+                </div>
+                <div class="card-body">
+                    {#                    <label class="tender-create-agreement__label">#}
+                    <label>
+                        <input id="cabb_ticket_checkbox_1"
+                               type="checkbox"
+                               name="payment-agreement__checkbox_1" value="1"
+                               class="">
+                        {% trans 'Auto Refresh' %}
+                    </label>
+                    <label>
+                        <input id="cabb_ticket_checkbox_1"
+                               type="number"
+                               min="10" max="60"
+                               name="payment-agreement__checkbox_1" value="10"
+                               class="">
+                        {% trans 'Auto Refresh' %}
+                    </label>
+                </div>
+                <div class="card-body">
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 table-cabb">
+                                <table id="id_table_tic" class="table table-bordered table-striped ">
+                                    <thead>
+                                    <tr class="js_tic_row">
+                                        <th></th>
+                                        <th>{% trans 'N req' %}</th>
+                                        <th>{% trans 'Id game' %}</th>
+                                        <th>{% trans 'Status' %}</th>
+                                        <th>{% trans 'User name' %}</th>
+                                        <th>{% trans 'Send Request' %}</th>
+                                        <th>{% trans 'Reply date' %}</th>
+                                        <th>{% trans 'Name Game' %}</th>
+                                        <th>{% trans 'Win/Loss' %}</th>
+                                        <th>{% trans 'N ticket' %}</th>
+                                        <th>{% trans 'Payment Methody' %}</th>
+                                        <th>{% trans 'Last 4' %}</th>
+                                        <th>{% trans 'Mask card' %}</th>
+                                        <th>{% trans 'Balance befor' %}</th>
+                                        <th>{% trans 'Cost 2' %}</th>
+                                        <th>{% trans 'Sum WIN' %}</th>
+                                        <th>{% trans 'Balance after' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ItemTicket in list_tickets %}
+                                        <tr class="js_tic_row {% if ItemTicket.answ_win %}
+                                     table-success
+                                   {% else %}
+{#                                     table-danger#}
+                                   {% endif %}"
+                                        >
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-info mybtn_cabb1 btn-sm"
+                                                        onclick="btn_ticket_action('recalculate', {{ ItemTicket.id }}, {{ filter_user_id }})">
+                                                    {#                                                    <i class="icon far fa-check-circle text-green"></i>#}
+                                                    {% trans 'Recalculate' %}
+                                                </button>
+                                                {#                                            <br>#}
+                                                {% if False %}
+                                                    <button type="button"
+                                                            class="btn btn-info mybtn_cabb1"
+                                                            onclick="btn_ticket_result({{ ItemTicket.id }})">
+                                                        {% trans 'B33' %}
+                                                    </button>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ ItemTicket.id }}</td>
+                                            <td class="text-nowrap">{{ ItemTicket.games_id_id }}
+                                                ({{ ItemTicket.games_id.ticket_num }})
+                                            </td>
+                                            <td>
+                                                {% if ItemTicket.status == "00" %}
+                                                    {% trans 'start' %}
+                                                {% elif ItemTicket.status == "01" %}
+                                                    {% trans 'ready' %}
+                                                    {#{% elif ItemTicket.status == "02"  %}#}
+                                                    {#{% trans 'start' %}#}
+                                                {% elif ItemTicket.status == "30" %}
+                                                    {% trans 'error' %}
+                                                {% elif ItemTicket.status == "33" %}
+                                                    {% trans 'finish' %}
+                                                {% endif %}
+                                            </td>
+                                            {#                                        <td>{{ ItemTicket.games_id.user_id }}</td>#}
+                                            <td>
+                                                {{ ItemTicket.games_id.user_id.profile.name }}
+                                                <br>{{ ItemTicket.games_id.user_id.profile.mobile }}
+                                                <br>{{ ItemTicket.games_id.user_id.email }}
+                                                {% if ItemTicket.games_id.game_type.verbal == "game_gift" %}
+                                                    <br><b>{% trans 'Gift to' %}</b>
+                                                    <br>{{ ItemTicket.games_id.user_recipient.profile.name }}
+                                                    <br>{{ ItemTicket.games_id.user_recipient.profile.mobile }}
+                                                    <br>{{ ItemTicket.games_id.user_recipient.email }}
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-nowrap">{{ ItemTicket.req_dt|date:"d.m.Y H:i:s" }}</td>
+                                            <td class="text-nowrap">{{ ItemTicket.answ_dt|date:"d.m.Y H:i:s" }}</td>
+                                            <td class="text-nowrap">{{ ItemTicket.game_type }}</td>
+                                            <td class="center">
+                                                {% if ItemTicket.answ_win %}
+                                                    <i class="icon far fa-check-circle text-green"></i>
+                                                {% else %}
+                                                    <i class="icon fas fa-ban text-red"></i>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-nowrap">{{ ItemTicket.answ_nom }}</td>
+                                            <td>{{ ItemTicket.games_id.t_payment }}</td>
+                                            {#                                        <td>{{ ItemTicket.games_id.ticket_sum }}</td>#}
+                                            <td>{{ ItemTicket.last_4 }}</td>
+                                            <td>{{ ItemTicket.card_mask }}</td>
+
+                                            <td>
+                                                {% if ItemTicket.games_id.game_type.verbal == "game_gift" %}
+                                                    {{ ItemTicket.games_id.user_id.email }}
+                                                    <br>{{ ItemTicket.balance_01 }}
+                                                    <br>{{ ItemTicket.games_id.user_recipient.email }}
+                                                    <br>{{ ItemTicket.recipient_balance_01 }}
+                                                {% else %}
+                                                    {{ ItemTicket.balance_01 }}
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ ItemTicket.cost_2 }}</td>
+                                            <td>{{ ItemTicket.answ_win_sum }}</td>
+                                            <td>
+                                                {% if ItemTicket.games_id.game_type.verbal == "game_gift" %}
+                                                    {{ ItemTicket.games_id.user_id.email }}
+                                                    <br>{{ ItemTicket.balance_02 }}
+                                                    <br>{{ ItemTicket.games_id.user_recipient.email }}
+                                                    <br>{{ ItemTicket.recipient_balance_02 }}
+                                                {% else %}
+                                                    {{ ItemTicket.balance_02 }}
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if True %}
+                                                    <a href="{{ ItemTicket.img_08 }}" target="_blank"
+                                                       class="btn btn-info mybtn_cabb1 btn-sm"
+                                                    >{% trans 'Pic' %}</a>
+                                                {% endif %}
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>{% trans 'N req' %}</th>
+                                        <th>{% trans 'Id game' %}</th>
+                                        <th>{% trans 'Status' %}</th>
+                                        <th>{% trans 'User name' %}</th>
+                                        <th>{% trans 'User phone' %}</th>
+                                        <th>{% trans 'Send Request' %}</th>
+                                        <th>{% trans 'Reply date' %}</th>
+                                        <th>{% trans 'Name Game' %}</th>
+                                        <th>{% trans 'Win/Loss' %}</th>
+                                        <th>{% trans 'N ticket' %}</th>
+                                        <th>{% trans 'Payment Methody' %}</th>
+                                        <th>{% trans 'Balance befor' %}</th>
+                                        <th>{% trans 'Cost 2' %}</th>
+                                        <th>{% trans 'Sum WIN' %}</th>
+                                        <th>{% trans 'Balance after' %}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        {% if l_pagination %}
+                            {% include l_pagination %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    function btn_ticket_action(l_type_action, l_ticket_id, l_user_id) {
+        console.log('btn_ticket_action');
+        Swal.fire({
+            icon: 'warning',
+            title: gettext("Are you sure?"),
+            showCancelButton: true,
+            confirmButtonColor: "#15b284",
+            cancelButtonColor: "#DD6B55",
+            confirmButtonText: gettext("Yes"),
+            cancelButtonText: gettext("No"),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: {
+                        type_action: l_type_action,
+                        ticket_id: l_ticket_id,
+                        user_id: l_user_id,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    url: "/cabb-user-tickets-action/",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.AnswerCod == "01") {
+                            location.reload();
+                        }
+                        if (res.AnswerCod == "00") {
+                            return Swal.fire({
+                                icon: 'error',
+                                title: gettext("Error"),
+                                text: res.AnswerText,
+                                confirmButtonColor: "#15b284",
+                                confirmButtonText: gettext("Yes"),
+                            });
+                        }
+                    },
+                    error: function (res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: gettext('ERROR'),
+                            background: '#cacaca',
+                            html: gettext("An error occurred. Please try again later."),
+                            confirmButtonText: gettext('Back to form'),
+                            confirmButtonColor: '#dd3333',
+                        });
+                        return false;
+                    }
+                });
+            } else {
+                Swal.fire(gettext('Thank you and goodbye'), '', 'info');
+                return false;
+            }
+        });
+    }
+</script>

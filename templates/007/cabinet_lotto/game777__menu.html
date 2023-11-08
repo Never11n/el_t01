@@ -1,0 +1,26 @@
+{% load static %}
+{% load i18n %}
+<section data-game-theme-color="#FC459A" data-game-theme-color-rgb="252, 69, 154" class="js-game-theme-color game-item main-bg full-height-without-footer">
+<!--    <div class="container">-->
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="col-lg-12">-->
+                <div class="ui-game ui-game__mob-no-p">
+                    {% include tmpl_card_header %}
+                    {% include tmpl_timer %}
+                    <div class="ui-game-links">
+                        <div class="ui-game-links-inner">
+                            <a class="ui-game-links__game ui-game-links__game-1" href="{% url 'cab_game_lotto' 'game777_col8' %}">{% trans '777 Systematic 8' %}</a>
+                            <a class="ui-game-links__game ui-game-links__game-2" href="{% url 'cab_game_lotto' 'game777_regular' %}">{% trans '777' %}</a>
+                            <a class="ui-game-links__game ui-game-links__game-3" href="{% url 'cab_game_lotto' 'game777_col9' %}">{% trans '777 Systematic 9' %}</a>
+                            <div class="ui-game-links__manin">
+                                <span class="ui-game-links__manin-inner-border"></span>
+                                {% trans '777' %}
+                            </div>
+                        </div>
+                    </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</section>
+

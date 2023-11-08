@@ -1,0 +1,110 @@
+{% load static %}
+{% load i18n %}
+<label>WINNING NUMBERS</label>
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <td>{% trans 'Numbers' %}</td>
+        <td>{% trans 'Extra numbers' %}</td>
+        <td>{% trans 'Strong' %}</td>
+    </tr>
+    <tr>
+        <td>{{ result.result.result_loto }}</td>
+        <td>{{ result.result.result_extra }}</td>
+        <td>{{ result.result.result_strong_num }}</td>
+    </tr>
+    </tbody>
+</table>
+<label>TICKET TYPE </label>
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        {% if item_ticket.answ_tabl.lotto_ticket_info.double %}
+            <td>{{ item_ticket.game_type.caption }} double</td>
+        {% else %}
+            <td>{{ item_ticket.game_type.caption }} (not double)</td>
+        {% endif %}
+    </tr>
+    </tbody>
+</table>
+<label>USER EXTRA NUMBERS</label>
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        {% if item_ticket.answ_tabl.lotto_ticket_info.extra_list and item_ticket.answ_tabl.lotto_ticket_info.extra %}
+            <td class="userExtraList">{{ item_ticket.answ_tabl.lotto_ticket_info.extra_list }}</td>
+        {% elif not item_ticket.answ_tabl.lotto_ticket_info.extra %}
+            <td class="userExtraList">{% trans 'User did not enable extra when buing' %}</td>
+        {% elif item_ticket.answ_tabl.lotto_ticket_info.extra and not item_ticket.answ_tabl.lotto_ticket_info.extra_list %}
+            <td class="userExtraList">{% trans 'Extras not yet assigned' %}</td>
+        {% endif %}
+    </tr>
+    </tbody>
+</table>
+{% if item_ticket.answ_tabl.lotto_ticket_info.form_type == 5 and item_ticket.game_type.verbal == 'lotto_systematic' %}
+<label>Additional 6th number</label>
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            {% if item_ticket.answ_tabl.lotto_ticket_info.6th_number %}
+                <td class="six_number">{{ item_ticket.answ_tabl.lotto_ticket_info.6th_number }}</td>
+            {% else %}
+                <td class="six_number">{% trans '6th number not yet assigned' %}</td>
+            {% endif %}
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+<label>USER LINES</label>
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <td>{% trans 'Numbers' %}</td>
+        <td>{% trans 'Strong number' %}</td>
+    </tr>
+    {% if item_ticket.game_type.verbal == 'lotto_regular' %}
+        {% for line in item_ticket.answ_tabl.lotto_ticket_info.tables %}
+        {% if line.numbers|length > 0 %}
+        <tr class="">
+            <td>{{ line.numbers }}</td>
+            <td>{{ line.strong_number }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td>{{ item_ticket.answ_tabl.lotto_ticket_info.tables.numbers }}</td>
+            <td>{{ item_ticket.answ_tabl.lotto_ticket_info.tables.strong }}</td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>
+<label>WINNING TABLE FROM PAIS</label>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>{% trans 'Guessed' %}</th>
+        <th>{% trans 'Number of winners' %}</th>
+        <th>{% trans 'Sum' %}</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% if item_ticket.answ_tabl.lotto_ticket_info.double %}
+            {% for key, value in result.result.result_win_tabl_double.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value.num }}</td>
+                    <td>{{ value.sum }} {{ sum_currency }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            {% for key, value in result.result.result_win_tabl.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value.num }}</td>
+                    <td>{{ value.sum }} {{ sum_currency }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+</table>

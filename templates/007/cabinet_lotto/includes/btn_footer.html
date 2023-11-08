@@ -1,0 +1,9 @@
+{% load static %}
+{% load i18n %}
+<div class="ui-game-btn-footer ui-game-btn-footer_center">
+    <button onclick="gameSave()" id="pay_btn" class="ui-game-btn ui-game-btn_light">{% trans 'To pay' %}</button>
+<!--    <a href="/" class="ui-game-btn ui-game-btn_light">{% trans 'To pay' %}</a>-->
+    {% if btn_subscription %}
+        <a href="/" class="ui-game-btn">10.00</a>
+    {% endif %}
+</div>

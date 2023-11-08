@@ -1,0 +1,60 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+    <!-- Header Area Start  -->
+    <header class="header ui-cabb">
+        <!--Main-Menu Area Start-->
+        <div class="mainmenu-area">
+            <div class="container-cabb">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_menu"
+                                aria-controls="main_menu"
+                                aria-expanded="false" aria-label="{% trans 'Toggle navigation' %}">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                            <div class="collapse navbar-collapse fixed-height" id="main_menu">
+                                <ul class="left-list">
+                                    <li>
+                                        {% include lf_language %}
+                                    </li>
+                                </ul>
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link {% if menu_item == 'nav-link_cabs_list' %}active{% endif %}"
+                                           href="{% url 'cabs_list' %}">{% trans 'Tasks' %}
+                                            <div class="mr-hover-effect"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {% if menu_item == 'nav-link_cabs_newtask' %}active{% endif %}"
+                                           href="{% url 'cabs_newtask' %}">{% trans 'New Task' %}
+                                            <div class="mr-hover-effect"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle {% if menu_item == 'nav-link_profile' %}active{% endif %}"
+                                           href="#" role="button"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false">
+                                            {{ me.profile.name }}
+                                            <div class="mr-hover-effect"></div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/logout/"> <i
+                                                    class="fa fa-angle-double-right"></i>{% trans 'Logout' %}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Main-Menu Area Start-->
+    </header>
+    <!-- Header Area End  -->

@@ -1,0 +1,56 @@
+{% load static %}
+{% load i18n %}
+    <div class="reg-text">
+        <h1><b class="enrollment">enrollment</b></h1>
+    </div>
+    <div class="registr">
+                        {% csrf_token %}
+                        <input type="hidden" id="url_path" name="url_path" value="{{ utm_code }}">
+                        <input type="hidden" id="get_param" name="get_param" value="{{ get_param }}">
+                        <div class="form_login_input">
+                            <input type="text" class=""
+                                   autocomplete="off"
+                                   id="input-name"
+                                   name="f_name"
+                                   placeholder="{% trans 'Full Name'%}*">
+                        </div>
+                        <div class="form_login_input">
+                            <input type="text" class=""
+                                   autocomplete="off"
+                                   id="input-id"
+                                   name="f_idoc"
+                                   placeholder="{% trans 'ID' %}*">
+                        </div>
+                        <div class="form_login_input">
+                            <input type="text" class=""
+                                   autocomplete="off"
+                                   id="input-phone"
+                                   name="f_phone_number"
+                                   placeholder="{% trans 'Phone Number' %}*">
+                        </div>
+                        <div class="form_login_input">
+                            <input type="text" class=""
+                                   autocomplete="off"
+                                   id="input-phone"
+                                   name="f_email"
+                                   placeholder="{% trans 'Email' %}*">
+                        </div>
+                        <div class="form_login_input">
+                            <input type="text" class=""
+                                   autocomplete="off"
+                                   id="input-date-birth"
+                                   name="f_date_birth"
+                                   placeholder="{% trans 'Date of birth' %}*"
+                                   onblur="(this.type='text')"
+                                   onfocus="(this.type='date')"
+                                   min = "1920-01-01">
+                                   
+                        </div>
+                    
+                    <div class="tab_text_4">
+                        <button class="btn_2 mybtn1-register-btn"
+                           onclick="btn_modal_shop_register()">
+                            {% trans 'CONFIRM' %}
+                        </button>
+                    </div>
+    </div>

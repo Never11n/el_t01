@@ -1,0 +1,57 @@
+{% load static %}
+{% load i18n %}
+<!-- lottery video Area Start -->
+<section class="cab-balance">
+    <div class="container">
+        <div class="cab-balance-box">
+            <div class="row justify-content-center">
+                <div class="section-heading">
+                    <h5 class="subtitle">{% trans 'All users' %}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-head-fixed text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Data Join</th>
+                                    <th>Name</th>
+                                    <th>Confirmed</th>
+                                    <th>Mobile</th>
+                                    <th>Mobile confirmed </th>
+                                    <th>Is boss</th>
+                                    <th>Doc</th>
+                                    <th>Balance</th>
+                                    <th>Language</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for ItemProfile in tprofile %}
+                                <tr>
+                                    <td>{{ ItemProfile.date_joined|date:"d.m.Y H:i:s" }}</td>
+                                    <td>{{ ItemProfile.name }}</td>
+                                    <td>{{ ItemProfile.user_confirmed }}</td>
+                                    <td>{{ ItemProfile.mobile }}</td>
+                                    <td>{{ ItemProfile.mobile_confirmed }}</td>
+                                    <td>{{ ItemProfile.is_boss }}</td>
+                                    <td>{{ ItemProfile.i_doc }}</td>
+                                    <td>{{ ItemProfile.balance }}</td>
+                                    <td>{{ ItemProfile.language }}</td>
+                                    <td><span class="tag tag-success">{{ ItemOperation.status }}</span></td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- lottery video Area End -->

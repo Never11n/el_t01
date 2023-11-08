@@ -1,0 +1,280 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+{% get_static_prefix as STATIC_PREFIX %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">{% trans 'Your choosen cards' %}</span>
+            <span class="ui-game-info-header__number">2</span>
+        </div>
+        <div>
+            <div data-card-num=1 class="ui-game-single-cards-multi">
+                {% if lotto_ticket_info.card_spades.0 %}
+                     <div data-card-suit="spades"
+                          class="ui-game-single-card ui-game-card-suit ui-game-card-suit__spades
+                                {% if winning_cards.card_spades == lotto_ticket_info.card_spades.0 %}js-single-card-selected{% endif %}"
+                          style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_spades.0 }}</span>
+                     </div>
+                {% else %}
+                    <div data-card-suit="spades" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg" alt="spades">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_spades.1 %}
+                     <div data-card-suit="spades"
+                          class="ui-game-single-card ui-game-card-suit ui-game-card-suit__spades
+                                {% if winning_cards.card_spades == lotto_ticket_info.card_spades.1 %}js-single-card-selected{% endif %}"
+                          style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_spades.1 }}</span>
+                     </div>
+                {% else %}
+                    <div data-card-suit="spades" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg" alt="spades">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_spades.2 %}
+                     <div data-card-suit="spades"
+                          class="ui-game-single-card ui-game-card-suit ui-game-card-suit__spades
+                                {% if winning_cards.card_spades == lotto_ticket_info.card_spades.2 %}js-single-card-selected{% endif %}"
+                          style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_spades.2 }}</span>
+                     </div>
+                {% else %}
+                    <div data-card-suit="spades" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg" alt="spades">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_spades.3 %}
+                    <div data-card-suit="spades"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__spades
+                         {% if winning_cards.card_spades == lotto_ticket_info.card_spades.3 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_spades.3 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="spades" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/spades.svg" alt="spades">
+                    </div>
+                {% endif %}
+                <div class="ui-game-single-card-line-number">1</div>
+            </div>
+
+            <div data-card-num=2 class="ui-game-single-cards-multi">
+                {% if lotto_ticket_info.card_hearts.0 %}
+                    <div data-card-suit="hearts"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__hearts
+                                {% if winning_cards.card_hearts == lotto_ticket_info.card_hearts.0 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_hearts.0 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="hearts" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg" alt="hearts">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_hearts.1 %}
+                    <div data-card-suit="hearts"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__hearts
+                                {% if winning_cards.card_hearts == lotto_ticket_info.card_hearts.1 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_hearts.1 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="hearts" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg" alt="hearts">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_hearts.2 %}
+                    <div data-card-suit="hearts"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__hearts
+                                {% if winning_cards.card_hearts == lotto_ticket_info.card_hearts.2 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_hearts.2 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="hearts" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg" alt="hearts">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_hearts.3 %}
+                    <div data-card-suit="hearts"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__hearts
+                                {% if winning_cards.card_hearts == lotto_ticket_info.card_hearts.3 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_hearts.3 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="hearts" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/hearts.svg" alt="hearts">
+                    </div>
+                {% endif %}
+                <div class="ui-game-single-card-line-number">2</div>
+            </div>
+
+            <div data-card-num=3 class="ui-game-single-cards-multi">
+                {% if lotto_ticket_info.card_diamonds.0 %}
+                    <div data-card-suit="diamonds"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__diamonds
+                         {% if winning_cards.card_diamonds == lotto_ticket_info.card_diamonds.0 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_diamonds.0 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="diamonds" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="diamonds">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_diamonds.1 %}
+                    <div data-card-suit="diamonds"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__diamonds
+                                {% if winning_cards.card_diamonds == lotto_ticket_info.card_diamonds.1 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_diamonds.1 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="diamonds" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="diamonds">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_diamonds.2 %}
+                    <div data-card-suit="diamonds"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__diamonds
+                                {% if winning_cards.card_diamonds == lotto_ticket_info.card_diamonds.2 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_diamonds.2 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="diamonds" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="diamonds">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_diamonds.3 %}
+                    <div data-card-suit="diamonds"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__diamonds
+                                {% if winning_cards.card_diamonds == lotto_ticket_info.card_diamonds.3 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_diamonds.3 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="diamonds" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/diamonds.svg" alt="diamonds">
+                    </div>
+                {% endif %}
+
+
+                <div class="ui-game-single-card-line-number">3</div>
+            </div>
+
+            <div data-card-num=4 class="ui-game-single-cards-multi ui-game-single-cards-multi_no-m-b">
+                {% if lotto_ticket_info.card_clubs.0 %}
+                    <div data-card-suit="clubs"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__clubs
+                                {% if winning_cards.card_clubs == lotto_ticket_info.card_clubs.0 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_clubs.0 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="clubs" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="clubs">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_clubs.1 %}
+                    <div data-card-suit="clubs"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__clubs
+                                {% if winning_cards.card_clubs == lotto_ticket_info.card_clubs.1 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_clubs.1 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="clubs" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="clubs">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_clubs.2 %}
+                    <div data-card-suit="clubs"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__clubs
+                         {% if winning_cards.card_clubs == lotto_ticket_info.card_clubs.2 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_clubs.2 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="clubs" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="clubs">
+                    </div>
+                {% endif %}
+                {% if lotto_ticket_info.card_clubs.3 %}
+                    <div data-card-suit="clubs"
+                         class="ui-game-single-card ui-game-card-suit ui-game-card-suit__clubs
+                                {% if winning_cards.card_clubs == lotto_ticket_info.card_clubs.3 %}js-single-card-selected{% endif %}"
+                         style="cursor: default;">
+                        <span class="js-game-single-card_text">{{ lotto_ticket_info.card_clubs.3 }}</span>
+                    </div>
+                {% else %}
+                    <div data-card-suit="clubs" class="ui-game-single-card ui-game-single-card_not-active" style="cursor: default;">
+                        <img class="js-game-single-card_img"
+                             src="{{ STATIC_PREFIX }}main/{{ GL_MainSkin }}/images/cards/clubs.svg" alt="clubs">
+                    </div>
+                {% endif %}
+
+                <div class="ui-game-single-card-line-number">4</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if winning_cards %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">
+                {% trans 'Lottery number' %}: {{ ticket.answ_lottery_number }}<br>
+                {% trans 'Draw date' %}: {{ draw_date|date:"d.m.Y H:i:s" }}<br>
+                {% trans 'Winning cards' %}:
+            </span>
+            <span class="ui-game-info-header__number">2</span>
+        </div>
+        <div class="ui-game-single-cards">
+            <div data-card-num=1 data-card-suit="spades"
+                 class="ui-game-single-card ui-game-card-suit ui-game-card-suit__spades
+                    {% if winning_cards.card_spades in lotto_ticket_info.card_spades %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span class="js-game-single-card_text">{{ winning_cards.card_spades }}</span>
+            </div>
+            <div data-card-num=2 data-card-suit="hearts"
+                 class="ui-game-single-card ui-game-card-suit ui-game-card-suit__hearts
+                    {% if winning_cards.card_hearts in lotto_ticket_info.card_hearts %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span class="js-game-single-card_text">{{ winning_cards.card_hearts }}</span>
+            </div>
+            <div data-card-num=3 data-card-suit="diamonds"
+                 class="ui-game-single-card ui-game-card-suit ui-game-card-suit__diamonds
+                    {% if winning_cards.card_diamonds in lotto_ticket_info.card_diamonds %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span class="js-game-single-card_text">{{ winning_cards.card_diamonds }}</span>
+            </div>
+            <div data-card-num=4 data-card-suit="clubs"
+                 class="ui-game-single-card ui-game-card-suit ui-game-card-suit__clubs
+                    {% if winning_cards.card_clubs in lotto_ticket_info.card_clubs %}js-single-card-selected{% endif %}"
+                 style="cursor: default;">
+                <span  class="js-game-single-card_text">{{ winning_cards.card_clubs }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

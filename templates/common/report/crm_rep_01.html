@@ -1,0 +1,70 @@
+{% load static %}
+{% load i18n %}
+
+<section class="cabb-page">
+    <div class="container_cabb">
+        <div class="justify-content-center">
+            <div class="card">
+            {% if l_find_form %}
+                {% include l_find_form %}
+            {% endif %}
+                <div class="card-header">
+                    <h3 class="card-title">{% trans report_item.caption %} ({{ date_range }})</h3>
+                    {% if l_btn_export %}
+                        {% include l_btn_export %}
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% if report_list %}
+                        <div class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 table-cabb">
+
+                                    <table id="example1" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>{% trans 'Payment' %}</th>
+                                            <th>{% trans 'Name Game' %}</th>
+                                            <th>{% trans 'Games/Transaction' %}</th>
+                                            <th>{% trans 'Tickets' %}</th>
+                                            <th>{% trans 'Amounts' %}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for item in report_list %}
+                                            <tr class="{% if item.game_type__caption == 'Total' and item.games_id__t_payment__verbal != 'Total' %}
+                                                        table-active
+                                                        {% elif item.games_id__t_payment__verbal == 'Total' %}
+                                                        table-primary
+                                                       {% endif %}">
+                                                <td class="">
+                                                    {% if item.games_id__t_payment__verbal == 'applepay' %}
+                                                        {% trans 'Apple Pay' %}
+                                                    {% elif item.games_id__t_payment__verbal == 'credit_card' %}
+                                                        {% trans 'Credit Card' %}
+                                                    {% elif item.games_id__t_payment__verbal == 'bit' %}
+                                                        {% trans 'Bit' %}
+                                                    {% else %}
+                                                        {{ item.games_id__t_payment__verbal }}
+                                                    {% endif %}
+                                                </td>
+                                                <td class="">{{ item.game_type__caption }}</td>
+                                                <td class="">{{ item.games_count }}</td>
+                                                <td class="">{{ item.tickets_count }}</td>
+                                                <td class="">{{ item.amount_count }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% trans 'No data to show' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>

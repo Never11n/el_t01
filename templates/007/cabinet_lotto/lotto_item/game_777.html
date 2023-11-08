@@ -1,0 +1,56 @@
+{% load static %}
+{% load i18n %}
+{% load el_t01_tags %}
+{% for line in lotto_ticket_info.tables %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">{% trans 'Line' %} {{ forloop.counter }}</span>
+<!--            <span class="ui-game-info-header__number"></span>-->
+        </div>
+
+        <div class="ui-game-balls-wrap">
+            <div class="ui-game-balls-wrap-row js-ui-game-balls-wrap-row">
+                {% for number in line.numbers %}
+                <div class="ui-game-ball"
+                     {% if number in winning_numbers %}
+                        style="background-color:#FC459A;color: #fff;"
+                     {% endif %}
+                >{{ number }}</div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endfor %}
+{% if winning_numbers %}
+<div class="ui-game-box">
+    <div class="ui-game-single">
+        <div class="ui-game-info-header">
+            <span class="ui-game-info-header__text">
+                {% trans 'Lottery number' %}: {{ ticket.answ_lottery_number }}<br>
+                {% trans 'Draw date' %}: {{ draw_date|date:"d.m.Y H:i:s" }}<br>
+                {% trans 'Winning numbers' %}
+            </span>
+        </div>
+
+        <div class="ui-game-balls-wrap">
+            <div class="ui-game-balls-wrap-row js-ui-game-balls-wrap-row row justify-content-start">
+                {% for number in winning_numbers %}
+                <div class="col-md-2 mb-2">
+                    <div class="ui-game-ball"
+                    {% if number in user_numbers %}
+                         style="background-color:#FC459A;color: #fff;"
+                    {% endif %}
+                    >{{ number }}</div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endif %}

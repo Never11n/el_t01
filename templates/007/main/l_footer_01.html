@@ -1,0 +1,177 @@
+{% load static %}
+{% load i18n %}
+<!-- Footer Area Start -->
+<section class="sub-footer">
+    <div class="container">
+        <div class="sub-footer__menu-wrap">
+            <div class="sub-footer__logo-wrap">
+                <img class="sub-footer__logo" src="{% static 'main/007/images/logo.png' %}" alt="">
+            </div>
+            <div class="sub-footer__row">
+                <div class="sub-footer__items-1">
+                    <div class="sub-footer-menu">
+                        <h4 class="sub-footer-menu__title">
+                            {% trans 'Useful Information' %}
+                        </h4>
+                        <ul class="sub-footer-menu__list">
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="">
+                                    {% trans 'Introduction video' %}
+                                </a>
+                            </li>
+
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="{% url 'faq' %}">
+                                    {% trans 'FAQ' %}
+                                </a>
+                            </li>
+
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="{% url 'forgot_password' %}">
+                                    {% trans 'Forgot Password' %}
+                                </a>
+                            </li>
+
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="">
+                                    {% trans 'User Authentication' %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sub-footer__items-2">
+                    <div class="sub-footer-menu">
+                        <h4 class="sub-footer-menu__title">
+                            {% trans 'About Us' %}
+                        </h4>
+                        <ul class="sub-footer-menu__list">
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="{% url 'aboutus' %}">
+                                    {% trans 'About Us' %}
+                                </a>
+                            </li>
+
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="{% url 'technology' %}">
+                                    {% trans 'Technology' %}
+                                </a>
+                            </li>
+
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="{% url 'contact' %}">
+                                    {% trans 'Contact Us' %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sub-footer__items-3">
+                    <div class="sub-footer-menu">
+                        <h4 class="sub-footer-menu__title">
+                            {% trans 'Legal' %}
+                        </h4>
+                        <ul class="sub-footer-menu__list">
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="{% url 'rules' %}">
+                                    {% trans 'Service Policy' %}
+                                </a>
+                            </li>
+
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="{% url 'rules' %}">
+                                    {% trans 'Service Terms of Use' %}
+                                </a>
+                            </li>
+
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="{% url 'privacynotice' %}">
+                                    {% trans 'Private Policy' %}
+                                </a>
+                            </li>
+
+                            <li class="sub-footer-menu__item">
+                                <a class="sub-footer-menu__link" href="">
+                                    {% trans 'Data Security' %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sub-footer__items-4">
+                    <div class="sub-footer-menu">
+                        <h4 class="sub-footer-menu__title">
+                            {% trans 'Payment On Website' %}
+                        </h4>
+
+                        <p class="sub-footer__text">
+                            {% trans 'Secured by the highest security standard' %}
+                        </p>
+                        <p class="sub-footer__text">
+                            {% trans 'Type Pci-Dss Level-1' %}
+                        </p>
+
+                        <ul class="list-pay-system">
+                            <li class="list-pay-system__item">
+                                <img class="list-pay-system__img" src="{% static 'main/007/images/credit-card.png' %}" alt="">
+                            </li>
+
+                            <li class="list-pay-system__item">
+                                <img class="list-pay-system__img" src="{% static 'main/007/images/bit.png' %}" alt="">
+                            </li>
+
+                            <li class="list-pay-system__item">
+                                <img class="list-pay-system__img" src="{% static 'main/007/images/apple-pay.png' %}" alt="">
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="sub-footer__items-5 sub-footer__to-right">
+                    <h4 class="sub-footer-menu__title">
+                        {% trans 'Follow Us' %}
+                    </h4>
+
+                    <ul class="social-links-list social-links-list__flex-end">
+                        <li class="social-links-list__item">
+                            <a class="social-links-list__link" href="">
+                                <img class="list-pay-system__img" src="{% static 'main/007/images/socialNetwork/facebook.svg' %}" alt="">
+                            </a>
+                        </li>
+
+                        <li class="social-links-list__item">
+                            <a class="social-links-list__link" href="">
+                                <img class="list-pay-system__img" src="{% static 'main/007/images/socialNetwork/instagram.svg' %}" alt="">
+                            </a>
+                        </li>
+
+                        <li class="social-links-list__item">
+                            <a class="social-links-list__link" href="">
+                                <img class="list-pay-system__img" src="{% static 'main/007/images/socialNetwork/youtube.svg' %}" alt="">
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <div class="sub-footer__language-wrap">
+                        {% include lf_language %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="sub-footer__info">
+            {% trans 'This site is operated and maintained by HishLine Ltd. HishLine Ltd work independently and unrelated to Mifal Apais.' %}
+            {% trans 'Entry and Participation above the age 18. Winning depends only on luck.' %}
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+        <div class="container">
+            <p class="footer__content">
+                {% trans 'HishLine © 2022. All Rights Reserved ' %}
+            </p>
+        </div>
+</footer>
+<!-- Footer Area End -->

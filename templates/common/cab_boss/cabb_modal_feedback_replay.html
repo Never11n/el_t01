@@ -1,0 +1,78 @@
+{% load i18n %}
+<div tabindex="-1" role="dialog" class="modal fade ui__modal_feedback_replay js__modal_feedback_replay ">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div data-dismiss="modal" aria-label="Close" class="ui__modal-close"></div>
+            </div>
+            <div class="modal__caption uppercase">
+                {% trans 'Feedback' %}
+            </div>
+            <div class="ui__modal_feedback_replay-item clearfix">
+                <div class="ui__modal_feedback_replay-content">
+{#                    <div id='id_feedback_caption' class="ui__mfeedback_replay-caption">#}
+                        {#                        Заголовок#}
+{#                    </div>#}
+                    <div class="ui__mfeedback_replay-items">
+                        <div class="ui__mfeedback_replay-item">
+                            <div class="ui__mfeedback_replay-item-caption">
+                                {% trans 'User:' %}
+                            </div>
+                            <div id='id_feedback_s01' class="ui__mfeedback_replay-item-text"></div>
+                        </div>
+                        <div class="ui__mfeedback_replay-item">
+                            <div class="ui__mfeedback_replay-item-caption">
+                                {% trans 'Date of receiving:' %}
+                            </div>
+                            <div id='id_feedback_s02' class="ui__mfeedback_replay-item-text"></div>
+                        </div>
+                        <div class="ui__mfeedback_replay-item">
+                            <div class="ui__mfeedback_replay-item-caption">
+                                {% trans 'Mail for reply:' %}
+                            </div>
+                            <div id='id_feedback_s03' class="ui__mfeedback_replay-item-text"></div>
+                        </div>
+                        <div class="ui__mfeedback_replay-item">
+                            <div class="ui__mfeedback_replay-item-caption">
+                                {% trans 'Message text:' %}
+                            </div>
+                            <div id='id_feedback_s04' class="ui__mfeedback_replay-item-text"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input id="id_feedback_item" type="hidden" name="id_feedback_item" value=""/>
+            <div class="ui__modal_feedback_replay-item clearfix">
+                <div class="ui__modal_feedback_replay-content">
+                    <div class="ui__mfeedback_replay-caption">
+                        {% trans 'Response text:' %}
+                    </div>
+                    <div class="ui__mfeedback_replay-items">
+                            <textarea
+                                    id="id_feedback_text"
+                                    maxlength="5000"
+                                    rows="1"
+                                    cols="1"
+                                    name="feedback_replay_text"
+                                    class="ui__mfeedback_replay-items-textarea"
+                            ></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-6">
+                    <button type="button" class="btn__big"
+                            onclick="feedback_send()">
+                        {% trans 'Answer' %}
+                    </button>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn__big"
+                            data-dismiss="modal">
+                        {% trans 'Close' %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

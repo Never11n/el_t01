@@ -1,0 +1,55 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+<!-- Recent Winners Area Start -->
+{#<div class="header-padding">#}
+{#    <section class="footer-pages main-bg full-height-without-footer">#}
+{#        <div class="container ui-box_message">#}
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="section-heading">
+                        <h2 class="title">
+                            {{ box_message_title }}
+                        </h2>
+                        <h5 class="subtitle">
+                            {{ box_message_subtitle }}
+                        </h5>
+                        <p class="text">
+                            {{ box_message_text }}
+                        </p>
+                    </div>
+                    {% if wait_source != "None" %}
+                        <div class="">
+                            <video id="id_ads_video"
+                                   class="ads_video"
+                                   autoplay="true"
+                                   loop="true"
+                                   controls="true"
+                                   playsinline
+                                   muted
+                                   width="100%"
+                                   poster="{{ wait_poster }}">
+                                <source id='mp4' src="{{ wait_source }}" type='{{ wait_source_type }}'/>
+                            </video>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-lg-8 col-md-10">
+                    <div class="text-center">
+                        <a href="{% url 'cabinet' %}"
+                           class="mybtn2">{% trans 'Start PLay' %}</a>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-10">
+                    <div class="section-heading">
+                        <div class="hero-img2">
+                            <img src="{% static 'main/006/images/06/mblock_bg.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+{#        </div>#}
+{#    </section>#}
+{#</div>#}
+<!-- Recent Winners Area End -->

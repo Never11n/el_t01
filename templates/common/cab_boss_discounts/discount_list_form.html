@@ -1,0 +1,166 @@
+{% load static %}
+{% load i18n %}
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <section class="main-bg">
+                <div class="container cabs_newtask-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary cab-table-border">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{ m_form_title }}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div class="form-group clearfix">
+                                                    <div class="icheck-success d-inline">
+                                                        <input type="checkbox"
+                                                               id="id_enabled"
+                                                               name="f_enabled"
+                                                               value="m_enabled"
+                                                               {% if m_form_type == 'new' %}
+                                                                checked
+                                                                {% else %}
+                                                                {% if disc_list.enabled %}
+                                                                checked
+                                                                {% endif %}
+                                                                {% endif %}
+                                                        >
+                                                        <label for="id_enabled">
+                                                            {% trans 'Enabled' %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                         <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_discount">{% trans 'Discount' %}</label>
+                                                <select class="form-control" id="id_discount">
+                                                    {% for discount in discounts %}
+                                                    <option {% if discount == disc_list.discount %} selected="selected" {% endif %}
+                                                         value="{{ discount.id }}">{{ discount.caption }}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_owner_type">{% trans 'Owner type' %}</label>
+                                                <select class="form-control" id="id_owner_type">
+                                                    {% for owner_type in owner_types %}
+                                                    <option {% if owner_type == disc_list.owner %} selected="selected" {% endif %}
+                                                         value="{{ owner_type.id }}">{{ owner_type.caption }}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_owner">{% trans 'Owner id' %}</label>
+                                                <input type="text"
+                                                       id="id_owner"
+                                                       class="form-control"
+                                                       value="{{ disc_list.id_owner }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="id_duration">{% trans 'Duration/hours' %}</label>
+                                                <input type="number"
+                                                       id="id_duration"
+                                                       class="form-control"
+                                                       value="{{  disc_list.duration_hours }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row flex-md-row ">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                onclick="btn_discount_list_save()"
+                                        >{% trans 'Save' %}
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-dark"
+                                                data-dismiss="modal"
+                                        >{% trans 'Close' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function btn_discount_list_save() {
+        let enabled = 0;
+        if ($('#id_enabled').is(':checked')) {
+            enabled = 1
+        }
+        let discount = $("#id_discount").val(),
+            owner = $("#id_owner_type").val(),
+            id_owner = $("#id_owner").val(),
+            duration_hours = $("#id_duration").val();
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                f_form_type: '{{ m_form_type }}',
+                f_id: '{{ m_id }}',
+                f_enabled: enabled,
+                f_discount: discount,
+                f_owner: owner,
+                f_id_owner: id_owner,
+                f_duration_hours: duration_hours,
+
+            },
+            url: "/discount_list_form_save/",
+            success: function (res) {
+                if (res.AnswerCod == '01') {
+                    $('.js-modal__cabb_form').modal('hide');
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occured, please try again later."),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+
+    }
+</script>

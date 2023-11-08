@@ -1,0 +1,95 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+
+{% if False %}
+<!-- Recent Winners Area Start -->
+<section class="recent-winners">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="section-heading">
+                    <h5 class="subtitle">
+                        {% trans 'Try your luck' %}
+                    </h5>
+                    <h2 class="title">
+                        {% trans 'others win while you doubt' %}
+                    </h2>
+                    <p class="text">
+                        {% trans 'Information about the latest winnings' %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="single-winer">
+                    <div class="top-area">
+                        <div class="left">
+                            <p class="date">
+                                Dekel
+                            </p>
+                            <h4 class="name">
+                                As=prass
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="bottom-area">
+                        <div class="left">
+                            500 {% trans 'ils' %}
+                        </div>
+                        <div class="right">
+                            <img src="{% static 'main/001/images/icon2.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="single-winer">
+                    <div class="top-area">
+                        <div class="left">
+                            <p class="date">
+                                Alon
+                            </p>
+                            <h4 class="name">
+                                CASINO
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="bottom-area">
+                        <div class="left">
+                            150 {% trans 'ils' %}
+                        </div>
+                        <div class="right">
+                            <img src="{% static 'main/001/images/icon2.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="single-winer">
+                    <div class="top-area">
+                        <div class="left">
+                            <p class="date">
+                                Jon Smit
+                            </p>
+                            <h4 class="name">
+                                BASKETBOOL
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="bottom-area">
+                        <div class="left">
+                            20 {% trans 'ils' %}
+                        </div>
+                        <div class="right">
+                            <img src="{% static 'main/001/images/icon2.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Recent Winners Area End -->
+{% endif %}

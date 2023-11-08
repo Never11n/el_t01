@@ -1,0 +1,68 @@
+{% load static %}
+{% load l10n %}
+{% load i18n %}
+<div class="header-padding">
+    <div class="hero-area">
+        <div class="container">
+            <div class="hero-area__inner">
+                <h1 class="hero-area__title">{% trans 'Scratch HISHGAD On Mobile' %}</h1>
+                 {% if not user.is_authenticated %}
+                <div class="links hide-on-mob">
+                    <a href="#" class="mybtn1"
+                       data-toggle="modal"
+                       data-target="#signin">{% trans 'REGISTER NOW' %}</a>
+                </div>
+                {% endif %}
+                <img class="hero-area__img" src="{% static 'main/007/images/hero-area__img.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- start content -->
+    <div class="main-box inner-mob-shadow">
+        <div class="container">
+            <div class="main-box__inner">
+                {% if not user.is_authenticated %}
+                <div class="text-center hide-on-desktop register-btn-wrap">
+                    <a href="#" class="mybtn1 "
+                       data-toggle="modal"
+                       data-target="#signin">{% trans 'Register Now' %}</a>
+                </div>
+                {% endif %}
+                <h4 class="main-box__title">
+                    {% trans 'Our Technology' %}
+                </h4>
+
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-list__item">
+                        {% trans 'Home' %}
+                    </li>
+                    <li class="breadcrumb-list__item">
+                        <span class="breadcrumb-list__icon-wrap">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+                    </li>
+                    <li class="breadcrumb-list__item">
+                        {% trans 'Our Technology' %}
+                    </li>
+                </ul>
+
+                <div class="main-text-right-rtf">
+                    <div class="main-text">
+                        <p>
+                            {% trans 'Technology that brings offline to online, and goes with you. Scratching the HISHGAD lottery tickets directly from the mobile phone and / or the computer. The winnings are accepted into an account on the website and immediately can be withdrawn to the bank account.' %}
+                        </p>
+                        <p>
+                            {% trans 'We are proud to present the new and unique ticket scratching machines of their kind. You order on the website, the machine scratches the ticket for you, and with a winning card you will receive the win directly to your account on HISHLINE website.' %}
+                        </p>
+                    </div>
+                    <div class="about-video">
+                        <a href="https://www.youtube.com/watch?v=AnL-l4CR7qQ" class="play-video mfp-iframe">
+                             <img src="{% static 'main/005/images/video_machine.png' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end content -->
+</div>

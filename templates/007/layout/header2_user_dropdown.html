@@ -1,0 +1,175 @@
+{% load i18n %}
+{% load static %}
+
+<input type="hidden" id='id_last_notifications_list' value="{{ last_notifications_list }}"/>
+<input type="hidden" id='id_new_notifications_count' value="{{ new_notifications_count }}"/>
+
+<div class="header-middle__auth js-header-middle__auth">
+    <div class="header-middle__profile-wrap">
+        <div class="header-middle__profile">
+            {% if me.profile.avatar %}
+            <div class="header-middle__profile-avatar">
+                <img src="/{{me.profile.avatar}}"
+                     class="js_header-middle__profile-avatar header-middle__profile-avatar-img">
+                {% if new_notifications_count > 0 %}
+                <a href="{% url 'notifications' %}">
+                    <div id="id_last_notifications"
+                         class="header-middle__profile-role-numbers">{{ new_notifications_count }}
+                    </div>
+                    {% endif %}
+                </a>
+            </div>
+            {% else %}
+            <div class="js_header-middle__profile-avatar {% if me.profile.specialization == None %} header-middle__profile-role-notspec {% else %} header-middle__profile-role {% endif %} ">
+                {% trans me.profile.specialization.short_caption %}
+                {% if new_notifications_count > 0 %}
+                <a href="{% url 'notifications' %}">
+                    <div id="id_last_notifications"
+                         class="header-middle__profile-role-numbers">{{ new_notifications_count }}
+                    </div>
+                    {% endif %}
+                </a>
+            </div>
+            {% endif %}
+            <div class="header-middle__profile-middle">
+                <div class="js_header-middle__profile-avatar header-middle__profile-middle-name">
+                    {% if me.profile.name|length > 13 %}
+                    {{ me.profile.name|slice:"10" }}...
+                    {% else %}
+                    {{ me.profile.name }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="header-middle__profile-right"></div>
+            <div class="profile-hover">
+                {% trans 'Вы - ' %} {% trans me.profile.specialization.caption %}
+            </div>
+        </div>
+        <div class="header-middle__profile-dropdown" style="display: none;">
+            <div class="header-middle__dropdown-conf clearfix">
+                <a href="{% url 'u_settings' %}"
+                   class="header-middle__dropdown-conf-link header-middle__dropdown-conf-link-settings">
+                    <div class="header-middle__dropdown-conf-icon-settings"></div>
+                    {% trans 'Настройка аккаунта' %}
+                </a>
+                <a href="{% url 'logout' %}"
+                   class="header-middle__dropdown-conf-link header-middle__dropdown-conf-link-logout">
+                    <div class="header-middle__dropdown-conf-icon-logout"></div>
+                    {% trans 'Выйти' %}
+                </a>
+            </div>
+            <div class="header-middle__dropdown-mesages">
+                {% if me.profile.is_boss %}
+                <a href="{% url 'boss_panel' %}" class="header-middle__dropdown-msg">
+                    {% trans 'Кабинет Директора' %}
+                </a>
+                {% endif %}
+                {% if me.profile.is_moderator %}
+                <a href="{% url 'moderator_panel' %}" class="header-middle__dropdown-msg">
+                    {% trans 'Кабинет Модератора' %}
+                </a>
+                {% endif %}
+
+                {# пункты меню по типам пользователя #}
+                {% if me.profile.specialization.verbal == 'istec'%}
+                <a href="{% url 'cabinet_isk' %}" class="header-middle__dropdown-msg"
+                   title="{% trans 'Всего исков/Активных исков' %}">
+                    {% trans 'Мои иски' %}
+                    {% if False %}
+                    <div class="header-middle__dropdown-msg-flag">
+                        {{my_isk_all}}/{{my_isk_activ}}
+                    </div>
+                    {% endif %}
+                </a>
+                <a href="{% url 'cabinet_advice' %}" class="header-middle__dropdown-msg"
+                   title="{% trans 'Всего консультаций/Активных консультаций' %}">
+                    {% trans 'Мои консультации/услуги' %}
+                    {% if False %}
+                    <div class="header-middle__dropdown-msg-flag">
+                        {{my_advice_all}}/{{my_advice_activ}}
+                    </div>
+                    {% endif %}
+                </a>
+                <a href="{% url 'cabinet_drafts' %}" class="header-middle__dropdown-msg"
+                   title="{% trans 'Черновики/Черновики' %}">
+                    {% trans 'Мои черновики' %}
+                    {% if False %}
+                    <div id='id_profile_my_drafts_tender' class="header-middle__dropdown-msg-flag">
+                        {{my_drafts_isk}}/{{my_drafts_advice}}
+                    </div>
+                    {% endif %}
+                </a>
+                {% endif %}
+
+                {% if me.profile.specialization.verbal == 'arbitr_sydja'%}
+                <a href="{% url 'cabinet_isk' %}" class="header-middle__dropdown-msg"
+                   title="{% trans 'Всего исков/Активных исков' %}">
+                    {% trans 'Мои иски' %}
+                    {% if False %}
+                    <div class="header-middle__dropdown-msg-flag">
+                        {{my_isk_all}}/{{my_isk_activ}}
+                    </div>
+                    {% endif %}
+                </a>
+                <a href="{% url 'cabinet_advice' %}" class="header-middle__dropdown-msg"
+                   title="{% trans 'Всего консультаций/Активных консультаций' %}">
+                    {% trans 'Мои консультации/услуги' %}
+                    {% if False %}
+                    <div class="header-middle__dropdown-msg-flag">
+                        {{my_advice_all}}/{{my_advice_activ}}
+                    </div>
+                    {% endif %}
+                </a>
+                {% if False %}
+                <a href="{% url 'cabinet_drafts' %}" class="header-middle__dropdown-msg"
+                   title="{% trans 'Черновики/Черновики' %}">
+                    {% trans 'Мои черновики' %}
+                    {% if False %}
+                    <div id='id_profile_my_drafts_tender' class="header-middle__dropdown-msg-flag">
+                        {{my_drafts_isk}}/{{my_drafts_advice}}
+                    </div>
+                    {% endif %}
+                </a>
+                {% endif %}
+                {% endif %}
+                {% if me.profile.specialization.verbal == 'urist'%}
+                <a href="{% url 'cabinet_advice' %}" class="header-middle__dropdown-msg"
+                   title="{% trans 'Всего консультаций/Активных консультаций' %}">
+                    {% trans 'Мои консультации/услуги' %}
+                    {% if False %}
+                    <div class="header-middle__dropdown-msg-flag">
+                        {{my_advice_all}}/{{my_advice_activ}}
+                    </div>
+                    {% endif %}
+                </a>
+                {% if False %}
+                <a href="{% url 'cabinet_drafts' %}" class="header-middle__dropdown-msg"
+                   title="{% trans 'Черновики/Черновики' %}">
+                    {% trans 'Мои черновики' %}
+                    {% if False %}
+                    <div id='id_profile_my_drafts_tender' class="header-middle__dropdown-msg-flag">
+                        {{my_drafts_isk}}/{{my_drafts_advice}}
+                    </div>
+                    {% endif %}
+                </a>
+                {% endif %}
+                {% endif %}
+
+            </div>
+            <div class="header-middle__dropdown-notifications">
+                {% for notification in last_notifications %}
+                {% include 'notifications/notification.html' %}
+                {% endfor %}
+            </div>
+            <div class="header-middle__dropdown-all-notification">
+                <div class="header-middle__dropdown-all-notification-text"> {% trans 'Вы с нами' %} {{ me_allday_joined }} {{ me_allday_joined_text }}
+                </div>
+            </div>
+            <div class="header-middle__dropdown-all-notification">
+                <a href="{% url 'notifications' %}" class="header-middle__dropdown-all-notification-link">
+                    {% trans 'Все уведомления' %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

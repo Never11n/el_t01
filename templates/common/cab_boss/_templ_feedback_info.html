@@ -1,0 +1,66 @@
+{% load static %}
+{% load i18n %}
+<input id="id_feedback_id" type="hidden" value="{{ item_feedback.id }}">
+<div class="feedback_card">
+    <div class="row">
+        <div class="col-12">
+            <div class="ui__mfeedback_replay-item-caption">
+                {% trans 'User:' %}
+            </div>
+            <div id='id_feedback_s01' class="ui__mfeedback_replay-item-text">
+                {% if item_feedback.u_name %}
+                    <span class="description">{{ item_feedback.u_name }}</span>
+                {% else %}
+                    <span class="description">
+                        {{ item_feedback.user_id.profile.name }}/{{ item_feedback.user_id.profile.mobile }}
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="ui__mfeedback_replay-item-caption">
+                {% trans 'Date of receiving:' %}
+            </div>
+            <div id='id_feedback_s01' class="ui__mfeedback_replay-item-text">
+                <span class="description">{{ item_feedback.created|date:"d.m.Y H:i:s" }}</span>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="ui__mfeedback_replay-item-caption">
+                {% trans 'Mail for reply:' %}
+            </div>
+            <div id='id_feedback_s01' class="ui__mfeedback_replay-item-text">
+                {% if item_feedback.u_name %}
+                    <span class="description">{{ item_feedback.u_email }}</span>
+                {% else %}
+                    <span class="description">{{ item_feedback.user_id.email }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="ui__mfeedback_replay-item-caption">
+                {% trans 'Message text:' %}
+            </div>
+            <div id='id_feedback_s01' class="ui__mfeedback_replay-item-text">
+                <span class="description">{{ item_feedback.text }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="feedback_card">
+    <div class="col-12">
+        <div class="ui__mfeedback_replay-caption">
+            {% trans 'Response text:' %}
+        </div>
+        <div class="ui__mfeedback_replay-items">
+            <textarea
+                    id="id_feedback_text"
+                    maxlength="5000"
+                    rows="1"
+                    cols="1"
+                    name="feedback_replay_text"
+                    class="ui__mfeedback_replay-items-textarea"
+            ></textarea>
+        </div>
+    </div>
+</div>
