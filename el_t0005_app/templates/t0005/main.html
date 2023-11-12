@@ -5,6 +5,14 @@
 {% block body %}
     <div id="tab" class="tab_main">
         <div id="tab_list" class="tab_list">
+            <div class="d-none" id="btn-back-div">
+                <button class="btn-back" id="btn-back" onclick="">
+                    <img src="{% static 'main/t0005/img/arrow-left.png' %}"
+                         alt="back-btn"
+                         width="100px"
+                         height="100px">
+                </button>
+            </div>
             <div id="main" class="d-block tab_content">
                 {% include './tab01.html' %}
             </div>

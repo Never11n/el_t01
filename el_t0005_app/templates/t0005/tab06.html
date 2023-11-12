@@ -46,13 +46,16 @@
                 </div>
             </div>
         </div>
-        {#            <img src="{% static 'main/t0005/img/closed.png' %}" alt="ticket" class="closed">#}
-        {#            <img src="{% static 'main/t0005/img/open.png' %}" alt="ticket" class="open">#}
     </div>
     <div class="tab_text_4">
         <button class="btn_2 mybtn1-register-btn"
-                onclick="changeTicket()"
-                id="btn-ticket" >
+                onclick="previousTicket()"
+                id="btn-ticket-previous">
+            {% trans 'previous' %}
+        </button>
+        <button class="btn_2 mybtn1-register-btn"
+                onclick="nextTicket()"
+                id="btn-ticket">
             {% trans 'next' %}
         </button>
     </div>
@@ -60,7 +63,13 @@
 
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script>
+    let ticketIndex = 1;
+    let lastScratched = 0;
+    let changedLastScratched = false
+    let ctx;
+
     function startCanvas() {
+        changedLastScratched = false;
         'use strict';
         console.log("startCanvas");
         //let l_pic_canvas = "{{pic_canva}}";
@@ -93,9 +102,10 @@
             canvas = document.getElementById('js-canvas'),
             canvasWidth = canvas.width,
             canvasHeight = canvas.height,
-            ctx = canvas.getContext('2d'),
+
             image = new Image(),
             brush = new Image();
+        ctx = canvas.getContext('2d')
         // base64 Workaround because Same-Origin-Policy
         console.log("pic_result_width = ", pic_result_width);
         console.log("pic_result_height = ", pic_result_height);
@@ -111,6 +121,7 @@
             canvasHeight = height;
             ctx.drawImage(image, 0, 0, width, height);
             var m_pixels_0 = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+            console.log('PIXELS:', m_pixels_0)
             //let m_scratch_box = $('.js-scratch_box');
             let m_scratch_box = document.querySelector('.js-scratch_box');
             m_scratch_box.style.opacity = 1;
@@ -126,7 +137,6 @@
 
 //            $(window).resize(respondCanvas);
         window.addEventListener('resize', respondCanvas);
-        console.log(canvas)
 
         function respondCanvas() {
             console.log("resize");
@@ -217,11 +227,20 @@
 
         function handlePercentage(filledInPixels) {
             filledInPixels = filledInPixels || 0;
+            const buttonNext = document.getElementById('btn-ticket')
+
             if (filledInPixels > 98) {
-                console.log(canvas)
+                buttonNext.style.backgroundColor = '#86e38c'
+                buttonNext.style.display = 'inline';
+                if (!changedLastScratched) {
+                    lastScratched++;
+                    changedLastScratched = true;
+                }
                 //canvas.parentNode.remove(canvas);
 //                    btn_ticket_result_send();
 //                    PollingTicketInfo();
+            } else {
+                buttonNext.style.display = 'none';
             }
         }
 
@@ -257,29 +276,83 @@
             isDrawing = false;
         }
     }
-    let ticketIndex = 0;
-    function changeTicket() {
+
+
+    function removeCanvas() {
+        const canvasObj = document.querySelector('#js-canvas');
+        console.log(`TRY TO REMOVE CANVAS ${ticketIndex}, ${lastScratched}`)
+        console.log(ticketIndex)
+        console.log(lastScratched)
+        if (canvasObj && ticketIndex <= lastScratched) {
+            ctx.clearRect(0, 0, canvasObj.width, canvasObj.height);
+
+            // canva.classList.add('d-none');
+        }
+    }
+
+    function nextTicket(firstStart = false) {
         let ticketCount = $('#ticket-count').val();
         let ticket = document.getElementById('ticket');
         let ticketCounter = document.getElementById('tick-count');
         let button = document.getElementById('btn-ticket');
-        ticketIndex = (ticketIndex % ticketCount) + 1;
-        ticket.src = '/static/main/t0005/ticket/open' + ticketIndex + '.png';
-        ticketCounter.textContent = ticketIndex + '/' + ticketCount;
-        console.log(ticketIndex);
-        if (ticketIndex == ticketCount){
-            button.onclick = function(){ 
-                console.log('Change onclick');
-                console.log(ticketIndex);
-                nextPage('btn_to_prizes');
-                
+
+        if (ticketIndex === ticketCount) {
+            button.addEventListener('click', nextPage('btn_to_prizes'))
+        }
+        if (!firstStart) {
+            if (ticketIndex < ticketCount) {
+                ticketIndex++;
+            }
+            if (ticketIndex > lastScratched) {
+                startCanvas();
             }
         }
-        startCanvas();
+
+        ticket.src = '/static/main/t0005/ticket/open' + ticketIndex + '.png';
+        ticketCounter.textContent = ticketIndex + '/' + ticketCount;
+        updateButtonStyle()
+    }
+
+    function previousTicket() {
+
+        const buttonNext = document.getElementById('btn-ticket')
+        buttonNext.style.backgroundColor = '#86e38c'
+        buttonNext.style.display = 'inline';
+
+        let ticketCounter = document.getElementById('tick-count');
+        let ticket = document.getElementById('ticket');
+        let ticketCount = $('#ticket-count').val();
+        if (ticketIndex > 1) {
+            ticketIndex--;
+        }
+        removeCanvas();
+        ticket.src = '/static/main/t0005/ticket/open' + ticketIndex + '.png';
+        ticketCounter.textContent = ticketIndex + '/' + ticketCount;
+
+        updateButtonStyle()
+    }
+
+    function updateButtonStyle() {
+        const buttonPrevious = document.getElementById('btn-ticket-previous');
+        const buttonNext = document.getElementById('btn-ticket');
+        const ticketCounter =  $('#ticket-count').val();
+        if (ticketIndex === 1) {
+            buttonPrevious.style.display = 'none';
+        } else {
+            buttonPrevious.style.display = 'inline';
+        }
+
+        if (ticketIndex <= lastScratched) {
+            buttonNext.style.display = 'inline';
+        } else {
+            buttonNext.style.display = 'none';
+        }
 
     }
+
     window.onload = function () {
         startCanvas();
-        changeTicket();
+        nextTicket(true);
+        // updateButtonStyle();
     }
 </script>

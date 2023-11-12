@@ -1,9 +1,10 @@
-html{
-    display:flex;
+html {
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
-body{
+
+body {
     margin: 0;
     padding: 0;
     width: 1080px;
@@ -11,6 +12,19 @@ body{
     /* max-width: 1080px !important; */
     /* max-height: 1920px !important;  */
     /* overflow: hidden; */
+}
+
+.btn-back-wrap {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    margin: 10px;
+}
+
+.btn-back {
+    font-size: 70px;
+    background-color: rgba(0, 0, 0, 0%);
+    border: 0;
 }
 
 .d-block {
@@ -21,7 +35,7 @@ body{
     display: none;
 }
 
-.tab_main{
+.tab_main {
     width: 1080px;
     height: 1920px;
     background-image: url(../img/fon1.jpg);
@@ -30,21 +44,23 @@ body{
     background-position: center;
 }
 
-.tab_list{
+.tab_list {
     width: 100%;
     height: 100%;
     margin: 0 0 0 0;
     padding-top: 30vh;
+    position: relative;
 }
 
-.tab_content{
+.tab_content {
     width: 100%;
     /* height: 100%; */
     /*display: flex;*/
     align-items: center;
     /*flex-direction: column;*/
 }
-#phone{
+
+#phone {
     margin-top: 10%
 }
 
@@ -66,9 +82,10 @@ body{
     text-align: center;
     padding: 0% 10% 0% 10%;
 }
-    .tab_text_3 p {
-        margin: 1em 1em 0.5em 1em;
-    }
+
+.tab_text_3 p {
+    margin: 1em 1em 0.5em 1em;
+}
 
 .tab_text_4 {
     font-size: 40px;
@@ -107,44 +124,59 @@ body{
     margin-top: 25px;
     margin-bottom: 25px;
 }
-    .form_login_input input {
 
-    }
+.form_login_input input {
 
-    .form_login_input input {
-        font-size: 55px;
-        padding: 15px 10px 15px 10px;
-        border: none;
-        border-radius: 15px;
-        margin: 5% 10% 0% 10%;
-    }
+}
 
-    .btn_2 {
-        margin: 2%;
-        padding: 3% 10% 3% 10%;
-        /*border: 3px solid #fff;*/
-        background-color: #86e38c;
-        border-radius: 25px;
-        width: fit-content;
-        text-align: center;
-        color: #fff;
-        font-size: 50px;
-    }
+.form_login_input input {
+    font-size: 55px;
+    padding: 15px 10px 15px 10px;
+    border: none;
+    border-radius: 15px;
+    margin: 5% 10% 0% 10%;
+}
 
-.barcode-img{
+.btn_2 {
+    margin: 2%;
+    padding: 3% 10% 3% 10%;
+    /*border: 3px solid #fff;*/
+    background-color: #86e38c;
+    border-radius: 25px;
+    width: fit-content;
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+}
+
+#btn-ticket {
+    background-color: #808080;
+    display: none;
+}
+
+#btn-ticket-previous {
+    background-color: #86e38c;
+    display: none;
+}
+button:focus {
+    outline: none;
+}
+
+.barcode-img {
     width: 30vh;
     height: 30vh;
     display: block;
     margin: 0 auto;
 }
 
-.ticket-wrapper{
-    width:100%;
+.ticket-wrapper {
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     margin: 0 25% 0 0;
 }
+
 .image-holder {
     position: relative;
     width: 100%;
@@ -153,65 +185,66 @@ body{
 }
 
 
-
-
-
-
-
-.reg-text{
+.reg-text {
     text-align: center;
     color: blue;
 }
-.reg-btn{
+
+.reg-btn {
     border: 3px solid white;
     background-color: #d21243;
     color: white;
     border-radius: 20px;
     padding: 2%;
 }
-.pink-logo{
+
+.pink-logo {
     margin-left: 40%;
-    width:100%;
+    width: 100%;
     height: 100%;
 }
-.pink{
+
+.pink {
     margin-left: 80%;
-    width:100%;
+    width: 100%;
     height: 100%;
 }
 
 
 .cart {
     width: 70px;
-   
+
 }
 
 .bt-text {
     margin: 0 0 30%;
 }
-.login{
-    display:flex;
+
+.login {
+    display: flex;
     justify-content: left;
     align-items: center;
     flex-direction: column;
-   /* margin-top: 20%;*/
+    /* margin-top: 20%;*/
 }
-.registr{
+
+.registr {
     width: 100%;
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
 }
-#registration{
+
+#registration {
     margin-top: 3%
 }
 
-.enrollment{
+.enrollment {
     font-size: 60px;
 }
 
-.info-text p{
-    margin:30px;
+.info-text p {
+    margin: 30px;
     font-size: 60px;
     font-weight: bold;
     text-align: center;
@@ -221,6 +254,7 @@ body{
     width: 20%;
     height: 10%;
 }
+
 .modal-fade-main-modal {
     display: flex;
     justify-content: center;
@@ -238,8 +272,8 @@ body{
 }
 
 
-.text-to-reg{
-    margin:0
+.text-to-reg {
+    margin: 0
 }
 
 h1 {
@@ -249,87 +283,94 @@ h1 {
 }
 
 
-
-.bar-text{
+.bar-text {
     font-size: 50px;
     color: darkblue;
 }
-.info-wrapper{
-    display:flex;
+
+.info-wrapper {
+    display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     flex-direction: column;
-    
+
 }
 
-.info-text{
-    font-size:25px;
+.info-text {
+    font-size: 25px;
     text-align: center;
     margin-top: 5%;
 }
-.info-number{
+
+.info-number {
     font-size: 45px;
     margin-top: 15%;
 }
-.info-btn{
+
+.info-btn {
     margin-top: 7%;
     padding: 0%;
     border: 3px solid #fff;
     background-color: #c3104f;
     border-radius: 15px;
     font-size: 20px;
-    width:15%;
+    width: 15%;
     height: 10%;
     text-align: center;
 }
 
 .closed {
     position: absolute;
-    margin-top:25%;
+    margin-top: 25%;
 }
 
 .open {
-    margin-top:25%;
+    margin-top: 25%;
 }
-.game-btn{
+
+.game-btn {
     margin: 5% 0 15% 38%;
     border: 3px solid #fff;
     background-color: #c3104f;
     border-radius: 15px;
     font-size: 20px;
-    width:25%;
+    width: 25%;
     text-align: center;
 
 }
-.prizes-text{
-    font-size:30px;
+
+.prizes-text {
+    font-size: 30px;
     text-align: center;
     margin-top: 5%;
     color: darkblue;
 }
-.prizes-number{
+
+.prizes-number {
     font-size: 50px;
     margin-top: 15%;
     color: darkblue;
 }
-.mail-number{
+
+.mail-number {
     font-size: 50px;
     margin-top: 10%;
     color: darkblue;
 }
 
-.ticket-counter{
+.ticket-counter {
     font-size: 60px;
     text-align: center;
     margin-top: 5%;
 }
 
-.to-reg{
+.to-reg {
     text-align: center;
     font-size: 20px;
 }
-@media(min-height:1920px){
-    body{
+
+@media (min-height: 1920px) {
+    body {
         overflow: hidden;
     }
 }

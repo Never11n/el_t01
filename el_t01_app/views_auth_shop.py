@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from django.utils.translation import ugettext as _
 from .models import Profile, Game_history, User
 from .service.service import get_main_args, send_sms_01
+from .views_ex_reg import valid_input
 
 
 # def login_shop(request):
@@ -36,17 +37,20 @@ def login_shop(request):
         print(request.POST)
         m_i_doc = request.POST.get('f_id', '').lower()
         m_phone = request.POST.get('f_phone', '')
+        m_phone = m_phone.replace('+', '')
+        print(m_phone)
         m_club_member = request.POST.get('f_clubcode', '')
 
         if m_i_doc or m_phone or m_club_member:
             _profile = Profile.objects.all()
 
-            if m_phone:
+            if m_phone and len(m_phone) == 12:
                 print('**')
                 _profile = _profile.filter(mobile=m_phone)
                 m_profile = _profile.first()
 
                 if not m_profile:
+                    print(m_profile)
                     m_return['AnswerCod'] = '01'
                     m_return['AnswerText'] = 'You`re entered a wrong phone number'
                     return JsonResponse(m_return)

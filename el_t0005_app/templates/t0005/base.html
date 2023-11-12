@@ -10,447 +10,633 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
-    {% block body %}
-    {% endblock %}
-    <!-- bootstrap -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function nextPage(btn) {
-            const main = $('#main'),
-                registr = $('#registration'),
-                login = $('#login'),
-                game = $('#game'),
-                barcode = $('#barcode'),
-                info = $('#info'),
-                prizes = $('#prizes'),
-                mail = $('#mail'),
-                phone = $('#phone');
+{% block body %}
+{% endblock %}
+<!-- bootstrap -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function nextPage(btn) {
+        const main = $('#main'),
+            registr = $('#registration'),
+            login = $('#login'),
+            game = $('#game'),
+            barcode = $('#barcode'),
+            info = $('#info'),
+            prizes = $('#prizes'),
+            mail = $('#mail'),
+            phone = $('#phone'),
+            buttonBackDiv = $('#btn-back-div'),
+            buttonBack = $('#btn-back');
 
-            if (btn === 'btn_to_registr') {
-                console.log(main)
-                login.removeClass("d-block").addClass("d-none");
-                registr.removeClass("d-none").addClass("d-block");
-            }
-            if (btn === 'btn_to_game') {
-                info.removeClass("d-block").addClass("d-none");
-                game.removeClass("d-none").addClass("d-block");
-            }
-            if (btn === 'btn_to_login') {
-                main.removeClass("d-block").addClass("d-none");
-                login.removeClass("d-none").addClass("d-block");
-            }
-            if (btn === 'btn_to_barcode') {
-                registr.removeClass("d-block").addClass("d-none");
-                phone.removeClass("d-block").addClass("d-none");
-                barcode.removeClass("d-none").addClass("d-block");
+        if (btn === 'btn_to_login') {
+            main.removeClass("d-block").addClass("d-none");
+            login.removeClass("d-none").addClass("d-block");
+            buttonBackDiv.removeClass("d-none").addClass('btn-back-wrap');
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_start")
+            });
+            setupPhoneValidation('input-phone')
+            globalInactivityTimer(40000)
+        }
+        if (btn === 'btn_to_registr') {
+            console.log(main)
+            login.removeClass("d-block").addClass("d-none");
+            registr.removeClass("d-none").addClass("d-block");
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_login")
+            });
+            setupPhoneValidation('input-phone');
+            globalInactivityTimer(40000)
+        }
+        if (btn === 'btn_to_barcode') {
+            registr.removeClass("d-block").addClass("d-none");
+            phone.removeClass("d-block").addClass("d-none");
+            barcode.removeClass("d-none").addClass("d-block");
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_login")
+            });
+            globalInactivityTimer(300000)
 
-            }
-            if (btn === 'btn_to_info') {
-                barcode.removeClass("d-block").addClass("d-none");
-                info.removeClass("d-none").addClass("d-block");
-            }
-            if (btn === 'btn_to_prizes') {
-                game.removeClass("d-block").addClass("d-none");
-                prizes.removeClass("d-none").addClass("d-block");
-            }
-            if (btn === 'btn_to_mail') {
-                prizes.removeClass("d-block").addClass("d-none");
-                mail.removeClass("d-none").addClass("d-block");
-            }
-            if (btn === 'btn_to_main') {
-                // mail.removeClass("d-block").addClass("d-none");
-                // main.removeClass("d-none").addClass("d-block");
-                location.reload();
-            }
-            if (btn === 'btn_to_phonecode') {
-                login.removeClass("d-block").addClass("d-none");
-                phone.removeClass("d-none").addClass("d-block");
-            }
         }
-    </script>
-    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-        function input_field_not_exist(name) {
-            return ($('input[name=' + name + ']')).length === 0;
+        if (btn === 'btn_to_info') {
+            barcode.removeClass("d-block").addClass("d-none");
+            info.removeClass("d-none").addClass("d-block");
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_barcode")
+            });
+            globalInactivityTimer(300000)
+        }
+        if (btn === 'btn_to_game') {
+            info.removeClass("d-block").addClass("d-none");
+            game.removeClass("d-none").addClass("d-block");
+            buttonBackDiv.removeClass("d-block").addClass("d-none");
+            globalInactivityTimer(300000)
+        }
+        if (btn === 'btn_to_prizes') {
+            game.removeClass("d-block").addClass("d-none");
+            prizes.removeClass("d-none").addClass("d-block");
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_barcode")
+            })
+            globalInactivityTimer(300000)
+        }
+        if (btn === 'btn_to_mail') {
+            prizes.removeClass("d-block").addClass("d-none");
+            mail.removeClass("d-none").addClass("d-block");
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_prizes")
+            });
+            globalInactivityTimer(300000)
+        }
+        if (btn === 'btn_to_main') {
+            // mail.removeClass("d-block").addClass("d-none");
+            // main.removeClass("d-none").addClass("d-block");
+            location.reload();
+        }
+        if (btn === 'btn_to_phonecode') {
+            login.removeClass("d-block").addClass("d-none");
+            phone.removeClass("d-none").addClass("d-block");
+            globalInactivityTimer(300000)
         }
 
-        function input_field_value(name) {
-            return ($('input[name=' + name + ']')).val();
+        if (btn === 'btn_back_to_start') {
+            login.removeClass("d-block").addClass("d-none");
+            main.removeClass("d-none").addClass("d-block")
+            buttonBackDiv.addClass("d-none")
         }
+        if (btn === 'btn_back_to_login') {
+            registr.removeClass("d-block").addClass("d-none");
+            barcode.removeClass("d-block").addClass("d-none");
+            main.removeClass("d-block").addClass("d-none");
+            login.removeClass("d-none").addClass("d-block");
+            buttonBackDiv.addClass("d-block");
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_start")
+            });
+            globalInactivityTimer(40000)
+        }
+        if (btn === 'btn_back_to_registr') {
+            barcode.removeClass("d-block").addClass("d-none");
+            registr.removeClass("d-none").addClass("d-block");
+            buttonBackDiv.addClass("d-block");
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_login")
+            });
+            globalInactivityTimer(40000)
+        }
+        if (btn === 'btn_back_to_barcode') {
+            info.removeClass("d-block").addClass("d-none");
+            barcode.removeClass("d-none").addClass("d-block");
+            login.removeClass("d-block").addClass("d-none");
+            phone.removeClass("d-block").addClass("d-none");
+            buttonBackDiv.addClass("d-block");
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_login")
+            });
+            globalInactivityTimer(300000)
+        }
+        if (btn === 'btn_back_to_info') {
+            game.removeClass("d-block").addClass("d-none");
+            info.removeClass("d-none").addClass("d-block");
+            barcode.removeClass("d-block").addClass("d-none");
+            buttonBackDiv.addClass("d-block");
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_barcode")
+            });
+            globalInactivityTimer(300000)
+        }
+        if (btn === 'btn_back_to_prizes') {
+            mail.removeClass("d-block").addClass("d-none");
+            prizes.removeClass("d-none").addClass("d-block");
+            buttonBackDiv.addClass("d-block");
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_barcode")
+            })
+            globalInactivityTimer(300000)
+        }
+    }
+</script>
+<script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    function input_field_not_exist(name) {
+        return ($('input[name=' + name + ']')).length === 0;
+    }
 
-        function input_field_value_is_empty(name) {
-            return ($('input[name=' + name + ']')).val() === '';
-        }
+    function input_field_value(name) {
+        return ($('input[name=' + name + ']')).val();
+    }
 
-        function input_field_exist(name) {
-            return !(($('input[name=' + name + ']')).length === 0);
-        }
+    function input_field_value_is_empty(name) {
+        return ($('input[name=' + name + ']')).val() === '';
+    }
 
-        function textarea_field_exist(name) {
-            return !(($('textarea[name=' + name + ']')).length === 0);
-        }
-        function btn_modal_shop_login() {
-            console.log("btn_modal_register");
-            let link = '/login-shop/';
-            let m_id = input_field_value('f_id');
-            let m_clubcode = input_field_value('f_clubcode');
-            let m_phone = input_field_value('f_phone');
-            let profile_id = $('#profile_id');
-            let isValid;
-            // if (input_field_exist('f_id')) {
-            //     if (input_field_value_is_empty('f_id')) {
-            //         Swal.fire({
-            //             icon: 'error',
-            //             title: gettext('ERROR'),
-            //             background: '#cacaca',
-            //             html: gettext("Please enter your Name"),
-            //             confirmButtonText: gettext('Back to form'),
-            //             confirmButtonColor: '#d33',
-            //         });
-            //         mLine_wrong = $('#id_f_id');
-            //         if (mLine_wrong.length) {
-            //             $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
-            //         }
-            //         return false;
-            //     }
-            // }
-            // if (input_field_exist('f_clubcode')) {
-            //     if (input_field_value_is_empty("f_clubcode")) {
-            //         Swal.fire({
-            //             icon: 'error',
-            //             title: gettext('ERROR'),
-            //             background: '#cacaca',
-            //             html: gettext('Enter code!'),
-            //             confirmButtonText: gettext('Back to form'),
-            //             confirmButtonColor: '#d33',
-            //         });
-            //         mLine_wrong = $('#id_f_clubcode');
-            //         if (mLine_wrong.length) {
-            //             $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
-            //         }
-            //         return false;
-            //     }
-            // }
-            // if (input_field_exist('f_phone')) {
-            //     if (input_field_value_is_empty('f_phone')) {
-            //         Swal.fire({
-            //             icon: 'error',
-            //             title: gettext('ERROR'),
-            //             background: '#cacaca',
-            //             html: gettext("Please enter your phone number"),
-            //             confirmButtonText: gettext('Back to form'),
-            //             confirmButtonColor: '#d33',
-            //         });
-            //         mLine_wrong = $('#input-phone');
-            //         if (mLine_wrong.length) {
-            //             $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
-            //         }
-            //         return false;
-            //     }
-            // }
-            if (input_field_value_is_empty('f_phone')&& input_field_value_is_empty('f_id')&& input_field_value_is_empty('f_clubcode')){
-                Swal.fire({
-                         icon: 'error',
-                         title: gettext('ERROR'),
-                         background: '#cacaca',
-                         html: gettext("Fill one of the fields"),
-                         confirmButtonText: gettext('Back to form'),
-                         confirmButtonColor: '#d33',
-                     });
-            }
-            $.ajax({
-                type: "POST",
-                async: false,
-                timeout: 120000,
-                data: {
-                    f_id: m_id,
-                    f_clubcode: m_clubcode,
-                    f_phone: m_phone,
-                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
-                },
-                url: link,
-                success: function (res) {
-                    console.log(res)
-                    if (res.AnswerCod === "00") {
-                        // $('.js-modal__register').modal('hide');
-                        console.log(res);
-                        profile_id.val(res.Profile_id)
-                        nextPage('btn_to_phonecode');
-                        //location.href = res.RedirectUrl;
-                        // Swal.fire({
-                        //     type: "success",
-                        //     icon: 'success',
-                        //     title: gettext('Registration completed'),
-                        //     background: '#ffffff',
-                        //     html: gettext("Registration completed successfully, follow the instructions in the mail"),
-                        //     confirmButtonText: gettext('OK'),
-                        //     confirmButtonColor: '#33c833',
-                        //     });
-                        // return true;
-                    }
-                    else if(res.AnswerCod === "01"){
-                        profile_id.val(res.Profile_id)
-                        Swal.fire({
-                            icon: 'error',
-                            title: gettext('ERROR'),
-                            background: '#cacaca',
-                            html: res.AnswerText,
-                            confirmButtonText: gettext('Back to form'),
-                            confirmButtonColor: '#dd3333',
-                        });
-                        return false;
-                    }
-                    else if (res.AnswerCod === "00gift") {
-                        $('.js-modal__register').modal('hide');
-                        location.href = res.RedirectUrl;
-                    }
-                    else {
-                        profile_id.val(res.Profile_id)
-                        Swal.fire({
-                            icon: 'error',
-                            title: gettext('ERROR'),
-                            background: '#cacaca',
-                            html: res.AnswerText,
-                            confirmButtonText: gettext('Back to form'),
-                            confirmButtonColor: '#dd3333',
-                        });
-                        return false;
-                    }
-                },
-                // error: function (res) {
-                //     Swal.fire({
-                //         icon: 'error',
-                //         title: gettext('ERROR'),
-                //         background: '#cacaca',
-                //         html: gettext("An error occurred while creating the user profile, please try again later"),
-                //         confirmButtonText: gettext('Back to form'),
-                //         confirmButtonColor: '#dd3333',
-                //     });
-                //     return false;
-                // }
+    function input_field_exist(name) {
+        return !(($('input[name=' + name + ']')).length === 0);
+    }
+
+    function textarea_field_exist(name) {
+        return !(($('textarea[name=' + name + ']')).length === 0);
+    }
+
+    function btn_modal_shop_login() {
+        console.log("btn_modal_register");
+        let link = '/login-shop/';
+        let m_id = input_field_value('f_id');
+        let m_clubcode = input_field_value('f_clubcode');
+        let m_phone = input_field_value('f_phone');
+        let profile_id = $('#profile_id');
+        let isValid;
+        if (input_field_value_is_empty('f_phone') && input_field_value_is_empty('f_id') && input_field_value_is_empty('f_clubcode')) {
+            Swal.fire({
+                icon: 'error',
+                title: gettext('ERROR'),
+                background: '#cacaca',
+                html: gettext("Fill one of the fields"),
+                confirmButtonText: gettext('Back to form'),
+                confirmButtonColor: '#d33',
             });
         }
-    </script>
-
-    <script>
-        function btn_modal_shop_register() {
-            console.log("btn_modal_register");
-            var link = '/api-extshop/';
-            var m_email = input_field_value('f_email');
-            var m_date_birthday = input_field_value('f_date_birth');
-            var m_name = input_field_value('f_name');
-            var m_id = input_field_value('f_idoc');
-            
-            const regex = '/^[a-zA-Z]+$/g';
-            // if (regex.test(m_name)){
-            //     console.log('Name is valid')
-            // }
-            // else{
+        if (m_id.length >= 20) {
+            console.log('****')
+            Swal.fire({
+                icon: 'error',
+                title: gettext('ERROR'),
+                background: '#cacaca',
+                html: gettext("Please enter correct id"),
+                confirmButtonText: gettext('Back to form'),
+                confirmButtonColor: '#d33',
+            });
+            return false
+        }
+        if (m_clubcode.length >= 20) {
+            console.log('****')
+            Swal.fire({
+                icon: 'error',
+                title: gettext('ERROR'),
+                background: '#cacaca',
+                html: gettext("Please enter correct club_code"),
+                confirmButtonText: gettext('Back to form'),
+                confirmButtonColor: '#d33',
+            });
+            return false
+        }
+        let m_phone_length = m_phone.length
+        if (m_phone_length !== 12) {
+            Swal.fire({
+                icon: 'error',
+                title: gettext('ERROR'),
+                background: '#cacaca',
+                html: gettext("Please enter correct phone number"),
+                confirmButtonText: gettext('Back to form'),
+                confirmButtonColor: '#d33',
+            });
+            return false
+        }
+        $.ajax({
+            type: "POST",
+            async: false,
+            timeout: 120000,
+            data: {
+                f_id: m_id,
+                f_clubcode: m_clubcode,
+                f_phone: m_phone,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: link,
+            success: function (res) {
+                console.log(res)
+                if (res.AnswerCod === "00") {
+                    // $('.js-modal__register').modal('hide');
+                    console.log(res);
+                    profile_id.val(res.Profile_id)
+                    nextPage('btn_to_phonecode');
+                    //location.href = res.RedirectUrl;
+                    // Swal.fire({
+                    //     type: "success",
+                    //     icon: 'success',
+                    //     title: gettext('Registration completed'),
+                    //     background: '#ffffff',
+                    //     html: gettext("Registration completed successfully, follow the instructions in the mail"),
+                    //     confirmButtonText: gettext('OK'),
+                    //     confirmButtonColor: '#33c833',
+                    //     });
+                    // return true;
+                } else if (res.AnswerCod === "01") {
+                    profile_id.val(res.Profile_id)
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                } else if (res.AnswerCod === "00gift") {
+                    $('.js-modal__register').modal('hide');
+                    location.href = res.RedirectUrl;
+                } else {
+                    profile_id.val(res.Profile_id)
+                    Swal.fire({
+                        icon: 'error',
+                        title: gettext('ERROR'),
+                        background: '#cacaca',
+                        html: res.AnswerText,
+                        confirmButtonText: gettext('Back to form'),
+                        confirmButtonColor: '#dd3333',
+                    });
+                    return false;
+                }
+            },
+            // error: function (res) {
             //     Swal.fire({
-            //             icon: 'error',
-            //             title: gettext('ERROR'),
-            //             background: '#cacaca',
-            //             html: gettext("Please enter correct name"),
-            //             confirmButtonText: gettext('Back to form'),
-            //             confirmButtonColor: '#d33',
-            //     })
+            //         icon: 'error',
+            //         title: gettext('ERROR'),
+            //         background: '#cacaca',
+            //         html: gettext("An error occurred while creating the user profile, please try again later"),
+            //         confirmButtonText: gettext('Back to form'),
+            //         confirmButtonColor: '#dd3333',
+            //     });
+            //     return false;
             // }
-            
-            var m_phone = input_field_value('f_phone_number');
-            console.log(m_id, m_phone)
-            var isValid;
-            if (input_field_exist('f_idoc')) {
-                if (input_field_value_is_empty('f_idoc')) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: gettext('ERROR'),
-                        background: '#cacaca',
-                        html: gettext("Please enter your ID"),
-                        confirmButtonText: gettext('Back to form'),
-                        confirmButtonColor: '#d33',
-                    });
-                    mLine_wrong = $('#input-id');
-                    if (mLine_wrong.length) {
-                        $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
-                    }
-                    return false;
+        });
+    }
+</script>
+
+<script>
+    function validInput(val) {
+        return val.length < 20;
+    }
+
+    function validValuesRegistration(valDict) {
+        const mRegName = valDict['m_name'];
+        const mRegId = valDict['m_id'];
+        const regexName = /^[a-zA-Z\s-]+$/;
+        const regexId = /^[a-zA-Z0-9/-]+$/;
+
+        if (!regexName.test(mRegName) || !regexId.test(mRegId)) {
+            return false;
+        }
+
+        console.log('11111');
+        const errorMessages = [];
+        for (const key in valDict) {
+            const inputValues = valDict[key];
+            const isValidValues = validInput(inputValues)
+
+            console.log(isValidValues)
+            if (!isValidValues) {
+                switch (key) {
+
+                    case 'm_reg_name':
+                        console.log('*')
+                        errorMessages.push('Please enter correct name');
+                        break;
+                    case 'm_reg_id':
+                        console.log('**')
+                        errorMessages.push('Please enter correct ID');
+                        break;
+                    case 'm_reg_phone':
+                        console.log('***')
+                        errorMessages.push('Please enter correct phone number');
+                        break;
+                    default:
+                        errorMessages.push('Please enter correct values');
                 }
             }
-            if (input_field_exist('f_email')) {
-                if (input_field_value_is_empty("f_email")) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: gettext('ERROR'),
-                        background: '#cacaca',
-                        html: gettext('Please enter your e-mail'),
-                        confirmButtonText: gettext('Back to form'),
-                        confirmButtonColor: '#d33',
-                    });
-                    mLine_wrong = $('#id_f_email');
-                    if (mLine_wrong.length) {
-                        $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
-                    }
-                    return false;
+        }
+        if (errorMessages.length > 0) {
+            return {isValidValues: false, messages: errorMessages};
+        }
+        return {isValidValues: true}
+    }
+
+    function toggleDatePicker() {
+        const inputDate = $('#input-date-birth');
+        inputDate.type = 'date';
+    }
+
+
+    function btn_modal_shop_register() {
+        console.log("btn_modal_register");
+        let link = '/api-extshop/';
+        let m_email = input_field_value('f_email');
+        let m_date_birthday = input_field_value('f_date_birth');
+        let m_name = input_field_value('f_name');
+        let m_id = input_field_value('f_idoc');
+        let m_phone = input_field_value('f_phone_number');
+        let valDict = {
+            'm_name': m_name,
+            'm_id': m_id
+        }
+
+        let isValidValuesRegistration = validValuesRegistration(valDict)
+        if (!isValidValuesRegistration.isValidValues) {
+            Swal.fire({
+                icon: 'error',
+                title: gettext('ERROR'),
+                background: '#cacaca',
+                html: isValidValuesRegistration.messages,
+                confirmButtonText: gettext('Back to form'),
+                confirmButtonColor: '#d33',
+            });
+            return false
+        }
+        let m_phone_length = m_phone.length
+        if (m_phone_length !== 12) {
+            Swal.fire({
+                icon: 'error',
+                title: gettext('ERROR'),
+                background: '#cacaca',
+                html: gettext("Please enter correct phone number"),
+                confirmButtonText: gettext('Back to form'),
+                confirmButtonColor: '#d33',
+            });
+            return false
+        }
+
+        console.log(m_id, m_phone)
+        let isValid;
+        if (input_field_exist('f_idoc')) {
+            if (input_field_value_is_empty('f_idoc')) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter your ID"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('#input-id');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
                 }
+                return false;
             }
-            if (input_field_exist('f_phone_number')) {
-                if (input_field_value_is_empty('f_phone_number')) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: gettext('ERROR'),
-                        background: '#cacaca',
-                        html: gettext("Please enter your phone number"),
-                        confirmButtonText: gettext('Back to form'),
-                        confirmButtonColor: '#d33',
-                    });
-                    mLine_wrong = $('#input-phone');
-                    if (mLine_wrong.length) {
-                        $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
-                    }
-                    return false;
+        }
+        if (input_field_exist('f_email')) {
+            if (input_field_value_is_empty("f_email")) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext('Please enter your e-mail'),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('#id_f_email');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
                 }
+                return false;
             }
-            if (input_field_exist('f_name')) {
-                if (input_field_value_is_empty('f_name')) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: gettext('ERROR'),
-                        background: '#cacaca',
-                        html: gettext("Please enter your name"),
-                        confirmButtonText: gettext('Back to form'),
-                        confirmButtonColor: '#d33',
-                    });
-                    mLine_wrong = $('#input-name');
-                    if (mLine_wrong.length) {
-                        $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
-                    }
-                    return false;
+        }
+        if (input_field_exist('f_phone_number')) {
+            if (input_field_value_is_empty('f_phone_number')) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter your phone number"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('#input-phone');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
                 }
+                return false;
             }
-            if (input_field_exist('f_date_birth')) {
-                if (input_field_value_is_empty('f_date_birth')) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: gettext('ERROR'),
-                        background: '#cacaca',
-                        html: gettext("Please enter your date of birth"),
-                        confirmButtonText: gettext('Back to form'),
-                        confirmButtonColor: '#d33',
-                    });
-                    mLine_wrong = $('#input-date_birth');
-                    if (mLine_wrong.length) {
-                        $('html,body').stop().animate({ scrollTop: mLine_wrong.offset().top - 20 }, '3000', 'swing');
-                    }
-                    return false;
+        }
+        if (input_field_exist('f_name')) {
+            if (input_field_value_is_empty('f_name')) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter your name"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('#input-name');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
                 }
+                return false;
             }
-            $.ajax({
-                type: "POST",
-                timeout: 120000,
-                async: false,
-                data: {
-                    f_idoc: m_id,
-                    f_email: m_email,
-                    f_phone_number: m_phone,
-                    f_date_birth: m_date_birthday,
-                    f_name: m_name,
-                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
-                },
-                url: link,
-                success: function (res) {
+        }
+        if (input_field_exist('f_date_birth')) {
+            if (input_field_value_is_empty('f_date_birth')) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("Please enter your date of birth"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#d33',
+                });
+                mLine_wrong = $('#input-date_birth');
+                if (mLine_wrong.length) {
+                    $('html,body').stop().animate({scrollTop: mLine_wrong.offset().top - 20}, '3000', 'swing');
+                }
+                return false;
+            }
+        }
+        $.ajax({
+            type: "POST",
+            timeout: 120000,
+            async: false,
+            data: {
+                f_idoc: m_id,
+                f_email: m_email,
+                f_phone_number: m_phone,
+                f_date_birth: m_date_birthday,
+                f_name: m_name,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: link,
+            success: function (res) {
+                console.log(res)
+                if (res.AnswerCod === "00") {
+                    // $('.js-modal__register').modal('hide');
                     console.log(res)
-                    if (res.AnswerCod === "00") {
-                        // $('.js-modal__register').modal('hide');
-                        console.log(res)
-                        nextPage('btn_to_barcode')
-                        
-                       // location.href = res.RedirectUrl;
-                        // Swal.fire({
-                        //     type: "success",
-                        //     icon: 'success',
-                        //     title: gettext('Registration completed'),
-                        //     background: '#ffffff',
-                        //     html: gettext("Registration completed successfully, follow the instructions in the mail"),
-                        //     confirmButtonText: gettext('OK'),
-                        //     confirmButtonColor: '#33c833',
-                        //     });
-                        // return true;
-                    }
-                    else if (res.AnswerCod === "00gift") {
-                        $('.js-modal__register').modal('hide');
-                        //location.href = res.RedirectUrl;
-                    }
-                    else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: gettext('ERROR'),
-                            background: '#cacaca',
-                            html: res.AnswerText,
-                            confirmButtonText: gettext('Back to form'),
-                            confirmButtonColor: '#dd3333',
-                        });
-                        return false;
-                    }
-                },
-                error: function (res) {
+                    nextPage('btn_to_barcode')
+
+                    // location.href = res.RedirectUrl;
+                    // Swal.fire({
+                    //     type: "success",
+                    //     icon: 'success',
+                    //     title: gettext('Registration completed'),
+                    //     background: '#ffffff',
+                    //     html: gettext("Registration completed successfully, follow the instructions in the mail"),
+                    //     confirmButtonText: gettext('OK'),
+                    //     confirmButtonColor: '#33c833',
+                    //     });
+                    // return true;
+                } else if (res.AnswerCod === "00gift") {
+                    $('.js-modal__register').modal('hide');
+                    //location.href = res.RedirectUrl;
+                } else {
                     Swal.fire({
                         icon: 'error',
                         title: gettext('ERROR'),
                         background: '#cacaca',
-                        html: gettext("An error occurred while creating the user profile, please try again later"),
+                        html: res.AnswerText,
                         confirmButtonText: gettext('Back to form'),
                         confirmButtonColor: '#dd3333',
                     });
                     return false;
                 }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("An error occurred while creating the user profile, please try again later"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+
+    function verifyPhoneCode() {
+        let m_phonecode = input_field_value('f_phonecode')
+        var link = '/phone-code-verification/';
+        var profile_id = input_field_value('profile_id');
+        if (input_field_value_is_empty('f_phonecode')) {
+            Swal.fire({
+                icon: 'error',
+                title: gettext('ERROR'),
+                background: '#cacaca',
+                html: gettext("Enter a received phone code"),
+                confirmButtonText: gettext('Back to form'),
+                confirmButtonColor: '#dd3333',
             });
         }
-        function verifyPhoneCode(){
-            m_phonecode = input_field_value('f_phonecode')
-            var link = '/phone-code-verification/';
-            var profile_id = input_field_value('profile_id');
-            if (input_field_value_is_empty('f_phonecode')){
-                Swal.fire({
-                        icon: 'error',
-                        title: gettext('ERROR'),
-                        background: '#cacaca',
-                        html: gettext("Enter a recieved phone code"),
-                        confirmButtonText: gettext('Back to form'),
-                        confirmButtonColor: '#dd3333',
-                });
-            }
-            $.ajax({
-                type: "POST",
-                timeout: 120000,
-                async: false,
-                data: {
-                    f_phonecode: m_phonecode,
-                    profile_id : profile_id,
-                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
-                },
-                url: link,
-                success: function (res) {
+        $.ajax({
+            type: "POST",
+            timeout: 120000,
+            async: false,
+            data: {
+                f_phonecode: m_phonecode,
+                profile_id: profile_id,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: link,
+            success: function (res) {
+                console.log(res)
+                if (res.AnswerCod === "00") {
                     console.log(res)
-                    if (res.AnswerCod === "00") {
-                        console.log(res)
-                        nextPage('btn_to_barcode')
-                    }
-                },
-                error: function (res) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: gettext('ERROR'),
-                        background: '#cacaca',
-                        html: gettext("You have entered an incorrect code"),
-                        confirmButtonText: gettext('Back to form'),
-                        confirmButtonColor: '#dd3333',
-                    });
-                    return false;
+                    nextPage('btn_to_barcode')
                 }
-            }); 
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: gettext('ERROR'),
+                    background: '#cacaca',
+                    html: gettext("You have entered an incorrect code"),
+                    confirmButtonText: gettext('Back to form'),
+                    confirmButtonColor: '#dd3333',
+                });
+                return false;
+            }
+        });
+    }
+
+    function setupPhoneValidation(phoneInputId) {
+        const phoneInputs = document.querySelectorAll('#input-phone');
+        phoneInputs.forEach((phoneInput) => {
+            phoneInput.addEventListener('input', function (e) {
+                let value = e.target.value.replace(/[^\d]/g, "");
+                if (value.length > 12) {
+                    value = value.substring(0, 12);
+                }
+                e.target.value = value;
+            });
+        })
+
+
+    }
+
+    let inactivityTimer;
+
+    function globalInactivityTimer(time) {
+
+        function startInactivityTimer() {
+            clearTimeout(inactivityTimer);
+
+            inactivityTimer = setTimeout(() => {
+                Swal.fire({
+                    title: 'Are you still here?',
+                    timer: 20000,
+                    timerProgressBar: true,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Yes',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (!result.isConfirmed) {
+                        location.reload();
+                    }
+                })
+            }, time);
         }
-    </script>
+
+        function resetTimerOnActivity() {
+            startInactivityTimer();
+        }
+
+        startInactivityTimer();
+
+        document.addEventListener('mousemove', resetTimerOnActivity);
+        document.addEventListener('keydown', resetTimerOnActivity);
+        document.addEventListener('click', resetTimerOnActivity);
+    }
+</script>
 </body>
 </html>
