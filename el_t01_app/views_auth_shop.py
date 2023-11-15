@@ -114,4 +114,6 @@ def phone_code_verification(request):
         m_return['AnswerCod'] = '00'
         # auth.login(request, m_profile_id)
         return JsonResponse(m_return)
+    m_return['AnswerCod'] = '01'
+    return JsonResponse(m_return)
 

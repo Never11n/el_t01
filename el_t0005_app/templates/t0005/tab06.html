@@ -47,17 +47,21 @@
             </div>
         </div>
     </div>
-    <div class="tab_text_4">
-        <button class="btn_2 mybtn1-register-btn"
-                onclick="previousTicket()"
-                id="btn-ticket-previous">
-            {% trans 'previous' %}
-        </button>
-        <button class="btn_2 mybtn1-register-btn"
-                onclick="nextTicket()"
-                id="btn-ticket">
-            {% trans 'next' %}
-        </button>
+    <div class="tab_text_4 buttons_ticket">
+        <div class="parent-wrap-prev">
+            <button class="btn_2 mybtn1-register-btn"
+                    onclick="previousTicket()"
+                    id="btn-ticket-previous">
+                {% trans 'previous' %}
+            </button>
+        </div>
+        <div class="parent-wrap-next">
+            <button class="btn_2 mybtn1-register-btn"
+                    onclick="nextTicket()"
+                    id="btn-ticket">
+                {% trans 'next' %}
+            </button>
+        </div>
     </div>
 </div>
 
@@ -226,6 +230,7 @@
         }
 
         function handlePercentage(filledInPixels) {
+            let ticketCount = $('#ticket-count').val();
             filledInPixels = filledInPixels || 0;
             const buttonNext = document.getElementById('btn-ticket')
 
@@ -236,10 +241,11 @@
                     lastScratched++;
                     changedLastScratched = true;
                 }
+            }
                 //canvas.parentNode.remove(canvas);
 //                    btn_ticket_result_send();
 //                    PollingTicketInfo();
-            } else {
+            else {
                 buttonNext.style.display = 'none';
             }
         }
@@ -290,15 +296,30 @@
         }
     }
 
+    function changeButtonEvent() {
+        let ticketCount = $('#ticket-count').val();
+        ticketCount = parseInt(ticketCount);
+        let button = document.getElementById('btn-ticket');
+        if (ticketIndex === ticketCount) {
+            console.log('*****11')
+            button.onclick = function(){
+                nextPage('btn_to_prizes')
+            }
+        }else{
+            button.onclick =  function () {
+            nextTicket()
+        }
+        }
+
+
+    }
+
     function nextTicket(firstStart = false) {
         let ticketCount = $('#ticket-count').val();
+        ticketCount = parseInt(ticketCount)
         let ticket = document.getElementById('ticket');
         let ticketCounter = document.getElementById('tick-count');
         let button = document.getElementById('btn-ticket');
-
-        if (ticketIndex === ticketCount) {
-            button.addEventListener('click', nextPage('btn_to_prizes'))
-        }
         if (!firstStart) {
             if (ticketIndex < ticketCount) {
                 ticketIndex++;
@@ -307,10 +328,10 @@
                 startCanvas();
             }
         }
-
         ticket.src = '/static/main/t0005/ticket/open' + ticketIndex + '.png';
         ticketCounter.textContent = ticketIndex + '/' + ticketCount;
-        updateButtonStyle()
+        updateButtonStyle();
+        changeButtonEvent();
     }
 
     function previousTicket() {
@@ -321,21 +342,26 @@
 
         let ticketCounter = document.getElementById('tick-count');
         let ticket = document.getElementById('ticket');
-        let ticketCount = $('#ticket-count').val();
+        let ticketCount = parseInt($('#ticket-count').val());
+        console.log(ticketIndex, '--------------');
+        console.log(ticketCount, '--------------')
         if (ticketIndex > 1) {
             ticketIndex--;
         }
         removeCanvas();
         ticket.src = '/static/main/t0005/ticket/open' + ticketIndex + '.png';
         ticketCounter.textContent = ticketIndex + '/' + ticketCount;
-
-        updateButtonStyle()
+        console.log(ticketIndex, '--------------');
+        console.log(ticketCount, '--------------');
+        console.log(lastScratched);
+        updateButtonStyle();
+        changeButtonEvent();
     }
 
     function updateButtonStyle() {
         const buttonPrevious = document.getElementById('btn-ticket-previous');
         const buttonNext = document.getElementById('btn-ticket');
-        const ticketCounter =  $('#ticket-count').val();
+        const ticketCounter = $('#ticket-count').val();
         if (ticketIndex === 1) {
             buttonPrevious.style.display = 'none';
         } else {

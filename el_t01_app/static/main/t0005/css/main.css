@@ -25,6 +25,9 @@ body {
     font-size: 70px;
     background-color: rgba(0, 0, 0, 0%);
     border: 0;
+    background-color: #0b1e62;
+    padding: 0 15px 10px;
+    border-radius: 15px;
 }
 
 .d-block {
@@ -93,6 +96,17 @@ body {
     text-align: center;
     padding: 0% 10% 0% 10%;
 }
+.tab_text_4.buttons_ticket {
+    display: flex;
+}
+.parent-wrap-prev{
+    width: 50%;
+    justify-self: flex-start;
+}
+.parent-wrap-next{
+    width: 50%;
+    justify-self: flex-end;
+}
 
 .tab_text_color_1 {
     color: white;
@@ -135,6 +149,7 @@ body {
     border: none;
     border-radius: 15px;
     margin: 5% 10% 0% 10%;
+    width: 650px;
 }
 
 .btn_2 {
@@ -155,7 +170,7 @@ body {
 }
 
 #btn-ticket-previous {
-    background-color: #86e38c;
+    background-color: #808080;
     display: none;
 }
 button:focus {

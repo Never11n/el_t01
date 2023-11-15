@@ -56,7 +56,7 @@
             buttonBack.on('click', function () {
                 nextPage("btn_back_to_login")
             });
-            globalInactivityTimer(300000)
+            globalInactivityTimer(120000)
 
         }
         if (btn === 'btn_to_info') {
@@ -65,7 +65,7 @@
             buttonBack.on('click', function () {
                 nextPage("btn_back_to_barcode")
             });
-            globalInactivityTimer(300000)
+            globalInactivityTimer(60000)
         }
         if (btn === 'btn_to_game') {
             info.removeClass("d-block").addClass("d-none");
@@ -79,7 +79,7 @@
             buttonBack.on('click', function () {
                 nextPage("btn_back_to_barcode")
             })
-            globalInactivityTimer(300000)
+            globalInactivityTimer(60000)
         }
         if (btn === 'btn_to_mail') {
             prizes.removeClass("d-block").addClass("d-none");
@@ -87,7 +87,7 @@
             buttonBack.on('click', function () {
                 nextPage("btn_back_to_prizes")
             });
-            globalInactivityTimer(300000)
+            globalInactivityTimer(60000)
         }
         if (btn === 'btn_to_main') {
             // mail.removeClass("d-block").addClass("d-none");
@@ -97,13 +97,19 @@
         if (btn === 'btn_to_phonecode') {
             login.removeClass("d-block").addClass("d-none");
             phone.removeClass("d-none").addClass("d-block");
-            globalInactivityTimer(300000)
+            buttonBack.on('click', function () {
+                nextPage("btn_back_to_login")
+            });
+            globalInactivityTimer(300000);
+            clearInputValues();
         }
 
         if (btn === 'btn_back_to_start') {
             login.removeClass("d-block").addClass("d-none");
             main.removeClass("d-none").addClass("d-block")
             buttonBackDiv.addClass("d-none")
+            buttonBackDiv.removeClass("d-block")
+            clearInputValues();
         }
         if (btn === 'btn_back_to_login') {
             registr.removeClass("d-block").addClass("d-none");
@@ -114,16 +120,19 @@
             buttonBack.on('click', function () {
                 nextPage("btn_back_to_start")
             });
-            globalInactivityTimer(40000)
+            globalInactivityTimer(40000);
+            clearInputValues();
         }
         if (btn === 'btn_back_to_registr') {
             barcode.removeClass("d-block").addClass("d-none");
             registr.removeClass("d-none").addClass("d-block");
             buttonBackDiv.addClass("d-block");
+            buttonBackDiv.removeClass("d-none");
             buttonBack.on('click', function () {
                 nextPage("btn_back_to_login")
             });
-            globalInactivityTimer(40000)
+            globalInactivityTimer(40000);
+            clearInputValues();
         }
         if (btn === 'btn_back_to_barcode') {
             info.removeClass("d-block").addClass("d-none");
@@ -131,29 +140,35 @@
             login.removeClass("d-block").addClass("d-none");
             phone.removeClass("d-block").addClass("d-none");
             buttonBackDiv.addClass("d-block");
+            buttonBackDiv.removeClass("d-none");
             buttonBack.on('click', function () {
                 nextPage("btn_back_to_login")
             });
-            globalInactivityTimer(300000)
+            globalInactivityTimer(120000);
+            clearInputValues();
         }
         if (btn === 'btn_back_to_info') {
             game.removeClass("d-block").addClass("d-none");
             info.removeClass("d-none").addClass("d-block");
             barcode.removeClass("d-block").addClass("d-none");
             buttonBackDiv.addClass("d-block");
+            buttonBackDiv.removeClass("d-none");
             buttonBack.on('click', function () {
                 nextPage("btn_back_to_barcode")
             });
-            globalInactivityTimer(300000)
+            globalInactivityTimer(60000);
+            clearInputValues();
         }
         if (btn === 'btn_back_to_prizes') {
             mail.removeClass("d-block").addClass("d-none");
             prizes.removeClass("d-none").addClass("d-block");
             buttonBackDiv.addClass("d-block");
+            buttonBackDiv.removeClass("d-none");
             buttonBack.on('click', function () {
                 nextPage("btn_back_to_barcode")
             })
-            globalInactivityTimer(300000)
+            globalInactivityTimer(60000);
+            clearInputValues();
         }
     }
 </script>
@@ -315,40 +330,35 @@
         const mRegId = valDict['m_id'];
         const regexName = /^[a-zA-Z\s-]+$/;
         const regexId = /^[a-zA-Z0-9/-]+$/;
+        const errorMessages = [];
 
-        if (!regexName.test(mRegName) || !regexId.test(mRegId)) {
-            return false;
+        if (!regexName.test(mRegName)) {
+            errorMessages.push('Please enter correct name')
+            return {isValidValues: false, messages: errorMessages};
+        }
+        if (!regexId.test(mRegId)) {
+            errorMessages.push('Please enter correct ID')
+            return {isValidValues: false, messages: errorMessages};
         }
 
         console.log('11111');
-        const errorMessages = [];
+
         for (const key in valDict) {
             const inputValues = valDict[key];
             const isValidValues = validInput(inputValues)
 
             console.log(isValidValues)
             if (!isValidValues) {
-                switch (key) {
-
-                    case 'm_reg_name':
-                        console.log('*')
-                        errorMessages.push('Please enter correct name');
-                        break;
-                    case 'm_reg_id':
-                        console.log('**')
-                        errorMessages.push('Please enter correct ID');
-                        break;
-                    case 'm_reg_phone':
-                        console.log('***')
-                        errorMessages.push('Please enter correct phone number');
-                        break;
-                    default:
-                        errorMessages.push('Please enter correct values');
+                if (inputValues === 'm_reg_name') {
+                    console.log('*')
+                    errorMessages.push('Please enter correct name');
+                    return {isValidValues: false, messages: errorMessages};
+                } else if (inputValues === 'm_reg_id') {
+                    console.log('**')
+                    errorMessages.push('Please enter correct ID');
+                    return {isValidValues: false, messages: errorMessages};
                 }
             }
-        }
-        if (errorMessages.length > 0) {
-            return {isValidValues: false, messages: errorMessages};
         }
         return {isValidValues: true}
     }
@@ -618,7 +628,14 @@
                     timerProgressBar: true,
                     showConfirmButton: true,
                     confirmButtonText: 'Yes',
-                    allowOutsideClick: false
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        document.querySelector('.swal2-container').addEventListener('click', (event) => {
+                            if (event.target.classList.contains('swal2-container')) {
+                                Swal.clickConfirm();
+                            }
+                        });
+                    },
                 }).then((result) => {
                     if (!result.isConfirmed) {
                         location.reload();
@@ -636,6 +653,17 @@
         document.addEventListener('mousemove', resetTimerOnActivity);
         document.addEventListener('keydown', resetTimerOnActivity);
         document.addEventListener('click', resetTimerOnActivity);
+    }
+
+    function clearInputValues(){
+        let inputElements = document.querySelectorAll('.input-class')
+        inputElements.forEach(function(input){
+            if (input) {
+                console.log(input.value);
+                input.value = ''
+                input.type = 'text'
+            }
+        });
     }
 </script>
 </body>

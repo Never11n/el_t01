@@ -8,41 +8,39 @@
     <input type="hidden" id="url_path" name="url_path" value="{{ utm_code }}">
     <input type="hidden" id="get_param" name="get_param" value="{{ get_param }}">
     <div class="form_login_input">
-        <input type="text" class=""
+        <input type="text" class="input-class"
                autocomplete="off"
                id="input-name"
                name="f_name"
                placeholder="{% trans 'Full Name'%}*">
     </div>
     <div class="form_login_input">
-        <input type="text" class=""
+        <input type="text" class="input-class"
                autocomplete="off"
                id="input-id"
                name="f_idoc"
                placeholder="{% trans 'ID' %}*">
     </div>
     <div class="form_login_input">
-        <input type="text" class=""
+        <input type="text" class="input-class"
                autocomplete="off"
                id="input-phone"
                name="f_phone_number"
                placeholder="{% trans 'Phone Number' %}*">
     </div>
     <div class="form_login_input">
-        <input type="text" class=""
+        <input type="text" class="input-class"
                autocomplete="off"
                id="input-email"
                name="f_email"
                placeholder="{% trans 'Email' %}*">
     </div>
     <div class="form_login_input">
-        <input type="text"
+        <input type="text" class="input-class"
                autocomplete="off"
                id="input-date-birth"
                name="f_date_birth"
-               placeholder="{% trans 'Date of birth' %}*"
-               onfocus="toggleDatePicker()"
-               min="1920-01-01">
+               placeholder="{% trans 'Date of birth' %}*">
     </div>
 
     <div class="tab_text_4">
@@ -52,3 +50,25 @@
         </button>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dateInput = document.getElementById('input-date-birth');
+
+        dateInput.addEventListener('focus', function () {
+            if (!this.value) {
+                this.type = 'date';
+
+                if (this.showPicker) {
+                    this.showPicker();
+                }
+            }
+        });
+
+        dateInput.addEventListener('blur', function () {
+            if (!this.value) {
+                this.type = 'text';
+            }
+        });
+    });
+
+</script>
